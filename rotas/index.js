@@ -1,8 +1,8 @@
-var express = require('express')
-    ,router = express.Router();
+import express from 'express';
+var router = express.Router();
 
 router.all('/', function(req, res) {
     res.send('Teste');
 })
 
-module.exports = router
+export router;
