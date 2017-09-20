@@ -48,3 +48,6 @@ Temporary Items
 
 #NODE
 node_modules
+
+#NPM
+package-lock.json
