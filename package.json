@@ -1,0 +1,21 @@
+{
+	"name": "topicosWeb",
+	"version": "0.0.1",
+	"private": false,
+	"description": "Aplicativo para a disciplica de tópicos WEB",
+	"main": "app.js",
+	"scripts": {
+		"start": "node app.js",
+		"test": "jest"
+	},
+	"dependencies": {
+		"react": "16.0.0-alpha.12",
+		"express": "*",
+		"mysql": "*"
+	},
+	"devDependencies": {
+		"babel-jest": "20.0.3",
+		"jest": "20.0.4",
+		"react-test-renderer": "16.0.0-alpha.12"
+	}
+}
