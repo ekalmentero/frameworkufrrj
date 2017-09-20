@@ -1,8 +1,8 @@
 import express from 'express';
-var router = express.Router();
+const rotas = express.Router();
 
-router.all('/', function(req, res) {
+rotas.all('/', function(req, res) {
     res.send('Teste');
 })
 
-export router;
+export default rotas;
