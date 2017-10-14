@@ -20,11 +20,43 @@ USE `mydb` ;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`disciplina` (
   `id` INT NOT NULL,
-  `nome` VARCHAR(45) NULL,
-  `codigo` VARCHAR(45) NULL,
-  `deleted` TINYINT(1) NULL,
-  `qtd_credito` INT NULL,
+  `nome` VARCHAR(200) NOT NULL,
+  `codigo` VARCHAR(10) NOT NULL,
+  `creditos` INT NOT NULL,
+  `deleted` TINYINT(1) NULL DEFAULT 0,
   PRIMARY KEY (`id`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`instituto`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`instituto` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `sigla` VARCHAR(45) NOT NULL,
+  `nome` VARCHAR(200) NOT NULL,
+  `deleted` TINYINT(1) NULL DEFAULT 0,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`departamento`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`departamento` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `nome` VARCHAR(200) NOT NULL,
+  `sigla` VARCHAR(10) NOT NULL,
+  `instituto_id` INT NOT NULL,
+  `deleted` TINYINT(1) NULL DEFAULT 0,
+  `deleted` VARCHAR(45) NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_departamento_instituto1_idx` (`instituto_id` ASC),
+  CONSTRAINT `fk_departamento_instituto1`
+    FOREIGN KEY (`instituto_id`)
+    REFERENCES `mydb`.`instituto` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
@@ -32,12 +64,20 @@ ENGINE = InnoDB;
 -- Table `mydb`.`curso`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`curso` (
-  `id` INT NOT NULL,
-  `nome` VARCHAR(45) NULL,
-  `codigo` VARCHAR(45) NULL,
-  `deleted` TINYINT(1) NULL,
-  `limite_periodos` INT NULL,
-  PRIMARY KEY (`id`))
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `nome` VARCHAR(45) NOT NULL,
+  `codigo` VARCHAR(45) NOT NULL,
+  `limite_periodos` INT NOT NULL,
+  `turno` VARCHAR(10) NOT NULL,
+  `deleted` TINYINT(1) NULL DEFAULT 0,
+  `departamento_id` INT NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_curso_departamento1_idx` (`departamento_id` ASC),
+  CONSTRAINT `fk_curso_departamento1`
+    FOREIGN KEY (`departamento_id`)
+    REFERENCES `mydb`.`departamento` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
@@ -45,10 +85,10 @@ ENGINE = InnoDB;
 -- Table `mydb`.`grade`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`grade` (
-  `id` INT NOT NULL,
-  `inicio_vigencia` DATE NULL,
-  `disponivel` TINYINT(1) NULL,
-  `deleted` TINYINT(1) NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `inicio_vigencia` DATE NOT NULL,
+  `disponivel` TINYINT(1) NOT NULL,
+  `deleted` TINYINT(1) NULL DEFAULT 0,
   `curso_id` INT NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `id_grade_UNIQUE` (`id` ASC),
@@ -67,7 +107,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `mydb`.`disciplina_grade` (
   `id_disciplina` INT NOT NULL,
   `id_grade` INT NOT NULL,
-  `periodo` INT NULL,
+  `periodo` INT NOT NULL,
   PRIMARY KEY (`id_disciplina`, `id_grade`),
   INDEX `fk_disciplina_has_grade_grade1_idx` (`id_grade` ASC),
   INDEX `fk_disciplina_has_grade_disciplina_idx` (`id_disciplina` ASC),
@@ -118,10 +158,10 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`periodo` (
   `id` INT NOT NULL,
-  `data_inicio` DATE NULL,
-  `data_fim` DATE NULL,
-  `nome` VARCHAR(45) NULL,
-  `deleted` TINYINT(1) NULL,
+  `data_inicio` DATE NOT NULL,
+  `data_fim` DATE NOT NULL,
+  `nome` VARCHAR(45) NOT NULL,
+  `deleted` TINYINT(1) NULL DEFAULT 0,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
@@ -131,9 +171,17 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`professor` (
   `id` INT NOT NULL,
-  `nome` VARCHAR(45) NULL,
-  `matricula` VARCHAR(45) NULL,
-  PRIMARY KEY (`id`))
+  `nome` VARCHAR(45) NOT NULL,
+  `matricula` VARCHAR(45) NOT NULL,
+  `deleted` TINYINT(1) NULL DEFAULT 0,
+  `departamento_id` INT NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_professor_departamento1_idx` (`departamento_id` ASC),
+  CONSTRAINT `fk_professor_departamento1`
+    FOREIGN KEY (`departamento_id`)
+    REFERENCES `mydb`.`departamento` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
@@ -141,14 +189,14 @@ ENGINE = InnoDB;
 -- Table `mydb`.`turma`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`turma` (
-  `id` INT NOT NULL,
-  `codigo` VARCHAR(5) NULL,
-  `deleted` VARCHAR(45) NULL,
-  `vagas` INT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `turno` VARCHAR(45) NOT NULL,
+  `codigo` VARCHAR(5) NOT NULL,
+  `vagas` INT NOT NULL,
+  `deleted` TINYINT(1) NULL DEFAULT 0,
   `disciplina_id` INT NOT NULL,
   `periodo_id` INT NOT NULL,
   `professor_id` INT NOT NULL,
-  `turno` VARCHAR(45) NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_turma_disciplina1_idx` (`disciplina_id` ASC),
   INDEX `fk_turma_periodo1_idx` (`periodo_id` ASC),
@@ -175,12 +223,12 @@ ENGINE = InnoDB;
 -- Table `mydb`.`aluno`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`aluno` (
-  `id` INT NOT NULL,
-  `nome` VARCHAR(45) NULL,
-  `matricula` VARCHAR(45) NULL,
-  `ativo` TINYINT(1) NULL,
-  `ingresso` VARCHAR(45) NULL,
-  `deleted` TINYINT(1) NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `nome` VARCHAR(200) NOT NULL,
+  `matricula` VARCHAR(10) NOT NULL,
+  `ativo` TINYINT(1) NOT NULL,
+  `ingresso` DATE NOT NULL,
+  `deleted` TINYINT(1) NULL DEFAULT 0,
   `curso_id` INT NOT NULL,
   `grade_id` INT NOT NULL,
   PRIMARY KEY (`id`),
@@ -225,10 +273,11 @@ ENGINE = InnoDB;
 -- Table `mydb`.`avaliacao`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`avaliacao` (
-  `id` INT NOT NULL,
-  `nome` VARCHAR(45) NULL,
-  `data` VARCHAR(45) NULL,
-  `descricao` VARCHAR(45) NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `nome` VARCHAR(200) NOT NULL,
+  `data` DATE NOT NULL,
+  `descricao` VARCHAR(400) NOT NULL,
+  `deleted` TINYINT(1) NULL DEFAULT 0,
   `turma_id` INT NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_avaliacao_turma1_idx` (`turma_id` ASC),
@@ -246,7 +295,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `mydb`.`avaliacao_aluno` (
   `avaliacao_id` INT NOT NULL,
   `aluno_id` INT NOT NULL,
-  `nota` VARCHAR(45) NULL,
+  `nota` DOUBLE NOT NULL,
   PRIMARY KEY (`avaliacao_id`, `aluno_id`),
   INDEX `fk_avaliacao_has_aluno_aluno1_idx` (`aluno_id` ASC),
   INDEX `fk_avaliacao_has_aluno_avaliacao1_idx` (`avaliacao_id` ASC),
@@ -268,7 +317,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`tipo_resultado` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `tipo` VARCHAR(100) NULL,
+  `tipo` VARCHAR(100) NOT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
@@ -278,8 +327,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`resultadofinal` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `resultado` VARCHAR(45) NULL,
-  `notafinal` FLOAT NULL,
+  `nota_final` DOUBLE NOT NULL,
   `aluno_id` INT NOT NULL,
   `turma_id` INT NOT NULL,
   `tipos_resultado_id` INT NOT NULL,
@@ -311,7 +359,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `mydb`.`aula` (
   `id` INT NOT NULL,
   `turma_id` INT NOT NULL,
-  `data` DATE NULL,
+  `data` DATE NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_aula_turma1_idx` (`turma_id` ASC),
   CONSTRAINT `fk_aula_turma1`
@@ -327,8 +375,8 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`horario` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `hora_inico` TIME(5) NULL,
-  `hora_fim` TIME(5) NULL,
+  `hora_inico` TIME(5) NOT NULL,
+  `hora_fim` TIME(5) NOT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
@@ -338,10 +386,11 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`predio` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `nome` VARCHAR(200) NULL,
-  `sigla` VARCHAR(45) NULL,
-  `lat` VARCHAR(45) NULL,
-  `long` VARCHAR(45) NULL,
+  `nome` VARCHAR(200) NOT NULL,
+  `sigla` VARCHAR(45) NOT NULL,
+  `lat` VARCHAR(45) NOT NULL,
+  `long` VARCHAR(45) NOT NULL,
+  `deleted` TINYINT(1) NULL DEFAULT 0,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
@@ -352,7 +401,8 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `mydb`.`sala` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `predio_id` INT NOT NULL,
-  `nome` VARCHAR(45) NULL,
+  `nome` VARCHAR(45) NOT NULL,
+  `deleted` TINYINT(1) NULL DEFAULT 0,
   PRIMARY KEY (`id`),
   INDEX `fk_sala_predio1_idx` (`predio_id` ASC),
   CONSTRAINT `fk_sala_predio1`
@@ -399,7 +449,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `mydb`.`conteudo` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `aula_id` INT NOT NULL,
-  `nome` VARCHAR(45) NULL,
+  `nome` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_conteudo_aula1_idx` (`aula_id` ASC),
   CONSTRAINT `fk_conteudo_aula1`
@@ -453,7 +503,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`tipo_presenca` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `descricao` VARCHAR(45) NULL,
+  `descricao` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
@@ -464,7 +514,6 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `mydb`.`presenca` (
   `aula_id` INT NOT NULL,
   `aluno_id` INT NOT NULL,
-  `tipo` VARCHAR(45) NULL,
   `descricao_justificativa` VARCHAR(45) NULL,
   `arquivo_justificativa` VARCHAR(45) NULL,
   `tipo_presenca_id` INT NOT NULL,
@@ -487,17 +536,6 @@ CREATE TABLE IF NOT EXISTS `mydb`.`presenca` (
     REFERENCES `mydb`.`tipo_presenca` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `mydb`.`instituto`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`instituto` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `sigla` VARCHAR(45) NULL,
-  `nome` VARCHAR(200) NULL,
-  PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
 
