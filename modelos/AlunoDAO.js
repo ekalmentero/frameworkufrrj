@@ -7,17 +7,17 @@ export class AlunoDao{
 
     }
 
-    insertAluno(aluno){ //OK
+    insertAluno(aluno){
         try {
             BD.inserir(aluno).then((retorno)=>{
-                return "Inserido";
-                })
+                });
+                return "Aluno "+retorno.nome+" inserido!";
         } catch (error) {
             return error.message;
         }
 
     }
-    selectAluno(id){ //OK
+    selectAluno(id){ 
         try {
             var tmpAluno = new Aluno();
             tmpAluno.setId(id);
@@ -29,8 +29,7 @@ export class AlunoDao{
                 tmpAluno.setAtivo(retorno.ativo);
                 tmpAluno.setIngresso(retorno.ingresso);
                 tmpAluno.setDeleted(retorno.deleted);
-
-                })
+                });
             return tmpAluno;
             
         } catch (error) {
@@ -38,19 +37,21 @@ export class AlunoDao{
         }
     }
     updateAluno(aluno){
-        var bd = new BD;
         try {
             bd.update(aluno)
+            BD.update(aluno).then((retorno)=>{
+                });
+                return "Aluno "+retorno.nome+" Atualizado!";
         } catch (error) {
            return error.message;
         }
 
     }
-    deleteAluno(aluno){ //OK
+    deleteAluno(aluno){ 
         try {
             BD.deletar(aluno).then((retorno)=>{
+                });
                 return "Aluno "+retorno.nome+" deletado!";
-                })
         } catch (error) {
            return error.message;
         }

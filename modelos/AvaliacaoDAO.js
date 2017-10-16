@@ -8,40 +8,44 @@ export class AvaliacaoDao{
     }
 
     insertAvaliacao(Avaliacao){
-        var bd = new BD();
         try {
-            bd.inserir(Avaliacao);
+            BD.inserir(Avaliacao).then((retorno)=>{
+                });
+                return "Avaliação inserida!";
         } catch (error) {
             return error.message;
         }
 
     }
     selectAvaliacao(avaliacaoID){
-        var bd = new BD;
         try {
             var tmpAvl = new Avaliacao();
             tmpAvl.setID(avaliacaoID);
-            var retorno = bd.buscar(tmpAvl);
-            tmpAvl.setAlunoId(retorno.alunoId);
-            tmpAvl.setNota(retorno.nota);
+
+            BD.buscar(tmpAvl).then((retorno)=>{
+                tmpAvl.setAlunoId(retorno.alunoId);
+                tmpAvl.setNota(retorno.nota);
+                });
             return tmpAvl;
         } catch (error) {
             return error.message;
         }
     }
     updateAvaliacao(Avaliacao){
-        var bd = new BD;
         try {
-            bd.update(Avaliacao)
+            BD.update(Avaliacao).then((retorno)=>{
+                });
+                return "Avaliação atualizada!";
         } catch (error) {
             return error.message;
         }
 
     }
     deleteAvaliacao(Avaliacao){
-        var bd = new BD;
         try {
-            bd.deletar(Avaliacao);
+            BD.deletar(Avaliacao).then((retorno)=>{
+                });
+                return "Avaliação deletada!";
         } catch (error) {
             return error.message;
         }
