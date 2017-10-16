@@ -1,3 +1,8 @@
 {
-  "presets": ["es2015"]
+  "presets": ["stage-1","env"],
+  "plugins": [
+    "syntax-class-properties",
+    "transform-class-properties",
+    "babel-plugin-transform-private-properties"
+  ]
 }
