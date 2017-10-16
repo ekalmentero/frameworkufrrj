@@ -5,7 +5,7 @@
 	"description": "Aplicativo para a disciplica de tópicos WEB",
 	"main": "app.js",
 	"scripts": {
-		"start": "babel-node app.js",
+		"start": "babel-node test/disciplina_tst.js",
 		"test": "jest"
 	},
 	"dependencies": {
