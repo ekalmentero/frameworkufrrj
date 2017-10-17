@@ -13,7 +13,7 @@ testes.all('/disciplina', function(req, res) {
 })
 
 testes.all('/aluno',function(req,res){
-
+    
     var tmp = new Aluno(1,2,3,4,5,6);
 
     // tmp.nome = "Teastae";
