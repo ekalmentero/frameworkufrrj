@@ -9,51 +9,12 @@ const conexao = mysql.createConnection({
   database : 'trabalho' //ALTERAR NÉ
 });
 
-conexao.connect();
+// conexao.connect();
 
 let tabelas = { // Exemplo
     'Aluno' : "tbl_aluno",
     'Professor' : "tbl_professor"
 };
-
-//EXEMPLO DE modelos
-class Aluno{
-    constructor(){
-        //...
-    }
-
-    @Private nome = "Bruno";
-    @Private dtNasc = 1996;
-
-    get getNome(){
-        return this.nome;
-    }
-
-    setNome(nome){
-        this.nome = nome;
-    }
-
-    get getIdade(){
-        return 2017 - this.dtNasc;
-    }
-
-    inserirNota(){
-      //...
-    }
-
-}
-
-// as funções retornam uma Promise
-// pra utilizar o código no DAO:
-//
-// import BD from './BD'
-//
-// [..]
-//
-// BD.query("").then((retorno)=>{
-//     retorno = retorno direto do banco de dados
-//     (false se query der erro)
-// })
 
 export default class BD {
 
@@ -125,6 +86,37 @@ export default class BD {
         );
     }
 
+    static update(obj){
+        var tabela = tabelas[obj.constructor.name];
+        var query = "UPDATE " + tabela + " SET ";
+
+        var filtros = [];
+
+        var tmp = new obj.constructor;
+
+        for(let propriedade of Object.getOwnPropertyNames(Object.getPrototypeOf(obj))){
+            if(propriedade == "constructor") continue;
+            if(typeof(a[propriedade]) == 'function') continue;
+
+            if(obj[propriedade] != tmp[propriedade] && propriedade != "getId"){
+                query += propriedade.replace("get","").toLowerCase() + "=" + obj[propriedade] + ",";
+            }
+        }
+
+        query = query.slice(0,-1);
+
+        query += " WHERE id=" + obj["getId"];
+
+        return new Promise(
+            function(resolve,reject){
+                conexao.query(sql, function (erro, retorno, colunas) {
+                    if (erro) reject(erro);
+                    resolve(true);
+                });
+            }
+        );
+    }
+
     static deletar(obj){
         var tabela = tabelas[obj.constructor.name];
         var query = "DELETE FROM " + tabela + " WHERE ";
@@ -152,7 +144,7 @@ export default class BD {
         return new Promise(
             function(resolve,reject){
                 conexao.query(sql, function (erro, retorno, colunas) {
-                    if (erro) resolve(false);
+                    if (erro) reject(erro);
                     resolve(true);
                 });
             }
