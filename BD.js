@@ -9,7 +9,7 @@ const conexao = mysql.createConnection({
   database : 'trabalho' //ALTERAR NÉ
 });
 
-// conexao.connect();
+conexao.connect();
 
 let tabelas = { // Exemplo
     'Aluno' : "tbl_aluno",
