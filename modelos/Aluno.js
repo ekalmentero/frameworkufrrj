@@ -1,32 +1,41 @@
 "use strict";
-export class Grade{
+export default class Grade{
 
-    Constructor(id, nome, matricula, ativo, ingresso, deleted){
+    Constructor(id, nome, matricula, ativo, ingresso, deleted, curso_id, grade_id){
         this.id = id;
         this.nome = nome;
         this.matricula = matricula;
         this.ativo = ativo;
         this.ingresso = ingresso;
         this.deleted = deleted;
+        this.curso_id = curso_id;
+        this.grade_id = grade_id;
+
     }
      getId() {
         return this.id;
       }
       
       getNome() {
-        return this.id;
+        return this.nome;
       }
       getMatricula() {
-        return this.id;
+        return this.matricula;
       }
       getAtivo() {
-        return this.id;
+        return this.ativo;
       }
       getIngresso() {
-        return this.id;
+        return this.ingresso;
       }
       getDeleted() {
-        return this.id;
+        return this.deleted;
+      }
+      getCurso() {
+        return this.curso_id;
+      }
+      getGrade() {
+        return this.grade_id;
       }
       
       setId(id) {
@@ -46,6 +55,12 @@ export class Grade{
       }
       setDeleted(deleted) {
         this.deleted = deleted;
+      }
+      setCurso(curso_id) {
+        this.curso_id = curso_id;
+      }
+      setGrade(grade_id) {
+        this.grade_id = grade_id;
       }
       
 

@@ -1,12 +1,13 @@
 "use strict";
-export class Avaliacao{
+export default class Avaliacao{
   
-    Constructor(id, nome, data, descricao, deleted){
+    Constructor(id, nome, data, descricao, deleted, turma_id){
         this.id = id;
         this.nome = nome;
         this.data = data;
         this.descricao = descricao;
         this.deleted = deleted;
+        this.turma_id = turma_id;
     }
      getId() {
         return this.id;
@@ -24,6 +25,9 @@ export class Avaliacao{
       getDeleted() {
         return this.deleted;
       }
+      getTurma() {
+        return this.turma_id;
+      }
       
       setId(id) {
         this.id = id;
@@ -39,6 +43,9 @@ export class Avaliacao{
       }
       setDeleted(deleted) {
         this.deleted = deleted;
+      }
+      setTurma(turma_id) {
+        this.turma_id = turma_id;
       }
 
 }

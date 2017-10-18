@@ -2,7 +2,7 @@
 import BD from './BD';
 import Avaliacao from './modelos/Avaliacao';
 
-export class AvaliacaoDao{
+export class AvaliacaoDAO{
     constructor(){
 
     }
@@ -23,8 +23,12 @@ export class AvaliacaoDao{
             tmpAvl.setID(avaliacaoID);
 
             BD.buscar(tmpAvl).then((retorno)=>{
-                tmpAvl.setAlunoId(retorno.alunoId);
-                tmpAvl.setNota(retorno.nota);
+                tmpAvl.setID(retorno.id);
+                tmpAvl.setNome(retorno.nome); 
+                tmpAvl.setData(retorno.data);
+                tmpAvl.setDescricao(retorno.descricao);
+                tmpAvl.setDeleted(retorno.deleted);
+                tmpAvl.setTurma(retorno.turma_id);
                 });
             return tmpAvl;
         } catch (error) {

@@ -2,7 +2,7 @@
 import BD from './BD';
 import Grade from './modelos/Grade';
 
-export class GradeDao{
+export class GradeDAO{
     constructor(){
 
     }
@@ -23,10 +23,11 @@ export class GradeDao{
             tmpGrade.setId(id);
 
             BD.buscar(tmpGrade).then((retorno)=>{
-                tmpGrade.setinicioVigencia(retorno.inicioVigencia);
-                //tmpGrade.setId(retorno.id);
+                tmpGrade.setinicioVigencia(retorno.inicio_vigencia);
+                tmpGrade.setId(retorno.id);
                 tmpGrade.setDisponivel(retorno.disponivel);
                 tmpGrade.setDeleted(retorno.deleted);
+                tmpGrade.setDeleted(retorno.curso_id);
                 });
                 return tmpGrade;
             
