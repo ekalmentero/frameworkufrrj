@@ -8,6 +8,10 @@ export default class Disciplina {
         this.codigo = _codigo;
     }
 
+    @Private id;
+    @Private nome;
+    @Private codigo; 
+
     get id(){
         return this.id + " teste id"; 
     }
@@ -33,7 +37,6 @@ export default class Disciplina {
     }
 
     toString(){
-        console.log(this.id);
         console.log(JSON.stringify(this));
     }
 }
