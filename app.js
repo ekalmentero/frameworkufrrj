@@ -10,5 +10,5 @@ import testes from './test'
 rotas.use('/teste',testes)
 
 app.listen(8080, function() {
-    console.log("INICIADO");
+    console.log("APP : INICIADO");
 })

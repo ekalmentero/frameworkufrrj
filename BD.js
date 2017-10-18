@@ -6,22 +6,24 @@ const conexao = mysql.createConnection({
   host     : 'localhost',
   user     : 'root',
   password : 'root',
-  database : 'trabalho' //ALTERAR NÉ
+  database : 'db_frameworkufrrj' //ALTERAR NÉ
 });
 
-conexao.connect();
+conexao.connect(function(erro) {
+    if(erro) console.error("Componente BD : ERRO CONEXAO BD"); else console.log("Componente BD : Conectado ao banco");
+});
 
 let tabelas = { // Exemplo
-    'Aluno' : "tbl_aluno",
+    'Aluno' : "aluno",
     'Professor' : "tbl_professor"
 };
 
 export default class BD {
 
-    static query(sql){
+    static query(query){
         return new Promise(
             function(resolve,reject){
-                conexao.query(sql, function (erro, retorno, colunas) {
+                conexao.query(query, function (erro, retorno, colunas) {
                     if (erro) throw erro;
                     resolve(retorno);
                 });
@@ -31,22 +33,24 @@ export default class BD {
 
     static inserir(obj){
         var tabela = tabelas[obj.constructor.name];
-        var query = "INSERT INTO " + tabela;
+        var query = "INSERT INTO " + tabela + " SET ";
 
         var tmp = "";
         for(let propriedade of Object.getOwnPropertyNames(Object.getPrototypeOf(obj))){
             if(propriedade == "constructor") continue;
-            if(typeof(a[propriedade]) == 'function') continue;
+            if(typeof(obj[propriedade]) == 'function') continue;
 
-            if(typeof(filtros[i][1]) == "string") tmp = "'"; else tmp = "";
-            query += " SET " + filtros[i][0].replace("get","").toLowerCase() + " = " + tmp + filtros[i][1] + tmp;
+            if(typeof(obj[propriedade]) == "string") tmp = "'"; else tmp = "";
+            query += propriedade.replace("get","").toLowerCase() + " = " + tmp + obj[propriedade] + tmp + ",";
         }
+        query = query.slice(0,-1);
+
+        console.log(query);
 
         return new Promise(
             function(resolve,reject){
-                conexao.query(sql, function (erro, retorno, colunas) {
-                    if (erro) resolve(false);
-                    resolve(true);
+                conexao.query(query, function (erro, retorno, colunas) {
+                    if (erro) reject(erro); else resolve(true);
                 });
             }
         );
@@ -62,7 +66,7 @@ export default class BD {
 
         for(let propriedade of Object.getOwnPropertyNames(Object.getPrototypeOf(obj))){
             if(propriedade == "constructor") continue;
-            if(typeof(a[propriedade]) == 'function') continue;
+            if(typeof(obj[propriedade]) == 'function') continue;
 
             if(obj[propriedade] != tmp[propriedade]){
                 filtros.push([propriedade,obj[propriedade]]);
@@ -96,7 +100,7 @@ export default class BD {
 
         for(let propriedade of Object.getOwnPropertyNames(Object.getPrototypeOf(obj))){
             if(propriedade == "constructor") continue;
-            if(typeof(a[propriedade]) == 'function') continue;
+            if(typeof(obj[propriedade]) == 'function') continue;
 
             if(obj[propriedade] != tmp[propriedade] && propriedade != "getId"){
                 query += propriedade.replace("get","").toLowerCase() + "=" + obj[propriedade] + ",";
@@ -109,7 +113,7 @@ export default class BD {
 
         return new Promise(
             function(resolve,reject){
-                conexao.query(sql, function (erro, retorno, colunas) {
+                conexao.query(query, function (erro, retorno, colunas) {
                     if (erro) reject(erro);
                     resolve(true);
                 });
@@ -127,7 +131,7 @@ export default class BD {
 
         for(let propriedade of Object.getOwnPropertyNames(Object.getPrototypeOf(obj))){
             if(propriedade == "constructor") continue;
-            if(typeof(a[propriedade]) == 'function') continue;
+            if(typeof(obj[propriedade]) == 'function') continue;
 
             if(obj[propriedade] != tmp[propriedade]){
                 filtros.push([propriedade,obj[propriedade]]);
@@ -143,12 +147,11 @@ export default class BD {
 
         return new Promise(
             function(resolve,reject){
-                conexao.query(sql, function (erro, retorno, colunas) {
+                conexao.query(query, function (erro, retorno, colunas) {
                     if (erro) reject(erro);
                     resolve(true);
                 });
             }
         );
     }
-
 }
