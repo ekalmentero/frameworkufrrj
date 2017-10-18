@@ -1,35 +1,53 @@
 import express from 'express';
-import BD from '../BD';
-
 const testes = express.Router();
 
-//import Disciplina from '../modelos/disciplina';
-// import Aluno from '../modelos/Aluno'
+import BD from '../BD';
 
-testes.all('/disciplina', function(req, res) {
+import Instituto from '../modelos/instituto';
+import InstitutoDAO from '../DAO/institutoDAO';
 
-    var tmp = new Disciplina(1,'1',1);
-    tmp.nome = 5;
-    res.send(tmp.toString());
+testes.all('/instituto',function(req,res){
+    var tmp = new Instituto();
+    tmp.setNome("Instituto de Ciencias Humanas e Sociais")
+    tmp.setSigla("ICHS")
+
+    InstitutoDAO.incluir(tmp).then((r)=>{
+      res.send(r)
+    });
 
 })
 
-testes.all('/aluno',function(req,res){
-    var tmp = new Aluno(1,2,3,4,5,6);
+testes.all("/:unidade",function(req,res){
+  var Instituto = require('../modelos/instituto.js');
+  var tmp = req.params.unidade.charAt(0).toUpperCase() + req.params.unidade.slice(1);
+  var html = "<h3>Testando :</h3> " + tmp + "<br>";
+  var inst = eval("new " + tmp + "()");
 
-    // tmp.nome = "Teastae";
-    res.send(tmp.getNome().toString());
+  html += "<h3>Instancia de " + tmp + " criada :</h3> " + inst + "<br><br><hr>";
+
+  inst.setId(1);
+  BD.buscar(inst).then((retorno)=>{
+    if(retorno == "") retorno = "{}";
+    html += "<h4 style='color:green;'>Busca " + tmp + "{id:1}</h3>" + retorno;
+  }).catch((erro)=>{
+    html += "<h4 style='color:red;'>Testando busca " + tmp + "{id:1}</h3>" + "ERRO { " + erro + " }";
+  });
+
+  inst.setId(123);
+  BD.inserir(inst).then((retorno)=>{
+    html += "<h4 style='color:green;'>Inserir " + tmp + "{id:'123'}</h3><br>" + retorno;
+  }).catch((erro)=>{
+    html += "<h4 style='color:red;'>Testando inserção " + tmp + "{id:'123'}</h3><br>" + "ERRO { " + erro + " }";
+  });
+
+  setTimeout(function(){res.send(html);},500);
+
 });
-
-class Aluno{
-    @Private nome;
-    get getNome(){return this.nome}
-    setNome(_nome){this.nome = _nome}
-}
 
 testes.all('/bd',function(req,res){
   var tmp = new Aluno();
     tmp.setNome("Bruno");
+
     BD.inserir(tmp).then((retorno)=>{
       res.send(retorno);
     }).catch((erro)=>{

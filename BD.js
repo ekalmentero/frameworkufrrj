@@ -15,6 +15,7 @@ conexao.connect(function(erro) {
 
 let tabelas = { // Exemplo
     'Aluno' : "aluno",
+    'Instituto' : "instituto",
     'Professor' : "tbl_professor"
 };
 
@@ -38,19 +39,25 @@ export default class BD {
         var tmp = "";
         for(let propriedade of Object.getOwnPropertyNames(Object.getPrototypeOf(obj))){
             if(propriedade == "constructor") continue;
-            if(typeof(obj[propriedade]) == 'function') continue;
+            if(typeof(obj[propriedade]) == 'function' || obj[propriedade] == undefined) continue;
+            if(propriedade == "getId") continue;
+
+            if(typeof(obj[propriedade]) == "object") obj[propriedade] = obj[propriedade].getId;
 
             if(typeof(obj[propriedade]) == "string") tmp = "'"; else tmp = "";
             query += propriedade.replace("get","").toLowerCase() + " = " + tmp + obj[propriedade] + tmp + ",";
         }
         query = query.slice(0,-1);
 
-        console.log(query);
-
         return new Promise(
             function(resolve,reject){
                 conexao.query(query, function (erro, retorno, colunas) {
-                    if (erro) reject(erro); else resolve(true);
+                    if (erro) reject(erro); else {
+                        BD.query("SELECT LAST_INSERT_ID() AS lid").then((r)=>{
+                            
+                            resolve(r[0].lid);
+                        }).catch((erro)=>{reject(erro)});
+                    }
                 });
             }
         );
@@ -67,6 +74,7 @@ export default class BD {
         for(let propriedade of Object.getOwnPropertyNames(Object.getPrototypeOf(obj))){
             if(propriedade == "constructor") continue;
             if(typeof(obj[propriedade]) == 'function') continue;
+            if(typeof(obj[propriedade]) == "object") obj[propriedade] = obj[propriedade].getId;
 
             if(obj[propriedade] != tmp[propriedade]){
                 filtros.push([propriedade,obj[propriedade]]);
@@ -100,9 +108,11 @@ export default class BD {
 
         for(let propriedade of Object.getOwnPropertyNames(Object.getPrototypeOf(obj))){
             if(propriedade == "constructor") continue;
-            if(typeof(obj[propriedade]) == 'function') continue;
+            if(typeof(obj[propriedade]) == 'function' || obj[propriedade] == undefined) continue;
+            if(propriedade == "getId") continue;
+            if(typeof(obj[propriedade]) == "object") obj[propriedade] = obj[propriedade].getId;
 
-            if(obj[propriedade] != tmp[propriedade] && propriedade != "getId"){
+            if(obj[propriedade] != tmp[propriedade]){
                 query += propriedade.replace("get","").toLowerCase() + "=" + obj[propriedade] + ",";
             }
         }
@@ -123,7 +133,7 @@ export default class BD {
 
     static deletar(obj){
         var tabela = tabelas[obj.constructor.name];
-        var query = "DELETE FROM " + tabela + " WHERE ";
+        var query = "UPDATE " + tabela + " SET deleted=WHERE ";
 
         var filtros = [];
 
