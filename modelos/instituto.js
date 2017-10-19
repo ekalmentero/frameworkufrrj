@@ -6,7 +6,6 @@ export default class Instituto{
     constructor(sigla,nome){
         this.setSigla(sigla);
         this.setNome(nome);
-
     }
 
     setId(id){this.id = id}

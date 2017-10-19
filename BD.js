@@ -54,7 +54,6 @@ export default class BD {
                 conexao.query(query, function (erro, retorno, colunas) {
                     if (erro) reject(erro); else {
                         BD.query("SELECT LAST_INSERT_ID() AS lid").then((r)=>{
-                            
                             resolve(r[0].lid);
                         }).catch((erro)=>{reject(erro)});
                     }

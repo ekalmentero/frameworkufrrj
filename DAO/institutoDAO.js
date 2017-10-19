@@ -1,16 +1,14 @@
 import BD from '../BD';
 
 export default class InstitutoDAO{
-    static incluir(inst){
-       return new Promise(
-           function(resolve,reject){
-              BD.inserir(inst).then((retorno) => {
-                  inst.setId(retorno);
-                  resolve(inst);
-              })
-           }
-       )
+    static async incluir(inst){
+        var retorno = await BD.inserir(inst);
+        inst.setId(retorno);
+        return inst;
     }
 
+    static async selecionarTudo(){
+         return await BD.query("SELECT * FROM instituto");
+    }
 
 }
