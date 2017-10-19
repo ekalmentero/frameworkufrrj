@@ -4,16 +4,12 @@ const testes = express.Router();
 import Instituto from '../modelos/instituto';
 import InstitutoDAO from '../DAO/institutoDAO';
 
-testes.all('/instituto',function(req,res){
+testes.all('/instituto',async function(req,res){
     var tmp = new Instituto();
     tmp.setNome("Instituto de Ciencias Humanas e Sociais")
     tmp.setSigla("ICHS")
 
-    var retorno = async () => {
-        res.send(await InstitutoDAO.incluir(tmp));
-    }
-
-    retorno();
+    res.send(await InstitutoDAO.incluir(tmp));
 
 })
 
