@@ -19,12 +19,14 @@ USE `db_frameworkufrrj` ;
 -- Table `db_frameworkufrrj`.`disciplina`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `db_frameworkufrrj`.`disciplina` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `nome` VARCHAR(200) NOT NULL,
   `codigo` VARCHAR(10) NOT NULL,
   `creditos` INT NOT NULL,
   `deleted` TINYINT(1) NULL DEFAULT 0,
-  PRIMARY KEY (`id`))
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `nome_UNIQUE` (`nome` ASC),
+  UNIQUE INDEX `codigo_UNIQUE` (`codigo` ASC))
 ENGINE = InnoDB;
 
 
@@ -36,7 +38,9 @@ CREATE TABLE IF NOT EXISTS `db_frameworkufrrj`.`instituto` (
   `sigla` VARCHAR(45) NOT NULL,
   `nome` VARCHAR(200) NOT NULL,
   `deleted` TINYINT(1) NULL DEFAULT 0,
-  PRIMARY KEY (`id`))
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `sigla_UNIQUE` (`sigla` ASC),
+  UNIQUE INDEX `nome_UNIQUE` (`nome` ASC))
 ENGINE = InnoDB;
 
 
@@ -51,6 +55,8 @@ CREATE TABLE IF NOT EXISTS `db_frameworkufrrj`.`departamento` (
   `instituto_id` INT NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_departamento_instituto1_idx` (`instituto_id` ASC),
+  UNIQUE INDEX `nome_UNIQUE` (`nome` ASC),
+  UNIQUE INDEX `sigla_UNIQUE` (`sigla` ASC),
   CONSTRAINT `fk_departamento_instituto1`
     FOREIGN KEY (`instituto_id`)
     REFERENCES `db_frameworkufrrj`.`instituto` (`id`)
@@ -72,6 +78,8 @@ CREATE TABLE IF NOT EXISTS `db_frameworkufrrj`.`curso` (
   `departamento_id` INT NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_curso_departamento1_idx` (`departamento_id` ASC),
+  UNIQUE INDEX `nome_UNIQUE` (`nome` ASC),
+  UNIQUE INDEX `codigo_UNIQUE` (`codigo` ASC),
   CONSTRAINT `fk_curso_departamento1`
     FOREIGN KEY (`departamento_id`)
     REFERENCES `db_frameworkufrrj`.`departamento` (`id`)
@@ -156,7 +164,7 @@ ENGINE = InnoDB;
 -- Table `db_frameworkufrrj`.`periodo`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `db_frameworkufrrj`.`periodo` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `data_inicio` DATE NOT NULL,
   `data_fim` DATE NOT NULL,
   `nome` VARCHAR(45) NOT NULL,
@@ -169,13 +177,15 @@ ENGINE = InnoDB;
 -- Table `db_frameworkufrrj`.`professor`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `db_frameworkufrrj`.`professor` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `nome` VARCHAR(45) NOT NULL,
   `matricula` VARCHAR(45) NOT NULL,
   `deleted` TINYINT(1) NULL DEFAULT 0,
   `departamento_id` INT NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_professor_departamento1_idx` (`departamento_id` ASC),
+  UNIQUE INDEX `nome_UNIQUE` (`nome` ASC),
+  UNIQUE INDEX `matricula_UNIQUE` (`matricula` ASC),
   CONSTRAINT `fk_professor_departamento1`
     FOREIGN KEY (`departamento_id`)
     REFERENCES `db_frameworkufrrj`.`departamento` (`id`)
@@ -233,6 +243,8 @@ CREATE TABLE IF NOT EXISTS `db_frameworkufrrj`.`aluno` (
   PRIMARY KEY (`id`),
   INDEX `fk_aluno_curso1_idx` (`curso_id` ASC),
   INDEX `fk_aluno_grade1_idx` (`grade_id` ASC),
+  UNIQUE INDEX `nome_UNIQUE` (`nome` ASC),
+  UNIQUE INDEX `matricula_UNIQUE` (`matricula` ASC),
   CONSTRAINT `fk_aluno_curso1`
     FOREIGN KEY (`curso_id`)
     REFERENCES `db_frameworkufrrj`.`curso` (`id`)
@@ -317,7 +329,8 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `db_frameworkufrrj`.`tipo_resultado` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `tipo` VARCHAR(100) NOT NULL,
-  PRIMARY KEY (`id`))
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `tipo_UNIQUE` (`tipo` ASC))
 ENGINE = InnoDB;
 
 
@@ -356,7 +369,7 @@ ENGINE = InnoDB;
 -- Table `db_frameworkufrrj`.`aula`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `db_frameworkufrrj`.`aula` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `turma_id` INT NOT NULL,
   `data` DATE NOT NULL,
   PRIMARY KEY (`id`),
@@ -390,7 +403,9 @@ CREATE TABLE IF NOT EXISTS `db_frameworkufrrj`.`predio` (
   `lat` VARCHAR(45) NOT NULL,
   `long` VARCHAR(45) NOT NULL,
   `deleted` TINYINT(1) NULL DEFAULT 0,
-  PRIMARY KEY (`id`))
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `nome_UNIQUE` (`nome` ASC),
+  UNIQUE INDEX `sigla_UNIQUE` (`sigla` ASC))
 ENGINE = InnoDB;
 
 
@@ -481,7 +496,8 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `db_frameworkufrrj`.`tipo_presenca` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `descricao` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`id`))
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `descricao_UNIQUE` (`descricao` ASC))
 ENGINE = InnoDB;
 
 
