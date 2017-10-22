@@ -11,12 +11,14 @@ export default class DisciplinaDAO {
     }
 
     static async read(disciplina){
-        return await BD.buscar(disciplina);
+        var result =  await BD.buscar(disciplina);
+        disciplina = result[0];
+        //disciplina = Object.create(Disciplina,result[0]); aguardando soluçao para converter em objeto
+        return disciplina;
     }
 
-    
     static async readAll(){
-        return await BD.query("SELECT * FROM instituto");
+        return await BD.query("SELECT * FROM disciplina");
     }
 
     static async update(disciplina){
