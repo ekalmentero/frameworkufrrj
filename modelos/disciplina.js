@@ -1,39 +1,38 @@
 "use strict";
 
 export default class Disciplina {
-    
-    constructor(_id, _nome, _codigo){
-        this.id = _id;
-        this.nome = _nome;
-        this.codigo = _codigo;
-    }
-
     @Private id;
     @Private nome;
-    @Private codigo; 
+    @Private codigo;
 
-    get id(){
+    constructor(id, nome, codigo){
+        this.id = id;
+        this.nome = nome;
+        this.codigo = codigo;
+    } 
+
+    get getId(){
         return this.id + " teste id"; 
-    }
-
-    set id(_id){
-        if (typeof(_id) != "number") this.id = _id;
     }
 
     get getNome(){
         return this.id + " teste nome"; 
     }
-
-    set nome(_nome){
-        if (typeof(_nome) != "string") this.nome = _nome;
-    }
-
-    get codigo(){
+    
+    get getCodigo(){
         return this.codigo + " teste codigo"; 
     }
+    
+    setId(id){
+        if (typeof(id) != "number") this.id = id;
+    }
 
-    set codigo(_codigo){
-        if (typeof(_codigo) != "number") this.codigo = _codigo;
+    setNome(nome){
+        if (typeof(nome) != "string") this.nome = nome;
+    }
+
+    setCodigo(_codigo){
+        if (typeof(codigo) != "number") this.codigo = codigo;
     }
 
     toString(){
