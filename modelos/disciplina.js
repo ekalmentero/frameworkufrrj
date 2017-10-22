@@ -1,41 +1,49 @@
-"use strict";
-
 export default class Disciplina {
     @Private id;
     @Private nome;
     @Private codigo;
+    @Private creditos;
 
-    constructor(id, nome, codigo){
-        this.id = id;
-        this.nome = nome;
-        this.codigo = codigo;
+    constructor(id, nome, codigo, creditos){
+        this.setId(id);
+        this.setNome(nome);
+        this.setCodigo(codigo);
+        this.setCreditos(creditos);
     } 
 
     get getId(){
-        return this.id + " teste id"; 
+        return this.id; 
     }
 
     get getNome(){
-        return this.id + " teste nome"; 
+        return this.nome; 
     }
     
     get getCodigo(){
-        return this.codigo + " teste codigo"; 
+        return this.codigo; 
     }
     
+    get getCreditos(){
+        return this.creditos;
+    }
+
     setId(id){
-        if (typeof(id) != "number") this.id = id;
+        if (typeof(id) == "number") this.id = id;
     }
 
     setNome(nome){
-        if (typeof(nome) != "string") this.nome = nome;
+        if (typeof(nome) == "string") this.nome = nome;
     }
 
-    setCodigo(_codigo){
-        if (typeof(codigo) != "number") this.codigo = codigo;
+    setCodigo(codigo){
+        if (typeof(codigo) == "string") this.codigo = codigo;
+    }
+
+    setCreditos(creditos){
+        if (typeof(creditos) == "number") this.creditos = creditos;
     }
 
     toString(){
-        console.log(JSON.stringify(this));
+        JSON.stringify(this);
     }
 }

@@ -3,6 +3,8 @@ const testes = express.Router();
 
 import Instituto from '../modelos/instituto';
 import InstitutoDAO from '../DAO/institutoDAO';
+import Disciplina from '../modelos/disciplina';
+import DisciplinaDAO from '../DAO/disciplinaDAO';
 
 testes.all('/instituto',function(req,res){
     var tmp = new Instituto();
@@ -15,6 +17,11 @@ testes.all('/instituto',function(req,res){
 
     retorno();
 
+})
+
+testes.all('/disciplina',async function(req,res){
+    let disciplina = new Disciplina("","Disciplina Teste","AA000",4);
+    res.send(await DisciplinaDAO.create(disciplina));
 })
 
 testes.all("/:unidade",function(req,res){
