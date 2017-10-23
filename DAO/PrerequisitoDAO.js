@@ -1,53 +1,54 @@
 "use strict";
-import BD from './BD';
-import Prerequisito from './modelos/Prerequisito';
+import BD from '../BD';
+import Prerequisito from '../modelos/Prerequisito';
 
-export class PrerequisitoDAO{
-    constructor(){
-
-    }
-
-    insertPrerequisito(Prerequisito){
+export default class PrerequisitoDAO{
+   
+    static async insertPrerequisito(prerequisito){
         try {
-            BD.inserir(Prerequisito).then((retorno)=>{
-                });
-                return "Prerequisito inserido!";
+            var retorno = await BD.inserir(prerequisito);
+            prerequisito.setGrade(retorno.grade_id);
+            prerequisito.setDisciplina(retorno.id_disciplina);
+            prerequisito.setRequisito(retorno.id_requisito);
+            return prerequisito;
         } catch (error) {
             return error.message;
         }
 
     }
-    selectPrerequisito(id_disciplina, id_requisito){
+    static async selectPrerequisito(id_disciplina, id_requisito){
         try {
-            var tmpPrerequisito = new Prerequisito();
-            tmpPrerequisito.setIdDisciplina(id_disciplina);
-            tmpPrerequisito.setIdRequisito(id_requisito);
+            var prerequisito = new Prerequisito();
+            prerequisito.setIdDisciplina(id_disciplina);
+            prerequisito.setIdRequisito(id_requisito);
 
-            BD.buscar(tmpPrerequisito).then((retorno)=>{
-                tmpPrerequisito.setIdDisciplina(retorno.id_disciplina);
-                tmpPrerequisito.setIdRequisito(retorno.id_requisito); 
-                tmpPrerequisito.setGradeId(retorno.grade_id);
-                });
-            return tmpPrerequisito;
+            var retorno = await BD.buscar(prerequisito);
+                prerequisito.setDisciplina(retorno.id_disciplina);
+                prerequisito.setRequisito(retorno.id_requisito); 
+                prerequisito.setGrade(retorno.grade_id);
+        
+            return prerequisito;
         } catch (error) {
             return error.message;
         }
     }
-    updatePrerequisito(Prerequisito){
+
+    static async selectAll(){
+        return await BD.query("SELECT * FROM prerequisito");
+   }
+
+
+   static async updatePrerequisito(prerequisito){
         try {
-            BD.update(Prerequisito).then((retorno)=>{
-                });
-                return "Prerequisito atualizada!";
+            return await BD.update(prerequisito);
         } catch (error) {
             return error.message;
         }
 
     }
-    deletePrerequisito(Prerequisito){
+    static async deletePrerequisito(prerequisito){
         try {
-            BD.deletar(Prerequisito).then((retorno)=>{
-                });
-                return "Prerequisito deletada!";
+            return await BD.deletar(prerequisito);
         } catch (error) {
             return error.message;
         }

@@ -1,29 +1,32 @@
 "use strict";
 export default class Prerequisito{
+  @Private id_disciplina;
+  @Private id_requisito;
+  @Private grade_id;
   
     Constructor(id_disciplina, id_requisito, grade_id){
-        this.id_disciplina = id_disciplina;
-        this.id_requisito = id_requisito;
-        this.grade_id = grade_id;
+        this.setDisciplina(id_disciplina);
+        this.setRequisito(id_requisito);
+        this.setGrade(grade_id);
     }
-     getIdDisciplina() {
+     get getDisciplina() {
         return this.id_disciplina;
       }
       
-      getIdRequisito() {
+      get getRequisito() {
         return this.id_requisito;
       }
-      getGradeId() {
+      get getGrade() {
         return this.grade_id;
       }
       
-      setIdDisciplina(id_disciplina) {
+      setDisciplina(id_disciplina) {
         this.id_disciplina = id_disciplina;
       }
-      setIdRequisito(id_requisito) {
+      setRequisito(id_requisito) {
         this.id_requisito = id_requisito;
       }
-      setGradeId(grade_id) {
+      setGrade(grade_id) {
         this.grade_id = grade_id;
       }
 

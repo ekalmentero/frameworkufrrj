@@ -1,59 +1,57 @@
 "use strict";
-import BD from './BD';
-import Aluno from './modelos/Aluno';
+import BD from '../BD';
+import Aluno from '../modelos/Aluno';
 
-export class AlunoDAO{
-    constructor(){
-
-    }
-
-    insertAluno(aluno){
+export default class AlunoDAO{
+  
+    static async insertAluno(aluno){
         try {
-            BD.inserir(aluno).then((retorno)=>{
-                });
-                return "Aluno inserido!";
+            var retorno = await BD.inserir(aluno);
+                aluno.setId(retorno);
+                return aluno;
         } catch (error) {
             return error.message;
         }
 
     }
-    selectAluno(id){ 
+    static async selectAluno(alunoId){ 
         try {
             var tmpAluno = new Aluno();
-            tmpAluno.setId(id);
+            tmpAluno.setId(alunoId);
 
-            BD.buscar(tmpAluno).then((retorno)=>{
+            var retorno = await BD.buscar(tmpAluno);
                 tmpAluno.setNome(retorno.nome);
-                tmpAluno.setId(retorno.id);
+                tmpAluno.setId(retorno.alunoId);
                 tmpAluno.setMatricula(retorno.matricula);
                 tmpAluno.setAtivo(retorno.ativo);
                 tmpAluno.setIngresso(retorno.ingresso);
                 tmpAluno.setDeleted(retorno.deleted);
                 tmpAluno.setDeleted(retorno.curso_id);
                 tmpAluno.setDeleted(retorno.grade_id);
-                });
+                
             return tmpAluno;
             
         } catch (error) {
             return error.message;
         }
     }
-    updateAluno(aluno){
+
+    static async selectAll(){
+        return await BD.query("SELECT * FROM aluno");
+   }
+
+
+   static async updateAluno(aluno){
         try {
-            bd.update(aluno)
-            BD.update(aluno).then((retorno)=>{
-                });
-                return "Aluno Atualizado!";
+            return await BD.update(aluno);
         } catch (error) {
            return error.message;
         }
 
     }
-    deleteAluno(aluno){ 
+    static async deleteAluno(aluno){ 
         try {
-            BD.deletar(aluno).then((retorno)=>{
-                });
-                return "Aluno deletado!";
+            return await BD.deletar(aluno);
         } catch (error) {
            return error.message;
         }

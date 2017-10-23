@@ -1,28 +1,33 @@
 "use strict";
 export default class Grade{
+  @Private id;
+  @Private inicio_vigencia;
+  @Private disponivel;
+  @Private deleted;
+  @Private curso_id;
 
     Constructor(id, inicio_vigencia, disponivel, deleted, curso_id){
-        this.id = id;
-        this.inicio_vigencia = inicio_vigencia;
-        this.disponivel = disponivel;
-        this.deleted = deleted;
-        this.curso_id = curso_id;
+        this.setId(id);
+        this.setinicioVigencia(inicio_vigencia);
+        this.setDisponivel(disponivel);
+        this.setDeleted(deleted);
+        this.setCurso(curso_id);
     }
-     getId() {
+     get getId() {
         return this.id;
       }
       
-      getinicioVigencia() {
+      get getinicioVigencia() {
         return this.inicio_vigencia;
       }
-      getdisponivel() {
+      get getdisponivel() {
         return this.disponivel;
       }
 
-      getDeleted() {
+      get getDeleted() {
         return this.deleted;
       }
-      getCurso() {
+      get getCurso() {
         return this.curso_id;
       }
       

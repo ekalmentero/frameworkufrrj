@@ -1,55 +1,53 @@
 "use strict";
-import BD from './BD';
-import Grade from './modelos/Grade';
+import BD from '../BD';
+import Grade from '../modelos/Grade';
 
-export class GradeDAO{
-    constructor(){
-
-    }
-
-    insertGrade(grade){
+export default class GradeDAO{
+   
+    static async insertGrade(grade){
         try {
-            BD.inserir(grade).then((retorno)=>{
-                });
-                return "Grade inserida!";
+            var retorno = await BD.inserir(grade);
+            grade.setId(retorno);
+            return grade;
         } catch (error) {
             return error.message;
         }
 
     }
-    selectGrade(id){
+    static async selectGrade(gradeId){
         try {
-            var tmpGrade = new Grade();
-            tmpGrade.setId(id);
+            var grade = new Grade();
+            grade.setId(gradeId);
 
-            BD.buscar(tmpGrade).then((retorno)=>{
-                tmpGrade.setinicioVigencia(retorno.inicio_vigencia);
-                tmpGrade.setId(retorno.id);
-                tmpGrade.setDisponivel(retorno.disponivel);
-                tmpGrade.setDeleted(retorno.deleted);
-                tmpGrade.setDeleted(retorno.curso_id);
-                });
-                return tmpGrade;
+            var retorno = await BD.buscar(grade);
+                grade.setinicioVigencia(retorno.inicio_vigencia);
+                grade.setId(retorno.id);
+                grade.setDisponivel(retorno.disponivel);
+                grade.setDeleted(retorno.deleted);
+                grade.setDeleted(retorno.curso_id);
+            
+                return grade;
             
         } catch (error) {
             return error.message;
         }
     }
-    updateGrade(Grade){
+
+    static async selectAll(){
+        return await BD.query("SELECT * FROM grade");
+   }
+
+   static async updateGrade(grade){
         try {
-            BD.update(Grade).then((retorno)=>{
-                });
-                return "Grade Atualizada!";
+            return await BD.update(grade);
         } catch (error) {
             return error.message;
         }
 
     }
-    deleteGrade(Grade){
+    static async deleteGrade(grade){
         try {
-            BD.deletar(Grade).then((retorno)=>{
-                });
-                return "Grade deletada!";
+            return await BD.deletar(grade);
         } catch (error) {
             return error.message;
         }
