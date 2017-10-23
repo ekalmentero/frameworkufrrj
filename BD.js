@@ -99,8 +99,10 @@ export default class BD {
             if(propriedade == "getId") continue;
             if(typeof(obj[propriedade]) == "object") obj[propriedade] = obj[propriedade].getId;
 
+            var tmp;
             if(obj[propriedade] != tmp[propriedade]){
-                query += propriedade.replace("get","").toLowerCase() + "=" + obj[propriedade] + ",";
+                if(typeof(obj[propriedade]) == "string") tmp = "'"; else tmp = "";
+                query += propriedade.replace("get","").toLowerCase() + "=" + tmp + obj[propriedade] + tmp + ",";
             }
         }
 
