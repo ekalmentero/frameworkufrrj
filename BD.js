@@ -120,7 +120,7 @@ export default class BD {
 
     static deletar(obj){
         var tabela = tabelas[obj.constructor.name];
-        var query = "UPDATE " + tabela + " SET deleted=WHERE ";
+        var query = "UPDATE " + tabela + " SET deleted=1 WHERE ";
 
         var filtros = [];
 
