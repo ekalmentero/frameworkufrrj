@@ -13,7 +13,7 @@ export default class BD {
         return new Promise(
             function(resolve,reject){
                 conexao.query(query, function (erro, retorno, colunas) {
-                    if (erro) throw erro;
+                    if (erro) {reject(erro); throw erro;}
                     resolve(retorno);
                 });
             }
@@ -43,7 +43,7 @@ export default class BD {
                     if (erro) reject(erro); else {
                         BD.query("SELECT LAST_INSERT_ID() AS lid").then((r)=>{
                             resolve(r[0].lid);
-                        }).catch((erro)=>{reject(erro)});
+                        }).catch((erro)=>{reject(erro); throw erro;});
                     }
                 });
             }
@@ -78,7 +78,7 @@ export default class BD {
         return new Promise(
             function(resolve,reject){
                 conexao.query(query, function (erro, retorno, colunas) {
-                    if (erro) reject(erro);
+                    if (erro) { reject(erro); throw erro; }
                     resolve(retorno);
                 });
             }
@@ -111,7 +111,7 @@ export default class BD {
         return new Promise(
             function(resolve,reject){
                 conexao.query(query, function (erro, retorno, colunas) {
-                    if (erro) reject(erro);
+                    if (erro) { reject(erro); throw erro; }
                     resolve(true);
                 });
             }
@@ -127,8 +127,9 @@ export default class BD {
         var tmp = new obj.constructor;
 
         for(let propriedade of Object.getOwnPropertyNames(Object.getPrototypeOf(obj))){
-            if(propriedade == "constructor") continue;
-            if(typeof(obj[propriedade]) == 'function') continue;
+            if(typeof(obj[propriedade]) == 'function' || obj[propriedade] == undefined) continue;
+            if(propriedade == "getId") continue;
+            if(typeof(obj[propriedade]) == "object") obj[propriedade] = obj[propriedade].getId;
 
             if(obj[propriedade] != tmp[propriedade]){
                 filtros.push([propriedade,obj[propriedade]]);
