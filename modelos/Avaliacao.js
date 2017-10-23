@@ -1,31 +1,37 @@
 "use strict";
 export default class Avaliacao{
+  @Private id;
+  @Private nome;
+  @Private data;
+  @Private descricao;
+  @Private deleted;
+  @Private turma_id;
   
     Constructor(id, nome, data, descricao, deleted, turma_id){
-        this.id = id;
-        this.nome = nome;
-        this.data = data;
-        this.descricao = descricao;
-        this.deleted = deleted;
-        this.turma_id = turma_id;
+        this.setId(id);
+        this.setNome(nome);
+        this.setData(data);
+        this.setDescricao(descricao);
+        this.setDeleted(deleted);
+        this.setTurma(turma_id);
     }
-     getId() {
+     get getId() {
         return this.id;
       }
       
-      getNome() {
+      get getNome() {
         return this.nome;
       }
-      getData() {
+      get getData() {
         return this.data;
       }
-      getDescricao() {
+      get getDescricao() {
         return this.descricao;
       }
-      getDeleted() {
+      get getDeleted() {
         return this.deleted;
       }
-      getTurma() {
+      get getTurma() {
         return this.turma_id;
       }
       

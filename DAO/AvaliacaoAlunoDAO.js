@@ -1,51 +1,50 @@
 "use strict";
-import BD from './BD';
-import AvaliacaoAluno from './modelos/AvaliacaoAluno';
+import BD from '../BD';
+import AvaliacaoAluno from '../modelos/AvaliacaoAluno';
 
-export class AvaliacaoAlunoDAO{
-    constructor(){
-
-    }
-
-    insertAvaliacaoAluno(AvaliacaoAluno){
+export default class AvaliacaoAlunoDAO{
+  
+    static async insertAvaliacaoAluno(avaliacaoAluno){
         try {
-            BD.inserir(AvaliacaoAluno).then((retorno)=>{
-                });
-                return "Tabela inserida!";
+            var retorno = await BD.inserir(avaliacaoAluno);
+            avaliacaoAluno.setAluno(retorno.aluno_id);//verificar se retorno pode ser um objeto com dois IDs
+            avaliacaoAluno.setAvaliacao(retorno.avaliacao_id); //verificar se retorno pode ser um objeto com dois IDs
+                return avaliacaoAluno;
         } catch (error) {
             return error.message;
         }
 
     }
-    selectAvaliacaoAluno(avaliacao_id, aluno_id){
+    static async selectAvaliacaoAluno(avaliacaoId, alunoId){
         try {
-            var tmpAvl_A = new AvaliacaoAluno();
-            tmpAvl_A.setAvaliacaoId(avaliacao_id);
-            tmpAvl_A.setAlunoId(aluno_id);
+            var avaliacaoAluno = new AvaliacaoAluno();
+            avaliacaoAluno.setAvaliacao(avaliacaoId);
+            avaliacaoAluno.setAluno(alunoId);
             
-            BD.buscar(tmpAvl_A).then((retorno)=>{
-                tmpAvl_A.setNota(retorno.nota);  
-                });
-            return tmpAvl_A;
+            var retorno = await BD.buscar(avaliacaoAluno);
+                avaliacaoAluno.setNota(retorno.nota);  
+            return avaliacaoAluno;
         } catch (error) {
             return error.message;
         }
     }
-    updateAvaliacaoAluno(AvaliacaoAluno){
+
+    static async selectAll(){
+        return await BD.query("SELECT * FROM avaliacao_aluno");
+   }
+
+
+   static async updateAvaliacaoAluno(avaliacaoAluno){
         try {
-            BD.update(AvaliacaoAluno).then((retorno)=>{
-                });
-                return "Tabela atualizada!";
+            return await BD.update(avaliacaoAluno);
         } catch (error) {
             return error.message;
         }
 
     }
-    deleteAvaliacaoAluno(AvaliacaoAluno){
+    static async deleteAvaliacaoAluno(avaliacaoAluno){
         try {
-            BD.deletar(AvaliacaoAluno).then((retorno)=>{
-                });
-                return "Tabela deletada!";
+            return await BD.deletar(avaliacaoAluno);
         } catch (error) {
             return error.message;
         }

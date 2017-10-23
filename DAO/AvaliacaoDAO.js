@@ -1,55 +1,54 @@
 "use strict";
-import BD from './BD';
-import Avaliacao from './modelos/Avaliacao';
+import BD from '../BD';
+import Avaliacao from '../modelos/Avaliacao';
 
-export class AvaliacaoDAO{
-    constructor(){
+export default class AvaliacaoDAO{
 
-    }
-
-    insertAvaliacao(Avaliacao){
+    static async insertAvaliacao(avaliacao){
         try {
-            BD.inserir(Avaliacao).then((retorno)=>{
-                });
-                return "Avaliação inserida!";
+            var retorno = await BD.inserir(avaliacao);
+            avaliacao.setID(retorno);
+            return avaliacao;
         } catch (error) {
             return error.message;
         }
 
     }
-    selectAvaliacao(avaliacaoID){
+    static async selectAvaliacao(avaliacaoId){
         try {
-            var tmpAvl = new Avaliacao();
-            tmpAvl.setID(avaliacaoID);
+            var avaliacao = new Avaliacao();
+            avaliacao.setId(avaliacaoId);
 
-            BD.buscar(tmpAvl).then((retorno)=>{
-                tmpAvl.setID(retorno.id);
-                tmpAvl.setNome(retorno.nome); 
-                tmpAvl.setData(retorno.data);
-                tmpAvl.setDescricao(retorno.descricao);
-                tmpAvl.setDeleted(retorno.deleted);
-                tmpAvl.setTurma(retorno.turma_id);
-                });
-            return tmpAvl;
+            var retorno = await BD.buscar(avaliacao);
+                avaliacao.setId(retorno.id);
+                avaliacao.setNome(retorno.nome); 
+                avaliacao.setData(retorno.data);
+                avaliacao.setDescricao(retorno.descricao);
+                avaliacao.setDeleted(retorno.deleted);
+                avaliacao.setTurma(retorno.turma_id);
+                
+            return avaliacao;
         } catch (error) {
             return error.message;
         }
     }
-    updateAvaliacao(Avaliacao){
+
+    static async selectAll(){
+        return await BD.query("SELECT * FROM avaliacao");
+   }
+
+
+   static async updateAvaliacao(avaliacao){
         try {
-            BD.update(Avaliacao).then((retorno)=>{
-                });
-                return "Avaliação atualizada!";
+            return await BD.update(avaliacao);
         } catch (error) {
             return error.message;
         }
 
     }
-    deleteAvaliacao(Avaliacao){
+    static async deleteAvaliacao(avaliacao){
         try {
-            BD.deletar(Avaliacao).then((retorno)=>{
-                });
-                return "Avaliação deletada!";
+            return await BD.deletar(avaliacao);
         } catch (error) {
             return error.message;
         }
