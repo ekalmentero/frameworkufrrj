@@ -16,7 +16,8 @@ conexao.connect(function(erro) {
 let tabelas = { // Exemplo
     'Aluno' : "aluno",
     'Instituto' : "instituto",
-    'Professor' : "tbl_professor"
+    'Professor' : "tbl_professor",
+    'Disciplina' : "disciplina"
 };
 
 export default class BD {

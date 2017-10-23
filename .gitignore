@@ -51,3 +51,7 @@ node_modules
 
 #NPM
 package-lock.json
+npm-debug.log
+
+# Database Backup
+database/db_frameworkufrrj.mwb.bak
