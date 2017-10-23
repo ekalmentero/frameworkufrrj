@@ -1,17 +1,4 @@
-import mysql from 'mysql';
-
-//import Aluno from 'modelos/aluno';
-
-const conexao = mysql.createConnection({
-  host     : 'localhost',
-  user     : 'root',
-  password : 'root',
-  database : 'db_frameworkufrrj' //ALTERAR NÉ
-});
-
-conexao.connect(function(erro) {
-    if(erro) console.error("Componente BD : ERRO CONEXAO BD"); else console.log("Componente BD : Conectado ao banco");
-});
+var conexao = require('./conexao.js')
 
 let tabelas = { // Exemplo
     'Aluno' : "aluno",
