@@ -6,13 +6,11 @@ import InstitutoDAO from '../DAO/institutoDAO';
 import Disciplina from '../modelos/disciplina';
 import DisciplinaDAO from '../DAO/disciplinaDAO';
 
-testes.all('/instituto',async function(req,res){
+testes.get('/instituto/:sigla',async function(req,res){
     var tmp = new Instituto();
-    tmp.setNome("Instituto de Ciencias Humanas e Sociais")
-    tmp.setSigla("ICHS")
-
-    res.send(await InstitutoDAO.incluir(tmp));
-
+    tmp.setSigla(req.params.sigla);
+    var ret = await InstitutoDAO.buscar(tmp);
+    res.send(ret);
 })
 
 //testes de Disciplina
