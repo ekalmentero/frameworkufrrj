@@ -576,6 +576,28 @@ CREATE TABLE IF NOT EXISTS `db_frameworkufrrj`.`conteudo_avaliacao` (
 ENGINE = InnoDB;
 
 
+-- -----------------------------------------------------
+-- Table `db_frameworkufrrj`.`disciplina_curso`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `db_frameworkufrrj`.`disciplina_curso` (
+  `curso_id` INT NOT NULL,
+  `disciplina_id` INT NOT NULL,
+  PRIMARY KEY (`curso_id`, `disciplina_id`),
+  INDEX `fk_curso_has_disciplina_disciplina1_idx` (`disciplina_id` ASC),
+  INDEX `fk_curso_has_disciplina_curso1_idx` (`curso_id` ASC),
+  CONSTRAINT `fk_curso_has_disciplina_curso1`
+    FOREIGN KEY (`curso_id`)
+    REFERENCES `db_frameworkufrrj`.`curso` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_curso_has_disciplina_disciplina1`
+    FOREIGN KEY (`disciplina_id`)
+    REFERENCES `db_frameworkufrrj`.`disciplina` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
