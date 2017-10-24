@@ -25,7 +25,8 @@ testes.route('/disciplina')
   .get(async function(req,res){
     let disciplina = new Disciplina();
     disciplina.setNome("Disciplina Teste");
-    res.send(await DisciplinaDAO.read(disciplina));
+    disciplina = await DisciplinaDAO.read(disciplina);
+    res.send(disciplina.toString());
   })
   .post(async function(req,res){
     let disciplina = new Disciplina("","Disciplina Teste 3","CC000",6);
@@ -38,22 +39,10 @@ testes.route('/disciplina')
     res.send(await DisciplinaDAO.update(disciplina));
   })
   .delete(async function(req,res){
-    //aguardando implementação no BD.js
-  });
-/*
-testes.get('/disciplina',async function(req,res){
     let disciplina = new Disciplina();
-    disciplina.setNome("Disciplina Teste");
-    var retorno = (await DisciplinaDAO.read(disciplina));
-    disciplina = retorno[0];
-    res.send(disciplina);
-})
-
-testes.post('/disciplina',async function(req,res){
-  let disciplina = new Disciplina("","Disciplina Teste","AA000");
-  res.send(await DisciplinaDAO.create(disciplina));
-})
-*/
+    disciplina.setId(1);
+    res.send(await DisciplinaDAO.delete(disciplina));
+  });
 
 testes.all("/:unidade",function(req,res){
   var Instituto = require('../modelos/instituto.js');

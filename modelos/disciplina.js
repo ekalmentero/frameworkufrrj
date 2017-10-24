@@ -4,12 +4,7 @@ export default class Disciplina {
     @Private codigo;
     @Private creditos;
 
-    constructor(id, nome, codigo, creditos){
-        this.setId(id);
-        this.setNome(nome);
-        this.setCodigo(codigo);
-        this.setCreditos(creditos);
-    } 
+    constructor(){} 
 
     get getId(){
         return this.id; 
@@ -44,6 +39,6 @@ export default class Disciplina {
     }
 
     toString(){
-        JSON.stringify(this);
+        return JSON.stringify(this);
     }
 }
