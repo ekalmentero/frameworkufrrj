@@ -1,44 +1,11 @@
-"use strict";
-import BD from '../BD';
-import Prerequisito from '../modelos/Prerequisito';
+import BD from "../BD";
+import Prerequisito from "../modelos/Prerequisito";
 
-export default class PrerequisitoDAO{
-   
-    static async insertPrerequisito(prerequisito){
-        try {
-            var retorno = await BD.inserir(prerequisito);
-            prerequisito.setGrade(retorno.grade_id);
-            prerequisito.setDisciplina(retorno.id_disciplina);
-            prerequisito.setRequisito(retorno.id_requisito);
-            return prerequisito;
-        } catch (error) {
-            return error.message;
-        }
+("use strict");
 
-    }
-    static async selectPrerequisito(id_disciplina, id_requisito){
-        try {
-            var prerequisito = new Prerequisito();
-            prerequisito.setIdDisciplina(id_disciplina);
-            prerequisito.setIdRequisito(id_requisito);
-
-            var retorno = await BD.buscar(prerequisito);
-                prerequisito.setDisciplina(retorno.id_disciplina);
-                prerequisito.setRequisito(retorno.id_requisito); 
-                prerequisito.setGrade(retorno.grade_id);
-        
-            return prerequisito;
-        } catch (error) {
-            return error.message;
-        }
-    }
-
-    static async selectAll(){
-        return await BD.query("SELECT * FROM prerequisito");
-   }
-
-
-   static async updatePrerequisito(prerequisito){
+export default class PrerequisitoDAO {
+  /* AS FUNÇÕES UPDADE, DELETE E CREATE NÃO FICAM AQUI, MAS EM DISCIPLINADAO (DAO CRIADO POR OUTRO ALUNO)
+    static async updatePrerequisito(prerequisito){
         try {
             return await BD.update(prerequisito);
         } catch (error) {
@@ -52,5 +19,19 @@ export default class PrerequisitoDAO{
         } catch (error) {
             return error.message;
         }
-    }
+    }*/
+  static async readAll() {
+    return await BD.query("SELECT * FROM prerequisito");
+  }
+
+  static async readAllByDisciplina(idDisciplina) {
+    return await BD.query(
+      "SELECT * FROM prerequisito WHERE id_disciplina='" + idDisciplina + "'"
+    );
+  }
+  static async readAllByGrade(gradeId) {
+    return await BD.query(
+      "SELECT * FROM prerequisito WHERE grade_id='" + gradeId + "'"
+    );
+  }
 }
