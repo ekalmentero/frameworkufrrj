@@ -3,13 +3,13 @@
 export default class Instituto {
 
 	@Private id;
-	@Private siga;
+	@Private sigla;
 	@Private nome;
 	@Private predios;
 
 	constructor(id, sigla, nome, predios){
 		this.setId(id);
-		this.setSigla(siga);
+		this.setSigla(sigla);
 		this.setNome(nome);
 		this.setPredios(predios);
 	}
