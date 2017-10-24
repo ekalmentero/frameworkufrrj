@@ -1,11 +1,15 @@
 "use strict";
 
 export default class Horario {
+	
+	@Private id;
+	@Private hora_inicio;
+	@Private hora_fim;
 
 	constructor(id, hora_inicio, hora_fim){
-		this.id = id;
-		this.hora_inicio = hora_inicio;
-		this.hora_fim = hora_fim;
+		this.setId(id);
+		this.setHoraInicio(hora_inicio);
+		this.setHoraFim(hora_fim);
 	}
 
 	setId(id){
@@ -20,15 +24,15 @@ export default class Horario {
 		this.hora_fim = h_fim;
 	}
 
-	getId(){
+	get getId(){
 		return this.id;
 	}
 	
-	getHoraInicio(){
+	get getHoraInicio(){
 		return this.hora_inicio;
 	}
 	
-	getHoraFim(){
+	get getHoraFim(){
 		return this.hora_fim;
 	}
 

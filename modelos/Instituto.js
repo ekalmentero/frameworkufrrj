@@ -2,18 +2,23 @@
 
 export default class Instituto {
 
+	@Private id;
+	@Private siga;
+	@Private nome;
+	@Private predios;
+
 	constructor(id, sigla, nome, predios){
-		this.id = id;
-		this.sigla = sigla;
-		this.nome = nome;
-		this.predios = predios;
+		this.setId(id);
+		this.setSigla(siga);
+		this.setNome(nome);
+		this.setPredios(predios);
 	}
 
 	setPredios(sigla){
 		this.predios = predios;
 	}
 
-	getPredios(){
+	get getPredios(){
 		return this.predios;
 	}
 
@@ -21,7 +26,7 @@ export default class Instituto {
 		this.sigla = sigla;
 	}
 
-	getSigla(){
+	get getSigla(){
 		return this.sigla;
 	}
 
@@ -29,7 +34,7 @@ export default class Instituto {
 		this.nome = nome;
 	}
 
-	getNome(){
+	get getNome(){
 		return this.nome;
 	}
 
@@ -37,7 +42,7 @@ export default class Instituto {
 		this.id = id;
 	}
 
-	getId(){
+	get getId(){
 		return this.id;
 	}
 

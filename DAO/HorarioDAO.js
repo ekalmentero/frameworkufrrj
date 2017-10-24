@@ -3,66 +3,36 @@
 import BD from '../BD.js';
 import Horario from '../modelos/Horario.js';
 
-export class HorarioDAO {
+export default class HorarioDAO {
   
     constructor(){
         
     }
 
-    insert(horario){
-        try {
-            
-            BD.inserir(horario).then((retorno)=>{});
-            return "Horario inserida!";
-        
-        } catch (error) {
-            return error.message;
-        }
-
+    static async insert(horario){   
+        var id = await BD.inserir(horario);
+        horario.setId(id);
+        return horario;
     }
     
 
-    select(horario_id){
-        try {
-            
-            var horario = new Horario();
-            horario.setID(horario_id);
+    static async select(horario){
+        var hor_return = new Horario(),
+            hor_raw = await BD.buscar(horario)[0];
 
-            BD.buscar(horario).then((retorno)=>{
-               horario.setId(retorno.id);
-               horario.setHoraInicio(retorno.hora_inicio);
-               horario.setHoraFim(retorno.hora_fim);
-            });
+        hor_return.setId(hor_raw.id);
+        hor_return.setHoraInicio(hor_raw.hora_inicio);
+        hor_return.setHoraFim(hor_raw.hora_fim);
            
-
-            return Horario;
-
-        } catch (error) {
-            return error.message;
-        }
+        return hor_return;
     }
    
-    update(horario){
-        try {
-            
-            BD.update(horario).then((retorno)=>{});
-            return "Horario atualizada!";
-
-        } catch (error) {
-            return error.message;
-        }
-
+    static async update(horario){
+        return await BD.update(horario);
     }
    
-    delete(horario){
-        try {
-            
-            BD.deletar(horario).then((retorno)=>{});
-            return "Horario deletada!";
-      
-        } catch (error) {
-            return error.message;
-        }
+   static async  delete(horario){
+        return await BD.deletar(horario); 
     }
 
 }

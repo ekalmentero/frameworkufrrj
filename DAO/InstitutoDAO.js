@@ -1,65 +1,39 @@
 "use strict";
+
 import BD from '../BD.js';
 import Instituto from '../modelos/Instituto.js';
 
-export class InstitutoDao {
+export default class InstitutoDao {
    constructor(){
 
    }
 
-   insert(instituto){
-       try {
-           BD.inserir(instituto).then((retorno)=>{
-               });
-               return "Instituto "+retorno.nome+" inserido!";
-       } catch (error) {
-           return error.message;
-       }
-
+   static async insert(instituto){
+       var id = await BD.inserir(instituto);
+       instituto.setId(id);
+       return instituro;
    }
    
-
-   select(id){ 
-       try {
-           var tmpInstituto = new Instituto();
-           tmpInstituto.setId(id);
-
-           BD.buscar(tmpInstituto).then((retorno)=>{
-               tmpInstituto.setNome(retorno.nome);
-               tmpInstituto.setSigla(retorno.sigla);
-               tmpInstituto.setId(retorno.id);
-               tmpInstituto.setDeleted(retorno.deleted);
-               
-               });
-
-           return tmpInstituto;
+   static async select(instituto){
+      var inst_return = new Instituto(),
+          inst_raw = await BD.buscar(instituto)[0];
            
-       } catch (error) {
-           return error.message;
-       }
+      inst_return.setId(inst_raw.id);
+      inst_return.setNome(inst_raw.nome);
+      inst_return.setSigla(inst_raw.sigla);
+      inst_return.setId(inst_raw.id);
+      inst_return.setDeleted(inst_raw.deleted);
+               
+      return inst_return;
    }
 
 
-   update(instituto){
-       try {
-           bd.update(instituto)
-           BD.update(instituto).then((retorno)=>{
-               });
-               return "Instituto "+retorno.nome+" Atualizado!";
-       } catch (error) {
-          return error.message;
-       }
-
+   static async update(instituto){
+      return await BD.update(instituto);
    }
 
 
-   delete(instituto){ 
-       try {
-           BD.deletar(instituto).then((retorno)=>{
-               });
-               return "Instituto "+retorno.nome+" deletado!";
-       } catch (error) {
-          return error.message;
-       }
+   static async delete(instituto){ 
+      return await BD.deletar(instituto);
    }
 }

@@ -3,69 +3,40 @@
 import BD from '../BD.js';
 import Predio from '../modelos/Predio.js';
 
-export class PredioDAO {
+export default class PredioDAO {
   
     constructor(){
         
     }
 
-    insert(predio){
-        try {
-            
-            BD.inserir(predio).then((retorno)=>{});
-            return "Predio inserida!";
-        
-        } catch (error) {
-            return error.message;
-        }
 
+    static async insert(predio){ 
+        var id = await BD.inserir(predio);
+        predio.setId(id);
+        return predio;
     }
     
 
-    select(predio_id){
-        try {
-            
-            var predio = new Predio();
-            predio.setID(predio_id);
+    static async select(predio){
+        var pre_return = new Predio();
+            pre_raw = await BD.buscar(predio)[0];
 
-            BD.buscar(predio).then((retorno)=>{
-                predio.setInstitutos(retorno.institutos);
-                predio.setId(retorno.id);
-                predio.setSigla(retorno.sigla);
-                predio.setLat(retorno.lat);
-                predio.setLong(retorno.long);
-                predio.setDeleted(retorno.deleted);
-            });
+        pre_return.setInstitutos(pre_raw.institutos);
+        pre_return.setId(pre_raw.id);
+        pre_return.setSigla(pre_raw.sigla);
+        pre_return.setLat(pre_raw.lat);
+        pre_return.setLong(pre_raw.long);
+        pre_return.setDeleted(pre_raw.deleted);
            
-
-            return Predio;
-
-        } catch (error) {
-            return error.message;
-        }
+        return pre_return;
     }
    
-    update(predio){
-        try {
-            
-            BD.update(predio).then((retorno)=>{});
-            return "Predio atualizada!";
-
-        } catch (error) {
-            return error.message;
-        }
-
+    static async update(predio){
+        return await BD.update(predio);
     }
    
-    delete(predio){
-        try {
-            
-            BD.deletar(predio).then((retorno)=>{});
-            return "Predio deletada!";
-      
-        } catch (error) {
-            return error.message;
-        }
+    static async delete(predio){
+        return await BD.deletar(predio);
     }
 
 }

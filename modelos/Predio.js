@@ -1,23 +1,26 @@
 "use strict";
 
 export default class Predio {
+	@Private id;
+	@Private nome;
+	@Private sigla;
+	@Private lat;
+	@Private long;
+	@Private deleted;
+	@Private institutos;
 
 	constructor(id, nome, sigla, lat, long, deleted, institutos){
-		this.id = id;
-		this.nome = nome;
-		this.sigla = sigla;
-		this.lat = lat;
-		this.long = long;
-		this.deleted = deleted;
-		this.institutos = institutos;
+		this.setInstitutos(institutos);
+		this.setId(id);
+		this.setSigla(sigla);
+		this.setNome(nome);
+		this.setLat(lat);
+		this.setLong(long);
+		this.setDeleted(deleted);
 	}
 
 	setInstitutos(institutos){
 		this.institutos = institutos;
-	}
-
-	getInstitutos(){
-		return this.institutos;
 	}
 
 	setId(id){
@@ -26,6 +29,10 @@ export default class Predio {
 
 	setSigla(sigla){
 		this.sigla = sigla;
+	}
+
+	setNome(nome){
+		this.nome = nome;
 	}
 
 	setLat(lat){
@@ -40,28 +47,32 @@ export default class Predio {
 		this.deleted = deleted;
 	}
 
-	getId(){
+	get getInstitutos(){
+		return this.institutos;
+	}
+
+	get getId(){
 		return this.id;
 	}
 
-	getSigla(){
+	get getSigla(){
 		return this.sigla;
 	}
 
-	getNome(){
+	get getNome(){
 		return this.nome;
 	}
 
-	getLat(){
+	get getLat(){
 		return this.lat;
 	}
 
 
-	getLong(){
+	get getLong(){
 		return this.long;
 	}
 
-	getDeleted(){
+	get getDeleted(){
 		return this.deleted;
 	}
 

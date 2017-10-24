@@ -2,11 +2,16 @@
 
 export default class Sala {
 
+	@Private id;
+	@Private predio;
+	@Private nome;
+	@Private deleted;
+
 	constructor(id, predio, nome, deleted){
-		this.id = id;
-		this.predio = predio;
-		this.nome = nome;
-		this.deleted = deleted;
+		this.setId(id);
+		this.setPredio(predio);
+		this.setNome(nome);
+		this.setDeleted(deleted);
 	}
 
 	setId(id){
@@ -25,20 +30,19 @@ export default class Sala {
 		this.deleted = deleted;
 	}
 
-	getId(){
+	get etId(){
 		return this.id;
 	}
 
-	getPredio(){
+	get getPredio(){
 		return this.predio;
 	}
 
-
-	getNome(){
+	get getNome(){
 		return this.nome;
 	}
 
-	getDeleted(){
+	get getDeleted(){
 		return this.deleted;
 	}
 

@@ -3,64 +3,38 @@
 import BD from '../BD.js';
 import Aula from '../modelos/Aula.js';
 
-export class AulaDAO{
+export default class AulaDAO{
   
     constructor(){
         
     }
 
-    insert(aula){
-        try {
-            
-            BD.inserir(Aula).then((retorno)=>{});
-            return "Aula inserida!";
-        
-        } catch (error) {
-            return error.message;
-        }
 
+    static async insert(aula){
+        var id = BD.inserir(Aula);
+        aula.setId(id);
+        return aula;
     }
     
+    static async select(aula){
+        var aula_raw = await BD.buscar(aula)[0],
+            aula_return = new Aula();
+        
+        aula_return.setId(aula_raw.id);
+        aula_return.setData(aula_raw.data);
+        aula_return.setTurma(aula_raw.turma);
 
-    select(aula_id){
-        try {
-            
-            var aula = new Aula();
-            aula.setID(aula_id);
-
-            BD.buscar(aula).then((retorno)=>{
-                aula.setId(retorno.id);
-                aula.setData(retorno.data);
-                aula.setTurma(returno.turma);
-            });
-
-        } catch (error) {
-            return error.message;
-        }
+        return aula_return;
     }
 
 
-    update(aula){
-        try {
-            
-            BD.update(Aula).then((retorno)=>{});
-            return "Aula atualizada!";
-
-        } catch (error) {
-            return error.message;
-        }
-
+    static async update(aula){
+        return await BD.update(aula);
     }
+
    
-    delete(aula){
-        try {
-            
-            BD.deletar(Aula).then((retorno)=>{});
-            return "Aula deletada!";
-      
-        } catch (error) {
-            return error.message;
-        }
+    static async delete(aula){
+        return await BD.deletar(aula);
     }
 
 }
