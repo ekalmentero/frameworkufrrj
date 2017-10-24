@@ -1,7 +1,7 @@
+"use strict";
 import BD from "../BD";
 import Grade from "../modelos/Grade";
 
-("use strict");
 
 export default class GradeDAO {
   static async create(grade) {
@@ -22,7 +22,8 @@ export default class GradeDAO {
       grade.setinicio_vigencia(retorno.inicio_vigencia);
       grade.setId(retorno.id);
       grade.setDisponivel(retorno.disponivel);
-      grade.setCurso(retorno.curso);
+      var tmpCurso = await CursoDAO.read(retorno.curso);
+      grade.setCurso(tmpCurso);
       return grade;
     } catch (error) {
       return error.message;

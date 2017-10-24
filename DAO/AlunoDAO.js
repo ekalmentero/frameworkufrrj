@@ -1,8 +1,10 @@
+"use strict";
 import BD from "../BD";
 import Aluno from "../modelos/Aluno";
 import AvaliacaoAluno from "../modelos/AvaliacaoAluno";
-("use strict");
+
 export default class AlunoDAO {
+  
   static async create(aluno) {
     try {
       var retorno = await BD.inserir(aluno);
@@ -51,8 +53,11 @@ export default class AlunoDAO {
       tmpAluno.setMatricula(retorno.matricula);
       tmpAluno.setAtivo(retorno.ativo);
       tmpAluno.setIngresso(retorno.ingresso);
-      tmpAluno.setCurso(retorno.curso);
-      tmpAluno.setGrade(retorno.grade);
+
+      var tmpCurso = await CursoDAO.read(retorno.curso);
+      tmpAluno.setCurso(tmpCurso);
+      var tmpGrade = await GradeDAO.read(retorno.grade);
+      tmpAluno.setGrade(tmpGrade);
       return tmpAluno;
     } catch (error) {
       return error.message;

@@ -1,7 +1,7 @@
+"use strict";
 import BD from "../BD";
 import Prerequisito from "../modelos/Prerequisito";
 
-("use strict");
 
 export default class PrerequisitoDAO {
   /* AS FUNÇÕES UPDADE, DELETE E CREATE NÃO FICAM AQUI, MAS EM DISCIPLINADAO (DAO CRIADO POR OUTRO ALUNO)

@@ -1,7 +1,6 @@
+"use strict";
 import BD from "../BD";
 import Avaliacao from "../modelos/Avaliacao";
-
-("use strict");
 
 export default class AvaliacaoDAO {
   static async create(avaliacao) {
@@ -23,7 +22,9 @@ export default class AvaliacaoDAO {
       avaliacao.setNome(retorno.nome);
       avaliacao.setData(retorno.data);
       avaliacao.setDescricao(retorno.descricao);
-      avaliacao.setTurma(retorno.turma);
+
+      var tmpTurma = await TurmaDAO.read(retorno.turma);
+      avaliacao.setTurma(tmpTurma);
 
       return avaliacao;
     } catch (error) {
