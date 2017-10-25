@@ -6,11 +6,11 @@ const disciplina = express.Router();
 
 disciplina.use(bodyParser.json());
 
-disciplina.get('/disciplinas/:id', async function(req,res){
+disciplina.get('/:id', async function(req,res){
     res.send(await DisciplinaController.read(req.params.id));
 })
 
-disciplina.route('/disciplinas')
+disciplina.route('/')
   .post(async function(req,res){
       res.send(await DisciplinaController.create(req.body));
   })
