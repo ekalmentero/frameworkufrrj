@@ -22,6 +22,7 @@ export default class PredioDAO {
             pre_raw = await BD.buscar(predio)[0];
 
         pre_return.setInstitutos(pre_raw.institutos);
+        pre_return.setNome(pre_raw.nome);
         pre_return.setId(pre_raw.id);
         pre_return.setSigla(pre_raw.sigla);
         pre_return.setLat(pre_raw.lat);

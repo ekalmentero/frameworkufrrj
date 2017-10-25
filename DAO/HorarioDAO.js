@@ -10,7 +10,9 @@ export default class HorarioDAO {
     }
 
     static async insert(horario){   
-        var id = await BD.inserir(horario);
+        var id = await BD.inserir(horario).catch((e) =>{
+            console.log(e);
+        });
         horario.setId(id);
         return horario;
     }

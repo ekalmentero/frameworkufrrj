@@ -13,8 +13,11 @@ export default class SalaDao{
 
 
    static async insert(sala){
-      var sal_id = await BD.inserir(sala),
-          sala.setId(sal_id);
+      var sal_id = await BD.inserir(sala).catch((e)=>{
+          console.log(e);
+      });
+
+      sala.setId(sal_id);
 
       return sala;
    }
@@ -27,7 +30,6 @@ export default class SalaDao{
           pre_raw = await BD.buscar(sal_raw.predio)[0];
         
           sal_return.setId(id);
-       
           sal_return.setNome(sal_raw.nome);
           sal_return.setId(sal_raw.id);
           sal_return.setDeleted(sal_raw.deleted);
@@ -39,6 +41,7 @@ export default class SalaDao{
           predio.setLong (pre_raw.long);
           predio.setDeleted (pre_raw.deleted);
           predio.setInstitutos (pre_raw.institutos);
+
           sal_return.setPredio(predio);
 
           return sal_return;

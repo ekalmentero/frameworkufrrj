@@ -3,15 +3,21 @@
 import BD from '../BD.js';
 import Aula from '../modelos/Aula.js';
 
-export default class AulaDAO{
+class AulaDAO {
   
     constructor(){
-        
+        //
     }
 
-
     static async insert(aula){
-        var id = BD.inserir(Aula);
+        
+        /** Não consigo lançar excessão de dentro de uma Promise
+            Como proceder? :)
+        */
+        var id = await BD.inserir(aula).catch((e)=>{
+            console.log(e);
+        });
+        
         aula.setId(id);
         return aula;
     }
@@ -38,3 +44,5 @@ export default class AulaDAO{
     }
 
 }
+
+module.exports = AulaDAO;

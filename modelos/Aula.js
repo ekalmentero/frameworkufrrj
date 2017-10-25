@@ -4,12 +4,11 @@ export default class Aula {
 
 	@Private id;
 	@Private turma;
+	@Private turma_id;
 	@Private data;
 
-	constructor(id, turma, data){
-		this.setId(id);
-		this.setTurma(turma);
-		this.setData(data);
+	constructor(){
+		
 	}
 
 	get getData(){
@@ -18,6 +17,14 @@ export default class Aula {
 
 	setId(id){
 		this.id = id;
+	}
+
+	setTurmaId(id){
+		this.turma_id = id;
+	}
+
+	get getTurmaId(){
+		return this.turma_id;
 	}
 
 	get getId(){

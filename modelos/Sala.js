@@ -7,11 +7,8 @@ export default class Sala {
 	@Private nome;
 	@Private deleted;
 
-	constructor(id, predio, nome, deleted){
-		this.setId(id);
-		this.setPredio(predio);
-		this.setNome(nome);
-		this.setDeleted(deleted);
+	constructor(){
+		//
 	}
 
 	setId(id){

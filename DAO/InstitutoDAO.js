@@ -9,7 +9,9 @@ export default class InstitutoDao {
    }
 
    static async insert(instituto){
-       var id = await BD.inserir(instituto);
+       var id = await BD.inserir(instituto).catch(()=>{
+          console.log(e);
+       });
        instituto.setId(id);
        return instituro;
    }

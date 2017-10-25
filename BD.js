@@ -4,9 +4,9 @@ import mysql from 'mysql';
 
 const conexao = mysql.createConnection({
   host     : 'localhost',
-  user     : 'root',
-  password : 'root',
-  database : 'trabalho' //ALTERAR NÉ
+  user     : 'ipbxsertel',
+  password : '@ipbxsertel',
+  database : 'bmg' //ALTERAR NÉ
 });
 
 conexao.connect();

@@ -7,11 +7,8 @@ export default class Instituto {
 	@Private nome;
 	@Private predios;
 
-	constructor(id, sigla, nome, predios){
-		this.setId(id);
-		this.setSigla(sigla);
-		this.setNome(nome);
-		this.setPredios(predios);
+	constructor(){
+		
 	}
 
 	setPredios(sigla){

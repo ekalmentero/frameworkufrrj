@@ -1,8 +1,12 @@
 {
-  "presets": ["stage-1","env"],
+  "presets": ["stage-1","env", "es2015"],
   "plugins": [
     "syntax-class-properties",
     "transform-class-properties",
-    "babel-plugin-transform-private-properties"
+    "babel-plugin-transform-private-properties",
+    ["transform-runtime", {
+      "polyfill": false,
+      "regenerator": true
+    }]
   ]
 }
