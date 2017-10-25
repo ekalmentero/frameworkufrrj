@@ -14,6 +14,10 @@ export default class DisciplinaController {
         return await DisciplinaDAO.read(disciplina);
     }
 
+    static async readAll(){
+        return await DisciplinaDAO.readAll();
+    }
+
     static async update(disciplina){
         var disciplinaObj = new Disciplina();
         disciplinaObj.parseDisciplina(disciplina); 
