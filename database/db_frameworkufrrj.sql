@@ -23,6 +23,7 @@ CREATE TABLE IF NOT EXISTS `db_frameworkufrrj`.`disciplina` (
   `nome` VARCHAR(200) NOT NULL,
   `codigo` VARCHAR(10) NOT NULL,
   `creditos` INT NOT NULL,
+  `livre_escolha` TINYINT(1) NOT NULL DEFAULT 0,
   `deleted` TINYINT(1) NULL DEFAULT 0,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `nome_UNIQUE` (`nome` ASC),
