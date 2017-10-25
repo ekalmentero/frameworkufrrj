@@ -2,7 +2,7 @@
 import Professor from "../modelos/Professor";
 import BD from "../BD";
 
-class ProfessorDAO{
+export class ProfessorDAO{
 
   static async create(professor){
     try{

@@ -2,7 +2,7 @@ import Professor from "../modelos/Turma";
 import BD from "../BD";
 
 
-class TurmaDAO{
+export class TurmaDAO{
   constructor(){
 
   }
