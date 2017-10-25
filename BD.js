@@ -130,7 +130,7 @@ export default class BD {
 
         for(let propriedade of Object.getOwnPropertyNames(Object.getPrototypeOf(obj))){
             if(typeof(obj[propriedade]) == 'function' || obj[propriedade] == undefined) continue;
-            if(propriedade == "getId") continue;
+            //if(propriedade == "getId") continue;
             if(typeof(obj[propriedade]) == "object") obj[propriedade] = obj[propriedade].getId;
 
             if(obj[propriedade] != tmp[propriedade]){
