@@ -31,3 +31,20 @@ Framework para o desenvolvimento de sistemas baseados no contexto da UFRRJ
 ```
 
  Que equivale a executar um : SELECT * FROM Aluno WHERE nome = Bruno
+
+# Padrão de nomeclatura para os métodos básicos do DAO
+
+- create -- para inserir no banco
+- uptade -- atualizar registro no banco
+- read -- ler registro do banco a partir do id
+- readAll -- ler todos os registros do banco
+- delete -- remover o registro no banco a partir do id
+
+# Padrão de uso dos métodos de request
+
+- post -- criar 
+- path -- atualizar
+- delete -- remover
+- get/:id -- buscar por id
+- get/.... - busca refinada
+
