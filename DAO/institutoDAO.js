@@ -7,6 +7,11 @@ export default class InstitutoDAO{
         return inst;
     }
 
+    static async buscar(inst){
+        var retorno = await BD.buscar(inst);
+        return retorno;
+    }
+
     static async selecionarTudo(){
          return await BD.query("SELECT * FROM instituto");
     }

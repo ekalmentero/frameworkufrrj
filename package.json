@@ -1,6 +1,6 @@
 {
 	"name": "topicosWeb",
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"private": false,
 	"description": "Aplicativo para a disciplica de tópicos WEB",
 	"main": "app.js",
@@ -11,7 +11,7 @@
 	"dependencies": {
 		"babel": "^6.23.0",
 		"body-parser": "^1.18.2",
-		"express": "*",
+		"express": "^4.16.2",
 		"mysql": "*",
 		"react": "^16.0.0"
 	},
