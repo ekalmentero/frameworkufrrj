@@ -23,6 +23,7 @@ CREATE TABLE IF NOT EXISTS `db_frameworkufrrj`.`disciplina` (
   `nome` VARCHAR(200) NOT NULL,
   `codigo` VARCHAR(10) NOT NULL,
   `creditos` INT NOT NULL,
+  `livre_escolha` TINYINT(1) NOT NULL DEFAULT 0,
   `deleted` TINYINT(1) NULL DEFAULT 0,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `nome_UNIQUE` (`nome` ASC),
@@ -571,6 +572,28 @@ CREATE TABLE IF NOT EXISTS `db_frameworkufrrj`.`conteudo_avaliacao` (
   CONSTRAINT `fk_conteudo_has_avaliacao_avaliacao1`
     FOREIGN KEY (`avaliacao_id`)
     REFERENCES `db_frameworkufrrj`.`avaliacao` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `db_frameworkufrrj`.`disciplina_curso`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `db_frameworkufrrj`.`disciplina_curso` (
+  `curso_id` INT NOT NULL,
+  `disciplina_id` INT NOT NULL,
+  PRIMARY KEY (`curso_id`, `disciplina_id`),
+  INDEX `fk_curso_has_disciplina_disciplina1_idx` (`disciplina_id` ASC),
+  INDEX `fk_curso_has_disciplina_curso1_idx` (`curso_id` ASC),
+  CONSTRAINT `fk_curso_has_disciplina_curso1`
+    FOREIGN KEY (`curso_id`)
+    REFERENCES `db_frameworkufrrj`.`curso` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_curso_has_disciplina_disciplina1`
+    FOREIGN KEY (`disciplina_id`)
+    REFERENCES `db_frameworkufrrj`.`disciplina` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
