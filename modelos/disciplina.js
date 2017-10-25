@@ -1,10 +1,14 @@
-export default class Disciplina {
+import Entidade from './entidade';
+
+export default class Disciplina extends Entidade {
     @Private id;
     @Private nome;
     @Private codigo;
     @Private creditos;
 
-    constructor(){} 
+    constructor(){
+        super();
+    } 
 
     get getId(){
         return this.id; 
@@ -36,15 +40,5 @@ export default class Disciplina {
 
     setCreditos(creditos){
         if (typeof(creditos) == "number") this.creditos = creditos;
-    }
-
-    parseDisciplina(json){
-        for (let property of Object.getOwnPropertyNames(json)){
-            eval("this.set" + property.charAt(0).toUpperCase() + property.slice(1) + "(json." + property + ")");
-        }
-    }
-
-    toString(){
-        return JSON.stringify(this);
     }
 }
