@@ -27,7 +27,7 @@ export default class Disciplina extends Entidade {
     }
 
     setId(id){
-        if (typeof(id) == "number") this.id = id;
+        this.id = id;
     }
 
     setNome(nome){
