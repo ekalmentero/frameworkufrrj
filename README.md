@@ -35,7 +35,7 @@ Framework para o desenvolvimento de sistemas baseados no contexto da UFRRJ
 # Padrão de nomeclatura para os métodos básicos do DAO
 
 - create -- para inserir no banco
-- uptade -- atualizar registro no banco
+- update -- atualizar registro no banco
 - read -- ler registro do banco a partir do id
 - readAll -- ler todos os registros do banco
 - delete -- remover o registro no banco a partir do id
