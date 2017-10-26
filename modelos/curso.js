@@ -1,6 +1,6 @@
 import Entidade from './entidade';
 
-export default class Disciplina extends Entidade {
+export default class Curso extends Entidade {
 
     @Private codigo;
     @Private id;

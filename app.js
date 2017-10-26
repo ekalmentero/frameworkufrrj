@@ -15,6 +15,9 @@ rotas.use('/disciplinas',disciplinas)
 import curso from './rotas/cursoRouter'
 rotas.use('/curso', curso)
 
+import departamento from './rotas/departamentoRouter'
+rotas.use('/departamento', departamento)
+
 app.listen(8080, function() {
     console.log("APP : INICIADO");
 })
