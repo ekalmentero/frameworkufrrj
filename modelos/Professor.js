@@ -1,15 +1,16 @@
+import Entidade from './entidade';
 
 
 
+export default class Professor extends Entidade {
+  @Private id;
+  @Private nome;
+  @Private matricula;
 
-export default class Professor {
-  @private id;
-  @private nome;
-  @private matricula;
-
-  constructor(nome,matricula) {
-    this.setNome(nome);
-    this.setMatricula(matricula);
+  constructor() {
+    super();
+    //this.setNome(nome);
+    //this.setMatricula(matricula);
   }
 
   get getNome(){

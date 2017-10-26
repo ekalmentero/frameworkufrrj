@@ -19,7 +19,10 @@ export class ProfessorDAO{
 
     try{
       var result= await BD.select(professor);
-      var professor= result[0];
+      var professor= new Professor();
+      professor.setId(result[0].id);
+      professor.setNome(result[0].nome);
+      professor.setMatricula(result[0].matricula);
       return professor;
     }
     catch(error){
@@ -40,9 +43,9 @@ export class ProfessorDAO{
     }
   }
 
-  static async delete(professor){
+  static async delete(id){
     try{
-      return await BD.deletar(professor);
+      return await BD.deletar(id);
     }
     catch(error){
       error.message;

@@ -12,6 +12,9 @@ rotas.use('/teste',testes)
 import disciplinas from './rotas/disciplinaRouter'
 rotas.use('/disciplinas',disciplinas)
 
+import professor from './rotas/professorRouter'
+rotas.use('/professor',professor)
+
 app.listen(8080, function() {
     console.log("APP : INICIADO");
 })
