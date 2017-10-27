@@ -25,15 +25,15 @@ export default class Professor extends Entidade {
     return this.id;
   }
 
-  set setNome(nome){
+  setNome(nome){
     this.nome=nome;
   }
 
-  set setMatricula(matricula){
+  setMatricula(matricula){
     this.matricula=matricula;
   }
 
-  set setId(id){
+  setId(id){
     this.id=id;
   }
 }

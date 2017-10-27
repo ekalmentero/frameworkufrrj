@@ -8,8 +8,8 @@ professor.use(bodyParser.json());
 
 professor.route('/')
   .post(async function(req,res){
-    //res.send(await ProfessorController.create(req.body));
-    res.send(typeof(ProfessorController.create));
+    res.send(await ProfessorController.create(req.body));
+    //res.send(typeof(ProfessorController.create));
     //console.log("oi");
   })
 
