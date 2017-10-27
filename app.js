@@ -12,6 +12,12 @@ rotas.use('/teste',testes)
 import disciplinas from './rotas/disciplinaRouter'
 rotas.use('/disciplinas',disciplinas)
 
+var crypto = require('crypto')
+
+rotas.all("/login",function(req,res){
+    res.send(crypto.createHash("md5").update("teste").digest("hex"));
+})
+
 app.listen(8080, function() {
     console.log("APP : INICIADO");
 })
