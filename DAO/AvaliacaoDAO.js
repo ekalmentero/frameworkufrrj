@@ -12,18 +12,15 @@ export default class AvaliacaoDAO {
       return error.message;
     }
   }
-  static async read(avaliacaoId) {
+  static async read(avaliacao) {
     try {
-      var avaliacao = new Avaliacao();
-      avaliacao.setId(avaliacaoId);
-
       var retorno = await BD.buscar(avaliacao);
-      avaliacao.setId(retorno.id);
-      avaliacao.setNome(retorno.nome);
-      avaliacao.setData(retorno.data);
-      avaliacao.setDescricao(retorno.descricao);
+      avaliacao.setId(retorno[0].id);
+      avaliacao.setNome(retorno[0].nome);
+      avaliacao.setData(retorno[0].data);
+      avaliacao.setDescricao(retorno[0].descricao);
 
-      var tmpTurma = await TurmaDAO.read(retorno.turma);
+      var tmpTurma = await TurmaDAO.read(retorno[0].turma);
       avaliacao.setTurma(tmpTurma);
 
       return avaliacao;

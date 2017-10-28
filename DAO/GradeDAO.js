@@ -13,16 +13,13 @@ export default class GradeDAO {
       return error.message;
     }
   }
-  static async read(gradeId) {
+  static async read(grade) {
     try {
-      var grade = new Grade();
-      grade.setId(gradeId);
-
       var retorno = await BD.buscar(grade);
-      grade.setinicio_vigencia(retorno.inicio_vigencia);
-      grade.setId(retorno.id);
-      grade.setDisponivel(retorno.disponivel);
-      var tmpCurso = await CursoDAO.read(retorno.curso);
+      grade.setinicio_vigencia(retorno[0].inicio_vigencia);
+      grade.setId(retorno[0].id);
+      grade.setDisponivel(retorno[0].disponivel);
+      var tmpCurso = await CursoDAO.read(retorno[0].curso);
       grade.setCurso(tmpCurso);
       return grade;
     } catch (error) {

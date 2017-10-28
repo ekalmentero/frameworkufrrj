@@ -2,6 +2,8 @@
 import BD from "../BD";
 import Aluno from "../modelos/Aluno";
 import AvaliacaoAluno from "../modelos/AvaliacaoAluno";
+import CursoDAO from "../DAO/CursoDAO";
+import GradeDAO from "../DAO/GradeDAO";
 
 export default class AlunoDAO {
   
@@ -42,23 +44,20 @@ export default class AlunoDAO {
     }
   }
 
-  static async read(alunoId) {
+  static async read(aluno) {
     try {
-      var tmpAluno = new Aluno();
-      tmpAluno.setId(alunoId);
+      var retorno = await BD.buscar(aluno);
+      aluno.setNome(retorno[0].nome);
+      aluno.setId(retorno[0].alunoId);
+      aluno.setMatricula(retorno[0].matricula);
+      aluno.setAtivo(retorno[0].ativo);
+      aluno.setIngresso(retorno[0].ingresso);
 
-      var retorno = await BD.buscar(tmpAluno);
-      tmpAluno.setNome(retorno.nome);
-      tmpAluno.setId(retorno.alunoId);
-      tmpAluno.setMatricula(retorno.matricula);
-      tmpAluno.setAtivo(retorno.ativo);
-      tmpAluno.setIngresso(retorno.ingresso);
-
-      var tmpCurso = await CursoDAO.read(retorno.curso);
-      tmpAluno.setCurso(tmpCurso);
-      var tmpGrade = await GradeDAO.read(retorno.grade);
-      tmpAluno.setGrade(tmpGrade);
-      return tmpAluno;
+      var tmpCurso = await CursoDAO.read(retorno[0].curso);
+      aluno.setCurso(tmpCurso);
+      var tmpGrade = await GradeDAO.read(retorno[0].grade);
+      aluno.setGrade(tmpGrade);
+      return aluno;
     } catch (error) {
       return error.message;
     }

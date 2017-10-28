@@ -7,7 +7,7 @@ export default class AvaliacaoAlunoDAO {
     return await BD.query("SELECT * FROM avaliacao_aluno");
   }
 
-  static async readAllByAluno(alunoId) {
+  static async readAllByAluno(alunoId) { 
     return await BD.query(
       "SELECT * FROM avaliacao_aluno WHERE aluno_id='" + alunoId + "'"
     );

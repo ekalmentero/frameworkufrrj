@@ -1,7 +1,8 @@
 "use strict";
 import Curso from 'Curso';
-import Grade from 'Grade';
-export default class Aluno{
+import Grade from './Grade';
+import Entidade from './entidade';
+export default class Aluno extends Entidade{
   @Private id;
   @Private nome;
   @Private matrcula;
@@ -11,8 +12,10 @@ export default class Aluno{
   @Private curso = new Curso();
   //@Private grade_id;
   @Private grade = new Grade();
+  @Private avaliacoes = [];
 
-    Constructor(){
+    constructor(){
+      super();
     }
      get getId() {
         return this.id;

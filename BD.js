@@ -36,6 +36,7 @@ export default class BD {
             query += propriedade.replace("get","").toLowerCase() + " = " + tmp + obj[propriedade] + tmp + ",";
         }
         query = query.slice(0,-1);
+        console.log(query)
 
         return new Promise(
             function(resolve,reject){

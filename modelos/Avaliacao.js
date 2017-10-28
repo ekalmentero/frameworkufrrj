@@ -1,5 +1,5 @@
 "use strict";
-import Turma from 'Turma';
+import Turma from './Turma';
 export default class Avaliacao{
   @Private id;
   @Private nome;

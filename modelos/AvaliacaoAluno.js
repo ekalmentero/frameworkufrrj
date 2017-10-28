@@ -1,6 +1,6 @@
 "use strict";
-import Avaliacao from 'Avaliacao';
-import Aluno from 'Aluno';
+import Avaliacao from './Avaliacao';
+import Aluno from './Aluno';
 export default class AvaliacaoAluno{
   //@Private avaliacao_id;
   @Private avaliacao = new Avaliacao();
