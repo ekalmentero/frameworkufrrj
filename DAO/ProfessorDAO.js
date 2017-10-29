@@ -34,13 +34,12 @@ export default class ProfessorDAO{
   }
 
   static async update(professor){
+      //console.log("oi");
+      var result=await BD.select(professor);
+      return result;
 
-    try{
-      return await BD.select(professor);
-    }
-    catch(erorr){
-      error.message;
-    }
+
+
   }
 
   static async delete(id){
