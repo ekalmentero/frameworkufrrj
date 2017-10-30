@@ -5,6 +5,7 @@ export default class Disciplina extends Entidade {
     @Private nome;
     @Private codigo;
     @Private creditos;
+    @Private livre_escolha;
 
     constructor(){
         super();
@@ -26,6 +27,10 @@ export default class Disciplina extends Entidade {
         return this.creditos;
     }
 
+    get getLivre_escolha(){
+        return this.livre_escolha;
+    }
+
     setId(id){
         this.id = id;
     }
@@ -40,5 +45,9 @@ export default class Disciplina extends Entidade {
 
     setCreditos(creditos){
         if (typeof(creditos) == "number") this.creditos = creditos;
+    }
+
+    setLivre_escolha(livre_escolha){
+        this.livre_escolha = livre_escolha;
     }
 }
