@@ -5,4 +5,4 @@ const tabelas = {
     'Disciplina' : "disciplina"
 };
 
-modules.export = tabelas;
+module.export = tabelas;
