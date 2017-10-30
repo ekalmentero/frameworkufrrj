@@ -6,6 +6,7 @@ export default class Professor extends Entidade {
   @Private id;
   @Private nome;
   @Private matricula;
+  @Private departamento_id;
 
   constructor() {
     super();

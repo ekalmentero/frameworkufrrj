@@ -3,7 +3,7 @@ var conexao = require('./conexao.js')
 let tabelas = { // Exemplo
     'Aluno' : "aluno",
     'Instituto' : "instituto",
-    'Professor' : "tbl_professor",
+    'Professor' : "professor",
     'Disciplina' : "disciplina"
 };
 

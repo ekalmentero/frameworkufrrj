@@ -2,18 +2,19 @@
 
 
 
-export default class Periodo{
-  @private id;
-  @private data_inicio;
-  @private data_fim;
-  @private nome;
-  @private deleted;
+export default class Periodo extends Entidade{
+  @Private id;
+  @Private data_inicio;
+  @Private data_fim;
+  @Private nome;
+  @Private deleted;
 
   constructor(id,data_inicio,data_fim,nome){
-    this.setId(id);
+    super();
+    /*this.setId(id);
     this.setDataInicio(data_inicio);
     this.setDataFim(data_fim);
-    this.setNome(nome);
+    this.setNome(nome);*/
   }
   get getDataInicio(){
     return this.data_inicio;
