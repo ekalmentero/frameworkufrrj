@@ -23,7 +23,7 @@ export default class Grade{
      get getId() {
         return this.id;
       }
-      
+
       get getNome() {
         return this.nome;
       }
@@ -45,7 +45,7 @@ export default class Grade{
       get getGrade() {
         return this.grade_id;
       }
-      
+
       setId(id) {
         this.id = id;
       }
@@ -70,7 +70,6 @@ export default class Grade{
       setGrade(grade_id) {
         this.grade_id = grade_id;
       }
-      
+
 
 }
-

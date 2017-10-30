@@ -27,7 +27,7 @@ export default class App extends React.Component {
     render(){
         var tmp;
         if(this.state.logado == "1"){
-             tmp = <Text>Logado</Text>;
+             tmp = <Arquivos />;
         } else { tmp = <Login />; }
         return(
           <Root>
