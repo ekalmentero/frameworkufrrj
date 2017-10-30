@@ -12,6 +12,9 @@ rotas.use('/teste',testes)
 import disciplinas from './rotas/disciplinaRouter'
 rotas.use('/disciplinas',disciplinas)
 
+import presencas from './rotas/presencaRouter'
+rotas.use('/presencas',presencas)
+
 var crypto = require('crypto')
 
 rotas.all("/login",function(req,res){

@@ -4,7 +4,8 @@ let tabelas = { // Exemplo
     'Aluno' : "aluno",
     'Instituto' : "instituto",
     'Professor' : "tbl_professor",
-    'Disciplina' : "disciplina"
+    'Disciplina' : "disciplina",
+    'Presenca' : "presenca"
 };
 
 export default class BD {
