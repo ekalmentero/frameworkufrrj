@@ -22,7 +22,11 @@ professor.route('/')
   })
 
   .delete(async function(req,res){
-    res.send(await ProfessorController.delete(req.body))
+    res.send(await ProfessorController.delete(req.body));
+  })
+
+  .get(async function(req,res){
+    res.send(await ProfessorController.readAll());
   })
 
 export default professor;

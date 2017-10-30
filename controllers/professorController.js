@@ -31,4 +31,8 @@ export default class ProfessorController{
     return await ProfessorDAO.delete(professorObj);
   }
 
+  static async readAll(){
+    return await ProfessorDAO.readAll()
+  }
+
 }
