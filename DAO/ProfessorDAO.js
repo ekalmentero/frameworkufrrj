@@ -18,7 +18,7 @@ export default class ProfessorDAO{
   static async read(professor){
 
     try{
-      var result= await BD.select(professor);
+      var result= await BD.buscar(professor);
       var professor= new Professor();
       professor.setId(result[0].id);
       professor.setNome(result[0].nome);
@@ -35,7 +35,7 @@ export default class ProfessorDAO{
 
   static async update(professor){
       //console.log("oi");
-      var result=await BD.select(professor);
+      var result=await BD.buscar(professor);
       return result;
 
 
