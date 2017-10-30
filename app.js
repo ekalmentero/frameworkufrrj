@@ -15,6 +15,9 @@ rotas.use('/disciplinas',disciplinas)
 import professor from './rotas/professorRouter'
 rotas.use('/professor',professor)
 
+import periodo from './rotas/periodoRouter'
+rotas.use('/periodo',periodo)
+
 app.listen(8080, function() {
     console.log("APP : INICIADO");
 })

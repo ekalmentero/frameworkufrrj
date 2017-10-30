@@ -24,14 +24,14 @@ export default class PeriodoDAO{
 static async read(periodo){
 
   try{
-    var result= await BD.select(perido);
+    var result= await BD.buscar(perido);
     periodo= result[0];
     return periodo;
   }
   catch(error){
     return error.message;
   }
-
+}
   static async readAll(){
       return await BD.query("SELECT * FROM periodo");
   }
@@ -39,7 +39,7 @@ static async read(periodo){
   static async update(periodo){
 
     try{
-      return await BD.select(periodo);
+      return await BD.buscar(periodo);
 
     }
     catch(error){
