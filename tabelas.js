@@ -6,4 +6,4 @@ const tabelas = {
     'Presenca' : "presenca"
 };
 
-modules.export = tabelas;
+module.export = tabelas;
