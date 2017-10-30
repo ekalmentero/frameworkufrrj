@@ -6,6 +6,7 @@
   $ npm i -g react-native-cli
   $ npm i
   $ react-native upgrade
+  $ react-native link
   $ react-native run-ios || run-android
 ```
 
@@ -14,4 +15,3 @@
     * Login
     * Perfil / home
     * Arquivos
-    re

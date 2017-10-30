@@ -36,6 +36,10 @@ node_modules/
 npm-debug.log
 yarn-error.log
 
+#Pastas
+ios/
+android/
+
 # BUCK
 buck-out/
 \.buckd/

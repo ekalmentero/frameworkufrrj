@@ -27,7 +27,7 @@ export default class Login extends React.Component {
           /*<ImageBackground source={require('./assets/1.jpg')} style={styles.container}>*/
               <KeyboardAvoidingView behavior='padding' keyboardVerticalOffset={0} style={{flex:1}}>
       		        <View style={{ flex:1,alignItems:'center',justifyContent:'center' }}>
-                      /* {logo} */
+                      
                   </View>
 
                   <View style={{paddingHorizontal: 30}}>
