@@ -4,7 +4,7 @@ import DisciplinaDAO from '../DAO/disciplinaDAO';
 export default class DisciplinaController {
     static async create(disciplina){
         var disciplinaObj = new Disciplina();
-        disciplinaObj.parseDisciplina(disciplina);
+        disciplinaObj.parseEntidade(disciplina);
         return await DisciplinaDAO.create(disciplinaObj);
     }
 
@@ -20,13 +20,13 @@ export default class DisciplinaController {
 
     static async update(disciplina){
         var disciplinaObj = new Disciplina();
-        disciplinaObj.parseDisciplina(disciplina); 
+        disciplinaObj.parseEntidade(disciplina); 
         return await DisciplinaDAO.update(disciplinaObj);
     }
 
     static async delete(disciplina){
         var disciplinaObj = new Disciplina();
-        disciplinaObj.parseDisciplina(disciplina);
+        disciplinaObj.parseEntidade(disciplina);
         return await DisciplinaDAO.delete(disciplinaObj);
     }
 }
