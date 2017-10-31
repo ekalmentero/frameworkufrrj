@@ -3,13 +3,13 @@ import BD.js
 
 export default class Turma{
 
-@private codigo;
-@private vagas;
-@private id_disciplina;
-@private id_periodo;
-@private id_professor;
-@private periodo;
-@private id;
+@Private codigo;
+@Private vagas;
+@Private id_disciplina;
+@Private id_periodo;
+@Private id_professor;
+@Private periodo;
+@Private id;
 
   constructor(){
 

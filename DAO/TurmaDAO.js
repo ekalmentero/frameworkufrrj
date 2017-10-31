@@ -1,4 +1,4 @@
-import Professor from "../modelos/Turma";
+import Turma from "../modelos/Turma";
 import BD from "../BD";
 
 
@@ -20,7 +20,7 @@ export class TurmaDAO{
 
   static async read(turma){
     try{
-      var result= await BD.select(turma);
+      var result= await BD.buscar(turma);
       var turma= result[0];
 
       return turma;
@@ -39,5 +39,5 @@ export class TurmaDAO{
   }
 
   static async update(turma){
-    return await BD.select(turma);
+    return await BD.buscar(turma);
   }
