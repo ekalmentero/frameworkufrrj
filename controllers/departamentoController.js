@@ -4,7 +4,7 @@ import DepartamentoDAO from '../DAO/departamentoDAO';
 export default class DepartamentoController {
     static async create(departamento){
         var departamentoObj = new Departamento();
-        departamentoObj.populatingObjectFromJson(departamento);
+        departamentoObj.parseEntidade(departamento);
         return await DepartamentoDAO.create(departamentoObj);
     }
 
@@ -16,13 +16,13 @@ export default class DepartamentoController {
 
     static async update(departamento){
         var departamentoObj = new Departamento();
-        departamentoObj.populatingObjectFromJson(departamento);
+        departamentoObj.parseEntidade(departamento);
         return await DepartamentoDAO.update(departamentoObj);
     }
 
     static async delete(departamento){
         var departamentoObj = new Departamento();
-        departamentoObj.populatingObjectFromJson(departamento);
+        departamentoObj.parseEntidade(departamento);
         return await DepartamentoDAO.delete(departamentoObj);
     }
 }

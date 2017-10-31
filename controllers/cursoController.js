@@ -4,7 +4,7 @@ import CursoDAO from '../DAO/cursoDAO';
 export default class CursoController {
     static async create(curso){
         var cursoObj = new Curso();
-        cursoObj.populatingObjectFromJson(curso);
+        cursoObj.parseEntidade(curso);
         return await CursoDAO.create(cursoObj);
     }
 
@@ -16,13 +16,13 @@ export default class CursoController {
 
     static async update(curso){
         var cursoObj = new Curso();
-        cursoObj.populatingObjectFromJson(curso);
+        cursoObj.parseEntidade(curso);
         return await CursoDAO.update(cursoObj);
     }
 
     static async delete(curso){
         var cursoObj = new Curso();
-        cursoObj.populatingObjectFromJson(curso);
+        cursoObj.parseEntidade(curso);
         return await CursoDAO.delete(cursoObj);
     }
 }
