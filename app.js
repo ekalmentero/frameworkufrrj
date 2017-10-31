@@ -18,8 +18,8 @@ rotas.use('/professor',professor)
 import periodo from './rotas/periodoRouter'
 rotas.use('/periodo',periodo)
 
-/*import turma from '.rotas/turmaRouter'
-rotas.use('/turma',periodo)*/
+import turma from '.rotas/turmaRouter'
+rotas.use('/turma',turma)
 
 app.listen(8080, function() {
     console.log("APP : INICIADO");
