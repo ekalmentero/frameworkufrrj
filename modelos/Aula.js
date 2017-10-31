@@ -1,6 +1,8 @@
 "use strict";
 
-export default class Aula {
+import Entidade from './entidade';
+
+export default class Aula extends Entidade{
 
 	@Private id;
 	@Private turma;
