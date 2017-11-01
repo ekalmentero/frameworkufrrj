@@ -1,30 +1,32 @@
 "use strict";
-export default class AvaliacaoAluno{
-  @Private avaliacao_id;
-  @Private aluno_id;
+import Avaliacao from './Avaliacao';
+import Aluno from './Aluno';
+import Entidade from './entidade';
+export default class AvaliacaoAluno extends Entidade{
+  @Private avaliacao = new Avaliacao();
+  @Private aluno = new Aluno();
   @Private nota;
-
-    Constructor(avaliacao_id, aluno_id, nota){
-        this.setAvaliacao(avaliacao_id);
-        this.setAluno(aluno_id);
-        this.setNota(nota);
+  
+    constructor(){
+      super();
     }
+
      get getAvaliacao() {
-        return this.avaliacao_id;
+        return this.avaliacao;
       }
 
       get getAluno() {
-        return this.aluno_id;
+        return this.aluno;
       }
       get getNota() {
         return this.nota;
       }
-
-      setAvaliacao(avaliacao_id) {
-        this.avaliacao_id = avaliacao_id;
+      
+      setAvaliacao(avaliacao) {
+        this.avaliacao = avaliacao;
       }
-      setAluno(aluno_id) {
-        this.aluno_id = aluno_id;
+      setAluno(aluno) {
+        this.aluno = aluno;
       }
       setNota(nota) {
         this.nota = nota;
