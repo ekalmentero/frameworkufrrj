@@ -2,6 +2,10 @@ var conexao = require('./conexao.js')
 
 let tabelas = { // Exemplo
     'Aluno' : "aluno",
+    'Avaliacao' : "avaliacao",
+    'Grade' : "grade",
+    'AvaliacaoAluno' : "avaliacao_aluno",
+    'Prerequisito' : "prerequisito",
     'Instituto' : "instituto",
     'Professor' : "tbl_professor",
     'Disciplina' : "disciplina"
@@ -142,7 +146,7 @@ export default class BD {
         var tmp;
         for(var i = 0;i<filtros.length;i++){
             if(typeof(filtros[i][1]) == "string") tmp = "'"; else tmp = "";
-            if(i > 0) query += "AND";
+            if(i > 0) query += " AND ";
             query += filtros[i][0].replace("get","").toLowerCase() + " = " + tmp + filtros[i][1] + tmp + " ";
         }
 
