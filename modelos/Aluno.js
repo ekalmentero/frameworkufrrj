@@ -1,5 +1,5 @@
 "use strict";
-import Curso from 'Curso';
+import Curso from './curso';
 import Grade from './Grade';
 import Entidade from './entidade';
 export default class Aluno extends Entidade{
@@ -66,4 +66,4 @@ export default class Aluno extends Entidade{
 
       }
 
-
+    }

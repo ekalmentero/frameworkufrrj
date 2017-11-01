@@ -1,7 +1,7 @@
 "use strict";
 import BD from "../BD";
-import CursoDAO from 'CursoDAO';
-import GradeDAO from 'GradeDAO';
+import CursoDAO from './cursoDAO';
+import GradeDAO from './GradeDAO';
 import Aluno from "../modelos/Aluno";
 import Avaliacao from "../modelos/Avaliacao";
 import AvaliacaoAluno from "../modelos/AvaliacaoAluno";

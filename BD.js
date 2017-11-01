@@ -1,5 +1,18 @@
 var conexao = require('./conexao.js')
-let tabelas = require('./tabelas.js')
+//let tabelas = require('./tabelas.js')
+
+let tabelas = { // Exemplo
+    'Aluno' : "aluno",
+    'Avaliacao' : "avaliacao",
+    'Grade' : "grade",
+    'AvaliacaoAluno' : "avaliacao_aluno",
+    'Prerequisito' : "prerequisito",
+    'Instituto' : "instituto",
+    'Professor' : "professor",
+    'Disciplina' : "disciplina",
+    'Turma' : "turma",
+    'Periodo' : "periodo"
+};
 
 export default class BD {
 

@@ -1,7 +1,7 @@
 "use strict";
 import BD from "../BD";
 import Grade from "../modelos/Grade";
-import CursoDAO from "CursoDAO";
+import CursoDAO from "./cursoDAO";
 
 export default class GradeDAO {
   static async create(grade) {
