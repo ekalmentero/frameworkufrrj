@@ -2,23 +2,21 @@
 import Grade from 'Grade';
 import Disciplina from 'Disciplina';
 export default class Prerequisito{
-  //@Private id_disciplina;
   @Private discuplina = new Disciplina();
-  //@Private id_requisito;
   @Private requisito = new Disciplina();
-  //@Private grade_id;
   @Private grade = new Grade();
   
-    Constructor(){
+    constructor(){
+      super();
     }
-     get getId_disciplina() {
+     get getDisciplina() {
         return this.disciplina;
       }
       
-      get getId_requisito() {
+      get getRequisito() {
         return this.requisito;
       }
-      get getGrade_id() {
+      get getGrade() {
         return this.grade;
       }
       

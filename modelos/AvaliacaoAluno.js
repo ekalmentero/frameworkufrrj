@@ -1,21 +1,21 @@
 "use strict";
 import Avaliacao from './Avaliacao';
 import Aluno from './Aluno';
-export default class AvaliacaoAluno{
-  //@Private avaliacao_id;
+import Entidade from './entidade';
+export default class AvaliacaoAluno extends Entidade{
   @Private avaliacao = new Avaliacao();
-  //@Private aluno_id;
   @Private aluno = new Aluno();
   @Private nota;
   
-    Constructor(){
+    constructor(){
+      super();
     }
 
-     get getAvaliacao_id() {
+     get getAvaliacao() {
         return this.avaliacao;
       }
       
-      get getAluno_id() {
+      get getAluno() {
         return this.aluno;
       }
       get getNota() {

@@ -4,10 +4,10 @@ export default class Grade{
   @Private id;
   @Private inicio_vigencia;
   @Private disponivel;
-  //@Private curso_id;
   @Private curso = new Curso();
 
-    Constructor(){
+    constructor(){
+      super();
     }
 
      get getId() {
@@ -20,7 +20,7 @@ export default class Grade{
       get getDisponivel() {
         return this.disponivel;
       }
-      get getCurso_id() {
+      get getCurso() {
         return this.curso;
       }
       

@@ -5,16 +5,16 @@ export default class Avaliacao{
   @Private nome;
   @Private data;
   @Private descricao;
-  //@Private turma_id;
   @Private turma = new Turma();
   
-    Constructor(){
+    constructor(){
+      super();
     }
 
      get getId() {
         return this.id;
       }
-      get getTurma_id() {
+      get getTurma() {
         return this.turma;
       }
       

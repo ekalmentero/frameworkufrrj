@@ -8,11 +8,9 @@ export default class Aluno extends Entidade{
   @Private matrcula;
   @Private ativo;
   @Private ingresso;
-  //@Private curso_id;
-  @Private curso = new Curso();
-  //@Private grade_id;
-  @Private grade = new Grade();
   @Private avaliacoes = [];
+  @Private curso = new Curso();
+  @Private grade = new Grade();
 
     constructor(){
       super();
@@ -20,10 +18,10 @@ export default class Aluno extends Entidade{
      get getId() {
         return this.id;
       }
-      get getCurso_id() {
+      get getCurso() {
         return this.curso;
       }
-      get getGrade_id() {
+      get getGrade() {
         return this.grade;
       }
       get getNome() {
@@ -38,6 +36,11 @@ export default class Aluno extends Entidade{
       get getIngresso() {
         return this.ingresso;
       }
+      get getAvaliacoes(){
+        return this.avaliacoes;
+      }
+
+
       setId(id) {
         this.id = id;
       }
@@ -59,7 +62,12 @@ export default class Aluno extends Entidade{
       setGrade(grade) {
         this.grade = grade;
       }
+      setAvaliacoes(avaliacao){
+        this.avaliacoes.push(avaliacao);
+
+      }
       
 
 }
+
 
