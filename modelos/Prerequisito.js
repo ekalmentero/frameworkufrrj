@@ -1,33 +1,33 @@
 "use strict";
+import Grade from 'Grade';
+import Disciplina from 'Disciplina';
 export default class Prerequisito{
-  @Private id_disciplina;
-  @Private id_requisito;
-  @Private grade_id;
+  @Private discuplina = new Disciplina();
+  @Private requisito = new Disciplina();
+  @Private grade = new Grade();
   
-    Constructor(id_disciplina, id_requisito, grade_id){
-        this.setDisciplina(id_disciplina);
-        this.setRequisito(id_requisito);
-        this.setGrade(grade_id);
+    constructor(){
+      super();
     }
      get getDisciplina() {
-        return this.id_disciplina;
+        return this.disciplina;
       }
       
       get getRequisito() {
-        return this.id_requisito;
+        return this.requisito;
       }
       get getGrade() {
-        return this.grade_id;
+        return this.grade;
       }
       
-      setDisciplina(id_disciplina) {
-        this.id_disciplina = id_disciplina;
+      setDisciplina(disciplina) {
+        this.disciplina = disciplina;
       }
-      setRequisito(id_requisito) {
-        this.id_requisito = id_requisito;
+      setRequisito(requisito) {
+        this.requisito = requisito;
       }
-      setGrade(grade_id) {
-        this.grade_id = grade_id;
+      setGrade(grade) {
+        this.grade = grade;
       }
 
 }

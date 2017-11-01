@@ -17,6 +17,19 @@ rotas.use('/curso', curso)
 
 import departamento from './rotas/departamentoRouter'
 rotas.use('/departamento', departamento)
+
+import professor from './rotas/professorRouter'
+rotas.use('/professor',professor)
+
+import periodo from './rotas/periodoRouter'
+rotas.use('/periodo',periodo)
+
+import turma from '.rotas/turmaRouter'
+rotas.use('/turma',turma)
+
+import alunos from './rotas/alunoRouter'
+rotas.use('/alunos',alunos)
+
 var crypto = require('crypto')
 
 rotas.all("/login",function(req,res){
