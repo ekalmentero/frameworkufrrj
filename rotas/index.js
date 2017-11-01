@@ -1,8 +1,8 @@
 import express from 'express';
+import AulaController from '../controllers/AulaController.js';
 const rotas = express.Router();
 
-rotas.all('/', function(req, res) {
-    res.send("TESTE");
-})
+/*mudar para post*/
+rotas.get('/aula/store', AulaController.store)
 
 export default rotas;
