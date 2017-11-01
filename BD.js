@@ -1,67 +1,13 @@
-import mysql from 'mysql';
-
-//import Aluno from 'modelos/aluno';
-
-const conexao = mysql.createConnection({
-  host     : 'localhost',
-  user     : 'ipbxsertel',
-  password : '@ipbxsertel',
-  database : 'bmg' //ALTERAR NÉ
-});
-
-conexao.connect();
-
-let tabelas = { // Exemplo
-    'Aluno' : "tbl_aluno",
-    'Professor' : "tbl_professor"
-};
-
-//EXEMPLO DE modelos
-class Aluno{
-    constructor(){
-        //...
-    }
-
-    @Private nome = "Bruno";
-    @Private dtNasc = 1996;
-
-    get getNome(){
-        return this.nome;
-    }
-
-    setNome(nome){
-        this.nome = nome;
-    }
-
-    get getIdade(){
-        return 2017 - this.dtNasc;
-    }
-
-    inserirNota(){
-      //...
-    }
-
-}
-
-// as funções retornam uma Promise
-// pra utilizar o código no DAO:
-//
-// import BD from './BD'
-//
-// [..]
-//
-// BD.query("").then((retorno)=>{
-//     retorno = retorno direto do banco de dados
-//     (false se query der erro)
-// })
+var conexao = require('./conexao.js')
+let tabelas = require('./tabelas.js')
 
 export default class BD {
 
-    static query(sql){
+    static query(query){
         return new Promise(
             function(resolve,reject){
-                conexao.query(sql, function (erro, retorno, colunas) {
-                    if (erro) throw erro;
+                conexao.query(query, function (erro, retorno, colunas) {
+                    if (erro) {reject(erro); throw erro;}
                     resolve(retorno);
                 });
             }
@@ -70,22 +16,30 @@ export default class BD {
 
     static inserir(obj){
         var tabela = tabelas[obj.constructor.name];
-        var query = "INSERT INTO " + tabela;
+        var query = "INSERT INTO " + tabela + " SET ";
 
         var tmp = "";
         for(let propriedade of Object.getOwnPropertyNames(Object.getPrototypeOf(obj))){
             if(propriedade == "constructor") continue;
-            if(typeof(a[propriedade]) == 'function') continue;
+            if(typeof(obj[propriedade]) == 'function' || obj[propriedade] == undefined) continue;
+            if(propriedade == "getId") continue;
 
-            if(typeof(filtros[i][1]) == "string") tmp = "'"; else tmp = "";
-            query += " SET " + filtros[i][0].replace("get","").toLowerCase() + " = " + tmp + filtros[i][1] + tmp;
+            if(typeof(obj[propriedade]) == "object") obj[propriedade] = obj[propriedade].getId;
+
+            if(typeof(obj[propriedade]) == "string") tmp = "'"; else tmp = "";
+            query += propriedade.replace("get","").toLowerCase() + " = " + tmp + obj[propriedade] + tmp + ",";
         }
+        query = query.slice(0,-1);
+        console.log(query)
 
         return new Promise(
             function(resolve,reject){
-                conexao.query(sql, function (erro, retorno, colunas) {
-                    if (erro) resolve(false);
-                    resolve(true);
+                conexao.query(query, function (erro, retorno, colunas) {
+                    if (erro) reject(erro); else {
+                        BD.query("SELECT LAST_INSERT_ID() AS lid").then((r)=>{
+                            resolve(r[0].lid);
+                        }).catch((erro)=>{reject(erro); throw erro;});
+                    }
                 });
             }
         );
@@ -101,7 +55,8 @@ export default class BD {
 
         for(let propriedade of Object.getOwnPropertyNames(Object.getPrototypeOf(obj))){
             if(propriedade == "constructor") continue;
-            if(typeof(a[propriedade]) == 'function') continue;
+            if(typeof(obj[propriedade]) == 'function') continue;
+            if(typeof(obj[propriedade]) == "object") obj[propriedade] = obj[propriedade].getId;
 
             if(obj[propriedade] != tmp[propriedade]){
                 filtros.push([propriedade,obj[propriedade]]);
@@ -118,16 +73,16 @@ export default class BD {
         return new Promise(
             function(resolve,reject){
                 conexao.query(query, function (erro, retorno, colunas) {
-                    if (erro) reject(erro);
+                    if (erro) { reject(erro); throw erro; }
                     resolve(retorno);
                 });
             }
         );
     }
 
-    static deletar(obj){
+    static update(obj){
         var tabela = tabelas[obj.constructor.name];
-        var query = "DELETE FROM " + tabela + " WHERE ";
+        var query = "UPDATE " + tabela + " SET ";
 
         var filtros = [];
 
@@ -135,7 +90,43 @@ export default class BD {
 
         for(let propriedade of Object.getOwnPropertyNames(Object.getPrototypeOf(obj))){
             if(propriedade == "constructor") continue;
-            if(typeof(a[propriedade]) == 'function') continue;
+            if(typeof(obj[propriedade]) == 'function' || obj[propriedade] == undefined) continue;
+            if(propriedade == "getId") continue;
+            if(typeof(obj[propriedade]) == "object") obj[propriedade] = obj[propriedade].getId;
+
+            var tmp;
+            if(obj[propriedade] != tmp[propriedade]){
+                if(typeof(obj[propriedade]) == "string") tmp = "'"; else tmp = "";
+                query += propriedade.replace("get","").toLowerCase() + "=" + tmp + obj[propriedade] + tmp + ",";
+            }
+        }
+
+        query = query.slice(0,-1);
+
+        query += " WHERE id=" + obj["getId"];
+
+        return new Promise(
+            function(resolve,reject){
+                conexao.query(query, function (erro, retorno, colunas) {
+                    if (erro) { reject(erro); throw erro; }
+                    resolve(true);
+                });
+            }
+        );
+    }
+
+    static deletar(obj){
+        var tabela = tabelas[obj.constructor.name];
+        var query = "UPDATE " + tabela + " SET deleted=1 WHERE ";
+
+        var filtros = [];
+
+        var tmp = new obj.constructor;
+
+        for(let propriedade of Object.getOwnPropertyNames(Object.getPrototypeOf(obj))){
+            if(typeof(obj[propriedade]) == 'function' || obj[propriedade] == undefined) continue;
+            //if(propriedade == "getId") continue;
+            if(typeof(obj[propriedade]) == "object") obj[propriedade] = obj[propriedade].getId;
 
             if(obj[propriedade] != tmp[propriedade]){
                 filtros.push([propriedade,obj[propriedade]]);
@@ -145,18 +136,17 @@ export default class BD {
         var tmp;
         for(var i = 0;i<filtros.length;i++){
             if(typeof(filtros[i][1]) == "string") tmp = "'"; else tmp = "";
-            if(i > 0) query += "AND";
+            if(i > 0) query += " AND ";
             query += filtros[i][0].replace("get","").toLowerCase() + " = " + tmp + filtros[i][1] + tmp + " ";
         }
 
         return new Promise(
             function(resolve,reject){
-                conexao.query(sql, function (erro, retorno, colunas) {
-                    if (erro) resolve(false);
+                conexao.query(query, function (erro, retorno, colunas) {
+                    if (erro) reject(erro);
                     resolve(true);
                 });
             }
         );
     }
-
 }

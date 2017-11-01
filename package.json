@@ -1,33 +1,32 @@
 {
-  "name": "topicosWeb",
-  "version": "0.0.1",
-  "private": false,
-  "description": "Aplicativo para a disciplica de tópicos WEB",
-  "main": "app.js",
-  "scripts": {
-    "start": "babel-watch app.js",
-    "test": "jest"
-  },
-  "dependencies": {
-    "babel": "^6.23.0",
-    "babel-runtime": "^6.26.0",
-    "express": "*",
-    "mysql": "*",
-    "react": "16.0.0-alpha.12"
-  },
-  "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-jest": "20.0.3",
-    "babel-plugin-syntax-class-properties": "^6.13.0",
-    "babel-plugin-transform-class-properties": "^6.24.1",
-    "babel-plugin-transform-private-properties": "^1.0.2",
-    "babel-plugin-transform-runtime": "^6.23.0",
-    "babel-polyfill": "^6.26.0",
-    "babel-preset-env": "^1.6.1",
-    "babel-preset-es2015": "^6.24.1",
-    "babel-preset-stage-1": "^6.24.1",
-    "babel-watch": "^2.0.7",
-    "jest": "20.0.4",
-    "react-test-renderer": "16.0.0-alpha.12"
-  }
+	"name": "topicosWeb",
+	"version": "0.0.2",
+	"private": false,
+	"description": "Aplicativo para a disciplica de tópicos WEB",
+	"main": "app.js",
+	"scripts": {
+		"start": "babel-watch app.js",
+		"test": "jest"
+	},
+	"dependencies": {
+		"babel": "^6.23.0",
+		"body-parser": "^1.18.2",
+		"express": "^4.16.2",
+		"mysql": "*",
+		"react": "^16.0.0"
+	},
+	"devDependencies": {
+		"babel-cli": "^6.26.0",
+		"babel-jest": "20.0.3",
+		"babel-plugin-syntax-class-properties": "^6.13.0",
+		"babel-plugin-transform-class-properties": "^6.24.1",
+		"babel-plugin-transform-private-properties": "^1.0.2",
+		"babel-plugin-transform-runtime": "^6.23.0",
+		"babel-polyfill": "^6.26.0",
+		"babel-preset-env": "^1.6.1",
+		"babel-preset-stage-1": "^6.24.1",
+		"babel-watch": "^2.0.7",
+		"jest": "20.0.4",
+		"react-test-renderer": "16.0.0-alpha.12"
+	}
 }
