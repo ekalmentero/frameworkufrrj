@@ -12,6 +12,12 @@ rotas.use('/teste',testes)
 import disciplinas from './rotas/disciplinaRouter'
 rotas.use('/disciplinas',disciplinas)
 
+import curso from './rotas/cursoRouter'
+rotas.use('/curso', curso)
+
+import departamento from './rotas/departamentoRouter'
+rotas.use('/departamento', departamento)
+
 import professor from './rotas/professorRouter'
 rotas.use('/professor',professor)
 
@@ -20,8 +26,10 @@ rotas.use('/periodo',periodo)
 
 import turma from '.rotas/turmaRouter'
 rotas.use('/turma',turma)
+
 import alunos from './rotas/alunoRouter'
 rotas.use('/alunos',alunos)
+
 var crypto = require('crypto')
 
 rotas.all("/login",function(req,res){
@@ -31,7 +39,6 @@ rotas.all("/login",function(req,res){
         res.send({status:0,msg:"Login incorreto"});
     }
 })
-
 app.listen(8080, function() {
     console.log("APP : INICIADO");
 })

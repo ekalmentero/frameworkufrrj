@@ -5,6 +5,7 @@ export default class Entidade {
         }
     }
 
+
     toString(){
         return JSON.stringify(this);
     }
