@@ -41,3 +41,4 @@ export class TurmaDAO{
   static async update(turma){
     return await BD.buscar(turma);
   }
+}

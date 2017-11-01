@@ -1,18 +1,17 @@
-import BD.js
+import Entidade from './entidade';
 
-
-export default class Turma{
+export default class Turma extends Entidade{
 
 @Private codigo;
 @Private vagas;
-@Private id_disciplina;
-@Private id_periodo;
-@Private id_professor;
+@Private disciplina;
+@Private periodo;
+@Private professor;
 @Private periodo;
 @Private id;
 
   constructor(){
-
+    super();
   }
 
   get getCodigo(){
@@ -24,19 +23,19 @@ export default class Turma{
 
   }
 
-  get getDisciplinaId(){
-    return this.disciplina_id;
+  get getDisciplina(){
+    return this.disciplina;
   }
 
-  get getPeriodoId(){
-    return this.periodo_id;
+  get getPeriodo(){
+    return this.periodo;
   }
 
-  get getProfessorId(){
-    return this.professor_id();
+  get getProfessor(){
+    return this.professor();
   }
 
-  get getTurmaId(){
+  get getId(){
     return this.id;
   }
 
@@ -47,7 +46,7 @@ export default class Turma{
   set setVagas(vagas){
     this.vagas=vagas;
   }
-  set setTurmaId(id){
+  set setId(id){
     this.id=id;
   }
   set setTurmaId(id){
