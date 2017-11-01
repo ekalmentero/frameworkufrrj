@@ -1,6 +1,7 @@
 "use strict";
 import BD from "../BD";
 import Avaliacao from "../modelos/Avaliacao";
+import TurmaDAO from "TurmaDAO";
 
 export default class AvaliacaoDAO {
   static async create(avaliacao) {

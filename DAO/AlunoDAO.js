@@ -1,9 +1,10 @@
 "use strict";
 import BD from "../BD";
+import CursoDAO from 'CursoDAO';
+import GradeDAO from 'GradeDAO';
 import Aluno from "../modelos/Aluno";
+import Avaliacao from "../modelos/Avaliacao";
 import AvaliacaoAluno from "../modelos/AvaliacaoAluno";
-import CursoDAO from "../DAO/CursoDAO";
-import GradeDAO from "../DAO/GradeDAO";
 
 export default class AlunoDAO {
   
@@ -12,33 +13,6 @@ export default class AlunoDAO {
       var retorno = await BD.inserir(aluno);
       aluno.setId(retorno);
       return aluno;
-    } catch (error) {
-      return error.message;
-    }
-  }
-  static async createAvaliacao(avaliacao, aluno, nota) {
-    //CRUD QUE SAIU DE AVALICAOALUNODAO
-    try {
-      var tmpAvl = new AvaliacaoAluno();
-      tmpAvl.setAvaliacao(avaliacao);
-      tmpAvl.setAluno(aluno);
-      tmpAvl.setNota(nota);
-      BD.inserir(tmpAvl);
-    } catch (error) {
-      return error.message;
-    }
-  }
-
-  static async updateAvaliacao(avaliacaoAluno) {
-    try {
-      return await BD.update(avaliacaoAluno);
-    } catch (error) {
-      return error.message;
-    }
-  }
-  static async deleteAvaliacao(avaliacaoAluno) {
-    try {
-      return await BD.deletar(avaliacaoAluno);
     } catch (error) {
       return error.message;
     }
@@ -55,6 +29,7 @@ export default class AlunoDAO {
 
       var tmpCurso = await CursoDAO.read(retorno[0].curso);
       aluno.setCurso(tmpCurso);
+      
       var tmpGrade = await GradeDAO.read(retorno[0].grade);
       aluno.setGrade(tmpGrade);
       return aluno;
@@ -77,6 +52,30 @@ export default class AlunoDAO {
   static async delete(aluno) {
     try {
       return await BD.deletar(aluno);
+    } catch (error) {
+      return error.message;
+    }
+  }
+
+  static async createNota(avaliacaoAluno){ //CRUD QUE SAIU DE AVALICAOALUNODAO
+    try {
+      await BD.inserir(avaliacaoAluno);
+    } catch (error) {
+      return error.message;
+    }
+  }
+
+  static async updateNota(avaliacaoAluno) {
+    try {
+      return await BD.update(avaliacaoAluno);
+    } catch (error) {
+      return error.message;
+    }
+  }
+  
+  static async deleteNota(avaliacaoAluno) {
+    try {
+      return await BD.deletar(avaliacaoAluno);
     } catch (error) {
       return error.message;
     }
