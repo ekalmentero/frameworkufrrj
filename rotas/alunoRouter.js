@@ -14,6 +14,9 @@ aluno.route('/')
   .post(async function(req,res){
       res.send(await AlunoController.create(req.body));
   })
+  .get(async function(req,res){
+    res.send(await AlunoController.readAll());
+  })
   .patch(async function(req,res){
       res.send(await AlunoController.update(req.body));
   })
