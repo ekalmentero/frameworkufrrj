@@ -40,7 +40,6 @@ export default class Aluno extends Entidade{
         return this.avaliacoes;
       }
 
-
       setId(id) {
         this.id = id;
       }
@@ -66,8 +65,5 @@ export default class Aluno extends Entidade{
         this.avaliacoes.push(avaliacao);
 
       }
-      
-
-}
 
 

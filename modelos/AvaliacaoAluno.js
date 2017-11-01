@@ -14,7 +14,7 @@ export default class AvaliacaoAluno extends Entidade{
      get getAvaliacao() {
         return this.avaliacao;
       }
-      
+
       get getAluno() {
         return this.aluno;
       }
@@ -33,4 +33,3 @@ export default class AvaliacaoAluno extends Entidade{
       }
 
 }
-

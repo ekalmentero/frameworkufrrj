@@ -11,6 +11,9 @@ disciplina.get('/:id', async function(req,res){
 })
 
 disciplina.route('/')
+  .get(async function(req,res){
+      res.send(await DisciplinaController.readAll());
+  })
   .post(async function(req,res){
       res.send(await DisciplinaController.create(req.body));
   })
