@@ -30,6 +30,7 @@ export default class BD {
             query += propriedade.replace("get","").toLowerCase() + " = " + tmp + obj[propriedade] + tmp + ",";
         }
         query = query.slice(0,-1);
+        console.log(query)
 
         return new Promise(
             function(resolve,reject){
@@ -135,7 +136,7 @@ export default class BD {
         var tmp;
         for(var i = 0;i<filtros.length;i++){
             if(typeof(filtros[i][1]) == "string") tmp = "'"; else tmp = "";
-            if(i > 0) query += "AND";
+            if(i > 0) query += " AND ";
             query += filtros[i][0].replace("get","").toLowerCase() + " = " + tmp + filtros[i][1] + tmp + " ";
         }
 

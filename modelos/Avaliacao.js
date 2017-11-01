@@ -1,22 +1,21 @@
 "use strict";
+import Turma from './Turma';
 export default class Avaliacao{
   @Private id;
   @Private nome;
   @Private data;
   @Private descricao;
-  @Private deleted;
-  @Private turma_id;
+  @Private turma = new Turma();
   
-    Constructor(id, nome, data, descricao, deleted, turma_id){
-        this.setId(id);
-        this.setNome(nome);
-        this.setData(data);
-        this.setDescricao(descricao);
-        this.setDeleted(deleted);
-        this.setTurma(turma_id);
+    constructor(){
+      super();
     }
+
      get getId() {
         return this.id;
+      }
+      get getTurma() {
+        return this.turma;
       }
       
       get getNome() {
@@ -27,12 +26,6 @@ export default class Avaliacao{
       }
       get getDescricao() {
         return this.descricao;
-      }
-      get getDeleted() {
-        return this.deleted;
-      }
-      get getTurma() {
-        return this.turma_id;
       }
       
       setId(id) {
@@ -47,11 +40,8 @@ export default class Avaliacao{
       setDescricao(descricao) {
         this.descricao = descricao;
       }
-      setDeleted(deleted) {
-        this.deleted = deleted;
-      }
-      setTurma(turma_id) {
-        this.turma_id = turma_id;
+      setTurma(turma) {
+        this.turma = turma;
       }
 
 }
