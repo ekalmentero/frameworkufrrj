@@ -5,7 +5,7 @@ import AvaliacaoAlunoDAO from '../DAO/AvaliacaoAlunoDAO';
 export default class AlunoController {
     static async create(aluno){
         var alunoObj = new Aluno();
-        alunoObj.parseAluno(aluno);
+        alunoObj.parseEntidade(aluno);
         return await AlunoDAO.create(alunoObj);
     }
 
@@ -21,13 +21,13 @@ export default class AlunoController {
 
     static async update(aluno){
         var alunoObj = new Aluno();
-        alunoObj.parseAluno(aluno); 
+        alunoObj.parseEntidade(aluno); 
         return await AlunoDAO.update(alunoObj);
     }
 
     static async delete(aluno){
         var alunoObj = new Aluno();
-        alunoObj.parseAluno(aluno);
+        alunoObj.parseEntidade(aluno);
         return await AlunoDAO.delete(alunoObj);
     }
 
@@ -35,7 +35,7 @@ export default class AlunoController {
     //Ainda não implementado no AlunoRouter
     static async createNota(avaliacaoAluno){ 
         var avaliacaoAlunoObj = new AvaliacaoAluno();
-        avaliacaoAlunoObj.parseAvaliacaoAluno(avaliacaoAluno);
+        avaliacaoAlunoObj.parseEntidade(avaliacaoAluno);
         return await AlunoDAO.createNota(avaliacaoAlunoObj);
     }
 }
