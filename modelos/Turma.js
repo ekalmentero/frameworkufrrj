@@ -4,10 +4,9 @@ export default class Turma extends Entidade{
 
 @Private codigo;
 @Private vagas;
-@Private disciplina;
-@Private periodo;
-@Private professor;
-@Private periodo;
+@Private disciplina= new Disciplina();
+@Private professor= new Professor();
+@Private periodo= new Periodo();
 @Private id;
 
   constructor(){
@@ -39,25 +38,25 @@ export default class Turma extends Entidade{
     return this.id;
   }
 
-  set setCodigo(codigo){
+  setCodigo(codigo){
     this.codigo=codigo;
   }
 
-  set setVagas(vagas){
+  setVagas(vagas){
     this.vagas=vagas;
   }
-  set setId(id){
+  setId(id){
     this.id=id;
   }
-  set setTurmaId(id){
-    this.id=id;
+  setTurmaId(turma){
+    this.turma=turma;
   }
 
-  set setPeriodoId(id){
-    this.id=id;
+  setPeriodoId(periodo){
+    this.periodo=periodo;
   }
-  set setProfessorId(id){
-    this.id=id;
+  setProfessorId(professor){
+    this.professor=professor;
   }
 
 }

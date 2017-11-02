@@ -1,4 +1,7 @@
 import Turma from "../modelos/Turma";
+import ProfessorDAO from '../DAO/ProfessorDAO';
+import disciplinaDAO from '../DAO/disciplinaDAO';
+import PeriodoDAO from '../DAO/periodoDAO';
 import BD from "../BD";
 
 
@@ -21,9 +24,14 @@ export class TurmaDAO{
   static async read(turma){
     try{
       var result= await BD.buscar(turma);
-      var turma= result[0];
+      var turmaTemp= new Turma();
+      turmaTemp.setCodigo(result[0].codigo);
+      turmaTemp.setVagas(result[0].vagas);
+      turmaTemp.setProfessor(ProfessorDAO.read(result[0].professor));
+      turmaTemp.setPeriodo(PeridoDAO.read(result[0].periodo));
+      turmaTemp.setDisciplina(DisciplinaDAO.read(result[0].disciplina));
 
-      return turma;
+      return turmaTemp;
     }
     catch(error){
       error.message;
