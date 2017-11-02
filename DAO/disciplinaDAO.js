@@ -12,10 +12,7 @@ export default class DisciplinaDAO {
 
     static async read(disciplina){
         var result =  await BD.buscar(disciplina);
-        disciplina.setId(result[0].id);
-        disciplina.setNome(result[0].nome);
-        disciplina.setCodigo(result[0].codigo);
-        disciplina.setCreditos(result[0].creditos);
+        disciplina.parseEntidade(result[0]);
         return disciplina;
     }
 
