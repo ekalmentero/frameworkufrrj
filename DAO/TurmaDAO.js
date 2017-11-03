@@ -1,11 +1,14 @@
 import Turma from "../modelos/Turma";
+import Professor from "../modelos/Professor";
+import Periodo from '../modelos/Periodo';
+import Disciplina from '../modelos/disciplina';
 import ProfessorDAO from '../DAO/ProfessorDAO';
-import disciplinaDAO from '../DAO/disciplinaDAO';
-import PeriodoDAO from '../DAO/periodoDAO';
+import DisciplinaDAO from '../DAO/disciplinaDAO';
+import PeriodoDAO from '../DAO/PeriodoDAO';
 import BD from "../BD";
 
 
-export class TurmaDAO{
+export default class TurmaDAO{
   constructor(){
 
   }
@@ -47,6 +50,26 @@ export class TurmaDAO{
   }
 
   static async update(turma){
-    return await BD.buscar(turma);
+    return await BD.update(turma);
+  }
+
+  static async listarProfessores(professor){
+    var id= professor.getId;
+    var result = await BD.query('SELECT * FROM turma WHERE professor=1');
+    var array= new Array();
+    var i=0;
+
+    while(i<result.lenght){
+      var turmaTemp= new Turma();
+      turmaTemp.setCodigo(result[i].codigo);
+      turmaTemp.setVagas(result[i].vagas);
+      turmaTemp.setProfessor(ProfessorDAO.read(result[i].professor));
+      turmaTemp.setPeriodo(PeridoDAO.read(result[i].periodo));
+      turmaTemp.setDisciplina(DisciplinaDAO.read(result[i].disciplina));
+      array.push(turmaTemp);
+      i++;
+
+    }
+    return array;
   }
 }

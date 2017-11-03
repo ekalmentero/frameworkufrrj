@@ -1,12 +1,13 @@
 import Turma from '../modelos/turma';
-import TurmaDAO from '../DAO/turmaDAO';
+import Professor from '../modelos/professor';
+import TurmaDAO from '../DAO/TurmaDAO';
 
 
-export default class ProfessorController{
+export default class TurmaController{
 
   static async create(turma){
     var turmaObj= new Turma();
-    turmaObj.parseDisciplina(turma);
+    turmaObj.parseEntidade(turma);
     return await TurmaDAO.create(turmaObj);
   }
 
@@ -19,20 +20,27 @@ export default class ProfessorController{
 
   static async update(turma){
     var turmaObj= new Turma();
-
-    turmaObj.parseDisciplina(turma);
-    return await TurmaController.update(turmaObj);
+    turmaObj.parseEntidade(turma);
+    return await TurmaDAO.update(turmaObj);
 
   }
 
   static async delete(turma){
     var turmaObj= new Turma();
-    turmaObj.parseDisciplina(turma);
-    return await TurmaController.delete(turmaObj);
+    turmaObj.parseEntidade(turma);
+    return await TurmaDAO.delete(turmaObj);
   }
 
   static async readAll(){
     return await TurmaDAO.readAll()
+  }
+
+  static async listarProfessores(id){
+    var professor= new Professor();
+    professor.setId(id);
+    //professor.setMatricula('haha');
+    //console.log(professor.getMatricula());
+    return await TurmaDAO.listarProfessores(professor);
   }
 
 }

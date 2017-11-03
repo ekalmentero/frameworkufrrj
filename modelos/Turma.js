@@ -1,4 +1,7 @@
 import Entidade from './entidade';
+import Disciplina from './disciplina';
+import Professor from './Professor';
+import Periodo from './Periodo';
 
 export default class Turma extends Entidade{
 
@@ -31,7 +34,7 @@ export default class Turma extends Entidade{
   }
 
   get getProfessor(){
-    return this.professor();
+    return this.professor;
   }
 
   get getId(){
@@ -48,14 +51,22 @@ export default class Turma extends Entidade{
   setId(id){
     this.id=id;
   }
-  setTurmaId(turma){
+  setTurma(turma){
     this.turma=turma;
   }
 
-  setPeriodoId(periodo){
+  setDisciplina(disciplina){
+    this.disciplina.setNome(disciplina.getNome());
+    this.disciplina.setCodigo(disciplina.getCodigo());
+    this.disciplina.setCreditos(disciplina.getCreditos());
+    this.disciplina.setLivre_escolha(disciplina.getLivre_escolha());
+
+  }
+
+  setPeriodo(periodo){
     this.periodo=periodo;
   }
-  setProfessorId(professor){
+  setProfessor(professor){
     this.professor=professor;
   }
 
