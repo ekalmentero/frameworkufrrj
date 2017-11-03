@@ -37,7 +37,7 @@ static async read(periodo){
   }
 }
   static async readAll(){
-      return await BD.query("SELECT * FROM periodo");
+      return await BD.query("SELECT * FROM periodo WHERE deleted=0");
   }
 
   static async update(periodo){
