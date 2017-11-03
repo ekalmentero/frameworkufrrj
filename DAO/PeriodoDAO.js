@@ -21,10 +21,10 @@ export default class PeriodoDAO{
   }
 
 
-static async read(x){
+static async read(periodo){
 
   try{
-    var result= await BD.buscar(x);
+    var result= await BD.buscar(periodo);
     var periodoObj= new Periodo();
     periodoObj.setNome(result[0].nome);
     periodoObj.setDataInicio(result[0].data_inicio);
