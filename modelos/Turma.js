@@ -26,15 +26,15 @@ export default class Turma extends Entidade{
   }
 
   get getDisciplina(){
-    return this.disciplina;
+    return this.disciplina.toString();
   }
 
   get getPeriodo(){
-    return this.periodo;
+    return this.periodo.toString();
   }
 
   get getProfessor(){
-    return this.professor;
+    return this.professor.toString();
   }
 
   get getId(){
