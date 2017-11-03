@@ -53,7 +53,7 @@ export default class TurmaDAO{
     return await BD.update(turma);
   }
 
-  static async listarProfessores(professor){
+  static async listarTurmaProfessores(professor){
     var id= professor.getId;
     var sql='SELECT * FROM turma WHERE professor=';
     var query=sql+id;

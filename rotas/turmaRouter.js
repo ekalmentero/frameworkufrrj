@@ -10,8 +10,8 @@ turma.get('/:id', async function(req,res){
   res.send(await TurmaController.read(req.params.id));
 })
 
-turma.get('/listarProfessores/:id', async function(req, res){
-    res.send(await TurmaController.listarProfessores(req.params.id));
+turma.get('/listarTurmas/:id', async function(req, res){
+    res.send(await TurmaController.listarTurmas(req.params.id));
 })
 
 turma.route('/')
