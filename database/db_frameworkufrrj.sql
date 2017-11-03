@@ -260,28 +260,6 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `db_frameworkufrrj`.`aluno_turma`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `db_frameworkufrrj`.`aluno_turma` (
-  `turma` INT NOT NULL,
-  `aluno` INT NOT NULL,
-  PRIMARY KEY (`turma`, `aluno`),
-  INDEX `fk_turma_has_aluno_aluno1_idx` (`aluno` ASC),
-  INDEX `fk_turma_has_aluno_turma1_idx` (`turma` ASC),
-  CONSTRAINT `fk_turma_has_aluno_turma1`
-    FOREIGN KEY (`turma`)
-    REFERENCES `db_frameworkufrrj`.`turma` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_turma_has_aluno_aluno1`
-    FOREIGN KEY (`aluno`)
-    REFERENCES `db_frameworkufrrj`.`aluno` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
 -- Table `db_frameworkufrrj`.`avaliacao`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `db_frameworkufrrj`.`avaliacao` (
@@ -325,9 +303,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `db_frameworkufrrj`.`tipo_resultado`
+-- Table `db_frameworkufrrj`.`conceito`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `db_frameworkufrrj`.`tipo_resultado` (
+CREATE TABLE IF NOT EXISTS `db_frameworkufrrj`.`conceito` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `tipo` VARCHAR(100) NOT NULL,
   PRIMARY KEY (`id`),
@@ -336,18 +314,17 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `db_frameworkufrrj`.`resultadofinal`
+-- Table `db_frameworkufrrj`.`aluno_turma`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `db_frameworkufrrj`.`resultadofinal` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `nota_final` DOUBLE NOT NULL,
+CREATE TABLE IF NOT EXISTS `db_frameworkufrrj`.`aluno_turma` (
   `aluno` INT NOT NULL,
   `turma` INT NOT NULL,
-  `tipos_resultado` INT NOT NULL,
-  PRIMARY KEY (`id`, `aluno`, `turma`, `tipos_resultado`),
+  `nota_final` DOUBLE NOT NULL,
+  `conceito` INT NOT NULL,
+  PRIMARY KEY (`aluno`, `turma`),
   INDEX `fk_resultadofinal_aluno1_idx` (`aluno` ASC),
   INDEX `fk_resultadofinal_turma1_idx` (`turma` ASC),
-  INDEX `fk_resultadofinal_tipos_resultado1_idx` (`tipos_resultado` ASC),
+  INDEX `fk_resultadofinal_conceito1_idx` (`conceito` ASC),
   CONSTRAINT `fk_resultadofinal_aluno1`
     FOREIGN KEY (`aluno`)
     REFERENCES `db_frameworkufrrj`.`aluno` (`id`)
@@ -358,9 +335,9 @@ CREATE TABLE IF NOT EXISTS `db_frameworkufrrj`.`resultadofinal` (
     REFERENCES `db_frameworkufrrj`.`turma` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_resultadofinal_tipos_resultado1`
-    FOREIGN KEY (`tipos_resultado`)
-    REFERENCES `db_frameworkufrrj`.`tipo_resultado` (`id`)
+  CONSTRAINT `fk_resultadofinal_conceito1`
+    FOREIGN KEY (`conceito`)
+    REFERENCES `db_frameworkufrrj`.`conceito` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
