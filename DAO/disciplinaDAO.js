@@ -14,8 +14,7 @@ export default class DisciplinaDAO {
 
     static async read(disciplina){
         var result =  await BD.buscar(disciplina);
-        disciplina.parseEntidade(result[0]);
-        return disciplina;
+        return result[0];
     }
 
     static async readAll(){
