@@ -16,22 +16,6 @@ CREATE SCHEMA IF NOT EXISTS `db_frameworkufrrj` DEFAULT CHARACTER SET utf8 ;
 USE `db_frameworkufrrj` ;
 
 -- -----------------------------------------------------
--- Table `db_frameworkufrrj`.`disciplina`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `db_frameworkufrrj`.`disciplina` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `nome` VARCHAR(200) NOT NULL,
-  `codigo` VARCHAR(10) NOT NULL,
-  `creditos` INT NOT NULL,
-  `livre_escolha` TINYINT(1) NOT NULL DEFAULT 0,
-  `deleted` TINYINT(1) NULL DEFAULT 0,
-  PRIMARY KEY (`id`),
-  UNIQUE INDEX `nome_UNIQUE` (`nome` ASC),
-  UNIQUE INDEX `codigo_UNIQUE` (`codigo` ASC))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
 -- Table `db_frameworkufrrj`.`instituto`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `db_frameworkufrrj`.`instituto` (
@@ -61,6 +45,29 @@ CREATE TABLE IF NOT EXISTS `db_frameworkufrrj`.`departamento` (
   CONSTRAINT `fk_departamento_instituto1`
     FOREIGN KEY (`instituto`)
     REFERENCES `db_frameworkufrrj`.`instituto` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `db_frameworkufrrj`.`disciplina`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `db_frameworkufrrj`.`disciplina` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `nome` VARCHAR(200) NOT NULL,
+  `codigo` VARCHAR(10) NOT NULL,
+  `creditos` INT NOT NULL,
+  `livre_escolha` TINYINT(1) NOT NULL DEFAULT 0,
+  `deleted` TINYINT(1) NULL DEFAULT 0,
+  `departamento` INT NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `nome_UNIQUE` (`nome` ASC),
+  UNIQUE INDEX `codigo_UNIQUE` (`codigo` ASC),
+  INDEX `fk_disciplina_departamento1_idx` (`departamento` ASC),
+  CONSTRAINT `fk_disciplina_departamento1`
+    FOREIGN KEY (`departamento`)
+    REFERENCES `db_frameworkufrrj`.`departamento` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
