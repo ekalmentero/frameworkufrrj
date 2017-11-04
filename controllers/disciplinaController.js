@@ -2,10 +2,10 @@ import Disciplina from '../modelos/disciplina';
 import DisciplinaDAO from '../DAO/disciplinaDAO';
 
 export default class DisciplinaController {
-    static async create(disciplina){
+    static async create(disciplina, id_departamento){
         var disciplinaObj = new Disciplina();
         disciplinaObj.parseEntidade(disciplina);
-        return await DisciplinaDAO.create(disciplinaObj);
+        return await DisciplinaDAO.create(disciplinaObj, id_departamento);
     }
 
     static async read(id){
@@ -18,10 +18,13 @@ export default class DisciplinaController {
         return await DisciplinaDAO.readAll();
     }
 
-    static async update(disciplina){
+    static async update(disciplina, id_departamento){
         var disciplinaObj = new Disciplina();
         disciplinaObj.parseEntidade(disciplina);
-        return await DisciplinaDAO.update(disciplinaObj);
+        if (typeof(id_departamento) == "undefined") 
+            return await DisciplinaDAO.update(disciplinaObj);
+        else 
+            return await DisciplinaDAO.update(disciplinaObj, id_departamento);
     }
 
     static async delete(disciplina){
