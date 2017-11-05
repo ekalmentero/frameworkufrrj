@@ -16,6 +16,10 @@ export default class DisciplinaDAO {
         var result =  await BD.buscar(disciplina);
         return result[0];
     }
+    
+    static async readByDepartamento(id_disciplina, id_departamento){
+        return await BD.query("SELECT * FROM disciplina WHERE departamento = " + id_departamento + " AND id = " + id_disciplina);
+    }
 
     static async readAll(){
         return await BD.query("SELECT * FROM disciplina");

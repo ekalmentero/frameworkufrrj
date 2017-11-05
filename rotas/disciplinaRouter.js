@@ -7,7 +7,10 @@ const disciplina = express.Router({mergeParams: true});
 disciplina.use(bodyParser.json());
 
 disciplina.get('/:id_disciplina', async function(req,res){
-    res.send(await DisciplinaController.read(req.params.id_disciplina));
+    if (typeof(req.params.id_departamento) != "undefined")
+        res.send(await DisciplinaController.readByDepartamento(req.params.id_disciplina, req.params.id_departamento));
+    else
+        res.send(await DisciplinaController.read(req.params.id_disciplina));
 })
 
 disciplina.route('/')

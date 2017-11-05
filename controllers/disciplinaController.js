@@ -8,10 +8,14 @@ export default class DisciplinaController {
         return await DisciplinaDAO.create(disciplinaObj, id_departamento);
     }
 
-    static async read(id){
+    static async read(id_disciplina){
         var disciplina = new Disciplina();
-        disciplina.setId(id);
+        disciplina.setId(id_disciplina);
         return await DisciplinaDAO.read(disciplina);
+    }
+    
+    static async readByDepartamento(id_disciplina, id_departamento){
+        return await DisciplinaDAO.readByDepartamento(id_disciplina, id_departamento);
     }
 
     static async readAll(){
