@@ -1,6 +1,8 @@
 "use strict";
 
-export default class Horario {
+import Entidade from './entidade';
+
+export default class Horario extends Entidade{
 	
 	@Private id;
 	@Private hora_inicio;

@@ -1,6 +1,8 @@
 "use strict";
 
-export default class Sala {
+import Entidade from './entidade';
+
+export default class Sala extends Entidade{
 
 	@Private id;
 	@Private predio;

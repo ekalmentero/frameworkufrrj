@@ -1,6 +1,8 @@
 "use strict";
 
-export default class Predio {
+import Entidade from './entidade';
+
+export default class Predio extends Entidade{
 	@Private id;
 	@Private nome;
 	@Private sigla;

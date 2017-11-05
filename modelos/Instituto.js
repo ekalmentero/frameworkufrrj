@@ -1,6 +1,8 @@
 "use strict";
 
-export default class Instituto {
+import Entidade from './entidade';
+
+export default class Instituto extends Entidade{
 
 	@Private id;
 	@Private sigla;
