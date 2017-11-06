@@ -1,9 +1,35 @@
 import express from 'express'
+import jwt from 'jsonwebtoken'
+import bodyParser from 'body-parser';
+
 const app = express()
 
 app.set("chaveCriptografia", "nodemelhorqjava");
+app.use(bodyParser.json());
 
-app.use(express.static(__dirname + '/recursos'))
+function verificaLogin(req, res, next) {
+    if(req.path === '/login') { next(); return; }
+    if(typeof(req.body) == undefined) {console.log("FAIL");res.redirect("/login");}
+    var token = req.body.token || req.query.token || req.headers['token'];
+
+    if (token) {
+        jwt.verify(token, app.get('chaveCriptografia'), function(err, decod) {
+            if (err) {
+                return res.json({ success: false, msg: 'Token inválido ou expirado' });
+            } else {
+                req.decod = decod;
+                next();
+            }
+        });
+    } else {
+        // return res.status(403).json({
+        //     success: false,
+        //     message: 'Nenhum token'
+        // });
+        res.redirect("/login");
+    }
+}
+app.use(verificaLogin);
 
 import rotas from './rotas'
 app.use(rotas)
@@ -32,8 +58,6 @@ rotas.use('/turma',turma)
 import alunos from './rotas/alunoRouter'
 rotas.use('/alunos',alunos)
 
-var crypto = require('crypto')
-
 rotas.all("/login",function(req,res){
     // if(req.body.login == "bruno" && req.body.senha == crypto.createHash("md5").update("senha").digest("hex")){
     //     res.send({status:1,msg:"Logado",token:crypto.randomBytes(32).toString()});
@@ -45,8 +69,8 @@ rotas.all("/login",function(req,res){
         id: 0
     };
 
-    var token = jwt.sign(conteudo, app.get('superSecret'), {
-        expiresInMinutes: 1440 //24 horas
+    var token = jwt.sign(conteudo, app.get('chaveCriptografia'), {
+        expiresIn : 60*60*24 //24 Horas
     });
 
     res.json({
