@@ -9,9 +9,9 @@ export default class Instituto extends Entidade{
 	@Private nome;
 	@Private predios;
 
-	constructor(){
-		
-	}
+	// constructor(){
+	//
+	// }
 
 	setPredios(sigla){
 		this.predios = predios;
