@@ -9,7 +9,7 @@ app.use(bodyParser.json());
 
 function verificaLogin(req, res, next) {
     if(req.path === '/login') { next(); return; }
-    if(typeof(req.body) == undefined) {console.log("FAIL");res.redirect("/login");}
+    if(typeof(req.body) == undefined) res.redirect("/login")
     var token = req.body.token || req.query.token || req.headers['token'];
 
     if (token) {
