@@ -1,16 +1,22 @@
 import express from 'express'
 import jwt from 'jsonwebtoken'
 import bodyParser from 'body-parser';
+import cookieSession from 'cookie-session';
 
 const app = express()
+
+app.use(cookieSession({
+  name: 'session',
+  keys: ["tantofaz"],
+    token : null
+}));
 
 app.set("chaveCriptografia", "nodemelhorqjava");
 app.use(bodyParser.json());
 
 function verificaLogin(req, res, next) {
-    if(req.path === '/login') { next(); return; }
-    if(typeof(req.body) == undefined) res.redirect("/login")
-    var token = req.body.token || req.query.token || req.headers['token'];
+    // if(req.path === '/login') { next(); return; }
+    var token = req.body.token || req.query.token || req.session.token;
 
     if (token) {
         jwt.verify(token, app.get('chaveCriptografia'), function(err, decod) {
@@ -23,7 +29,7 @@ function verificaLogin(req, res, next) {
         });
     } else {
         // return res.status(403).json({
-        //     success: false,
+        //     status: false,
         //     message: 'Nenhum token'
         // });
         res.redirect("/login");
@@ -59,6 +65,8 @@ import alunos from './rotas/alunoRouter'
 rotas.use('/alunos',alunos)
 
 rotas.all("/login",function(req,res){
+    if(req.session.token) res.redirect("/");
+
     // if(req.body.login == "bruno" && req.body.senha == crypto.createHash("md5").update("senha").digest("hex")){
     //     res.send({status:1,msg:"Logado",token:crypto.randomBytes(32).toString()});
     // } else {
@@ -73,7 +81,9 @@ rotas.all("/login",function(req,res){
         expiresIn : 60*60*24 //24 Horas
     });
 
-    res.json({
+    req.session.token = token;
+
+    res.status(200).json({
       status: true,
       msg: 'Logado com sucesso',
       token: token
