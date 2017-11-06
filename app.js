@@ -1,6 +1,7 @@
 import express from 'express'
 import jwt from 'jsonwebtoken'
 import bodyParser from 'body-parser';
+import session from 'express-session';
 
 const app = express()
 
@@ -23,7 +24,7 @@ function verificaLogin(req, res, next) {
         });
     } else {
         // return res.status(403).json({
-        //     success: false,
+        //     status: false,
         //     message: 'Nenhum token'
         // });
         res.redirect("/login");
@@ -72,6 +73,8 @@ rotas.all("/login",function(req,res){
     var token = jwt.sign(conteudo, app.get('chaveCriptografia'), {
         expiresIn : 60*60*24 //24 Horas
     });
+
+    req.token = token;
 
     res.json({
       status: true,
