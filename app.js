@@ -15,6 +15,7 @@ app.set("chaveCriptografia", "nodemelhorqjava");
 app.use(bodyParser.json());
 
 function verificaLogin(req, res, next) {
+    if(req.path === "/login") next();
     var token = req.body.token || req.query.token || req.session.token;
 
     if (token) {
@@ -27,10 +28,6 @@ function verificaLogin(req, res, next) {
             }
         });
     } else {
-        // return res.status(403).json({
-        //     status: false,
-        //     message: 'Nenhum token'
-        // });
         res.redirect("/login");
     }
 }
