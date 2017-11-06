@@ -15,7 +15,6 @@ app.set("chaveCriptografia", "nodemelhorqjava");
 app.use(bodyParser.json());
 
 function verificaLogin(req, res, next) {
-    // if(req.path === '/login') { next(); return; }
     var token = req.body.token || req.query.token || req.session.token;
 
     if (token) {
@@ -89,6 +88,11 @@ rotas.all("/login",function(req,res){
       token: token
     });
 })
+
+rotas.all("/deslogar",function(req,res){
+    req.session.token = null;
+    res.redirect("/login");
+});
 
 app.listen(8080, function() {
     console.log("APP : INICIADO");
