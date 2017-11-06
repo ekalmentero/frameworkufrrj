@@ -6,7 +6,7 @@ export default class ProfessorController{
 
   static async create(professor){
     var professorObj= new Professor();
-    professorObj.parseDisciplina(professor);
+    professorObj.parseEntidade(professor);
     return await ProfessorDAO.create(professorObj);
   }
 
@@ -20,14 +20,14 @@ export default class ProfessorController{
   static async update(professor){
     var professorObj= new Professor();
 
-    professorObj.parseDisciplina(professor);
+    professorObj.parseEntidade(professor);
     return await ProfessorDAO.update(professorObj);
 
   }
 
   static async delete(professor){
     var professorObj= new Professor();
-    professorObj.parseDisciplina(professor);
+    professorObj.parseEntidade(professor);
     return await ProfessorDAO.delete(professorObj);
   }
 

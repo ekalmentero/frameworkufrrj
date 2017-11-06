@@ -35,7 +35,7 @@ export default class ProfessorDAO{
 
   static async update(professor){
       //console.log("oi");
-      var result=await BD.buscar(professor);
+      var result=await BD.update(professor);
       return result;
 
 
