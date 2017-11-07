@@ -22,7 +22,7 @@ export default class AlunoDAO {
     try {
       var retorno = await BD.buscar(aluno);
       aluno.setNome(retorno[0].nome);
-      aluno.setId(retorno[0].alunoId);
+      aluno.setId(retorno[0].id);
       aluno.setMatricula(retorno[0].matricula);
       aluno.setAtivo(retorno[0].ativo);
       aluno.setIngresso(retorno[0].ingresso);
@@ -57,7 +57,8 @@ export default class AlunoDAO {
     }
   }
 
-  static async createNota(avaliacaoAluno){ //CRUD QUE SAIU DE AVALICAOALUNODAO
+  //CRUD QUE SAIU DE AVALICAOALUNODAO
+  static async createNota(avaliacaoAluno){
     try {
       await BD.inserir(avaliacaoAluno);
     } catch (error) {
