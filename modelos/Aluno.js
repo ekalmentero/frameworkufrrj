@@ -19,10 +19,10 @@ export default class Aluno extends Entidade{
         return this.id;
       }
       get getCurso() {
-        return this.curso;
+        return this.curso.toString();
       }
       get getGrade() {
-        return this.grade;
+        return this.grade.toString();
       }
       get getNome() {
         return this.nome;
