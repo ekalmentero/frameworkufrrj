@@ -78,21 +78,21 @@ export default class TurmaDAO{
   }
 
   static async listarAlunoTurmas(aluno){
-    var id=aluno.getId;
+    var id=aluno.getId; //pega o id do aluno que vem do controller
     var i=0;
-    var result=BD.query('SELECT turma FROM aluno_turma WHERE aluno='+id);
+    var result=BD.query('SELECT turma FROM aluno_turma WHERE aluno='+id); //retorna um array de ids das turmas de um aluno
     var array= new Array();
 
     while(i<result.lenght){
-      var turmaTemp= new Turma();
-      turmaTemp.setId(result[i].turma);
-      var resultTurma=BD.buscar(turmaTemp);
-      turmaTemp.setCodigo(resultTurma[0].codigo);
+      var turmaTemp= new Turma(); //variável temp de turma
+      turmaTemp.setId(result[i].turma); //faz a busca da turma usando os ids da busca da linha 83, usando o i para navegar pelas posições
+      var resultTurma=BD.buscar(turmaTemp); //faz a busca
+      turmaTemp.setCodigo(resultTurma[0].codigo); //instancia o objeot
       turmaTemp.setVagas(resultTurma[0].vagas);
       turmaTemp.setProfessor(ProfessorDAO.read(resultTurma[0].professor));
       turmaTemp.setPeriodo(PeridoDAO.read(resultTurma[0].periodo));
       turmaTemp.setDisciplina(DisciplinaDAO.read(resultTurma[0].disciplina));
-      array.push(turmaTemp);
+      array.push(turmaTemp); //joga no array
       i++;
     }
 
