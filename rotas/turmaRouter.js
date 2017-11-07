@@ -14,6 +14,10 @@ turma.get('/listarTurmas/:id', async function(req, res){
     res.send(await TurmaController.listarTurmas(req.params.id));
 })
 
+turma.get('/listarAlunoTurmas/:id',async function (req, res){
+  res.send(await TurmaController.listarAlunoTurmas(req.params.id));
+})
+
 turma.route('/')
   .post(async function(req,res){
     res.send(await TurmaController.create(req.body));

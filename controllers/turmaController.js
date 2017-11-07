@@ -1,5 +1,6 @@
 import Turma from '../modelos/turma';
 import Professor from '../modelos/professor';
+import Aluno from '../modelos/Aluno';
 import TurmaDAO from '../DAO/TurmaDAO';
 
 
@@ -41,6 +42,14 @@ export default class TurmaController{
     //professor.setMatricula('haha');
     //console.log(professor.getMatricula());
     return await TurmaDAO.listarTurmaProfessores(professor);
+  }
+
+  static async listarAlunoTurmas(id){
+    var aluno= new Aluno();
+
+    aluno.setId(id);
+
+    return await TurmaDAO.listarAlunoTurmas(aluno);
   }
 
 }

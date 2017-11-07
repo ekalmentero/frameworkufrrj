@@ -29,6 +29,7 @@ export default class TurmaDAO{
       var result= await BD.buscar(turma);
       var turmaTemp= new Turma();
       turmaTemp.setCodigo(result[0].codigo);
+      turmaTemp.setId(result[0].id);
       turmaTemp.setVagas(result[0].vagas);
       turmaTemp.setProfessor(ProfessorDAO.read(result[0].professor));
       turmaTemp.setPeriodo(PeridoDAO.read(result[0].periodo));
@@ -74,5 +75,29 @@ export default class TurmaDAO{
 
     }
     return array;
+  }
+
+  static async listarAlunoTurmas(aluno){
+    var id=aluno.getId;
+    var i=0;
+    var result=BD.query('SELECT turma FROM aluno_turma WHERE aluno='+id);
+    var array= new Array();
+
+    while(i<result.lenght){
+      var turmaTemp= new Turma();
+      turmaTemp.setId(result[i].turma);
+      var resultTurma=BD.buscar(turmaTemp);
+      turmaTemp.setCodigo(resultTurma[0].codigo);
+      turmaTemp.setVagas(resultTurma[0].vagas);
+      turmaTemp.setProfessor(ProfessorDAO.read(resultTurma[0].professor));
+      turmaTemp.setPeriodo(PeridoDAO.read(resultTurma[0].periodo));
+      turmaTemp.setDisciplina(DisciplinaDAO.read(resultTurma[0].disciplina));
+      array.push(turmaTemp);
+      i++;
+    }
+
+    return array;
+
+
   }
 }
