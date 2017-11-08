@@ -17,7 +17,7 @@ export default class Avaliacao extends Entidade {
         return this.id;
       }
       get getTurma() {
-        return this.turma;
+        return this.turma.toString();
       }
       
       get getNome() {

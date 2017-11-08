@@ -1,7 +1,8 @@
 "use strict";
+import turma from '../rotas/turmaRouter';
 import BD from "../BD";
 import Avaliacao from "../modelos/Avaliacao";
-import TurmaDAO from "TurmaDAO";
+import TurmaDAO from "./TurmaDAO";
 
 export default class AvaliacaoDAO {
   static async create(avaliacao) {
@@ -44,6 +45,31 @@ export default class AvaliacaoDAO {
   static async delete(avaliacao) {
     try {
       return await BD.deletar(avaliacao);
+    } catch (error) {
+      return error.message;
+    }
+  }
+
+  static async listarAvaliacoesTurma(id){ //retornando a lista só quando o atrib turma de avl não é obj
+    try {
+      var retorno = await BD.query("SELECT * FROM avaliacao WHERE turma = '"+id+"'");
+      var i=0;
+      var array = new Array();
+
+      while(i<retorno.length){
+        var avlTemp= new Avaliacao();
+        avlTemp.setId(retorno[i].id);
+        avlTemp.setNome(retorno[i].nome);
+        avlTemp.setData(retorno[i].data);
+        avlTemp.setDescricao(retorno[i].descricao);
+        //avlTemp.setTurma(retorno[i].turma);
+
+        //var tmpTurma = await TurmaDAO.read(retorno[i].turma);
+        avlTemp.setTurma(TurmaDAO.read(retorno[i].turma));
+        array.push(avlTemp);
+        i++;
+      }
+      return array;
     } catch (error) {
       return error.message;
     }

@@ -35,7 +35,7 @@ function verificaLogin(req, res, next) {
         res.redirect("/login");
     }
 }
-app.use(verificaLogin);
+//app.use(verificaLogin);
 
 import rotas from './rotas'
 app.use(rotas)
@@ -63,6 +63,9 @@ rotas.use('/turma',turma)
 
 import alunos from './rotas/alunoRouter'
 rotas.use('/alunos',alunos)
+
+import avaliacao from './rotas/avaliacaoRouter'
+rotas.use('/avaliacao',avaliacao)
 
 rotas.all("/login",function(req,res){
     if(req.session.token) res.redirect("/");

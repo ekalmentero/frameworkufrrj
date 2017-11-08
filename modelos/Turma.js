@@ -1,13 +1,15 @@
 import Entidade from './entidade';
+import Disciplina from './disciplina';
+import Professor from './Professor';
+import Periodo from './Periodo';
 
 export default class Turma extends Entidade{
 
 @Private codigo;
 @Private vagas;
-@Private disciplina;
-@Private periodo;
-@Private professor;
-@Private periodo;
+@Private disciplina;//= new Disciplina();
+@Private professor;//= new Professor();
+@Private periodo;//= new Periodo();
 @Private id;
 
   constructor(){
@@ -24,40 +26,41 @@ export default class Turma extends Entidade{
   }
 
   get getDisciplina(){
-    return this.disciplina;
+    return this.disciplina.toString();
   }
 
   get getPeriodo(){
-    return this.periodo;
+    return this.periodo.toString();
   }
 
   get getProfessor(){
-    return this.professor();
+    return this.professor.toString();
   }
 
   get getId(){
     return this.id;
   }
 
-  set setCodigo(codigo){
+  setCodigo(codigo){
     this.codigo=codigo;
   }
 
-  set setVagas(vagas){
+  setVagas(vagas){
     this.vagas=vagas;
   }
-  set setId(id){
-    this.id=id;
-  }
-  set setTurmaId(id){
+  setId(id){
     this.id=id;
   }
 
-  set setPeriodoId(id){
-    this.id=id;
+  setDisciplina(disciplina){
+    this.disciplina = disciplina;
   }
-  set setProfessorId(id){
-    this.id=id;
+
+  setPeriodo(periodo){
+    this.periodo=periodo;
+  }
+  setProfessor(professor){
+    this.professor=professor;
   }
 
 }

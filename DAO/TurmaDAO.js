@@ -21,9 +21,16 @@ export class TurmaDAO{
   static async read(turma){
     try{
       var result= await BD.buscar(turma);
-      var turma= result[0];
+      var tmpturma = new Turma();
+      tmpturma.setId(result[0].id);
+      tmpturma.setCodigo(result[0].codigo);
+      tmpturma.setVagas(result[0].vagas);
+      tmpturma.setDisciplina(result[0].disciplina);
+      tmpturma.setPeriodo(result[0].periodo);
+      tmpturma.setProfessor(result[0].professor);
 
-      return turma;
+
+      return tmpturma;
     }
     catch(error){
       error.message;
