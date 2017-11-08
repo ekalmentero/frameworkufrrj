@@ -1,4 +1,6 @@
+import turma from '../rotas/turmaRouter';
 import Aluno from '../modelos/Aluno';
+import Turma from '../modelos/Turma';
 import AvaliacaoAluno from '../modelos/AvaliacaoAluno';
 import AlunoDAO from '../DAO/AlunoDAO';
 import AvaliacaoAlunoDAO from '../DAO/AvaliacaoAlunoDAO';
@@ -31,11 +33,17 @@ export default class AlunoController {
         return await AlunoDAO.delete(alunoObj);
     }
 
-    //como trabalhar com atribs do tipo obj no json??
-    //Ainda não implementado no AlunoRouter
+    static async listarAlunosTurma(id){
+        var turma = new Turma();
+        turma.setId(id);
+        return await AlunoDAO.listarAlunosTurma(turma);
+    }
+
+    /*como trabalhar com atribs do tipo obj no json??
+    Ainda não implementado no AlunoRouter
     static async createNota(avaliacaoAluno){ 
         var avaliacaoAlunoObj = new AvaliacaoAluno();
         avaliacaoAlunoObj.parseEntidade(avaliacaoAluno);
         return await AlunoDAO.createNota(avaliacaoAlunoObj);
-    }
+    }*/
 }

@@ -8,7 +8,6 @@ export default class Aluno extends Entidade{
   @Private matrcula;
   @Private ativo;
   @Private ingresso;
-  @Private avaliacoes = [];
   @Private curso = new Curso();
   @Private grade = new Grade();
 

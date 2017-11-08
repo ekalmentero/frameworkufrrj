@@ -10,6 +10,10 @@ aluno.get('/:id', async function(req,res){
     res.send(await AlunoController.read(req.params.id));
 })
 
+aluno.get('/listarAlunosTurma/:id',async function (req, res){
+    res.send(await AlunoController.listarAlunosTurma(req.params.id));
+  })
+
 aluno.route('/')
   .post(async function(req,res){
       res.send(await AlunoController.create(req.body));

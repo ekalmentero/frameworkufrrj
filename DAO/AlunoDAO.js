@@ -57,6 +57,28 @@ export default class AlunoDAO {
     }
   }
 
+  static async listarAlunosTurma(turma){
+    var id=turma.getId; //pega o id da turma que vem do controller
+    var i=0;
+    var result=BD.query('SELECT aluno FROM aluno_turma WHERE turma='+id); 
+    var array= new Array();
+
+    while(i<result.length){
+      var alunoTemp= new Aluno(); //variável temp de turma
+      alunoTemp.setId(result[i].aluno); //faz a busca do aluno usando os ids da busca da linha 83, usando o i para navegar pelas posições
+      var resultAluno=BD.buscar(alunoTemp); //faz a busca
+      alunoTemp.setNome(resultAluno[0].nome); //instancia o objeto
+      alunoTemp.setMatricula(resultAluno[0].matricula);
+      alunoTemp.setAtivo(resultAluno[0].ativo);
+      alunoTemp.setIngresso(resultAluno[0].ingresso);
+      alunoTemp.setCurso(CursoDAO.read(resultAluno[0].curso));
+      alunoTemp.setGrade(GradeDAO.read(resultAluno[0].grade));
+      array.push(alunoTemp); //joga no array
+      i++;
+    }
+    return array;
+  }
+
   //CRUD QUE SAIU DE AVALICAOALUNODAO
   static async createNota(avaliacaoAluno){
     try {
