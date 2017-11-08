@@ -15,7 +15,7 @@ export default class ConteudoDAO{
 
     }
 
-    static async select(conteudoId){
+    static async read(conteudoId){
         try {
             var conteudo = new Conteudo();
             conteudo.setId(conteudoId);
@@ -32,7 +32,7 @@ export default class ConteudoDAO{
         }
     }
 
-    static async selectAll(){
+    static async readAll(){
         return await BD.query("SELECT * FROM conteudo");
    }
 

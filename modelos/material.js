@@ -1,12 +1,16 @@
 "use strict";
 
-export default class Material {
+import Entidade from './entidade';
 
-	constructor(ir, arquivo, conteudo){
-		this.setId = id;
-		this.setArquivo = arquivo;
-		this.setConteudo = conteudo;
-	}
+export default class Conteudo extends Entidade {
+
+	@Private id;
+	@Private arquivo;
+	@Private conteudo;
+
+	constructor(){
+    super();
+  }
 
 	get getId(){
 		return this.id;

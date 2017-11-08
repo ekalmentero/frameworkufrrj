@@ -1,7 +1,12 @@
 "use strict";
 import BD from '../BD.js';
 import Material from '../modelos/Material.js';
-
+/* import Conteudo from "../modelos/Conteudo";
+import Aula from "../modelos/Aula";
+import Turma from '../modelos/Turma';
+import ConteudoDAO from '../DAO/conteudoDAO';
+import TurmaPeriodoDAO from '../DAO/turmaDAO';
+*/
 export default class MaterialDAO{
 
     static async create(material){
@@ -15,15 +20,15 @@ export default class MaterialDAO{
 
     }
 
-    static async select(materialId){
+    static async read(materialId){
         try {
             var material = new Material();
             material.setId(materialId);
 
             var retorno = await BD.buscar(material);
               material.setId(retorno.id);
-              material.setNome(retorno.nome);
-              material.setAula(retorno.aula);
+              material.setArquivo(retorno.arquivo);
+              material.setConteudo(retorno.conteudo);
 
             return material;
 
@@ -32,10 +37,13 @@ export default class MaterialDAO{
         }
     }
 
-    static async selectAll(){
+    static async readAll(){
         return await BD.query("SELECT * FROM material");
    }
 
+   static async readAllByTurma(id_turma){
+       return await BD.query("SELECT arquivo FROM material WHERE aula IN (SELECT aula FROM conteudo WHERE turma IN (SELECT turma FROM aula WHERE turma = " + id_turma + "))");
+   }
 
     static async update(material){
       try{

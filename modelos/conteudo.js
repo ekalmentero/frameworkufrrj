@@ -1,16 +1,16 @@
 "use strict";
 
-export default class Conteudo {
+import Entidade from './entidade';
+
+export default class Conteudo extends Entidade {
 
 	@Private id;
 	@Private nome;
 	@Private aula;
 
-	constructor(id, nome, aula){
-		this.SetId(id);
-		this.SetNome(nome);
-		this.SetAula(aula)
-	}
+	constructor(){
+    super();
+  }
 
 	get getId(){
 		return this.id;

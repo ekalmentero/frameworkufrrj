@@ -2,7 +2,6 @@ import Conteudo from '../modelos/conteudo';
 import ConteudoDAO from '../DAO/conteudoDAO';
 
 export default class ConteudoController {
-
     static async create(conteudo){
         var conteudoObj = new Conteudo();
         conteudoObj.parseEntidade(conteudo);
@@ -30,4 +29,5 @@ export default class ConteudoController {
         conteudoObj.parseEntidade(conteudo);
         return await ConteudoDAO.delete(conteudoObj);
     }
+
 }

@@ -10,6 +10,10 @@ material.get('/:id', async function(req,res){
     res.send(await MaterialController.read(req.params.id));
 })
 
+aluno.get('/listarArquivosTurma/:id',async function (req, res){
+    res.send(await AlunoController.listarArquivosTurma(req.params.id));
+})
+
 material.route('/')
   .get(async function(req,res){
       res.send(await MaterialController.readAll());
