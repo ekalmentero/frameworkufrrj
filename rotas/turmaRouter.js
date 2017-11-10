@@ -7,16 +7,14 @@ const turma= express.Router();
 turma.use(bodyParser.json());
 
 turma.get('/:id', async function(req,res){
-  res.send(await TurmaController.read(req.params.id));
+  if(typeof(req.params.id_professor)!= "undefined")
+    res.send(await TurmaController.listarTurmasProfessor(req.params.id_professor));
+  if(typeof(req.params.id_aluno)!="undefined")
+    res.send(await TurmaController.listarTurmasAluno(req.params.id_aluno));
+  else
+    res.send(await TurmaController.read(req.params.id));
 })
 
-turma.get('/listarTurmas/:id', async function(req, res){
-    res.send(await TurmaController.listarTurmas(req.params.id));
-})
-
-turma.get('/listarAlunoTurmas/:id',async function (req, res){
-  res.send(await TurmaController.listarAlunoTurmas(req.params.id));
-})
 
 turma.route('/')
   .post(async function(req,res){

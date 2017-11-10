@@ -54,8 +54,8 @@ export default class TurmaDAO{
     return await BD.update(turma);
   }
 
-  static async listarTurmaProfessores(professor){
-    var id= professor.getId;
+  static async listarTurmasProfessor(id, id_professor){
+    var id=id_professor;
     var sql='SELECT * FROM turma WHERE professor=';
     var query=sql+id;
     console.log(query);
@@ -77,11 +77,11 @@ export default class TurmaDAO{
     return array;*/
   }
 
-  static async listarAlunoTurmas(aluno){
-    var id=aluno.getId; //pega o id do aluno que vem do controller
+  static async listarTurmasAluno(id_aluno){
+    var id=id_aluno; //pega o id do aluno que vem do controller
+    var result= await BD.query('SELECT turma FROM aluno_turma WHERE aluno='+id); //retorna um array de ids das turmas de um aluno
     var i=0;
-    return await BD.query('SELECT turma FROM aluno_turma WHERE aluno='+id); //retorna um array de ids das turmas de um aluno
-    /*var array= new Array();
+    var array= new Array();
 
     while(i<result.lenght){
       var turmaTemp= new Turma(); //variável temp de turma
@@ -97,7 +97,7 @@ export default class TurmaDAO{
     }
 
     return array;
-*/
+
 
   }
 }

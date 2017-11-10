@@ -36,20 +36,15 @@ export default class TurmaController{
     return await TurmaDAO.readAll()
   }
 
-  static async listarTurmas(id){
-    var professor= new Professor();
-    professor.setId(id);
+  static async listarTurmasProfessor(id_professor){
     //professor.setMatricula('haha');
     //console.log(professor.getMatricula());
-    return await TurmaDAO.listarTurmaProfessores(professor);
+    return await TurmaDAO.listarTurmasProfessor(id_professor);
   }
 
-  static async listarAlunoTurmas(id){
-    var aluno= new Aluno();
+  static async listarTurmasAluno(id_aluno){
 
-    aluno.setId(id);
-
-    return await TurmaDAO.listarAlunoTurmas(aluno);
+    return await TurmaDAO.listarTurmasAluno(id_aluno);
   }
 
 }
