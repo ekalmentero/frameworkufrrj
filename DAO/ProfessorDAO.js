@@ -4,9 +4,11 @@ import BD from "../BD";
 
 export default class ProfessorDAO{
 
-  static async create(professor){
+  static async create(professor,id_departamento){
     try{
-      var id= await BD.inserir(professor);
+      var foreignKeys= [];
+      foreignKeys.push('departamento',id_departamento);
+      var id= await BD.inserir(professor,id_departamento);
       professor.setId(id);
       return professor;
     }
@@ -30,7 +32,7 @@ export default class ProfessorDAO{
     }
   }
   static async readAll(){
-      return await BD.query("SELECT * FROM professor");
+      return await BD.query("SELECT * FROM professor WHERE deleted=0");
   }
 
   static async update(professor){

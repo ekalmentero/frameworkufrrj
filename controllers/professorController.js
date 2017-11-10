@@ -4,10 +4,10 @@ import ProfessorDAO from '../DAO/ProfessorDAO';
 
 export default class ProfessorController{
 
-  static async create(professor){
+  static async create(professor, id_departamento){
     var professorObj= new Professor();
     professorObj.parseEntidade(professor);
-    return await ProfessorDAO.create(professorObj);
+    return await ProfessorDAO.create(professorObj,id_departamento);
   }
 
   static async read(id){

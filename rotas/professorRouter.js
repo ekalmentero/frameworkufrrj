@@ -2,9 +2,11 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import ProfessorController from '../controllers/professorController';
 
-const professor= express.Router();
+const professor= express.Router({mergeParams: true});
 
 professor.use(bodyParser.json());
+
+professor.use('/:id_professor/turmas',turma);
 
 professor.get('/:id', async function(req,res){
   res.send(await ProfessorController.read(req.params.id));
@@ -12,7 +14,7 @@ professor.get('/:id', async function(req,res){
 
 professor.route('/')
   .post(async function(req,res){
-    res.send(await ProfessorController.create(req.body));
+    res.send(await ProfessorController.create(req.body, req.params.id_departamento));
     //res.send(typeof(ProfessorController.create));
     //console.log("oi");
   })
