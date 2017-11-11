@@ -13,9 +13,13 @@ export default class TurmaDAO{
 
   }
 
-  static async create(turma){
+  static async create(turma,id_disciplina,id_professor,id_periodo){
     try{
-      var id= await BD.inserir(turma);
+      var foreignKeys=[];
+      foreignKeys.push('disciplina',id_disciplina);
+      foreignKeys.push('professor',id_professor);
+      foreignKeys.push('id_periodo',id_professor);
+      var id= await BD.inserir(turma,foreignKeys);
       turma.setId(id);
       return turma;
     }catch(error){
