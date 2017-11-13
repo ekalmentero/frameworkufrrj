@@ -1,14 +1,19 @@
 "use strict";
 import BD from "../BD";
 import Avaliacao from "../modelos/Avaliacao";
-import TurmaDAO from "TurmaDAO";
+import TurmaDAO from "./TurmaDAO";
 
 export default class AvaliacaoDAO {
-  static async create(avaliacao) {
+  static async create(avaliacao, idTurma) {
     try {
+      var foreignKeys = [];
+      foreignKeys.push(['turma', idTurma]);
+
       var retorno = await BD.inserir(avaliacao);
       avaliacao.setId(retorno);
+
       return avaliacao;
+
     } catch (error) {
       return error.message;
     }
@@ -34,9 +39,15 @@ export default class AvaliacaoDAO {
     return await BD.query("SELECT * FROM avaliacao");
   }
 
-  static async update(avaliacao) {
+  static async update(avaliacao, idTurma) {
     try {
-      return await BD.update(avaliacao);
+      if (typeof(idTurma) == undefined)
+            return await BD.update(avaliacao);
+      else {
+            var foreignKeys = [];
+            foreignKeys.push(['turma', idTurma]);
+            return await BD.update(avaliacao, foreignKeys);
+      }
     } catch (error) {
       return error.message;
     }
