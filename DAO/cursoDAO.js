@@ -14,7 +14,15 @@ export default class CursoDAO {
 
     static async read(curso){
         var result =  await BD.buscar(curso);
-        return result[0];
+        curso.setId(result[0].id);
+        curso.setNome(result[0].nome);
+        curso.setCodigo(result[0].codigo);
+        curso.setTurno(result[0].turno);
+        curso.setDeleted(result[0].deleted);
+        curso.setDepartamento_id(result[0].departamento_id);
+        curso.setLimite_periodos(result[0].limite_periodos);
+
+        return curso;
     }
 
     static async readByDepartamento(idCurso, idDepartamento){

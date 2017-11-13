@@ -13,13 +13,13 @@ export default class DepartamentoDAO {
     static async read(departamento){
         var result =  await BD.buscar(departamento);
 
-        // departamento.setId(result[0].id);
-        // departamento.setNome(result[0].nome);
-        // departamento.setSigla(result[0].sigla);
-        // departamento.setDeleted(result[0].deleted);
-        // departamento.setInstituto_id(result[0].instituto_id);
+        departamento.setId(result[0].id);
+        departamento.setNome(result[0].nome);
+        departamento.setSigla(result[0].sigla);
+        departamento.setDeleted(result[0].deleted);
+        departamento.setInstituto_id(result[0].instituto_id);
 
-        return result[0];
+        return departamento;
     }
 
     static async readAll(){

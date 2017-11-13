@@ -6,7 +6,7 @@ const curso = express.Router({mergeParams: true});
 
 curso.use(bodyParser.json());
 
-curso.get('/:id_curso', async function(req,res){
+curso.get('/:id_curso', async function(req, res){
   if (typeof(req.params.id_curso) != "undefined")
       res.send(await CursoController.readByDepartamento(req.params.id_curso, req.params.id_departamento));
   else
@@ -14,14 +14,14 @@ curso.get('/:id_curso', async function(req,res){
 })
 
 curso.route('/')
-    .get(async function(req,res){
+    .get(async function(req, res){
         if (typeof(req.params.id_departamento) != "undefined")
             res.send(await CursoController.readAllByDepartamento(req.params.id_departamento));
         else
             res.send(await CursoController.readAll());
     })
     .post(async function(req,res){
-        res.send(await CursoController.create(req.body));
+        res.send(await CursoController.create(req.body, req.params.id_departamento));
     })
     .patch(async function(req,res){
         if (typeof(req.params.id_departamento) != "undefined")
