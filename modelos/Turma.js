@@ -6,6 +6,7 @@ import Periodo from './Periodo';
 export default class Turma extends Entidade{
 
 @Private codigo;
+@Private turno;
 @Private vagas;
 /*@Private disciplina= new Disciplina();
 @Private professor= new Professor();
@@ -23,6 +24,10 @@ export default class Turma extends Entidade{
   get getVagas(){
     return this.vagas;
 
+  }
+
+  get getTurno(){
+    return this.turno;
   }
 /*
   get getDisciplina(){
@@ -53,6 +58,10 @@ export default class Turma extends Entidade{
   }
   setTurma(turma){
     this.turma=turma;
+  }
+
+  setTurno(){
+    this.turno=turno;
   }
 /*
   setDisciplina(disciplina){
