@@ -18,7 +18,7 @@ export default class TurmaDAO{
       var foreignKeys=[];
       foreignKeys.push('disciplina',id_disciplina);
       foreignKeys.push('professor',id_professor);
-      foreignKeys.push('id_periodo',id_professor);
+      foreignKeys.push('periodo',id_periodo);
       var id= await BD.inserir(turma,foreignKeys);
       turma.setId(id);
       return turma;
