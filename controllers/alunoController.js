@@ -16,8 +16,20 @@ export default class AlunoController {
         return await AlunoDAO.read(aluno);
     }
 
+    static async readByCurso(id_aluno, id_curso){
+        return await alunoDAO.readByCurso(id_aluno, id_curso);
+    }
+
+    static async readByMatricula(mat_aluno){
+        return await alunoDAO.readByMatricula(mat_aluno);
+    }
+
     static async readAll(){
         return await AlunoDAO.readAll();
+    }
+
+    static async readAllByCurso(id_curso){
+        return await alunoDAO.readAllByCurso(id_curso);
     }
 
     static async update(aluno, id_curso, id_grade){
@@ -25,8 +37,12 @@ export default class AlunoController {
         alunoObj.parseEntidade(aluno); 
         if (typeof(id_curso) == "undefined" && typeof(id_grade) == "undefined")
             return await AlunoDAO.update(alunoObj);
+        else if (typeof(id_curso) != "undefined" && typeof(id_grade) == "undefined")
+            return await AlunoDAO.update(alunoObj, id_curso);
+        else if (typeof(id_curso) == "undefined" && typeof(id_grade) != "undefined")
+            return await AlunoDAO.update(alunoObj, id_grade);
         else
-        return await AlunoDAO.update(alunoObj, id_curso, id_grade);
+            return await AlunoDAO.update(alunoObj, id_curso, id_grade);
 
     }
 

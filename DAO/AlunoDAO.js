@@ -36,20 +36,42 @@ export default class AlunoDAO {
     }
   }
 
+  static async readByCurso(id_aluno, id_curso) {
+    return await BD.query("SELECT * FROM aluno WHERE id = " + id_aluno + " AND curso = " + id_curso);
+  }
+
+  static async readByMatricula(mat_aluno) {
+    return await BD.query("SELECT * FROM aluno WHERE matricula = " + mat_aluno);
+  }
+
   static async readAll() {
     return await BD.query("SELECT * FROM aluno");
   }
 
+  static async readAllByCurso(id_curso) {
+    return await BD.query("SELECT * FROM aluno WHERE curso = " + id_curso);
+  }
+
   static async update(aluno, id_curso, id_grade) {
     try {
-      if (typeof(id_curso) == "undefined" && typeof(id_grade) == "undefined")
-      return await BD.update(aluno);
-      else{
+      if (typeof(id_curso) != "undefined" && typeof(id_grade) != "undefined"){
         var foreignKeys = [];
         foreignKeys.push(['curso',id_curso]);
         foreignKeys.push(['grade',id_grade]);
         return await BD.update(aluno, foreignKeys);
       }
+      else if (typeof(id_curso) != "undefined" && typeof(id_grade) == "undefined"){
+        var foreignKeys = [];
+        foreignKeys.push(['curso',id_curso]);
+        return await BD.update(aluno, foreignKeys);
+      }
+      else if (typeof(id_curso) == "undefined" && typeof(id_grade) != "undefined"){
+        var foreignKeys = [];
+        foreignKeys.push(['grade',id_grade]);
+        return await BD.update(aluno, foreignKeys);
+      }
+      else 
+        return await BD.update(aluno);
     } catch (error) {
       return error.message;
     }
@@ -71,13 +93,12 @@ export default class AlunoDAO {
 
     while(i<result.length){
       var alunoTemp= new Aluno();
-      alunoTemp.setId(result[i].aluno); 
+      alunoTemp.setId(result[i].aluno);
+      var resultAluno=BD.buscar(alunoTemp); 
       alunoTemp.setNome(resultAluno[0].nome);
       alunoTemp.setMatricula(resultAluno[0].matricula);
       alunoTemp.setAtivo(resultAluno[0].ativo);
       alunoTemp.setIngresso(resultAluno[0].ingresso);
-      //alunoTemp.setCurso(CursoDAO.read(resultAluno[0].curso));
-      //alunoTemp.setGrade(GradeDAO.read(resultAluno[0].grade));
       array.push(alunoTemp);
       i++;
     }
@@ -85,7 +106,7 @@ export default class AlunoDAO {
   }
 
   //CRUD QUE SAIU DE AVALICAOALUNODAO
-  static async createNota(avaliacaoAluno){
+  /*static async createNota(avaliacaoAluno){
     try {
       await BD.inserir(avaliacaoAluno);
     } catch (error) {
@@ -107,5 +128,5 @@ export default class AlunoDAO {
     } catch (error) {
       return error.message;
     }
-  }
+  }*/
 }
