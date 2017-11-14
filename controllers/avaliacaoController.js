@@ -1,11 +1,10 @@
 import Avaliacao from '../modelos/Avaliacao';
-import Turma from '../modelos/Turma';
 import AvaliacaoDAO from '../DAO/AvaliacaoDAO';
 export default class AvaliacaoController {
-    static async create(avaliacao){
+    static async create(avaliacao, id_turma){
         var avaliacaoObj = new Avaliacao();
         avaliacaoObj.parseEntidade(avaliacao);
-        return await AvaliacaoDAO.create(avaliacaoObj);
+        return await AvaliacaoDAO.create(avaliacaoObj, id_turma);
     }
 
     static async read(id){
@@ -14,14 +13,25 @@ export default class AvaliacaoController {
         return await AvaliacaoDAO.read(avaliacao);
     }
 
+    static async readByTurma(id_avaliacao, id_turma){
+        return await AvaliacaoDAO.readByTurma(id_avaliacao, id_turma);
+    }
+
     static async readAll(){
         return await AvaliacaoDAO.readAll();
     }
 
-    static async update(avaliacao){
+    static async readAllByTurma(id_turma){
+        return await AvaliacaoDAO.readAllByTurma(id_turma);
+    }
+
+    static async update(avaliacao, id_turma){
         var avaliacaoObj = new Avaliacao();
         avaliacaoObj.parseEntidade(avaliacao); 
-        return await AvaliacaoDAO.update(avaliacaoObj);
+        if (typeof(id_turma) == "undefined")
+            return await AvaliacaoDAO.update(avaliacaoObj);
+        else
+            return await AvaliacaoDAO.update(avaliacaoObj, id_turma);
     }
 
     static async delete(avaliacao){
@@ -30,7 +40,7 @@ export default class AvaliacaoController {
         return await AvaliacaoDAO.delete(avaliacaoObj);
     }
 
-    static async listarAvaliacoesTurma(id){
+    static async listarAvaliacoesTurma(id){ //listar avaliações de uma turma
         //var turma = new Turma();
         //turma.setId(id);
         return await AvaliacaoDAO.listarAvaliacoesTurma(id);

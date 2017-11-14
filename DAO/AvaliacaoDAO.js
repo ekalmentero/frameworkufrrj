@@ -1,13 +1,13 @@
 "use strict";
-import turma from '../rotas/turmaRouter';
 import BD from "../BD";
 import Avaliacao from "../modelos/Avaliacao";
-import TurmaDAO from "./TurmaDAO";
 
 export default class AvaliacaoDAO {
-  static async create(avaliacao) {
+  static async create(avaliacao, id_turma) {
     try {
-      var retorno = await BD.inserir(avaliacao);
+      var foreignKeys = [];
+      foreignKeys.push(['turma', id_turma]);
+      var retorno = await BD.inserir(avaliacao, foreignKeys);
       avaliacao.setId(retorno);
       return avaliacao;
     } catch (error) {
@@ -17,31 +17,38 @@ export default class AvaliacaoDAO {
   static async read(avaliacao) {
     try {
       var retorno = await BD.buscar(avaliacao);
-      avaliacao.setId(retorno[0].id);
-      avaliacao.setNome(retorno[0].nome);
-      avaliacao.setData(retorno[0].data);
-      avaliacao.setDescricao(retorno[0].descricao);
-
-      var tmpTurma = await TurmaDAO.read(retorno[0].turma);
-      avaliacao.setTurma(tmpTurma);
-
-      return avaliacao;
+      return retorno[0];
     } catch (error) {
       return error.message;
     }
   }
+
+  static async readByTurma(id_avaliacao, id_turma){
+    return await BD.query("SELECT * FROM avaliacao WHERE turma = " + id_turma + " AND id = " + id_avaliacao);
+}
 
   static async readAll() {
     return await BD.query("SELECT * FROM avaliacao");
   }
 
+  static async readAllByTurma(id_turma){
+    return await BD.query("SELECT * FROM avaliacao WHERE turma = " + id_turma);
+}
+
   static async update(avaliacao) {
     try {
-      return await BD.update(avaliacao);
+      if (typeof(id_turma) == "undefined")
+        return await BD.update(avaliacao);
+      else{
+        var foreignKeys = [];
+        foreignKeys.push(['turma', id_turma]);
+        return await BD.update(avaliacao, foreignKeys);
+      }
     } catch (error) {
       return error.message;
     }
   }
+
   static async delete(avaliacao) {
     try {
       return await BD.deletar(avaliacao);
@@ -50,7 +57,7 @@ export default class AvaliacaoDAO {
     }
   }
 
-  static async listarAvaliacoesTurma(id){ //retornando a lista só quando o atrib turma de avl não é obj
+  static async listarAvaliacoesTurma(id){
     try {
       var retorno = await BD.query("SELECT * FROM avaliacao WHERE turma = '"+id+"'");
       var i=0;
@@ -62,10 +69,6 @@ export default class AvaliacaoDAO {
         avlTemp.setNome(retorno[i].nome);
         avlTemp.setData(retorno[i].data);
         avlTemp.setDescricao(retorno[i].descricao);
-        //avlTemp.setTurma(retorno[i].turma);
-
-        //var tmpTurma = await TurmaDAO.read(retorno[i].turma);
-        avlTemp.setTurma(TurmaDAO.read(retorno[i].turma));
         array.push(avlTemp);
         i++;
       }
@@ -74,4 +77,5 @@ export default class AvaliacaoDAO {
       return error.message;
     }
   }
+
 }
