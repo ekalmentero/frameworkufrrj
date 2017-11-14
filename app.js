@@ -65,7 +65,7 @@ import alunos from './rotas/alunoRouter'
 rotas.use('/alunos',alunos)
 
 import avaliacao from './rotas/avaliacaoRouter'
-rotas.use('/avaliacao',avaliacao)
+rotas.use('/avaliacao', avaliacao)
 
 rotas.all("/login",function(req,res){
     if(req.session.token) res.redirect("/");

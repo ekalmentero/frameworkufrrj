@@ -9,7 +9,9 @@ export default class AvaliacaoDAO {
       foreignKeys.push(['turma', id_turma]);
       var retorno = await BD.inserir(avaliacao, foreignKeys);
       avaliacao.setId(retorno);
+
       return avaliacao;
+
     } catch (error) {
       return error.message;
     }

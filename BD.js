@@ -27,9 +27,15 @@ export default class BD {
         );
     }
 
-    static inserir(obj){
+    static inserir(obj, chavesEstrangeiras){
         var tabela = tabelas[obj.constructor.name];
         var query = "INSERT INTO " + tabela + " SET ";
+
+        if (typeof(chavesEstrangeiras) != "undefined"){
+            for(var i = 0;i<chavesEstrangeiras.length;i++){
+                query += chavesEstrangeiras[i][0] + " = " + chavesEstrangeiras[i][1] + ",";
+            }
+        }
 
         var tmp = "";
         for(let propriedade of Object.getOwnPropertyNames(Object.getPrototypeOf(obj))){
@@ -43,7 +49,6 @@ export default class BD {
             query += propriedade.replace("get","").toLowerCase() + " = " + tmp + obj[propriedade] + tmp + ",";
         }
         query = query.slice(0,-1);
-        console.log(query);
 
         return new Promise(
             function(resolve,reject){
@@ -82,7 +87,6 @@ export default class BD {
             if(typeof(filtros[i][1]) == "string") tmp = "'"; else tmp = "";
             query += " " + filtros[i][0].replace("get","").toLowerCase() + " = " + tmp + filtros[i][1] + tmp;
         }
-        console.log(query);
 
         return new Promise(
             function(resolve,reject){
@@ -94,13 +98,19 @@ export default class BD {
         );
     }
 
-    static update(obj){
+    static update(obj, chavesEstrangeiras){
         var tabela = tabelas[obj.constructor.name];
         var query = "UPDATE " + tabela + " SET ";
 
         var filtros = [];
 
         var tmp = new obj.constructor;
+
+        if (typeof(chavesEstrangeiras) != "undefined"){
+            for(var i = 0;i<chavesEstrangeiras.length;i++){
+                query += chavesEstrangeiras[i][0] + " = " + chavesEstrangeiras[i][1] + ",";
+            }
+        }
 
         for(let propriedade of Object.getOwnPropertyNames(Object.getPrototypeOf(obj))){
             if(propriedade == "constructor") continue;

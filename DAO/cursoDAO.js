@@ -4,15 +4,16 @@ import Curso from "../modelos/curso";
 import BD from "../bd";
 
 export default class CursoDAO {
-    static async create(curso){
-        var id = await BD.inserir(curso);
+    static async create(curso, idDepartamento){
+        var foreignKeys = [];
+        foreignKeys.push(['departamento', idDepartamento]);
+        var id = await BD.inserir(curso, foreignKeys);
         curso.setId(id);
         return curso;
     }
 
     static async read(curso){
         var result =  await BD.buscar(curso);
-
         curso.setId(result[0].id);
         curso.setNome(result[0].nome);
         curso.setCodigo(result[0].codigo);
@@ -24,12 +25,26 @@ export default class CursoDAO {
         return curso;
     }
 
+    static async readByDepartamento(idCurso, idDepartamento){
+        return await BD.query("SELECT * FROM curso WHERE departamento = " + idDepartamento + " AND id = " + idCurso);
+    }
+
     static async readAll(){
         return await BD.query("SELECT * FROM curso");
     }
 
-    static async update(curso){
-        return await BD.update(curso);
+    static async readAllByDepartamento(idDepartamento){
+        return await BD.query("SELECT * FROM curso WHERE departamento = " + idDepartamento);
+    }
+
+    static async update(curso, idDepartamento){
+        if (typeof(idDepartamento) == undefined)
+              return await BD.update(curso);
+        else {
+              var foreignKeys = [];
+              foreignKeys.push(['departamento', idDepartamento]);
+              return await BD.update(curso, foreignKeys);
+        }
     }
 
     static async delete(curso){
