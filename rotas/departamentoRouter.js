@@ -1,13 +1,20 @@
 import express from 'express';
 import bodyParser from 'body-parser';
+import disciplinaRouter from "./disciplinaRouter";
+import cursoRouter from "./cursoRouter";
 import DepartamentoController from '../controllers/departamentoController';
+
 
 const departamento = express.Router();
 
 departamento.use(bodyParser.json());
 
-departamento.get('/:id', async function(req,res){
-    res.send(await DepartamentoController.read(req.params.id));
+departamento.use('/:id_departamento/disciplinas', disciplinaRouter);
+
+departamento.use('/:id_departamento/cursos', cursoRouter);
+
+departamento.get('/:id_departamento', async function(req,res){
+    res.send(await DepartamentoController.read(req.params.id_departamento));
 })
 
 departamento.route('/')
