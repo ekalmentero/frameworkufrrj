@@ -1,16 +1,15 @@
 "use strict";
 import BD from "../BD";
-import CursoDAO from './cursoDAO';
-import GradeDAO from './GradeDAO';
 import Aluno from "../modelos/Aluno";
-import Avaliacao from "../modelos/Avaliacao";
-import AvaliacaoAluno from "../modelos/AvaliacaoAluno";
 
 export default class AlunoDAO {
   
-  static async create(aluno) {
+  static async create(aluno, id_curso, id_grade) {
     try {
-      var retorno = await BD.inserir(aluno);
+      var foreignKeys=[];
+      foreignKeys.push(['curso',id_curso]);
+      foreignKeys.push(['grade',id_grade]);
+      var retorno = await BD.inserir(aluno, foreignKeys);
       aluno.setId(retorno);
       return aluno;
     } catch (error) {
@@ -21,18 +20,17 @@ export default class AlunoDAO {
   static async read(aluno) {
     try {
       var retorno = await BD.buscar(aluno);
-      aluno.setNome(retorno[0].nome);
+      return retorno[0];
+      /*aluno.setNome(retorno[0].nome);
       aluno.setId(retorno[0].id);
       aluno.setMatricula(retorno[0].matricula);
       aluno.setAtivo(retorno[0].ativo);
       aluno.setIngresso(retorno[0].ingresso);
-
       var tmpCurso = await CursoDAO.read(retorno[0].curso);
       aluno.setCurso(tmpCurso);
-      
       var tmpGrade = await GradeDAO.read(retorno[0].grade);
       aluno.setGrade(tmpGrade);
-      return aluno;
+      return aluno;*/
     } catch (error) {
       return error.message;
     }
@@ -42,13 +40,21 @@ export default class AlunoDAO {
     return await BD.query("SELECT * FROM aluno");
   }
 
-  static async update(aluno) {
+  static async update(aluno, id_curso, id_grade) {
     try {
+      if (typeof(id_curso) == "undefined" && typeof(id_grade) == "undefined")
       return await BD.update(aluno);
+      else{
+        var foreignKeys = [];
+        foreignKeys.push(['curso',id_curso]);
+        foreignKeys.push(['grade',id_grade]);
+        return await BD.update(aluno, foreignKeys);
+      }
     } catch (error) {
       return error.message;
     }
   }
+
   static async delete(aluno) {
     try {
       return await BD.deletar(aluno);
@@ -58,22 +64,21 @@ export default class AlunoDAO {
   }
 
   static async listarAlunosTurma(turma){
-    var id=turma.getId; //pega o id da turma que vem do controller
+    var id=turma.getId();
     var i=0;
     var result=BD.query('SELECT aluno FROM aluno_turma WHERE turma='+id); 
     var array= new Array();
 
     while(i<result.length){
-      var alunoTemp= new Aluno(); //variável temp de turma
-      alunoTemp.setId(result[i].aluno); //faz a busca do aluno usando os ids da busca da linha 83, usando o i para navegar pelas posições
-      var resultAluno=BD.buscar(alunoTemp); //faz a busca
-      alunoTemp.setNome(resultAluno[0].nome); //instancia o objeto
+      var alunoTemp= new Aluno();
+      alunoTemp.setId(result[i].aluno); 
+      alunoTemp.setNome(resultAluno[0].nome);
       alunoTemp.setMatricula(resultAluno[0].matricula);
       alunoTemp.setAtivo(resultAluno[0].ativo);
       alunoTemp.setIngresso(resultAluno[0].ingresso);
-      alunoTemp.setCurso(CursoDAO.read(resultAluno[0].curso));
-      alunoTemp.setGrade(GradeDAO.read(resultAluno[0].grade));
-      array.push(alunoTemp); //joga no array
+      //alunoTemp.setCurso(CursoDAO.read(resultAluno[0].curso));
+      //alunoTemp.setGrade(GradeDAO.read(resultAluno[0].grade));
+      array.push(alunoTemp);
       i++;
     }
     return array;
