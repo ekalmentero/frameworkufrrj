@@ -1,14 +1,13 @@
-import turma from '../rotas/turmaRouter';
 import Aluno from '../modelos/Aluno';
+import AlunoDAO from '../DAO/AlunoDAO';
 import Turma from '../modelos/Turma';
 import AvaliacaoAluno from '../modelos/AvaliacaoAluno';
-import AlunoDAO from '../DAO/AlunoDAO';
-import AvaliacaoAlunoDAO from '../DAO/AvaliacaoAlunoDAO';
+
 export default class AlunoController {
-    static async create(aluno){
+    static async create(aluno, id_curso, id_grade){
         var alunoObj = new Aluno();
         alunoObj.parseEntidade(aluno);
-        return await AlunoDAO.create(alunoObj);
+        return await AlunoDAO.create(alunoObj, id_curso, id_grade);
     }
 
     static async read(id){
@@ -21,10 +20,14 @@ export default class AlunoController {
         return await AlunoDAO.readAll();
     }
 
-    static async update(aluno){
+    static async update(aluno, id_curso, id_grade){
         var alunoObj = new Aluno();
         alunoObj.parseEntidade(aluno); 
-        return await AlunoDAO.update(alunoObj);
+        if (typeof(id_curso) == "undefined" && typeof(id_grade) == "undefined")
+            return await AlunoDAO.update(alunoObj);
+        else
+        return await AlunoDAO.update(alunoObj, id_curso, id_grade);
+
     }
 
     static async delete(aluno){
