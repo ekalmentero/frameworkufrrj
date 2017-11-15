@@ -2,7 +2,7 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import TurmaController from '../controllers/turmaController';
 
-const turma= express.Router();
+const turma= express.Router({mergeParams: true});
 
 turma.use(bodyParser.json());
 
@@ -14,12 +14,15 @@ turma.get('/:id', async function(req,res){
 
 turma.route('/')
   .post(async function(req,res){
-    res.send(await TurmaController.create(req.body,id_disciplina,id_professor,id_periodo));
+    res.send(await TurmaController.create(req.body,req.params.id_disciplina));
     //res.send(typeof(ProfessorController.create));
     //console.log("oi");
   })
   .patch(async function(req,res){
-    res.send(await TurmaController.update(req.body));
+    if(typeof(req.params.id_professor)!= "undefined")
+      res.send(await TurmaController.insertProfessorTurma(req.body,req.params.id_professor));
+    else
+      res.send(await TurmaController.update(req.body));
     //res.send("oi");
   })
 

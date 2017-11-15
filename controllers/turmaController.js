@@ -6,10 +6,10 @@ import TurmaDAO from '../DAO/TurmaDAO';
 
 export default class TurmaController{
 
-  static async create(turma,id_disciplina,id_professor,id_periodo){
+  static async create(turma,id_disciplina){
     var turmaObj= new Turma();
     turmaObj.parseEntidade(turma);
-    return await TurmaDAO.create(turmaObj,id_disciplina,id_professor,id_periodo);
+    return await TurmaDAO.create(turmaObj,id_disciplina);
   }
 
   static async read(id){
@@ -45,6 +45,12 @@ export default class TurmaController{
   static async listarTurmasAluno(id_aluno){
 
     return await TurmaDAO.listarTurmasAluno(id_aluno);
+  }
+
+  static async insertProfessorTurma(turma,id_professor){
+    var turmaObj= new Turma();
+    turmaObj.parseEntidade(turma);
+    return await TurmaDAO.insertProfessorTurma(turmaObj,id_professor);
   }
 
 }

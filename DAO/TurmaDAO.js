@@ -13,12 +13,10 @@ export default class TurmaDAO{
 
   }
 
-  static async create(turma,id_disciplina,id_professor,id_periodo){
+  static async create(turma,id_disciplina){
     try{
       var foreignKeys=[];
-      foreignKeys.push('disciplina',id_disciplina);
-      foreignKeys.push('professor',id_professor);
-      foreignKeys.push('periodo',id_periodo);
+      foreignKeys.push(['disciplina',id_disciplina]);
       var id= await BD.inserir(turma,foreignKeys);
       turma.setId(id);
       return turma;
@@ -103,5 +101,11 @@ export default class TurmaDAO{
     return array;
 
 
+  }
+
+  static async insertProfessorTurma(turma,id_professor){
+      var id= turma.getId;
+
+      return await BD.query("UPDATE TURMA SET professor="+id+"WHERE id="+id);
   }
 }
