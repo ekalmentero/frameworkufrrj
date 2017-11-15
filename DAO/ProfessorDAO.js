@@ -7,10 +7,12 @@ export default class ProfessorDAO{
   static async create(professor,id_departamento){
     try{
       var foreignKeys= [];
-      foreignKeys.push('departamento',id_departamento);
-      var id= await BD.inserir(professor,id_departamento);
+      foreignKeys.push(['departamento',id_departamento]);
+      var id= await BD.inserir(professor,foreignKeys);
       professor.setId(id);
+      console.log(professor.getId);
       return professor;
+
     }
     catch(error){
       error.message;

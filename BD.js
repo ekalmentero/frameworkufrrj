@@ -6,6 +6,7 @@ let tabelas = { // Exemplo
     'Avaliacao' : "avaliacao",
     'Grade' : "grade",
     'AvaliacaoAluno' : "avaliacao_aluno",
+    'Departamento':"departamento",
     'Prerequisito' : "prerequisito",
     'Instituto' : "instituto",
     'Professor' : "professor",
@@ -30,7 +31,7 @@ export default class BD {
     static inserir(obj, chavesEstrangeiras){
         var tabela = tabelas[obj.constructor.name];
         var query = "INSERT INTO " + tabela + " SET ";
-
+        console.log(chavesEstrangeiras);
         if (typeof(chavesEstrangeiras) != "undefined"){
             for(var i = 0;i<chavesEstrangeiras.length;i++){
                 query += chavesEstrangeiras[i][0] + " = " + chavesEstrangeiras[i][1] + ",";
@@ -48,8 +49,9 @@ export default class BD {
             if(typeof(obj[propriedade]) == "string") tmp = "'"; else tmp = "";
             query += propriedade.replace("get","").toLowerCase() + " = " + tmp + obj[propriedade] + tmp + ",";
         }
+
         query = query.slice(0,-1);
-        
+        console.log(query);
         return new Promise(
             function(resolve,reject){
                 conexao.query(query, function (erro, retorno, colunas) {
