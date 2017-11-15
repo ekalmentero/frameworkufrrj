@@ -8,7 +8,7 @@ disciplina.use(bodyParser.json());
 
 disciplina.get('/:id_disciplina', async function(req,res){
     if (typeof(req.params.id_departamento) != "undefined")
-        res.send(await DisciplinaController.readByDepartamento(req.params.id_disciplina, req.params.id_departamento));
+        res.send(403);
     else
         res.send(await DisciplinaController.read(req.params.id_disciplina));
 })

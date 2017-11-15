@@ -13,20 +13,31 @@ export default class DisciplinaDAO {
     }
 
     static async read(disciplina){
-        var result =  await BD.buscar(disciplina);
-        return result[0];
-    }
-    
-    static async readByDepartamento(id_disciplina, id_departamento){
-        return await BD.query("SELECT * FROM disciplina WHERE departamento = " + id_departamento + " AND id = " + id_disciplina);
+        var result = await BD.buscar(disciplina);
+        disciplina.parseEntidade(result[0]);
+        return disciplina;
     }
 
     static async readAll(){
-        return await BD.query("SELECT * FROM disciplina");
+        var result = await BD.query("SELECT * FROM disciplina");
+        var disciplinas = [];
+        for (let object of result){
+            var disciplina = new Disciplina();
+            disciplina.parseEntidade(object);
+            disciplinas.push(disciplina);
+        } 
+        return disciplinas;
     }
 
     static async readAllByDepartamento(id_departamento){
-        return await BD.query("SELECT * FROM disciplina WHERE departamento = " + id_departamento);
+        var result = await BD.query("SELECT * FROM disciplina WHERE departamento = " + id_departamento);
+        var disciplinas = [];
+        for (let object of result){
+            var disciplina = new Disciplina();
+            disciplina.parseEntidade(object);
+            disciplinas.push(disciplina);
+        } 
+        return disciplinas;
     }
 
     static async update(disciplina, id_departamento){

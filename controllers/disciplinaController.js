@@ -13,10 +13,6 @@ export default class DisciplinaController {
         disciplina.setId(id_disciplina);
         return await DisciplinaDAO.read(disciplina);
     }
-    
-    static async readByDepartamento(id_disciplina, id_departamento){
-        return await DisciplinaDAO.readByDepartamento(id_disciplina, id_departamento);
-    }
 
     static async readAll(){
         return await DisciplinaDAO.readAll();
