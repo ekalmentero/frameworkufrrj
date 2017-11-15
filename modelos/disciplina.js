@@ -9,6 +9,11 @@ export default class Disciplina extends Entidade {
 
     constructor(){
         super();
+        this.id = undefined;
+        this.nome = undefined;
+        this.codigo = undefined;
+        this.creditos = undefined;
+        this.livre_escolha = undefined;
     } 
 
     get getId(){
