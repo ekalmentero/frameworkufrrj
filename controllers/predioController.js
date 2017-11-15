@@ -5,10 +5,10 @@ import Predio from '../modelos/Predio.js';
 
 class PredioController {
 	
-	static async create(predio){
+	static async create(predio, a_id_instituto){
         var predioObj = new Predio();
         predioObj.parseEntidade(predio);
-        return await PredioDAO.create(predioObj);
+        return await PredioDAO.create(predioObj, a_id_instituto);
     }
 
     static async read(id){

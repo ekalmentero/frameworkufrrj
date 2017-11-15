@@ -2,6 +2,7 @@
 
 import BD from '../BD.js';
 import Predio from '../modelos/Predio.js';
+import Instituto from '../modelos/Instituto.js';
 
 export default class PredioDAO {
   
@@ -9,9 +10,14 @@ export default class PredioDAO {
         
     }
 
+    /**
+    *   a_id_instituto - array com os ids dos institutos ao qual esse prédio pertence
+    */
+    static async insert(predio, a_id_instituto){ 
 
-    static async insert(predio){ 
-        var id = await BD.inserir(predio);
+        var foreignKeys=[];
+        foreignKeys.push(['instituto',a_id_instituto]);
+        var id = await BD.inserir(predio, foreignKeys);
         predio.setId(id);
         return predio;
     }
