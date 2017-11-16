@@ -5,7 +5,8 @@ export default class DisciplinaController {
     static async create(disciplina, id_departamento){
         var disciplinaObj = new Disciplina();
         disciplinaObj.parseEntidade(disciplina);
-        return await DisciplinaDAO.create(disciplinaObj, id_departamento);
+        disciplinaObj.setDepartamento(id_departamento);
+        return await DisciplinaDAO.create(disciplinaObj);
     }
 
     static async read(id_disciplina){
@@ -25,10 +26,9 @@ export default class DisciplinaController {
     static async update(disciplina, id_departamento){
         var disciplinaObj = new Disciplina();
         disciplinaObj.parseEntidade(disciplina);
-        if (typeof(id_departamento) == "undefined") 
-            return await DisciplinaDAO.update(disciplinaObj);
-        else 
-            return await DisciplinaDAO.update(disciplinaObj, id_departamento);
+        if (typeof(id_departamento) != "undefined") 
+            disciplinaObj.setDepartamento(id_departamento);
+        return await DisciplinaDAO.update(disciplinaObj);
     }
 
     static async delete(disciplina){

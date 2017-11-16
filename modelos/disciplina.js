@@ -1,4 +1,5 @@
 import Entidade from './entidade';
+import Departamento from './departamento';
 
 export default class Disciplina extends Entidade {
     @Private id;
@@ -6,6 +7,7 @@ export default class Disciplina extends Entidade {
     @Private codigo;
     @Private creditos;
     @Private livre_escolha;
+    @Private departamento;
 
     constructor(){
         super();
@@ -14,6 +16,7 @@ export default class Disciplina extends Entidade {
         this.codigo = undefined;
         this.creditos = undefined;
         this.livre_escolha = undefined;
+        this.departamento = new Departamento();
     } 
 
     get getId(){
@@ -36,6 +39,10 @@ export default class Disciplina extends Entidade {
         return this.livre_escolha;
     }
 
+    get getDepartamento(){
+        return this.departamento;
+    }
+
     setId(id){
         this.id = id;
     }
@@ -55,4 +62,8 @@ export default class Disciplina extends Entidade {
     setLivre_escolha(livre_escolha){
         this.livre_escolha = livre_escolha;
     }
+
+    setDepartamento(departamento){
+        this.departamento = departamento;
+    }    
 }

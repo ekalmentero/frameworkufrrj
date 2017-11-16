@@ -4,10 +4,8 @@ import Disciplina from "../modelos/disciplina";
 import BD from "../bd";
 
 export default class DisciplinaDAO {
-    static async create(disciplina, id_departamento){
-        var foreignKeys = [];
-        foreignKeys.push(['departamento', id_departamento]);
-        var id = await BD.inserir(disciplina, foreignKeys);
+    static async create(disciplina){
+        var id = await BD.inserir(disciplina);
         disciplina.setId(id);
         return disciplina;
     }
@@ -40,14 +38,8 @@ export default class DisciplinaDAO {
         return disciplinas;
     }
 
-    static async update(disciplina, id_departamento){
-        if (typeof(id_departamento) == "undefined")
-            return await BD.update(disciplina);
-        else{
-            var foreignKeys = [];
-            foreignKeys.push(['departamento', id_departamento]);
-            return await BD.update(disciplina, foreignKeys);
-        }
+    static async update(disciplina){
+        return await BD.update(disciplina);
     }
     
     static async delete(disciplina){
