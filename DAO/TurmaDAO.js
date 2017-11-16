@@ -61,8 +61,8 @@ export default class TurmaDAO{
     var sql='SELECT * FROM turma WHERE professor=';
     var query=sql+id;
     console.log(query);
-    return await BD.query(query);
-    /*var array= new Array();
+    var result=await BD.query(query);
+    var array= new Array();
     var i=0;
 
     while(i<result.lenght){
@@ -76,7 +76,7 @@ export default class TurmaDAO{
       i++;
 
     }
-    return array;*/
+    return array;
   }
 
   static async listarTurmasAluno(id_aluno){

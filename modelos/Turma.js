@@ -8,13 +8,20 @@ export default class Turma extends Entidade{
 @Private codigo;
 @Private turno;
 @Private vagas;
-/*@Private disciplina= new Disciplina();
+@Private disciplina= new Disciplina();
 @Private professor= new Professor();
-@Private periodo= new Periodo();*/
+@Private periodo= new Periodo();
 @Private id;
 
   constructor(){
     super();
+    this.id=undefined;
+    this.codigo=undefined;
+    this.turno=undefined;
+    this.vagas=undefined;
+    this.disciplina= new Disciplina();
+    this.professor= new Professor();
+    this.periodo= new Periodo();
   }
 
   get getCodigo(){
@@ -29,7 +36,7 @@ export default class Turma extends Entidade{
   get getTurno(){
     return this.turno;
   }
-/*
+
   get getDisciplina(){
     return this.disciplina.toString();
   }
@@ -41,7 +48,7 @@ export default class Turma extends Entidade{
   get getProfessor(){
     return this.professor.toString();
   }
-*/
+
   get getId(){
     return this.id;
   }
@@ -63,12 +70,12 @@ export default class Turma extends Entidade{
   setTurno(){
     this.turno=turno;
   }
-/*
+
   setDisciplina(disciplina){
-    this.disciplina.setNome(disciplina.getNome());
-    this.disciplina.setCodigo(disciplina.getCodigo());
-    this.disciplina.setCreditos(disciplina.getCreditos());
-    this.disciplina.setLivre_escolha(disciplina.getLivre_escolha());
+    this.disciplina.setNome(disciplina.getNome);
+    this.disciplina.setCodigo(disciplina.getCodigo);
+    this.disciplina.setCreditos(disciplina.getCreditos);
+    this.disciplina.setLivre_escolha(disciplina.getLivre_escolha);
 
   }
 
@@ -78,5 +85,5 @@ export default class Turma extends Entidade{
   setProfessor(professor){
     this.professor=professor;
   }
-*/
+
 }
