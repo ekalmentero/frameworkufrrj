@@ -72,10 +72,7 @@ export default class Turma extends Entidade{
   }
 
   setDisciplina(disciplina){
-    this.disciplina.setNome(disciplina.getNome);
-    this.disciplina.setCodigo(disciplina.getCodigo);
-    this.disciplina.setCreditos(disciplina.getCreditos);
-    this.disciplina.setLivre_escolha(disciplina.getLivre_escolha);
+    this.disciplina=disciplina;
 
   }
 
