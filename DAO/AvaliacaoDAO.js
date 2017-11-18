@@ -37,7 +37,7 @@ export default class AvaliacaoDAO {
     return await BD.query("SELECT * FROM avaliacao WHERE turma = " + id_turma);
 }
 
-  static async update(avaliacao) {
+  static async update(avaliacao, id_turma) {
     try {
       if (typeof(id_turma) == "undefined")
         return await BD.update(avaliacao);
@@ -59,7 +59,7 @@ export default class AvaliacaoDAO {
     }
   }
 
-  static async listarAvaliacoesTurma(id){
+  /*static async listarAvaliacoesTurma(id){
     try {
       var retorno = await BD.query("SELECT * FROM avaliacao WHERE turma = '"+id+"'");
       var i=0;
@@ -78,6 +78,6 @@ export default class AvaliacaoDAO {
     } catch (error) {
       return error.message;
     }
-  }
+  }*/
 
 }

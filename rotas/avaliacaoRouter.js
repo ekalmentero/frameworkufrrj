@@ -13,9 +13,9 @@ avaliacao.get('/:id_avaliacao', async function(req,res){
         res.send(await avaliacaoController.read(req.params.id_avaliacao));
 })
 
-avaliacao.get('/listarAvaliacoesTurma/:id_turma', async function(req, res){
+/*avaliacao.get('/listarAvaliacoesTurma/:id_turma', async function(req, res){  já existe: readAllByTurma
     res.send(await avaliacaoController.listarAvaliacoesTurma(req.params.id_turma));
-})
+})*/
 
 avaliacao.route('/')
   .post(async function(req,res){
