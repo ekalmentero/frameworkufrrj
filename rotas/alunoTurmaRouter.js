@@ -9,7 +9,7 @@ alunoTurma.use(bodyParser.json());
 
 alunoTurma.route('/')
   .post(async function(req,res){
-      res.send(await AlunoTurmaController.create(req.body, req.body.aluno, req.body.turma, req.body.conceito));
+      res.send(await AlunoTurmaController.create(req.body));
   })
   .get(async function(req,res){
     res.send(await AlunoTurmaController.readAll());
