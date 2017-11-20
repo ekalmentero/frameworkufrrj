@@ -1,10 +1,9 @@
 "use strict";
 import Aluno from './Aluno';
 import Turma from './Turma';
-import Conceito from './conceito';
 import Entidade from './entidade';
 
-export default class Aluno extends Entidade{
+export default class Conceito extends Entidade{
   @Private id;
   @Private tipo;
 
