@@ -48,6 +48,10 @@ export default class Curso extends Entidade {
         return this.departamento_id;
     }
 
+    get getDepartamento(){
+        return this.departamento;
+    }
+
     get getDeleted(){
         return this.deleted;
     }
@@ -74,6 +78,10 @@ export default class Curso extends Entidade {
 
     setDepartamento_id(departamento_id){
         if (typeof(departamento_id) == "number") this.departamento_id = departamento_id;
+    }
+
+    setDepartamento(departamento){
+        this.departamento = departamento;
     }
 
     setDeleted(deleted){

@@ -1,6 +1,7 @@
 "use strict";
 
 import Curso from "../modelos/curso";
+import DepartamentoDAO from './departamentoDAO';
 import BD from "../bd";
 
 export default class CursoDAO {
@@ -19,8 +20,10 @@ export default class CursoDAO {
         curso.setCodigo(result[0].codigo);
         curso.setTurno(result[0].turno);
         curso.setDeleted(result[0].deleted);
-        curso.setDepartamento_id(result[0].departamento_id);
         curso.setLimite_periodos(result[0].limite_periodos);
+
+        var tmpDepartamento = await DepartamentoDAO.read(retorno[0].departamento_id);
+        departamento.setDepartamento(tmpDepartamento);
 
         return curso;
     }
