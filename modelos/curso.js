@@ -1,4 +1,5 @@
 import Entidade from './entidade';
+import Departamento from './departamento';
 
 export default class Curso extends Entidade {
 
@@ -9,10 +10,19 @@ export default class Curso extends Entidade {
     @Private turno;
     @Private deleted;
     @Private departamento_id;
+    @Private departamento;
 
     constructor(){
         super();
+        this.id = undefined;
+        this.nome = undefined;
+        this.limite_periodos = undefined;
+        this.deleted = undefined;
+        this.departamento_id = undefined;
+        this.turno = undefined;
+        this.departamento = new Departamento();
     }
+
 
     get getId(){
         return this.id;

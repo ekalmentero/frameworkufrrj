@@ -5,7 +5,6 @@ export default class Turma extends Entidade{
 @Private codigo;
 @Private vagas;
 @Private disciplina;
-@Private periodo;
 @Private professor;
 @Private periodo;
 @Private id;
