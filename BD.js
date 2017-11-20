@@ -11,7 +11,10 @@ let tabelas = { // Exemplo
     'Professor' : "professor",
     'Disciplina' : "disciplina",
     'Turma' : "turma",
-    'Periodo' : "periodo"
+    'Periodo' : "periodo",
+    'Curso' : "curso",
+    'Departamento': "departamento",
+    'AlunoTurma' : "aluno_turma"
 };
 
 export default class BD {
@@ -31,7 +34,7 @@ export default class BD {
         var tabela = tabelas[obj.constructor.name];
         var query = "INSERT INTO " + tabela + " SET ";
 
-        if (typeof(chavesEstrangeiras) != "undefined"){
+        if (typeof(chavesEstrangeiras) != "undefined" && chavesEstrangeiras.length > 0){
             for(var i = 0;i<chavesEstrangeiras.length;i++){
                 query += chavesEstrangeiras[i][0] + " = " + chavesEstrangeiras[i][1] + ",";
             }
@@ -49,7 +52,7 @@ export default class BD {
             query += propriedade.replace("get","").toLowerCase() + " = " + tmp + obj[propriedade] + tmp + ",";
         }
         query = query.slice(0,-1);
-        
+
         return new Promise(
             function(resolve,reject){
                 conexao.query(query, function (erro, retorno, colunas) {
@@ -106,7 +109,7 @@ export default class BD {
 
         var tmp = new obj.constructor;
 
-        if (typeof(chavesEstrangeiras) != "undefined"){
+        if (typeof(chavesEstrangeiras) != "undefined" && chavesEstrangeiras.length > 0){
             for(var i = 0;i<chavesEstrangeiras.length;i++){
                 query += chavesEstrangeiras[i][0] + " = " + chavesEstrangeiras[i][1] + ",";
             }
