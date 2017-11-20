@@ -1,4 +1,5 @@
 import Entidade from './entidade';
+import Instituto from './Instituto';
 
 export default class Departamento extends Entidade {
 
@@ -7,9 +8,16 @@ export default class Departamento extends Entidade {
     @Private instituto_id;
     @Private deleted;
     @Private sigla;
+    @Private instituto;
 
     constructor(){
         super();
+        this.id = undefined;
+        this.nome = undefined;
+        this.sigla = undefined;
+        this.deleted = undefined;
+        this.instituto_id = undefined;
+        this.instituto = new Instituto();
     }
 
     get getId(){
