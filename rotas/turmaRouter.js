@@ -14,7 +14,7 @@ turma.get('/:id', async function(req,res){
 
 turma.route('/')
   .post(async function(req,res){
-    res.send(await TurmaController.create(req.body,req.params.id_disciplina));
+    res.send(await TurmaController.create(req.body,req.params.id_disciplina, req.body.periodo));
     //res.send(typeof(ProfessorController.create));
     //console.log("oi");
   })
@@ -33,10 +33,10 @@ turma.route('/')
   .get(async function(req,res){
     if(typeof(req.params.id_professor)!= "undefined")
       res.send(await TurmaController.listarTurmasProfessor(req.params.id_professor));
-    if(typeof(req.params.id_aluno)!="undefined")
+    else if(typeof(req.params.id_aluno)!="undefined")
       res.send(await TurmaController.listarTurmasAluno(req.params.id_aluno));
     else
-    res.send(await TurmaController.readAll());
+      res.send(await TurmaController.readAll());
   })
 
 export default turma;

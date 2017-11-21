@@ -13,13 +13,15 @@ export default class TurmaDAO{
 
   }
 
-  static async create(turma,id_disciplina){
+  static async create(turma,id_disciplina,id_periodo){
     try{
       var foreignKeys=[];
-      foreignKeys.push(['disciplina',id_disciplina]);
-      var id= await BD.inserir(turma,foreignKeys);
-      turma.setId(id);
-      return turma;
+      //foreignKeys.push(['disciplina',id_disciplina]);
+      //foreignKeys.push(['periodo',id_periodo]);
+      //var id= await BD.inserir(turma,foreignKeys);
+      //turma.setId(id);
+      return await BD.query("INSERT INTO turma SET codigo='"+turma.getCodigo+"',turno='"+turma.getTurno+"',vagas='"+turma.vagas+"',periodo='"+id_periodo+"',disciplina='"+id_disciplina+"'");
+      //return turma;
     }catch(error){
       error.message;
     }
@@ -30,22 +32,33 @@ export default class TurmaDAO{
     try{
       var result= await BD.buscar(turma);
       var turmaTemp= new Turma();
-      turmaTemp.setCodigo(result[0].codigo);
-      turmaTemp.setId(result[0].id);
-      turmaTemp.setVagas(result[0].vagas);
-      turmaTemp.setProfessor(ProfessorDAO.read(result[0].professor));
-      turmaTemp.setPeriodo(PeridoDAO.read(result[0].periodo));
-      turmaTemp.setDisciplina(DisciplinaDAO.read(result[0].disciplina));
+      //console.log(result[0]);
+      //turmaTemp.setCodigo(result[0].codigo);
+      //turmaTemp.setId(result[0].id);
+      //turmaTemp.setVagas(result[0].vagas);
+      //turmaTemp.setProfessor(ProfessorDAO.read(result[0].professor));
+      //turmaTemp.setPeriodo(PeridoDAO.read(result[0].periodo));
+      //turmaTemp.setDisciplina(DisciplinaDAO.read(result[0].disciplina));
+      turmaTemp.parseEntidade(result[0]);
+      console.log(turmaTemp.getCodigo);
 
-      return turmaTemp;
-    }
+
+    return turmaTemp;
+  }
     catch(error){
       error.message;
     }
   }
 
   static async readAll(){
-      return await BD.query("SELECT * FROM turma where deleted=0");
+      var result=await BD.query("SELECT * FROM turma where deleted=0");
+      var turmas= [];
+      for (let object of result){
+        var turma= new Turma();
+        turma.parseEntidade(object);
+        array.push(turma);
+      }
+      return turmas;
   }
 
   static async delete(turma){
@@ -56,15 +69,14 @@ export default class TurmaDAO{
     return await BD.update(turma);
   }
 
-  static async listarTurmasProfessor(id, id_professor){
+  static async listarTurmasProfessor( id_professor){
     var id=id_professor;
     var sql='SELECT * FROM turma WHERE professor=';
     var query=sql+id;
-    console.log(query);
     var result=await BD.query(query);
+    console.log(result);
     var array= new Array();
-    var i=0;
-
+    /*var i=0;
     while(i<result.lenght){
       var turmaTemp= new Turma();
       turmaTemp.setCodigo(result[i].codigo);
@@ -75,6 +87,12 @@ export default class TurmaDAO{
       array.push(turmaTemp);
       i++;
 
+    }*/
+
+    for (let object of result){
+      var turma= new Turma();
+      turma.parseEntidade(object);
+      array.push(turma);
     }
     return array;
   }
@@ -98,14 +116,12 @@ export default class TurmaDAO{
       i++;
     }
 
-    return array;
-
 
   }
 
   static async insertProfessorTurma(turma,id_professor){
       var id= turma.getId;
 
-      return await BD.query("UPDATE TURMA SET professor="+id+"WHERE id="+id);
+      return await BD.query("UPDATE TURMA SET professor='"+id_professor+"'WHERE id='"+id+"'");
   }
 }

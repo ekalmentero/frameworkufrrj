@@ -1,10 +1,12 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import DisciplinaController from '../controllers/disciplinaController';
+import turma from './turmaRouter'
 
 const disciplina = express.Router({mergeParams: true});
 
 disciplina.use(bodyParser.json());
+disciplina.use('/:id_disciplina/turma',turma);
 
 disciplina.get('/:id_disciplina', async function(req,res){
     if (typeof(req.params.id_departamento) != "undefined")
@@ -24,7 +26,7 @@ disciplina.route('/')
         res.send(await DisciplinaController.create(req.body, req.params.id_departamento));
     })
     .patch(async function(req,res){
-        if (typeof(req.params.id_departamento) != "undefined") 
+        if (typeof(req.params.id_departamento) != "undefined")
             res.send(await DisciplinaController.update(req.body, req.params.id_departamento));
         else
             res.send(await DisciplinaController.update(req.body));

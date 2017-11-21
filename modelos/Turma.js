@@ -15,7 +15,6 @@ export default class Turma extends Entidade{
 
   constructor(){
     super();
-    this.id=undefined;
     this.codigo=undefined;
     this.turno=undefined;
     this.vagas=undefined;
@@ -67,7 +66,7 @@ export default class Turma extends Entidade{
     this.turma=turma;
   }
 
-  setTurno(){
+  setTurno(turno){
     this.turno=turno;
   }
 
@@ -79,8 +78,10 @@ export default class Turma extends Entidade{
   setPeriodo(periodo){
     this.periodo=periodo;
   }
+
   setProfessor(professor){
     this.professor=professor;
   }
+
 
 }

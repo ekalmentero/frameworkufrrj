@@ -1,10 +1,12 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import AlunoController from '../controllers/alunoController';
+import turma from './turmaRouter';
 
 const aluno = express.Router();
 
 aluno.use(bodyParser.json());
+aluno.use('/:id_aluno/turma',turma)
 
 aluno.get('/:id', async function(req,res){
     res.send(await AlunoController.read(req.params.id));
