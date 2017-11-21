@@ -17,11 +17,11 @@ export default class AlunoController {
     }
 
     static async readByCurso(id_aluno, id_curso){
-        return await alunoDAO.readByCurso(id_aluno, id_curso);
+        return await AlunoDAO.readByCurso(id_aluno, id_curso);
     }
 
     static async readByMatricula(mat_aluno){
-        return await alunoDAO.readByMatricula(mat_aluno);
+        return await AlunoDAO.readByMatricula(mat_aluno);
     }
 
     static async readAll(){
@@ -29,12 +29,12 @@ export default class AlunoController {
     }
 
     static async readAllByCurso(id_curso){
-        return await alunoDAO.readAllByCurso(id_curso);
+        return await AlunoDAO.readAllByCurso(id_curso);
     }
 
     static async update(aluno, id_curso, id_grade){
         var alunoObj = new Aluno();
-        alunoObj.parseEntidade(aluno); 
+        alunoObj.parseEntidade(aluno);
         if (typeof(id_curso) == "undefined" && typeof(id_grade) == "undefined")
             return await AlunoDAO.update(alunoObj);
         else if (typeof(id_curso) != "undefined" && typeof(id_grade) == "undefined")
@@ -53,14 +53,12 @@ export default class AlunoController {
     }
 
     static async listarAlunosTurma(id){
-        var turma = new Turma();
-        turma.setId(id);
-        return await AlunoDAO.listarAlunosTurma(turma);
+      return await AlunoDAO.listarAlunosTurma(id);
     }
 
     /*como trabalhar com atribs do tipo obj no json??
     Ainda não implementado no AlunoRouter
-    static async createNota(avaliacaoAluno){ 
+    static async createNota(avaliacaoAluno){
         var avaliacaoAlunoObj = new AvaliacaoAluno();
         avaliacaoAlunoObj.parseEntidade(avaliacaoAluno);
         return await AlunoDAO.createNota(avaliacaoAlunoObj);

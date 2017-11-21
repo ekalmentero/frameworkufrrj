@@ -7,16 +7,17 @@ const aluno = express.Router({mergeParams: true});
 aluno.use(bodyParser.json());
 
 aluno.get('/:id_aluno', async function(req,res){
-    if (typeof(req.params.id_curso) != "undefined") 
+
+    if (typeof(req.params.id_curso) != "undefined")
         res.send(await AlunoController.readByCurso(req.params.id_aluno, req.params.id_curso)); //Serviço: Buscar aluno por curso
-    else if (typeof(req.params.id_aluno) != "string")
-        res.send(await AlunoController.read(req.params.id_aluno)); //Serviço: Buscar aluno por id
+    else if (((req.params.id_aluno).length) < 10)
+       res.send(await AlunoController.read(req.params.id_aluno)); //Serviço: Buscar aluno por id
     else
-        res.send(await AlunoController.readByMatricula(req.params.id_aluno)); //Serviço: Buscar aluno por matrícula 
+        res.send(await AlunoController.readByMatricula(req.params.id_aluno)); //Serviço: Buscar aluno por matrícula*/
 })
 
 aluno.get('/listarAlunosTurma/:id_turma',async function (req, res){ //Serviço: Listar alunos de uma turma
-    res.send(await AlunoController.listarAlunosTurma(req.params.id));
+    res.send(await AlunoController.listarAlunosTurma(req.params.id_turma));
   })
 
 aluno.route('/')
@@ -30,13 +31,13 @@ aluno.route('/')
         res.send(await AlunoController.readAll());
   })
   .patch(async function(req,res){
-    if (typeof(req.params.id_curso) != "undefined" && typeof(req.params.id_grade) != "undefined") 
+    if (typeof(req.params.id_curso) != "undefined" && typeof(req.params.id_grade) != "undefined")
         res.send(await AlunoController.update(req.body, req.params.id_curso, req.params.id_grade));
 
-    else if (typeof(req.params.id_curso) != "undefined" && typeof(req.params.id_grade) == "undefined") 
+    else if (typeof(req.params.id_curso) != "undefined" && typeof(req.params.id_grade) == "undefined")
         res.send(await AlunoController.update(req.body, req.params.id_curso));
 
-    else if (typeof(req.params.id_curso) == "undefined" && typeof(req.params.id_grade) != "undefined") 
+    else if (typeof(req.params.id_curso) == "undefined" && typeof(req.params.id_grade) != "undefined")
         res.send(await AlunoController.update(req.body, req.params.id_grade));
     else
         res.send(await AlunoController.update(req.body));

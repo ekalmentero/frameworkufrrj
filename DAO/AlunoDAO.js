@@ -3,7 +3,7 @@ import BD from "../BD";
 import Aluno from "../modelos/Aluno";
 
 export default class AlunoDAO {
-  
+
   static async create(aluno, id_curso, id_grade) {
     try {
       var foreignKeys=[];
@@ -70,7 +70,7 @@ export default class AlunoDAO {
         foreignKeys.push(['grade',id_grade]);
         return await BD.update(aluno, foreignKeys);
       }
-      else 
+      else
         return await BD.update(aluno);
     } catch (error) {
       return error.message;
@@ -85,21 +85,16 @@ export default class AlunoDAO {
     }
   }
 
-  static async listarAlunosTurma(turma){
-    var id=turma.getId();
+  static async listarAlunosTurma(id){
     var i=0;
-    var result=BD.query('SELECT aluno FROM aluno_turma WHERE turma='+id); 
+    var result= await BD.query("SELECT aluno FROM aluno_turma WHERE turma="+id);
     var array= new Array();
 
-    while(i<result.length){
+      while(i<result.length){
       var alunoTemp= new Aluno();
       alunoTemp.setId(result[i].aluno);
-      var resultAluno=BD.buscar(alunoTemp); 
-      alunoTemp.setNome(resultAluno[0].nome);
-      alunoTemp.setMatricula(resultAluno[0].matricula);
-      alunoTemp.setAtivo(resultAluno[0].ativo);
-      alunoTemp.setIngresso(resultAluno[0].ingresso);
-      array.push(alunoTemp);
+      var resultAluno=await BD.buscar(alunoTemp);
+      array.push(resultAluno[0]);
       i++;
     }
     return array;
@@ -121,7 +116,7 @@ export default class AlunoDAO {
       return error.message;
     }
   }
-  
+
   static async deleteNota(avaliacaoAluno) {
     try {
       return await BD.deletar(avaliacaoAluno);
