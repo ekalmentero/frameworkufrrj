@@ -16,11 +16,11 @@ export default class Periodo extends Entidade{
     this.setDataFim(data_fim);
     this.setNome(nome);*/
   }
-  get getDataInicio(){
+  get getData_inicio(){
     return this.data_inicio;
   }
 
-  get getDataFim(){
+  get getData_fim(){
     return this.data_fim;
 
   }
@@ -37,11 +37,11 @@ export default class Periodo extends Entidade{
     return this.id;
   }
 
-  setDataInicio(data_inicio){
+  setData_inicio(data_inicio){
     this.data_inicio=data_inicio;
   }
 
-  setDataFim(data_fim){
+  setData_fim(data_fim){
     this.data_fim=data_fim;
   }
 

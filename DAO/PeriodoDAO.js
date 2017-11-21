@@ -27,9 +27,10 @@ static async read(periodo){
     var result= await BD.buscar(periodo);
     var periodoObj= new Periodo();
     periodoObj.setNome(result[0].nome);
-    periodoObj.setDataInicio(result[0].data_inicio);
-    periodoObj.setDataFim(result[0].data_fim);
+    periodoObj.setData_inicio(result[0].data_inicio);
+    periodoObj.setData_fim(result[0].data_fim);
     periodoObj.setId(result[0].id);
+
     return periodoObj;
   }
   catch(error){
@@ -37,7 +38,13 @@ static async read(periodo){
   }
 }
   static async readAll(){
-      return await BD.query("SELECT * FROM periodo WHERE deleted=0");
+      var result= await BD.query("SELECT * FROM periodo WHERE deleted=0");
+      var periodos=[];
+      for(let object of result){
+        var periodo= new Periodo();
+        periodo.parseEntidade(object);
+        periodos.push(periodo);
+      }
   }
 
   static async update(periodo){
