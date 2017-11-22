@@ -17,7 +17,7 @@ export default class Instituto extends Entidade{
 		this.predios = predios;
 	}
 
-	get getPredios(){
+	get Predios(){
 		return this.predios;
 	}
 
@@ -25,7 +25,7 @@ export default class Instituto extends Entidade{
 		this.sigla = sigla;
 	}
 
-	get getSigla(){
+	get Sigla(){
 		return this.sigla;
 	}
 
@@ -33,7 +33,7 @@ export default class Instituto extends Entidade{
 		this.nome = nome;
 	}
 
-	get getNome(){
+	get Nome(){
 		return this.nome;
 	}
 
@@ -41,7 +41,7 @@ export default class Instituto extends Entidade{
 		this.id = id;
 	}
 
-	get getId(){
+	get Id(){
 		return this.id;
 	}
 

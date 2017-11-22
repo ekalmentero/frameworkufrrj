@@ -14,15 +14,15 @@ export default class Professor extends Entidade {
     //this.setMatricula(matricula);
   }
 
-  get getNome(){
+  get Nome(){
     return this.nome;
   }
 
-  get getMatricula(){
+  get Matricula(){
     return this.matricula;
   }
 
-  get getId(){
+  get Id(){
     return this.id;
   }
 

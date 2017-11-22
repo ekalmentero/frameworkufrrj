@@ -26,15 +26,15 @@ export default class Horario extends Entidade{
 		this.hora_fim = h_fim;
 	}
 
-	get getId(){
+	get Id(){
 		return this.id;
 	}
 	
-	get getHoraInicio(){
+	get HoraInicio(){
 		return this.hora_inicio;
 	}
 	
-	get getHoraFim(){
+	get HoraFim(){
 		return this.hora_fim;
 	}
 

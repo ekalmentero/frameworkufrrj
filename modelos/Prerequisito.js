@@ -9,14 +9,14 @@ export default class Prerequisito{
     constructor(){
       super();
     }
-     get getDisciplina() {
+     get Disciplina() {
         return this.disciplina;
       }
       
-      get getRequisito() {
+      get Requisito() {
         return this.requisito;
       }
-      get getGrade() {
+      get Grade() {
         return this.grade;
       }
       

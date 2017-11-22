@@ -13,7 +13,7 @@ export default class Aula extends Entidade{
 		
 	}
 
-	get getData(){
+	get Data(){
 		return this.data;
 	}
 
@@ -25,11 +25,11 @@ export default class Aula extends Entidade{
 		this.turma_id = id;
 	}
 
-	get getTurmaId(){
+	get TurmaId(){
 		return this.turma_id;
 	}
 
-	get getId(){
+	get Id(){
 		return this.id;
 	}
 
@@ -37,7 +37,7 @@ export default class Aula extends Entidade{
 		this.data = data;
 	}
 
-	get getTurma(){
+	get Turma(){
 		return this.turma;
 	}
 

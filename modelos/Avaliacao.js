@@ -13,20 +13,20 @@ export default class Avaliacao extends Entidade {
       super();
     }
 
-     get getId() {
+     get Id() {
         return this.id;
       }
-      get getTurma() {
+      get Turma() {
         return this.turma;
       }
       
-      get getNome() {
+      get Nome() {
         return this.nome;
       }
-      get getData() {
+      get Data() {
         return this.data;
       }
-      get getDescricao() {
+      get Descricao() {
         return this.descricao;
       }
       

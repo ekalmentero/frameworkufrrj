@@ -14,31 +14,31 @@ export default class Curso extends Entidade {
         super();
     }
 
-    get getId(){
+    get Id(){
         return this.id;
     }
 
-    get getNome(){
+    get Nome(){
         return this.nome;
     }
 
-    get getLimite_periodos(){
+    get Limite_periodos(){
         return this.limite_periodos;
     }
 
-    get getTurno(){
+    get Turno(){
         return this.turno;
     }
 
-    get getCodigo(){
+    get Codigo(){
         return this.codigo;
     }
 
-    get getDepartamento_id(){
+    get Departamento_id(){
         return this.departamento_id;
     }
 
-    get getDeleted(){
+    get Deleted(){
         return this.deleted;
     }
 

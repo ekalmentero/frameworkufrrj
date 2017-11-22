@@ -14,28 +14,28 @@ export default class Turma extends Entidade{
     super();
   }
 
-  get getCodigo(){
+  get Codigo(){
     return this.codigo;
   }
 
-  get getVagas(){
+  get Vagas(){
     return this.vagas;
 
   }
 
-  get getDisciplina(){
+  get Disciplina(){
     return this.disciplina;
   }
 
-  get getPeriodo(){
+  get Periodo(){
     return this.periodo;
   }
 
-  get getProfessor(){
+  get Professor(){
     return this.professor();
   }
 
-  get getId(){
+  get Id(){
     return this.id;
   }
 

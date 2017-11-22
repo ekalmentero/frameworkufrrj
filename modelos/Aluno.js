@@ -15,28 +15,28 @@ export default class Aluno extends Entidade{
     constructor(){
       super();
     }
-     get getId() {
+     get Id() {
         return this.id;
       }
-      get getCurso() {
+      get Curso() {
         return this.curso;
       }
-      get getGrade() {
+      get Grade() {
         return this.grade;
       }
-      get getNome() {
+      get Nome() {
         return this.nome;
       }
-      get getMatricula() {
+      get Matricula() {
         return this.matricula;
       }
-      get getAtivo() {
+      get Ativo() {
         return this.ativo;
       }
-      get getIngresso() {
+      get Ingresso() {
         return this.ingresso;
       }
-      get getAvaliacoes(){
+      get Avaliacoes(){
         return this.avaliacoes;
       }
 

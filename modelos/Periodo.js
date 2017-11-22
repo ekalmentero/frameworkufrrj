@@ -16,24 +16,24 @@ export default class Periodo extends Entidade{
     this.setDataFim(data_fim);
     this.setNome(nome);*/
   }
-  get getDataInicio(){
+  get DataInicio(){
     return this.data_inicio;
   }
 
-  get getDataFim(){
+  get DataFim(){
     return this.data_fim;
 
   }
 
-  get getNome(){
+  get Nome(){
     return this.nome;
   }
 
-  get getDeleted(){
+  get Deleted(){
     return this.deleted;
   }
 
-  get getId(){
+  get Id(){
     return this.id;
   }
 

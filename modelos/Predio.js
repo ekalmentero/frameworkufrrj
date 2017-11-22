@@ -49,32 +49,32 @@ export default class Predio extends Entidade{
 		this.deleted = deleted;
 	}
 
-	get getInstitutos(){
+	get Institutos(){
 		return this.institutos;
 	}
 
-	get getId(){
+	get Id(){
 		return this.id;
 	}
 
-	get getSigla(){
+	get Sigla(){
 		return this.sigla;
 	}
 
-	get getNome(){
+	get Nome(){
 		return this.nome;
 	}
 
-	get getLat(){
+	get Lat(){
 		return this.lat;
 	}
 
 
-	get getLong(){
+	get Long(){
 		return this.long;
 	}
 
-	get getDeleted(){
+	get Deleted(){
 		return this.deleted;
 	}
 

@@ -24,14 +24,14 @@ LocaleConfig.locales['br'] = {
 LocaleConfig.defaultLocale = 'br';
 
 var datas = {};
-var descricoes = {};
+var descricoes = [];
 
 fetch('http://localhost:8080/calendario',)
 .then((res) => res.json())
 .then((resJson) => {
     datas = resJson.datas;
     for(var i in resJson.datas){
-        console.warn(i,resJson.datas[i].titulo);
+        descricoes.push({dia:i,titulo:resJson.datas[i].titulo});
     }
  })
  .catch((erro) => Alert.alert(erro.message));
@@ -62,9 +62,10 @@ export default class Calendario extends React.Component {
                 />
 
                 <FlatList
-                    data={datas}
+                    style={{margin:15,height: 200}}
+                    data={descricoes}
                     renderItem={({ item }) => (
-                        <Text>Teste</Text>
+                        <Text>Dia: {item.dia}  |  {item.titulo}</Text>
                     )}
                 />
 

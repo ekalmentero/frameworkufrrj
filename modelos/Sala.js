@@ -33,15 +33,15 @@ export default class Sala extends Entidade{
 		return this.id;
 	}
 
-	get getPredio(){
+	get Predio(){
 		return this.predio;
 	}
 
-	get getNome(){
+	get Nome(){
 		return this.nome;
 	}
 
-	get getDeleted(){
+	get Deleted(){
 		return this.deleted;
 	}
 

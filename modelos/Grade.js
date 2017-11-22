@@ -12,17 +12,17 @@ export default class Grade extends Entidade {
       super();
     }
 
-     get getId() {
+     get Id() {
         return this.id;
       }
       
-      get getInicio_vigencia() {
+      get Inicio_vigencia() {
         return this.inicio_vigencia;
       }
-      get getDisponivel() {
+      get Disponivel() {
         return this.disponivel;
       }
-      get getCurso() {
+      get Curso() {
         return this.curso;
       }
       

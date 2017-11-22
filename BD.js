@@ -5,7 +5,7 @@ let tabelas = { // Exemplo
     'Aluno' : "aluno",
     'Avaliacao' : "avaliacao",
     'Grade' : "grade",
-    'AvaliacaoAluno' : "avaliacao_aluno",
+    'Resultado' : "avaliacao_aluno",
     'Prerequisito' : "prerequisito",
     'Instituto' : "instituto",
     'Professor' : "professor",
@@ -41,7 +41,7 @@ export default class BD {
         for(let propriedade of Object.getOwnPropertyNames(Object.getPrototypeOf(obj))){
             if(propriedade == "constructor") continue;
             if(typeof(obj[propriedade]) == 'function' || obj[propriedade] == undefined) continue;
-            if(propriedade == "getId") continue;
+            if(propriedade.toLowerCase() == "id") continue;
 
             if(typeof(obj[propriedade]) == "object") continue;
 
@@ -49,7 +49,7 @@ export default class BD {
             query += propriedade.replace("get","").toLowerCase() + " = " + tmp + obj[propriedade] + tmp + ",";
         }
         query = query.slice(0,-1);
-        
+
         return new Promise(
             function(resolve,reject){
                 conexao.query(query, function (erro, retorno, colunas) {

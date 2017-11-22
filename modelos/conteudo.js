@@ -12,7 +12,7 @@ export default class Conteudo {
 		this.SetAula(aula)
 	}
 
-	get getId(){
+	get Id(){
 		return this.id;
 	}
 
@@ -20,7 +20,7 @@ export default class Conteudo {
 		this.id = id;
 	}
 
-	get getAula(){
+	get Aula(){
 		return this.aula;
 	}
 
@@ -28,7 +28,7 @@ export default class Conteudo {
 		this.aula = aula;
 	}
 
-	get getNome(){
+	get Nome(){
 		return this.nome;
 	}
 

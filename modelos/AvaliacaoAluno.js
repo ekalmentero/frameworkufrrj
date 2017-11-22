@@ -11,14 +11,14 @@ export default class AvaliacaoAluno extends Entidade{
       super();
     }
 
-     get getAvaliacao() {
+     get Avaliacao() {
         return this.avaliacao;
       }
 
-      get getAluno() {
+      get Aluno() {
         return this.aluno;
       }
-      get getNota() {
+      get Nota() {
         return this.nota;
       }
       
