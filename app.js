@@ -23,7 +23,6 @@ function verificaLogin(req, res, next) {
             if (err) {
                 return res.json({ success: false, msg: 'Token inválido ou expirado' });
             } else {
-                req.decod = decod;
                 next();
             }
         });
@@ -62,12 +61,6 @@ rotas.use('/alunos',alunos)
 
 rotas.all("/login",function(req,res){
     if(req.session.token) res.redirect("/");
-
-    // if(req.body.login == "bruno" && req.body.senha == crypto.createHash("md5").update("senha").digest("hex")){
-    //     res.send({status:1,msg:"Logado",token:crypto.randomBytes(32).toString()});
-    // } else {
-    //     res.send({status:0,msg:"Login incorreto"});
-    // }
 
     const conteudo = {
         id: 0
