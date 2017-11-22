@@ -42,31 +42,31 @@ export default class Curso extends Entidade {
         return this.deleted;
     }
 
-    setId(id){
+    set Id(id){
         this.id = id;
     }
 
-    setNome(nome){
+    set Nome(nome){
         if (typeof(nome) == "string") this.nome = nome;
     }
 
-    setCodigo(codigo){
+    set Codigo(codigo){
         if (typeof(codigo) == "string") this.codigo = codigo;
     }
 
-    setLimite_periodos(limite_periodos){
+    set Limite_periodos(limite_periodos){
         if (typeof(limite_periodos) == "number") this.limite_periodos = limite_periodos;
     }
 
-    setTurno(turno){
+    set Turno(turno){
         if (typeof(turno) == "string") this.turno = turno;
     }
 
-    setDepartamento_id(departamento_id){
+    set Departamento_id(departamento_id){
         if (typeof(departamento_id) == "number") this.departamento_id = departamento_id;
     }
 
-    setDeleted(deleted){
+    set Deleted(deleted){
         if (typeof(deleted) == "number") this.deleted = deleted;
     }
 }

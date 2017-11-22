@@ -13,7 +13,7 @@ export default class Instituto extends Entidade{
 	//
 	// }
 
-	setPredios(sigla){
+	set Predios(sigla){
 		this.predios = predios;
 	}
 
@@ -21,7 +21,7 @@ export default class Instituto extends Entidade{
 		return this.predios;
 	}
 
-	setSigla(sigla){
+	set Sigla(sigla){
 		this.sigla = sigla;
 	}
 
@@ -29,7 +29,7 @@ export default class Instituto extends Entidade{
 		return this.sigla;
 	}
 
-	setNome(nome){
+	set Nome(nome){
 		this.nome = nome;
 	}
 
@@ -37,7 +37,7 @@ export default class Instituto extends Entidade{
 		return this.nome;
 	}
 
-	setId(id){
+	set Id(id){
 		this.id = id;
 	}
 

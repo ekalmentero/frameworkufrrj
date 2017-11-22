@@ -22,13 +22,13 @@ export default class AvaliacaoAluno extends Entidade{
         return this.nota;
       }
       
-      setAvaliacao(avaliacao) {
+      set Avaliacao(avaliacao) {
         this.avaliacao = avaliacao;
       }
-      setAluno(aluno) {
+      set Aluno(aluno) {
         this.aluno = aluno;
       }
-      setNota(nota) {
+      set Nota(nota) {
         this.nota = nota;
       }
 

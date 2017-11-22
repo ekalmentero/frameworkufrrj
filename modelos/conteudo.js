@@ -7,16 +7,16 @@ export default class Conteudo {
 	@Private aula;
 
 	constructor(id, nome, aula){
-		this.SetId(id);
-		this.SetNome(nome);
-		this.SetAula(aula)
+		this.set Id(id);
+		this.set Nome(nome);
+		this.set Aula(aula)
 	}
 
 	get Id(){
 		return this.id;
 	}
 
-	setId(id){
+	set Id(id){
 		this.id = id;
 	}
 
@@ -24,7 +24,7 @@ export default class Conteudo {
 		return this.aula;
 	}
 
-	setAula(aula){
+	set Aula(aula){
 		this.aula = aula;
 	}
 
@@ -32,7 +32,7 @@ export default class Conteudo {
 		return this.nome;
 	}
 
-	setNome(nome){
+	set Nome(nome){
 		this.nome = nome;
 	}
 

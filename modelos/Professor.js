@@ -10,8 +10,8 @@ export default class Professor extends Entidade {
 
   constructor() {
     super();
-    //this.setNome(nome);
-    //this.setMatricula(matricula);
+    //this.set Nome(nome);
+    //this.set Matricula(matricula);
   }
 
   get Nome(){
@@ -26,15 +26,15 @@ export default class Professor extends Entidade {
     return this.id;
   }
 
-  setNome(nome){
+  set Nome(nome){
     this.nome=nome;
   }
 
-  setMatricula(matricula){
+  set Matricula(matricula){
     this.matricula=matricula;
   }
 
-  setId(id){
+  set Id(id){
     this.id=id;
   }
 }

@@ -17,11 +17,11 @@ export default class Aula extends Entidade{
 		return this.data;
 	}
 
-	setId(id){
+	set Id(id){
 		this.id = id;
 	}
 
-	setTurmaId(id){
+	set TurmaId(id){
 		this.turma_id = id;
 	}
 
@@ -33,7 +33,7 @@ export default class Aula extends Entidade{
 		return this.id;
 	}
 
-	setData(data){
+	set Data(data){
 		this.data = data;
 	}
 
@@ -41,7 +41,7 @@ export default class Aula extends Entidade{
 		return this.turma;
 	}
 
-	setTurma(turma){
+	set Turma(turma){
 		this.turma = turma;
 	}
 

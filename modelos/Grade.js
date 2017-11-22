@@ -26,16 +26,16 @@ export default class Grade extends Entidade {
         return this.curso;
       }
       
-      setId(id) {
+      set Id(id) {
         this.id = id;
       }
-      setInicio_vigencia(inicio_vigencia) {
+      set Inicio_vigencia(inicio_vigencia) {
         this.inicio_vigencia = inicio_vigencia;
       }
-      setDisponivel(disponivel) {
+      set Disponivel(disponivel) {
         this.disponivel = disponivel;
       }
-      setCurso(curso) {
+      set Curso(curso) {
         this.curso = curso;
       }
       

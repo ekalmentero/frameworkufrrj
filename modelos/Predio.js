@@ -12,40 +12,40 @@ export default class Predio extends Entidade{
 	@Private institutos;
 
 	constructor(id, nome, sigla, lat, long, deleted, institutos){
-		this.setInstitutos(institutos);
-		this.setId(id);
-		this.setSigla(sigla);
-		this.setNome(nome);
-		this.setLat(lat);
-		this.setLong(long);
-		this.setDeleted(deleted);
+		this.set Institutos(institutos);
+		this.set Id(id);
+		this.set Sigla(sigla);
+		this.set Nome(nome);
+		this.set Lat(lat);
+		this.set Long(long);
+		this.set Deleted(deleted);
 	}
 
-	setInstitutos(institutos){
+	set Institutos(institutos){
 		this.institutos = institutos;
 	}
 
-	setId(id){
+	set Id(id){
 		this.id = id;
 	}
 
-	setSigla(sigla){
+	set Sigla(sigla){
 		this.sigla = sigla;
 	}
 
-	setNome(nome){
+	set Nome(nome){
 		this.nome = nome;
 	}
 
-	setLat(lat){
+	set Lat(lat){
 		this.lat = lat;
 	}
 
-	setLong(long){
+	set Long(long){
 		this.long = long;
 	}
 
-	setDeleted(deleted){
+	set Deleted(deleted){
 		this.deleted = deleted;
 	}
 

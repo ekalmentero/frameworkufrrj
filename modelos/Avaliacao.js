@@ -30,19 +30,19 @@ export default class Avaliacao extends Entidade {
         return this.descricao;
       }
       
-      setId(id) {
+      set Id(id) {
         this.id = id;
       }
-      setNome(nome) {
+      set Nome(nome) {
         this.nome = nome;
       }
-      setData(data) {
+      set Data(data) {
         this.data = data;
       }
-      setDescricao(descricao) {
+      set Descricao(descricao) {
         this.descricao = descricao;
       }
-      setTurma(turma) {
+      set Turma(turma) {
         this.turma = turma;
       }
 

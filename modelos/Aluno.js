@@ -40,28 +40,28 @@ export default class Aluno extends Entidade{
         return this.avaliacoes;
       }
 
-      setId(id) {
+      set Id(id) {
         this.id = id;
       }
-      setNome(nome) {
+      set Nome(nome) {
         this.nome = nome;
       }
-      setMatricula(matricula) {
+      set Matricula(matricula) {
         this.matricula = matricula;
       }
-      setAtivo(ativo) {
+      set Ativo(ativo) {
         this.ativo = ativo;
       }
-      setIngresso(ingresso) {
+      set Ingresso(ingresso) {
         this.ingresso = ingresso;
       }
-      setCurso(curso) {
+      set Curso(curso) {
         this.curso = curso;
       }
-      setGrade(grade) {
+      set Grade(grade) {
         this.grade = grade;
       }
-      setAvaliacoes(avaliacao){
+      set Avaliacoes(avaliacao){
         this.avaliacoes.push(avaliacao);
 
       }

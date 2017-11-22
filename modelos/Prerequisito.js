@@ -20,13 +20,13 @@ export default class Prerequisito{
         return this.grade;
       }
       
-      setDisciplina(disciplina) {
+      set Disciplina(disciplina) {
         this.disciplina = disciplina;
       }
-      setRequisito(requisito) {
+      set Requisito(requisito) {
         this.requisito = requisito;
       }
-      setGrade(grade) {
+      set Grade(grade) {
         this.grade = grade;
       }
 
