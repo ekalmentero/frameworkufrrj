@@ -48,3 +48,11 @@ Framework para o desenvolvimento de sistemas baseados no contexto da UFRRJ
 - get/:id -- buscar por id
 - get/.... - busca refinada
 
+# Refactoring das classes da camada de modelo
+
+- Mudar os métodos get, removendo a palavra get antes do nome da classe
+- Ex.: get getProfessor() --> get professor()
+- Mudar os métodos set, incluindo a palavra-chave set e removendo a palavra set antes do nome da classe
+- Ex.: setVagas() --> set vagas() 
+
+
