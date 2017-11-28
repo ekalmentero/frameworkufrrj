@@ -35,7 +35,7 @@ function verificaLogin(req, res, next) {
         res.redirect("/login");
     }
 }
-app.use(verificaLogin);
+//app.use(verificaLogin);
 
 import rotas from './rotas'
 app.use(rotas)
