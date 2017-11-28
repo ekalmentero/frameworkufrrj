@@ -6,12 +6,13 @@ export default class AlunoDAO {
 
   static async create(aluno, id_curso, id_grade) {
     try {
-      var foreignKeys=[];
+      /*var foreignKeys=[];
       foreignKeys.push(['curso',id_curso]);
-      foreignKeys.push(['grade',id_grade]);
+      foreignKeys.push(['grade',aluno.grade()]);
       var retorno = await BD.inserir(aluno, foreignKeys);
-      aluno.setId(retorno);
-      return aluno;
+      aluno.Id(retorno);
+      return aluno;*/
+      return await BD.query("INSERT INTO Aluno SET nome='"+aluno.nome+"',matricula='"+aluno.matricula+"',ativo='"+aluno.ativo+"',ingresso='"+aluno.ingresso+"',curso='"+id_curso+"',grade='"+id_grade+"'");
     } catch (error) {
       return error.message;
     }
@@ -32,42 +33,32 @@ export default class AlunoDAO {
       aluno.setGrade(tmpGrade);
       return aluno;*/
     } catch (error) {
-      return error.message;
+      return (error.message);
     }
   }
 
-  static async readByCurso(id_aluno, id_curso) {
+  /*static async readByCurso(id_aluno, id_curso) {
     return await BD.query("SELECT * FROM aluno WHERE id = " + id_aluno + " AND curso = " + id_curso);
-  }
+  }*/
 
   static async readByMatricula(mat_aluno) {
     return await BD.query("SELECT * FROM aluno WHERE matricula = " + mat_aluno);
   }
 
   static async readAll() {
-    return await BD.query("SELECT * FROM aluno");
+    return await BD.query("SELECT * FROM aluno where deleted = 0");
   }
 
   static async readAllByCurso(id_curso) {
     return await BD.query("SELECT * FROM aluno WHERE curso = " + id_curso);
   }
 
-  static async update(aluno, id_curso, id_grade) {
+  static async update(aluno, id_curso) {
     try {
-      if (typeof(id_curso) != "undefined" && typeof(id_grade) != "undefined"){
+      if (typeof(id_curso) != "undefined"){
         var foreignKeys = [];
         foreignKeys.push(['curso',id_curso]);
-        foreignKeys.push(['grade',id_grade]);
-        return await BD.update(aluno, foreignKeys);
-      }
-      else if (typeof(id_curso) != "undefined" && typeof(id_grade) == "undefined"){
-        var foreignKeys = [];
-        foreignKeys.push(['curso',id_curso]);
-        return await BD.update(aluno, foreignKeys);
-      }
-      else if (typeof(id_curso) == "undefined" && typeof(id_grade) != "undefined"){
-        var foreignKeys = [];
-        foreignKeys.push(['grade',id_grade]);
+        foreignKeys.push(['grade',aluno.grade()]);
         return await BD.update(aluno, foreignKeys);
       }
       else
@@ -92,7 +83,7 @@ export default class AlunoDAO {
 
       while(i<result.length){
       var alunoTemp= new Aluno();
-      alunoTemp.setId(result[i].aluno);
+      alunoTemp.Id(result[i].aluno);
       var resultAluno=await BD.buscar(alunoTemp);
       array.push(resultAluno[0]);
       i++;

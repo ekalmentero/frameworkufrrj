@@ -12,13 +12,13 @@ export default class AlunoController {
 
     static async read(id){
         var aluno = new Aluno();
-        aluno.setId(id);
+        aluno.Id=id;
         return await AlunoDAO.read(aluno);
     }
 
-    static async readByCurso(id_aluno, id_curso){
+    /*static async readByCurso(id_aluno, id_curso){
         return await AlunoDAO.readByCurso(id_aluno, id_curso);
-    }
+    }*/
 
     static async readByMatricula(mat_aluno){
         return await AlunoDAO.readByMatricula(mat_aluno);
@@ -32,17 +32,13 @@ export default class AlunoController {
         return await AlunoDAO.readAllByCurso(id_curso);
     }
 
-    static async update(aluno, id_curso, id_grade){
+    static async update(aluno, id_curso){
         var alunoObj = new Aluno();
         alunoObj.parseEntidade(aluno);
-        if (typeof(id_curso) == "undefined" && typeof(id_grade) == "undefined")
-            return await AlunoDAO.update(alunoObj);
-        else if (typeof(id_curso) != "undefined" && typeof(id_grade) == "undefined")
+        if (typeof(id_curso) != "undefined")
             return await AlunoDAO.update(alunoObj, id_curso);
-        else if (typeof(id_curso) == "undefined" && typeof(id_grade) != "undefined")
-            return await AlunoDAO.update(alunoObj, id_grade);
         else
-            return await AlunoDAO.update(alunoObj, id_curso, id_grade);
+            return await AlunoDAO.update(alunoObj);
 
     }
 

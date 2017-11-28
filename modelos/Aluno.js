@@ -1,44 +1,66 @@
 "use strict";
 import Entidade from './entidade';
+import Curso from '../modelos/curso';
+import Grade from '../modelos/Grade';
 export default class Aluno extends Entidade{
   @Private id;
   @Private nome;
-  @Private matrcula;
+  @Private matricula;
   @Private ativo;
   @Private ingresso;
+  @Private curso = new Curso();
+  @Private grade = new Grade();
 
     constructor(){
       super();
+      this.nome=undefined;
+      this.matricula=undefined;
+      this.ativo=undefined;
+      this.ingresso=undefined;
+      this.curso= new Curso();
+      this.grade= new Grade();
     }
-     get getId() {
+     get Id() {
         return this.id;
       }
-      get getNome() {
+      get Nome() {
         return this.nome;
       }
-      get getMatricula() {
+      get Matricula() {
         return this.matricula;
       }
-      get getAtivo() {
+      get Ativo() {
         return this.ativo;
       }
-      get getIngresso() {
+      get Ingresso() {
         return this.ingresso;
       }
+      get Curso(){
+        return this.curso.toString();
+      }
+      get Grade(){
+        return this.grade.toString();
+      }
 
-      setId(id) {
+      set Id(id) {
         this.id = id;
       }
-      setNome(nome) {
+      set Nome(nome) {
         this.nome = nome;
       }
-      setMatricula(matricula) {
+      set Matricula(matricula) {
         this.matricula = matricula;
       }
-      setAtivo(ativo) {
+      set Ativo(ativo) {
         this.ativo = ativo;
       }
-      setIngresso(ingresso) {
+      set Ingresso(ingresso) {
         this.ingresso = ingresso;
+      }
+      set Ingresso(curso) {
+        this.curso = curso;
+      }
+      set Ingresso(grade) {
+        this.grade = grade;
       }
     }
