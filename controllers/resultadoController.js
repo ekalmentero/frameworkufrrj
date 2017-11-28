@@ -15,6 +15,10 @@ export default class ResultadoController {
         return await ResultadoDAO.readAllByAvaliacao(id_avaliacao);
     }
 
+    static async readAllByAluno(id_aluno){
+        return await ResultadoDAO.readAllByAluno(id_aluno);
+    }
+
     static async update(resultado, id_avaliacao){
         var resultadoObj = new Resultado();
         resultadoObj.parseEntidade(resultado); 

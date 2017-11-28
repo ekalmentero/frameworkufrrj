@@ -18,15 +18,15 @@ export default class ResultadoDAO {
     return await BD.query("SELECT * FROM avaliacao_aluno");
   }
 
-  static async readAllByAluno(alunoId) {
+  static async readAllByAluno(id_aluno) {
     return await BD.query(
-      "SELECT * FROM avaliacao_aluno WHERE aluno = " + alunoId
+      "SELECT * FROM avaliacao_aluno WHERE aluno = " + id_aluno
     );
   }
   
-  static async readAllByAvaliação(avaliaçãoId) { //Serviço: Listar notas de uma avaliação
+  static async readAllByAvaliação(id_avaliacao) { //Serviço: Listar notas de uma avaliação
     return await BD.query(
-      "SELECT * FROM avaliacao_aluno WHERE avaliacao = " + avaliaçãoId
+      "SELECT * FROM avaliacao_aluno WHERE avaliacao = " + id_avaliacao
     );
   }
 

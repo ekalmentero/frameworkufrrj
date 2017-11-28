@@ -20,6 +20,8 @@ resultado.route('/')
   .get(async function(req,res){
     if (typeof(req.params.id_avaliacao) != "undefined")
         res.send(await resultadoController.readAllByAvaliacao(req.params.id_avaliacao));
+    else if (typeof(req.params.id_aluno) != "undefined")
+        res.send(await resultadoController.readAllByAluno(req.params.id_aluno));
     else
         res.send(await resultadoController.readAll());
   })
@@ -27,10 +29,11 @@ resultado.route('/')
     if (typeof(req.params.id_avaliacao) != "undefined")
         res.send(await resultadoController.update(req.body, req.params.id_avaliacao));
     else
-        res.send(await resultadoController.update(req.body));
+        //res.send(await resultadoController.update(req.body));
+        res.sendStatus(403);
   });
   /*.delete(async function(req,res){ sem necessidade de deletar nota, apenas atualizar
       res.send(await resultadoController.delete(req.body));
   });*/
 
-export default avaliacao;
+export default resultado;
