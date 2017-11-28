@@ -9,7 +9,7 @@ export default class AvaliacaoController {
 
     static async read(id){
         var avaliacao = new Avaliacao();
-        avaliacao.setId(id);
+        avaliacao.id = id;
         return await AvaliacaoDAO.read(avaliacao);
     }
 
@@ -27,7 +27,7 @@ export default class AvaliacaoController {
 
     static async update(avaliacao, id_turma){
         var avaliacaoObj = new Avaliacao();
-        avaliacaoObj.parseEntidade(avaliacao); 
+        avaliacaoObj.parseEntidade(avaliacao);
         if (typeof(id_turma) == "undefined")
             return await AvaliacaoDAO.update(avaliacaoObj);
         else

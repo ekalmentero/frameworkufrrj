@@ -8,7 +8,7 @@ export default class AvaliacaoDAO {
       var foreignKeys = [];
       foreignKeys.push(['turma', id_turma]);
       var retorno = await BD.inserir(avaliacao, foreignKeys);
-      avaliacao.setId(retorno);
+      avaliacao.Id = retorno;
 
       return avaliacao;
 
@@ -67,9 +67,9 @@ export default class AvaliacaoDAO {
 
       while(i<retorno.length){
         var avlTemp= new Avaliacao();
-        avlTemp.setId(retorno[i].id);
-        avlTemp.setNome(retorno[i].nome);
-        avlTemp.setData(retorno[i].data);
+        avlTemp.Id(retorno[i].id);
+        avlTemp.Nome(retorno[i].nome);
+        avlTemp.Data(retorno[i].data);
         avlTemp.setDescricao(retorno[i].descricao);
         array.push(avlTemp);
         i++;
