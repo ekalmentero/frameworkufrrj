@@ -37,23 +37,23 @@ export default class Periodo extends Entidade{
     return this.id;
   }
 
-  setData_inicio(data_inicio){
+  set Data_inicio(data_inicio){
     this.data_inicio=data_inicio;
   }
 
-  setData_fim(data_fim){
+  set Data_fim(data_fim){
     this.data_fim=data_fim;
   }
 
-    setNome(nome){
+  set Nome(nome){
     this.nome=nome;
   }
 
-  setDeleted(deleted){
+  set Deleted(deleted){
     this.deleted=deleted;
   }
 
-  setId(id){
+  set Id(id){
     this.id=id;
   }
 
