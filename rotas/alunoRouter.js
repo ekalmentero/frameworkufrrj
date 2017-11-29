@@ -24,7 +24,7 @@ aluno.get('/:id_aluno', async function(req,res){
 
 aluno.route('/')
   .post(async function(req,res){
-      res.send(await AlunoController.create(req.body, req.params.id_curso, req.body.grade));
+      res.send(await AlunoController.create(req.body, req.params.id_curso));
   })
   .get(async function(req,res){
     if (typeof(req.params.id_curso) != "undefined")

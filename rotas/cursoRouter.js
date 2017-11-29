@@ -1,10 +1,13 @@
 import express from 'express';
 import bodyParser from 'body-parser';
+import alunoRouter from "./alunoRouter";
 import CursoController from '../controllers/cursoController';
 
 const curso = express.Router({mergeParams: true});
 
 curso.use(bodyParser.json());
+
+curso.use('/:id_curso/alunos', alunoRouter);
 
 curso.get('/:id_curso', async function(req, res){
   if (typeof(req.params.id_curso) != "undefined")

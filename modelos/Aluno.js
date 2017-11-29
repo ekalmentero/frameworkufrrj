@@ -8,8 +8,9 @@ export default class Aluno extends Entidade{
   @Private matricula;
   @Private ativo;
   @Private ingresso;
-  @Private curso = new Curso();
-  @Private grade = new Grade();
+  @Private curso;
+  @Private grade;
+  @Private usuario;
 
     constructor(){
       super();
@@ -17,8 +18,8 @@ export default class Aluno extends Entidade{
       this.matricula=undefined;
       this.ativo=undefined;
       this.ingresso=undefined;
-      this.curso= new Curso();
-      this.grade= new Grade();
+      this.grade=undefined;
+      this.usuario=undefined;
     }
      get Id() {
         return this.id;
@@ -36,10 +37,13 @@ export default class Aluno extends Entidade{
         return this.ingresso;
       }
       get Curso(){
-        return this.curso.toString();
+        return this.curso;
       }
       get Grade(){
-        return this.grade.toString();
+        return this.grade;
+      }
+      get Usuario(){
+        return this.usuario;
       }
 
       set Id(id) {
@@ -57,10 +61,13 @@ export default class Aluno extends Entidade{
       set Ingresso(ingresso) {
         this.ingresso = ingresso;
       }
-      set Ingresso(curso) {
+      set Curso(curso) {
         this.curso = curso;
       }
-      set Ingresso(grade) {
+      set Grade(grade) {
         this.grade = grade;
+      }
+      set Usuario(usuario) {
+        this.usuario = usuario;
       }
     }

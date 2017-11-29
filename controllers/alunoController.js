@@ -4,10 +4,10 @@ import Turma from '../modelos/Turma';
 import AvaliacaoAluno from '../modelos/AvaliacaoAluno';
 
 export default class AlunoController {
-    static async create(aluno, id_curso, id_grade){
+    static async create(aluno, id_curso){
         var alunoObj = new Aluno();
         alunoObj.parseEntidade(aluno);
-        return await AlunoDAO.create(alunoObj, id_curso, id_grade);
+        return await AlunoDAO.create(alunoObj, id_curso);
     }
 
     static async read(id){
