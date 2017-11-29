@@ -6,7 +6,7 @@ import Resultado from "../modelos/Resultado";
 export default class ResultadoDAO {
   static async create(resultado, id_avaliacao) { //Serviço: Inserir nota para uma avaliação
     try {
-      return await BD.query(
+      await BD.query(
         "INSERT INTO avaliacao_aluno SET avaliacao = "+id_avaliacao+", aluno = "+resultado.aluno+", nota = "+resultado.nota
       );
     } catch (error) {
@@ -24,7 +24,7 @@ export default class ResultadoDAO {
     );
   }
   
-  static async readAllByAvaliação(id_avaliacao) { //Serviço: Listar notas de uma avaliação
+  static async readAllByAvaliacao(id_avaliacao) { //Serviço: Listar notas de uma avaliação
     return await BD.query(
       "SELECT * FROM avaliacao_aluno WHERE avaliacao = " + id_avaliacao
     );
@@ -32,8 +32,8 @@ export default class ResultadoDAO {
 
   static async update(resultado, id_avaliacao) {
     try {
-      return await BD.query(
-        "UPDATE avaliacao_aluno SET avaliacao = "+id_avaliacao+", aluno = "+resultado.aluno+", nota = "+resultado.nota
+      await BD.query(
+        "UPDATE avaliacao_aluno SET nota = "+resultado.nota+" WHERE avaliacao="+id_avaliacao+" AND aluno="+resultado.aluno
       );
     } catch (error) {
       return error.message;

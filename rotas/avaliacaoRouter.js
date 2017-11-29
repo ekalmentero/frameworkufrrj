@@ -1,10 +1,13 @@
 import express from 'express';
 import bodyParser from 'body-parser';
+import resultadoRouter from "./resultadoRouter";
 import avaliacaoController from '../controllers/avaliacaoController';
 
 const avaliacao = express.Router({mergeParams: true});
 
 avaliacao.use(bodyParser.json());
+
+avaliacao.use('/:id_avaliacao/resultados', resultadoRouter);
 
 avaliacao.get('/:id_avaliacao', async function(req, res){
       res.send(await avaliacaoController.read(req.params.id_avaliacao));

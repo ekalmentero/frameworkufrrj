@@ -3,12 +3,11 @@ import Entidade from './entidade';
 import Aluno from './Aluno';
 export default class Resultado extends Entidade{
   @Private nota;
-  @Private aluno = new Aluno();
+  @Private aluno;
   
     constructor(){
       super();
       this.nota=undefined;
-      this.aluno = new Aluno();
     }
       get Nota() {
         return this.nota;

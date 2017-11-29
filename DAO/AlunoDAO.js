@@ -4,7 +4,6 @@ import CursoDAO from './cursoDAO';
 import GradeDAO from './GradeDAO';
 import Aluno from "../modelos/Aluno";
 import Avaliacao from "../modelos/Avaliacao";
-import AvaliacaoAluno from "../modelos/AvaliacaoAluno";
 
 export default class AlunoDAO {
   

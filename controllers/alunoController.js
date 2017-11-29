@@ -1,7 +1,5 @@
 import Aluno from '../modelos/Aluno';
-import AvaliacaoAluno from '../modelos/AvaliacaoAluno';
 import AlunoDAO from '../DAO/AlunoDAO';
-import AvaliacaoAlunoDAO from '../DAO/AvaliacaoAlunoDAO';
 export default class AlunoController {
     static async create(aluno){
         var alunoObj = new Aluno();
@@ -29,13 +27,5 @@ export default class AlunoController {
         var alunoObj = new Aluno();
         alunoObj.parseEntidade(aluno);
         return await AlunoDAO.delete(alunoObj);
-    }
-
-    //como trabalhar com atribs do tipo obj no json??
-    //Ainda não implementado no AlunoRouter
-    static async createNota(avaliacaoAluno){ 
-        var avaliacaoAlunoObj = new AvaliacaoAluno();
-        avaliacaoAlunoObj.parseEntidade(avaliacaoAluno);
-        return await AlunoDAO.createNota(avaliacaoAlunoObj);
     }
 }
