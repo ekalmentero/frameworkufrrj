@@ -4,15 +4,16 @@ import Aluno from "../modelos/Aluno";
 
 export default class AlunoDAO {
 
-  static async create(aluno, id_curso, id_grade) {
+  static async create(aluno, id_curso) {
     try {
-      /*var foreignKeys=[];
+      var foreignKeys=[];
       foreignKeys.push(['curso',id_curso]);
-      foreignKeys.push(['grade',aluno.grade()]);
+      //foreignKeys.push(['grade',aluno.grade]);
+      //foreignKeys.push(['usuario',aluno.usuario]);
       var retorno = await BD.inserir(aluno, foreignKeys);
-      aluno.Id(retorno);
-      return aluno;*/
-      return await BD.query("INSERT INTO Aluno SET nome='"+aluno.nome+"',matricula='"+aluno.matricula+"',ativo='"+aluno.ativo+"',ingresso='"+aluno.ingresso+"',curso='"+id_curso+"',grade='"+id_grade+"'");
+      aluno.id = retorno;
+      return aluno;
+      //return await BD.query("INSERT INTO Aluno SET nome='"+aluno.nome+"',matricula='"+aluno.matricula+"',ativo='"+aluno.ativo+"',ingresso='"+aluno.ingresso+"',curso='"+id_curso+"',grade='"+aluno.grade+"',usuario='"+aluno.usuario+"'");
     } catch (error) {
       return error.message;
     }
