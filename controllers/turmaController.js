@@ -15,7 +15,7 @@ export default class TurmaController{
   static async read(id){
     var turma= new Turma();
 
-    turma.setId(id);
+    turma.id=id;
     return await TurmaDAO.read(turma);
   }
 

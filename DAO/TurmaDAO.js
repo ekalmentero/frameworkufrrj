@@ -105,13 +105,13 @@ export default class TurmaDAO{
 
     while(i<result.lenght){
       var turmaTemp= new Turma(); //variável temp de turma
-      turmaTemp.setId(result[i].turma); //faz a busca da turma usando os ids da busca da linha 83, usando o i para navegar pelas posições
+      turmaTemp.id=result[i].turma; //faz a busca da turma usando os ids da busca da linha 83, usando o i para navegar pelas posições
       var resultTurma=BD.buscar(turmaTemp); //faz a busca
-      turmaTemp.setCodigo(resultTurma[0].codigo); //instancia o objeot
-      turmaTemp.setVagas(resultTurma[0].vagas);
-      turmaTemp.setProfessor(ProfessorDAO.read(resultTurma[0].professor));
-      turmaTemp.setPeriodo(PeridoDAO.read(resultTurma[0].periodo));
-      turmaTemp.setDisciplina(DisciplinaDAO.read(resultTurma[0].disciplina));
+      turmaTemp.codigo=resultTurma[0].codigo; //instancia o objeot
+      turmaTemp.vagas=resultTurma[0].vagas;
+      turmaTemp.professor=ProfessorDAO.read(resultTurma[0].professor);
+      turmaTemp.periodo=PeridoDAO.read(resultTurma[0].periodo);
+      turmaTemp.disciplina=DisciplinaDAO.read(resultTurma[0].disciplina);
       array.push(turmaTemp); //joga no array
       i++;
     }
