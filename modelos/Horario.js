@@ -9,6 +9,7 @@ export default class Horario extends Entidade{
 	@Private hora_fim;
 
 	constructor(id, hora_inicio, hora_fim){
+		super();
 		this.setId(id);
 		this.setHoraInicio(hora_inicio);
 		this.setHoraFim(hora_fim);
