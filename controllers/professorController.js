@@ -7,13 +7,14 @@ export default class ProfessorController{
   static async create(professor, id_departamento){
     var professorObj= new Professor();
     professorObj.parseEntidade(professor);
+    professorObj.departamento.id=id_departamento;
     return await ProfessorDAO.create(professorObj,id_departamento);
   }
 
   static async read(id){
     var professor= new Professor();
 
-    professor.setId(id);
+    professor.Id=id;
     return await ProfessorDAO.read(professor);
   }
 
