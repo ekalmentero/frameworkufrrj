@@ -12,33 +12,32 @@ export default class Grade extends Entidade {
       super();
     }
 
-     get getId() {
+      get Id() {
         return this.id;
       }
-      
-      get getInicio_vigencia() {
+
+      get Inicio_vigencia() {
         return this.inicio_vigencia;
       }
-      get getDisponivel() {
+      get Disponivel() {
         return this.disponivel;
       }
-      get getCurso() {
+      get Curso() {
         return this.curso;
       }
-      
-      setId(id) {
+
+      set Id(id) {
         this.id = id;
       }
-      setInicio_vigencia(inicio_vigencia) {
+      set Inicio_vigencia(inicio_vigencia) {
         this.inicio_vigencia = inicio_vigencia;
       }
-      setDisponivel(disponivel) {
+      set Disponivel(disponivel) {
         this.disponivel = disponivel;
       }
-      setCurso(curso) {
+      set Curso(curso) {
         this.curso = curso;
       }
-      
+
 
 }
-
