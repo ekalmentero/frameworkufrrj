@@ -1,6 +1,6 @@
 import express from 'express';
 import bodyParser from 'body-parser';
-import avaliacaoRouter from "./disciplinaRouter";
+import avaliacaoRouter from "./avaliacaoRouter";
 import TurmaController from '../controllers/turmaController';
 
 const turma= express.Router();
