@@ -20,6 +20,10 @@ class HorarioController {
     static async readAll(){
         return await HorarioDAO.readAll();
     }
+    
+    static async readAllByTurma(id_turma){
+        return await HorarioDAO.readAllByTurma(id_turma);
+    }
 
     static async update(horario){
         var horarioObj = new Horario();

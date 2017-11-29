@@ -1,10 +1,13 @@
 import express from 'express';
 import bodyParser from 'body-parser';
+import horarioRouter from './horarioRouter';
 import TurmaController from '../controllers/turmaController';
 
 const turma= express.Router({mergeParams: true});
 
 turma.use(bodyParser.json());
+
+turma.use('/id_turma/horarios', horarioRouter);
 
 turma.get('/:id', async function(req,res){
 

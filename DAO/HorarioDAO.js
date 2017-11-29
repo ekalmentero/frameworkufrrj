@@ -28,6 +28,17 @@ export default class HorarioDAO {
            
         return hor_return;
     }
+
+    static async readAllByTurma(id_turma){
+        var result = await BD.query("SELECT * FROM horario WHERE turma = " + id_turma);
+        var horarios = [];
+        for (let object of result){
+            var horario = new Horario();
+            horario.parseEntidade(object);
+            horarios.push(horario);
+        } 
+        return horarios;
+    }
    
     static async update(horario){
         return await BD.update(horario);
