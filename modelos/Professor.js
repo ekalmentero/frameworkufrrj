@@ -1,6 +1,4 @@
-import Entidade from './entidade';
-
-
+import Entidade from './Entidade';
 
 export default class Professor extends Entidade {
   @Private id;

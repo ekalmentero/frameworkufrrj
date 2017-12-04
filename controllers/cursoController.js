@@ -1,5 +1,5 @@
-import Curso from '../modelos/curso';
-import CursoDAO from '../DAO/cursoDAO';
+import Curso from '../modelos/Curso';
+import CursoDAO from '../DAO/CursoDAO';
 
 export default class CursoController {
     static async create(curso, idDepartamento = undefined){

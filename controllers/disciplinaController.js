@@ -1,5 +1,5 @@
-import Disciplina from '../modelos/disciplina';
-import DisciplinaDAO from '../DAO/disciplinaDAO';
+import Disciplina from '../modelos/Disciplina';
+import DisciplinaDAO from '../DAO/DisciplinaDAO';
 
 export default class DisciplinaController {
     static async create(disciplina, id_departamento){

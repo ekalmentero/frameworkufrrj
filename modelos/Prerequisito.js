@@ -1,6 +1,8 @@
 "use strict";
+
 import Grade from 'Grade';
 import Disciplina from 'Disciplina';
+
 export default class Prerequisito{
   @Private discuplina = new Disciplina();
   @Private requisito = new Disciplina();

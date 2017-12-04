@@ -1,7 +1,7 @@
 "use strict";
 
-import Departamento from "../modelos/departamento";
-import BD from "../bd";
+import Departamento from "../modelos/Departamento";
+import BD from "../BD";
 
 export default class DepartamentoDAO {
     static async create(departamento){

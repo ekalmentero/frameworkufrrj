@@ -1,4 +1,4 @@
-import Professor from '../modelos/professor';
+import Professor from '../modelos/Professor';
 import ProfessorDAO from '../DAO/ProfessorDAO';
 
 

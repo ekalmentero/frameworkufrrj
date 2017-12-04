@@ -1,7 +1,9 @@
 "use strict";
 import Avaliacao from './Avaliacao';
 import Aluno from './Aluno';
-import Entidade from './entidade';
+import Entidade from './Entidade';
+
+
 export default class AvaliacaoAluno extends Entidade{
   @Private avaliacao = new Avaliacao();
   @Private aluno = new Aluno();

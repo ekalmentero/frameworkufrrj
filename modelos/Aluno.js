@@ -1,7 +1,9 @@
 "use strict";
-import Curso from './curso';
+import Curso from './Curso';
 import Grade from './Grade';
-import Entidade from './entidade';
+import Entidade from './Entidade';
+
+
 export default class Aluno extends Entidade{
   @Private id;
   @Private nome;

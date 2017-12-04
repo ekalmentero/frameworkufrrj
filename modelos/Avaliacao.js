@@ -1,6 +1,6 @@
 "use strict";
 import Turma from './Turma';
-import Entidade from './entidade';
+import Entidade from './Entidade';
 
 export default class Avaliacao extends Entidade {
   @Private id;

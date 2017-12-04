@@ -1,5 +1,5 @@
-import Turma from '../modelos/turma';
-import TurmaDAO from '../DAO/turmaDAO';
+import Turma from '../modelos/Turma';
+import TurmaDAO from '../DAO/TurmaDAO';
 
 
 export default class ProfessorController{

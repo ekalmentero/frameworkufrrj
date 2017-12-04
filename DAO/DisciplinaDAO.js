@@ -1,7 +1,7 @@
 "use strict";
 
-import Disciplina from "../modelos/disciplina";
-import BD from "../bd";
+import Disciplina from "../modelos/Disciplina";
+import BD from "../BD";
 
 export default class DisciplinaDAO {
     static async create(disciplina){

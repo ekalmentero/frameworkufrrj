@@ -1,5 +1,5 @@
-import Departamento from '../modelos/departamento';
-import DepartamentoDAO from '../DAO/departamentoDAO';
+import Departamento from '../modelos/Departamento';
+import DepartamentoDAO from '../DAO/DepartamentoDAO';
 
 export default class DepartamentoController {
     static async create(departamento){

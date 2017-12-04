@@ -1,7 +1,7 @@
 "use strict";
 
-import Curso from "../modelos/curso";
-import BD from "../bd";
+import Curso from "../modelos/Curso";
+import BD from "../BD";
 
 export default class CursoDAO {
     static async create(curso, idDepartamento){

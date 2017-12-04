@@ -1,5 +1,5 @@
-import Entidade from './entidade';
-import Departamento from './departamento';
+import Entidade from './Entidade';
+import Departamento from './Departamento';
 
 export default class Disciplina extends Entidade {
     @Private id;

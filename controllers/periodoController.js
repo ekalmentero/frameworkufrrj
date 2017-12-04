@@ -1,5 +1,5 @@
-import Periodo from '../modelos/periodo'
-import PeriodoDAO from '../DAO/periodoDAO'
+import Periodo from '../modelos/Periodo'
+import PeriodoDAO from '../DAO/PeriodoDAO'
 
 export default class PeriodoController{
 

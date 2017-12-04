@@ -1,5 +1,5 @@
-import avaliacao from '../modelos/avaliacao';
-import avaliacaoDAO from '../DAO/avaliacaoDAO';
+import avaliacao from '../modelos/Avaliacao';
+import AvaliacaoDAO from '../DAO/AvaliacaoDAO';
 
 export default class avaliacaoController {
     static async create(avaliacao, idTurma = undefined){

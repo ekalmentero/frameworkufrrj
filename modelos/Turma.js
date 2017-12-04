@@ -1,4 +1,4 @@
-import Entidade from './entidade';
+import Entidade from './Entidade';
 
 export default class Turma extends Entidade{
 
