@@ -3,7 +3,7 @@ import BD from "../BD";
 import TurmaDAO from './cursoDAO';
 import Aula from "../modelos/Aula";
 import Turma from "../modelos/Turma";
-
+ 
 export default class AulaDAO {
   
   static async create(aula) {

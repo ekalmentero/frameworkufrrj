@@ -6,8 +6,17 @@ const predio = express.Router();
 
 predio.use(bodyParser.json());
 
+
+/*
+ * Comentei esta função para poder usar a função de busca
+
 predio.get('/:id', async function(req,res){
     res.send(await predioController.read(req.params.id));
+})
+*/
+
+predio.get('/search', async function(req,res){
+    res.send(await predioController.search(req.query));
 })
 
 predio.route('/')

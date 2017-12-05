@@ -1,8 +1,6 @@
 "use strict";
 
-import Entidade from './Entidade';
-
-export default class Predio extends Entidade{
+export default class Predio{
 	@Private id;
 	@Private nome;
 	@Private sigla;
@@ -11,14 +9,16 @@ export default class Predio extends Entidade{
 	@Private deleted;
 	@Private institutos;
 
-	constructor(id, nome, sigla, lat, long, deleted, institutos){
-		this.setInstitutos(institutos);
-		this.setId(id);
-		this.setSigla(sigla);
-		this.setNome(nome);
-		this.setLat(lat);
-		this.setLong(long);
-		this.setDeleted(deleted);
+	constructor(){
+
+		this.institutos = [];
+		this.id = null;
+		this.sigla = "";
+		this.nome = "";
+		this.lat = "";
+		this.long = "";
+		this.deleted = 0;
+
 	}
 
 	setInstitutos(institutos){
@@ -49,33 +49,57 @@ export default class Predio extends Entidade{
 		this.deleted = deleted;
 	}
 
-	get getInstitutos(){
+	getInstitutos(){
 		return this.institutos;
 	}
 
-	get getId(){
+	getId(){
 		return this.id;
 	}
 
-	get getSigla(){
+	getSigla(){
 		return this.sigla;
 	}
 
-	get getNome(){
+	getNome(){
 		return this.nome;
 	}
 
-	get getLat(){
+	getLat(){
 		return this.lat;
 	}
 
 
-	get getLong(){
+	getLong(){
 		return this.long;
 	}
 
-	get getDeleted(){
+	getDeleted(){
 		return this.deleted;
+	}
+
+	fillFromObject(obj){
+		console.log('obj', obj);
+		if(obj.institutos !== undefined)
+			this.setInstitutos(obj.institutos)
+		
+		if(obj.id !== undefined)
+			this.setId(obj.id)
+		
+		if(obj.sigla !== undefined)
+			this.setSigla(obj.sigla)
+		
+		if(obj.nome !== undefined)
+			this.setNome(obj.nome)
+		
+		if(obj.lat !== undefined)
+			this.setLat(obj.lat)
+		
+		if(obj.long !== undefined)
+			this.setLong(obj.long)
+		
+		if(obj.deleted !== undefined)
+			this.setDeleted(obj.deleted)
 	}
 
 }

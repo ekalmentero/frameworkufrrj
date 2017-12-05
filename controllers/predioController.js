@@ -7,7 +7,7 @@ class PredioController {
 	
 	static async create(predio, a_id_instituto){
         var predioObj = new Predio();
-        predioObj.parseEntidade(predio);
+        //predioObj.parseEntidade(predio);
         return await PredioDAO.create(predioObj, a_id_instituto);
     }
 
@@ -31,6 +31,24 @@ class PredioController {
         var predioObj = new Predio();
         predioObj.parseEntidade(predio);
         return await PredioDAO.delete(predioObj);
+    }
+
+    static async search(terms){
+        let predio = new Predio();
+
+        if(terms.nome !== undefined)
+            predio.setNome(terms.nome);
+
+        if(terms.sigla !== undefined) 
+            predio.setSigla(terms.sigla);
+
+        if(terms.lat !== undefined)
+            predio.setLat(terms.lat);
+
+        if(terms.long !== undefined)
+            predio.setLong(terms.long);
+
+        return await PredioDAO.search(predio);
     }
 	
 }

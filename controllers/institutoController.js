@@ -5,10 +5,15 @@ import Instituto from '../modelos/Instituto.js';
 
 class InstitutoController {
 	
-	static async create(instituto){
-        var institutoObj = new Instituto();
-        institutoObj.parseEntidade(instituto);
-        return await InstitutoDAO.create(institutoObj);
+	static async create(dados_instituto){
+        let instituto = new Instituto();
+        instituto.fillFromObject(dados_instituto);
+        instituto = await InstitutoDAO.create(instituto);
+        console.log("departamentos", dados_instituto.departamentos)
+        InstitutoDAO.linkDepartamentosByDepsId(instituto, dados_instituto.departamentos);
+        InstitutoDAO.linkPrediosByPrediosId(instituto, dados_instituto.predios);
+
+        return instituto;
     }
 
     static async read(id){
@@ -21,10 +26,10 @@ class InstitutoController {
         return await InstitutoDAO.readAll();
     }
 
-    static async update(instituto){
-        var institutoObj = new Instituto();
-        institutoObj.parseEntidade(instituto); 
-        return await InstitutoDAO.update(institutoObj);
+    static async update(dados_instituto){
+        var instituto = new Instituto();
+        instituto.fillFromObject(dados_instituto);
+        return await InstitutoDAO.update(instituto);
     }
 
     static async delete(instituto){

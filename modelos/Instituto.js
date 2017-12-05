@@ -1,23 +1,25 @@
 "use strict";
 
-import Entidade from './entidade';
-
-export default class Instituto extends Entidade{
+export default class Instituto{
 
 	@Private id;
 	@Private sigla;
 	@Private nome;
 	@Private predios;
 
-	// constructor(){
-	//
-	// }
+	constructor(){
+		this.id = null;
+		this.sigla = "";
+		this.nome = "";
+		this.departamentos = [];
+		this.predios = [];
+	}
 
-	setPredios(sigla){
+	setPredios(predios){
 		this.predios = predios;
 	}
 
-	get getPredios(){
+	getPredios(){
 		return this.predios;
 	}
 
@@ -25,7 +27,7 @@ export default class Instituto extends Entidade{
 		this.sigla = sigla;
 	}
 
-	get getSigla(){
+	getSigla(){
 		return this.sigla;
 	}
 
@@ -33,7 +35,7 @@ export default class Instituto extends Entidade{
 		this.nome = nome;
 	}
 
-	get getNome(){
+	getNome(){
 		return this.nome;
 	}
 
@@ -41,8 +43,46 @@ export default class Instituto extends Entidade{
 		this.id = id;
 	}
 
-	get getId(){
+	getId(){
 		return this.id;
 	}
 
+	setDeleted(deleted){
+		return this.deleted = deleted;
+	}
+
+	getDeleted(){
+		return this.deleted;
+	}
+
+	getDepartamentos(){
+		return this.departamentos;
+	}
+
+	setDepartamentos(deps){
+		this.departamentos = deps;
+	}
+
+	fillFromObject(obj){
+
+		if(obj.id !== undefined)
+			this.setId(obj.id);
+
+		if(obj.nome !== undefined)
+			this.setNome(obj.nome);
+
+		if(obj.sigla !== undefined)
+        	this.setSigla(obj.sigla);
+
+        if(obj.deleted !== undefined)
+        	this.setDeleted(obj.deleted);
+
+        if(obj.predios !== undefined && obj.predios.length > 1)
+        	this.setPredios(obj.predios);
+
+        if(obj.departamentos !== undefined && obj.departamentos.length > 1)
+        	this.setDepartamentos(obj.departamentos);
+
+        return this;
+	}
 }

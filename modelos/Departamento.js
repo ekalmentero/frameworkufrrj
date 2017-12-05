@@ -1,27 +1,35 @@
-import Entidade from './Entidade';
 
-export default class Departamento extends Entidade {
+
+export default class Departamento {
 
     @Private id;
     @Private nome;
-    @Private instituto_id;
+    @Private instituto;
     @Private deleted;
     @Private sigla;
 
     constructor(){
-        super();
+        this.id = null;
+        this.nome = "";
+        this.sigla = "";
+        this.deleted = 0;
+        this.instituto = null;
     }
 
-    get getId(){
+    getId(){
         return this.id;
     }
 
-    get getNome(){
+    getNome(){
         return this.nome;
     }
 
-    get getDeleted(){
+    getDeleted(){
         return this.deleted;
+    }
+
+    getSigla(){
+        return this.sigla;
     }
 
     setId(id){
@@ -29,19 +37,39 @@ export default class Departamento extends Entidade {
     }
 
     setNome(nome){
-        if (typeof(nome) == "string") this.nome = nome;
+        this.nome = nome;
     }
 
-    setInstituto_id(instituto_id){
-        if (typeof(instituto_id) == "number") this.instituto_id = instituto_id;
+    setInstituto(instituto){
+        this.instituto = instituto;
     }
 
     setDeleted(deleted){
-        if (typeof(deleted) == "number") this.deleted = deleted;
+       this.deleted = deleted;
     }
 
     setSigla(sigla){
-        if (typeof(sigla) == "string") this.sigla = sigla;
+       this.sigla = sigla;
+    }
+
+    fillFromObject(obj){
+       
+        if(obj.instituto !== undefined)
+            this.setInstituto(obj.instituto)
+        
+        if(obj.id !== undefined)
+            this.setId(obj.id)
+        
+        if(obj.sigla !== undefined)
+            this.setSigla(obj.sigla)
+        
+        if(obj.nome !== undefined)
+            this.setNome(obj.nome)
+        
+        if(obj.deleted !== undefined)
+            this.setDeleted(obj.deleted)
+
+        return this;
     }
 
 }

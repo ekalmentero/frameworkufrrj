@@ -2,6 +2,7 @@ import express from 'express'
 import jwt from 'jsonwebtoken'
 import bodyParser from 'body-parser';
 import cookieSession from 'cookie-session';
+import cors from 'cors';
 
 const app = express()
 
@@ -10,6 +11,8 @@ app.use(cookieSession({
   keys: ["tantofaz"],
     token : null
 }));
+
+app.use(cors());
 
 app.set("chaveCriptografia", "nodemelhorqjava");
 app.use(bodyParser.json());
@@ -66,6 +69,12 @@ rotas.use('/alunos',alunos)
 
 import avaliacao from './rotas/avaliacaoRouter'
 rotas.use('/avaliacao', avaliacao)
+
+import instituto from './rotas/institutoRouter'
+rotas.use('/instituto', instituto)
+
+import predio from './rotas/predioRouter'
+rotas.use('/predio', predio)
 
 rotas.all("/login",function(req,res){
     if(req.session.token) res.redirect("/");

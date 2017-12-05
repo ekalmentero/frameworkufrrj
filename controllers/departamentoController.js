@@ -14,6 +14,20 @@ export default class DepartamentoController {
         return await DepartamentoDAO.read(departamento);
     }
 
+
+    static async search(terms){
+        let departamento = new Departamento();
+
+        if(terms.nome !== undefined)
+            departamento.setNome(terms.nome);
+
+        if(terms.sigla !== undefined) 
+            departamento.setSigla(terms.sigla);
+
+        return await DepartamentoDAO.search(departamento);
+    }
+
+
     static async update(departamento){
         var departamentoObj = new Departamento();
         departamentoObj.parseEntidade(departamento);

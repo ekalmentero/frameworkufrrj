@@ -22,8 +22,67 @@ export default class DepartamentoDAO {
         return departamento;
     }
 
+    static async readByInstituto(instituto){
+
+        let query = "SELECT * from departamento "+
+                    "WHERE departamento.instituto = "+instituto.getId();
+
+        let retorno = await BD.query( query ).then( (retorno) => {
+                                return retorno;
+                            });
+        
+        return retorno;
+
+    }
+
+    static async readByInstitutoIds(ids_array){
+        let query = "SELECT * from departamento "+
+                    "WHERE id in ["+(ids_array.join(','))+"]";
+
+        return await BD.query( query ).then( (retorno) => {
+            return retorno;
+        });
+    }
+
     static async readAll(){
-        return await BD.query("SELECT * FROM departamento");
+        /*let departamentos = await BD.query("SELECT * FROM departamento").then( (retorno) => { return retorno; } );
+        let 
+        return*/ 
+    }
+
+    static async search(departamento){
+        let query = "SELECT * from departamento WHERE ",
+            wheres_array = [];
+
+        if(departamento.getNome() !== "")
+            wheres_array.push("nome like '%"+departamento.getNome()+"%'");
+
+        if(departamento.getSigla() !== "")
+            wheres_array.push("sigla like '%"+departamento.getSigla()+"%'");
+
+        if(wheres_array.length == 0)
+            return [];
+
+        let departamentos = await BD.query( query.concat(wheres_array.join(" OR ")) )
+                            .then( (retorno) => {
+                                return retorno.map( (raw_dep) => {
+                                            let dep = new Departamento();
+                                            dep.fillFromObject(raw_dep);
+                                            return dep;
+                                        });
+                            });
+
+        return departamentos;
+    }
+
+    static async linkToInstitutoByDepsIds(dep_ids, instituto){
+        let query = "UPDATE departamento "+
+                    "SET instituto="+instituto.getId()+" "+
+                    "WHERE departamento.id in ("+dep_ids.join(',')+")";
+
+        return await BD.query(query).then( (retorno) => {
+            return retorno;
+        });
     }
 
     static async update(departamento){
