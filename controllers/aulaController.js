@@ -5,10 +5,10 @@ import Aula from '../modelos/Aula.js';
 
 class AulaController {
 
-	static async create(aula){
+	static async create(aula, id_turma){
         var aulaObj = new Aula();
         aulaObj.parseEntidade(aula);
-        return await AulaDAO.create(aulaObj);
+        return await AulaDAO.create(aulaObj, id_turma);
     }
 
     static async read(id){

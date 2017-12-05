@@ -5,10 +5,10 @@ import Sala from '../modelos/Sala.js';
 
 class SalaController {
 	
-	static async create(sala){
+	static async create(sala, id_predio){
         var salaObj = new Sala();
         salaObj.parseEntidade(sala);
-        return await SalaDAO.create(salaObj);
+        return await SalaDAO.create(salaObj, id_predio);
     }
 
     static async read(id){
