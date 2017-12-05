@@ -52,34 +52,34 @@ export default class Turma extends Entidade{
     return this.id;
   }
 
-  set codigo(codigo){
+  setCodigo(codigo){
     this.codigo=codigo;
   }
 
-  set vagas(vagas){
+  setVagas(vagas){
     this.vagas=vagas;
   }
-  set id(id){
+  setid(id){
     this.id=id;
   }
-  set turma(turma){
+  setTurma(turma){
     this.turma=turma;
   }
 
-  set turno(turno){
+  setTurno(turno){
     this.turno=turno;
   }
 
-  set disciplina(disciplina){
+  setDisciplina(disciplina){
     this.disciplina=disciplina;
 
   }
 
-  set periodo(periodo){
+  setPeriodo(periodo){
     this.periodo=periodo;
   }
 
-  set professor(professor){
+  setProfessor(professor){
     this.professor=professor;
   }
 

@@ -8,7 +8,12 @@ export default class TurmaController{
 
   static async create(turma,id_disciplina,periodo){
     var turmaObj= new Turma();
-    turmaObj.parseEntidade(turma);
+    var turmaJson=JSON.stringify(turma);
+    //turmaObj.codigo="AA";
+    turmaObj.codigo=turma.codigo;
+    turmaObj.turno=turmaJson.turno;
+    turmaObj.vagas=turmaJson.vagas;
+    console.log(turmaObj.codigo);
     return await TurmaDAO.create(turmaObj,id_disciplina,periodo);
   }
 
