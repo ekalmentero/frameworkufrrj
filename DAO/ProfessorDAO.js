@@ -1,10 +1,11 @@
 
 import Professor from "../modelos/Professor";
+import Departamento from "./departamentoDAO";
 import BD from "../BD";
 
 export default class ProfessorDAO{
 
-  static async create(professor,id_departamento){
+  static async create(professor,id_departamento, id_usuario){
     try{
     /*var foreignKeys= [];
       foreignKeys.push(['departamento',id_departamento]);
@@ -14,7 +15,7 @@ export default class ProfessorDAO{
 
       return professor;
 */
-    return await BD.query("INSERT INTO professor SET matricula='"+professor.getMatricula+"',nome='"+professor.getNome+"',departamento='"+id_departamento+"'");
+    return await BD.query("INSERT INTO professor SET matricula='"+professor.getMatricula+"',nome='"+professor.getNome+"',departamento='"+id_departamento+"',usuario='"+id_usuario+"'");
     }
     catch(error){
       error.message;
@@ -37,7 +38,18 @@ export default class ProfessorDAO{
     }
   }
   static async readAll(){
-      return await BD.query("SELECT * FROM professor WHERE deleted=0");
+      var result= await BD.query("SELECT * FROM professor WHERE deleted=0");
+      var professores=[];
+      for(let object of result){
+        var professor= new Professor();
+        professor.setId(object.id);
+        professor.setNome(object.nome);
+        professor.setMatricula(object.matricula);
+        professor.setDepartamento(Departamento.read(object.departamento));
+        professores.push(professor);
+      }
+      return professores;
+
   }
 
   static async update(professor){

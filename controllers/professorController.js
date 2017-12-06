@@ -9,8 +9,9 @@ export default class ProfessorController{
     professorObj.setNome(professor.nome);
     professorObj.setMatricula(professor.matricula);
     professorObj.setDepartamento(id_departamento);
+    var id_usuario=professor.usuario;
 
-    return await ProfessorDAO.create(professorObj,id_departamento);
+    return await ProfessorDAO.create(professorObj,id_departamento,id_usuario);
   }
 
   static async read(id){
@@ -25,6 +26,7 @@ export default class ProfessorController{
     professorObj.setNome(professor.nome);
     professorObj.setMatricula(professor.matricula);
     professorObj.setId(professor.id);
+    professorObj.setDepartamento(professor.departamento);
 
     return await ProfessorDAO.update(professorObj);
 
