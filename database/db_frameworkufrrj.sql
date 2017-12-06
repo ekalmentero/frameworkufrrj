@@ -182,6 +182,20 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
+-- Table `db_frameworkufrrj`.`usuario`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `db_frameworkufrrj`.`usuario` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `login` VARCHAR(500) NOT NULL,
+  `senha` VARCHAR(500) NOT NULL,
+  `nivel` INT NOT NULL,
+  `deleted` TINYINT(1) NULL DEFAULT 0,
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `login_UNIQUE` (`login` ASC))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
 -- Table `db_frameworkufrrj`.`professor`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `db_frameworkufrrj`.`professor` (
@@ -190,13 +204,20 @@ CREATE TABLE IF NOT EXISTS `db_frameworkufrrj`.`professor` (
   `matricula` VARCHAR(45) NOT NULL,
   `deleted` TINYINT(1) NULL DEFAULT 0,
   `departamento` INT NOT NULL,
+  `usuario` INT NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_professor_departamento1_idx` (`departamento` ASC),
   UNIQUE INDEX `nome_UNIQUE` (`nome` ASC),
   UNIQUE INDEX `matricula_UNIQUE` (`matricula` ASC),
+  INDEX `fk_professor_usuario1_idx` (`usuario` ASC),
   CONSTRAINT `fk_professor_departamento1`
     FOREIGN KEY (`departamento`)
     REFERENCES `db_frameworkufrrj`.`departamento` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_professor_usuario1`
+    FOREIGN KEY (`usuario`)
+    REFERENCES `db_frameworkufrrj`.`usuario` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -213,7 +234,7 @@ CREATE TABLE IF NOT EXISTS `db_frameworkufrrj`.`turma` (
   `deleted` TINYINT(1) NULL DEFAULT 0,
   `disciplina` INT NOT NULL,
   `periodo` INT NOT NULL,
-  `professor` INT NOT NULL,
+  `professor` INT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_turma_disciplina1_idx` (`disciplina` ASC),
   INDEX `fk_turma_periodo1_idx` (`periodo` ASC),
@@ -248,11 +269,13 @@ CREATE TABLE IF NOT EXISTS `db_frameworkufrrj`.`aluno` (
   `deleted` TINYINT(1) NULL DEFAULT 0,
   `curso` INT NOT NULL,
   `grade` INT NOT NULL,
+  `usuario` INT NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_aluno_curso1_idx` (`curso` ASC),
   INDEX `fk_aluno_grade1_idx` (`grade` ASC),
   UNIQUE INDEX `nome_UNIQUE` (`nome` ASC),
   UNIQUE INDEX `matricula_UNIQUE` (`matricula` ASC),
+  INDEX `fk_aluno_usuario1_idx` (`usuario` ASC),
   CONSTRAINT `fk_aluno_curso1`
     FOREIGN KEY (`curso`)
     REFERENCES `db_frameworkufrrj`.`curso` (`id`)
@@ -261,6 +284,11 @@ CREATE TABLE IF NOT EXISTS `db_frameworkufrrj`.`aluno` (
   CONSTRAINT `fk_aluno_grade1`
     FOREIGN KEY (`grade`)
     REFERENCES `db_frameworkufrrj`.`grade` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_aluno_usuario1`
+    FOREIGN KEY (`usuario`)
+    REFERENCES `db_frameworkufrrj`.`usuario` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -368,17 +396,6 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `db_frameworkufrrj`.`horario`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `db_frameworkufrrj`.`horario` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `hora_inico` TIME(5) NOT NULL,
-  `hora_fim` TIME(5) NOT NULL,
-  PRIMARY KEY (`id`))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
 -- Table `db_frameworkufrrj`.`predio`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `db_frameworkufrrj`.`predio` (
@@ -413,30 +430,26 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `db_frameworkufrrj`.`horario_turma`
+-- Table `db_frameworkufrrj`.`horario`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `db_frameworkufrrj`.`horario_turma` (
-  `horario` INT NOT NULL,
-  `turma` INT NOT NULL,
-  `dia_semana` VARCHAR(45) NULL,
+CREATE TABLE IF NOT EXISTS `db_frameworkufrrj`.`horario` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `dia_semana` VARCHAR(45) NOT NULL,
+  `hora_inicio` TIME NOT NULL,
+  `hora_fim` TIME NOT NULL,
   `sala` INT NOT NULL,
-  PRIMARY KEY (`horario`, `turma`),
-  INDEX `fk_horario_has_turma_turma1_idx` (`turma` ASC),
-  INDEX `fk_horario_has_turma_horario1_idx` (`horario` ASC),
+  `turma` INT NOT NULL,
   INDEX `fk_horario_turma_sala1_idx` (`sala` ASC),
-  CONSTRAINT `fk_horario_has_turma_horario1`
-    FOREIGN KEY (`horario`)
-    REFERENCES `db_frameworkufrrj`.`horario` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_horario_has_turma_turma1`
-    FOREIGN KEY (`turma`)
-    REFERENCES `db_frameworkufrrj`.`turma` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+  INDEX `fk_horario_turma_turma1_idx` (`turma` ASC),
+  PRIMARY KEY (`id`),
   CONSTRAINT `fk_horario_turma_sala1`
     FOREIGN KEY (`sala`)
     REFERENCES `db_frameworkufrrj`.`sala` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_horario_turma_turma1`
+    FOREIGN KEY (`turma`)
+    REFERENCES `db_frameworkufrrj`.`turma` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
