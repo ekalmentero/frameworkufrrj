@@ -19,10 +19,13 @@ turma.route('/')
     //console.log("oi");
   })
   .patch(async function(req,res){
-    if(typeof(req.params.id_professor)!= "undefined")
-      res.send(await TurmaController.insertProfessorTurma(req.body,req.params.id_professor));
-    else
+    if(typeof (req.body.professor) != "undefined"){
+      res.send(await TurmaController.insertProfessorTurma(req.body,req.body.professor));
+    }
+    else{
+      //console.log("entrou no else");
       res.send(await TurmaController.update(req.body));
+    }
     //res.send("oi");
   })
 

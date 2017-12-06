@@ -59,7 +59,7 @@ export default class Turma extends Entidade{
   setVagas(vagas){
     this.vagas=vagas;
   }
-  setid(id){
+  setId(id){
     this.id=id;
   }
   setTurma(turma){

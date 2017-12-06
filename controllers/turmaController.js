@@ -8,12 +8,12 @@ export default class TurmaController{
 
   static async create(turma,id_disciplina,periodo){
     var turmaObj= new Turma();
-    var turmaJson=JSON.stringify(turma);
+    //var turmaJson=JSON.stringify(turma);
     //turmaObj.codigo="AA";
-    turmaObj.codigo=turma.codigo;
-    turmaObj.turno=turmaJson.turno;
-    turmaObj.vagas=turmaJson.vagas;
-    console.log(turmaObj.codigo);
+    turmaObj.setCodigo(turma.codigo);
+    turmaObj.setTurno(turma.turno);
+    turmaObj.setVagas(turma.vagas);
+    //console.log(turmaObj.codigo);
     return await TurmaDAO.create(turmaObj,id_disciplina,periodo);
   }
 
@@ -26,14 +26,18 @@ export default class TurmaController{
 
   static async update(turma){
     var turmaObj= new Turma();
-    turmaObj.parseEntidade(turma);
+    turmaObj.setCodigo(turma.codigo);
+    turmaObj.setTurno(turma.turno);
+    turmaObj.setVagas(turma.vagas);
+    turmaObj.setId(turma.id);
+    console.log("nao entrou no if");
     return await TurmaDAO.update(turmaObj);
 
   }
 
   static async delete(turma){
     var turmaObj= new Turma();
-    turmaObj.parseEntidade(turma);
+    turmaObj.setId(turma.id);
     return await TurmaDAO.delete(turmaObj);
   }
 
@@ -48,13 +52,14 @@ export default class TurmaController{
   }
 
   static async listarTurmasAluno(id_aluno){
-
     return await TurmaDAO.listarTurmasAluno(id_aluno);
   }
 
   static async insertProfessorTurma(turma,id_professor){
     var turmaObj= new Turma();
-    turmaObj.parseEntidade(turma);
+    console.log(id_professor);
+    turmaObj.setId(turma.id);
+    console.log("entrou no if");
     return await TurmaDAO.insertProfessorTurma(turmaObj,id_professor);
   }
 

@@ -33,13 +33,13 @@ export default class TurmaDAO{
       var result= await BD.buscar(turma);
       var turmaTemp= new Turma();
       //console.log(result[0]);
-      //turmaTemp.setCodigo(result[0].codigo);
-      //turmaTemp.setId(result[0].id);
-      //turmaTemp.setVagas(result[0].vagas);
-      //turmaTemp.setProfessor(ProfessorDAO.read(result[0].professor));
-      //turmaTemp.setPeriodo(PeridoDAO.read(result[0].periodo));
-      //turmaTemp.setDisciplina(DisciplinaDAO.read(result[0].disciplina));
-      turmaTemp.parseEntidade(result[0]);
+      turmaTemp.setCodigo(result[0].codigo);
+      turmaTemp.setId(result[0].id);
+      turmaTemp.setVagas(result[0].vagas);
+      turmaTemp.setProfessor(ProfessorDAO.read(result[0].professor));
+      turmaTemp.setPeriodo(PeridoDAO.read(result[0].periodo));
+      turmaTemp.setDisciplina(DisciplinaDAO.read(result[0].disciplina));
+      //turmaTemp.parseEntidade(result[0]);
       console.log(turmaTemp.getCodigo);
 
 
@@ -55,7 +55,12 @@ export default class TurmaDAO{
       var turmas= [];
       for (let object of result){
         var turma= new Turma();
-        turma.parseEntidade(object);
+        turmaTemp.setCodigo(object.codigo);
+        turmaTemp.setId(object.id);
+        turmaTemp.setVagas(object.vagas);
+        turmaTemp.setProfessor(ProfessorDAO.read(object.professor));
+        turmaTemp.setPeriodo(PeridoDAO.read(object.periodo));
+        turmaTemp.setDisciplina(DisciplinaDAO.read(object.disciplina));
         array.push(turma);
       }
       return turmas;
@@ -75,7 +80,7 @@ export default class TurmaDAO{
     var query=sql+id;
     var result=await BD.query(query);
     console.log(result);
-    var array= new Array();
+    var turmas=[];
     /*var i=0;
     while(i<result.lenght){
       var turmaTemp= new Turma();
@@ -91,10 +96,16 @@ export default class TurmaDAO{
 
     for (let object of result){
       var turma= new Turma();
-      turma.parseEntidade(object);
-      array.push(turma);
+      turmaTemp.setCodigo(object.codigo);
+      turmaTemp.setId(object.id);
+      turmaTemp.setVagas(object.vagas);
+      turmaTemp.setProfessor(ProfessorDAO.read(object.professor));
+      turmaTemp.setPeriodo(PeridoDAO.read(object.periodo));
+      turmaTemp.setDisciplina(DisciplinaDAO.read(object.disciplina));
+
+      array.push(turmas);
     }
-    return array;
+    return turmas;
   }
 
   static async listarTurmasAluno(id_aluno){
