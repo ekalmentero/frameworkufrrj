@@ -4,22 +4,29 @@ import Aluno from './Aluno';
 export default class Resultado extends Entidade{
   @Private nota;
   @Private aluno;
+  @Private avaliacao;
   
     constructor(){
       super();
       this.nota=undefined;
     }
-      get Nota() {
+      get getNota() {
         return this.nota;
       }
-      get Aluno() {
+      get getAluno() {
+        return this.aluno;
+      }
+      get getAvaliacao() {
         return this.aluno;
       }
       
-      set Nota(nota) {
+      setNota(nota) {
         this.nota = nota;
       }
-      set Aluno(aluno) {
+      setAluno(aluno) {
+        this.aluno = aluno;
+      }
+      setAvaliacao(aluno) {
         this.aluno = aluno;
       }
 

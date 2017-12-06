@@ -3,7 +3,8 @@ import ResultadoDAO from '../DAO/ResultadoDAO';
 export default class ResultadoController {
     static async create(resultado, id_avaliacao){
         var resultadoObj = new Resultado();
-        resultadoObj.parseEntidade(resultado);
+        resultadoObj.setNota(resultado.nota);
+        resultadoObj.setAluno(resultado.aluno);
         return await ResultadoDAO.create(resultadoObj, id_avaliacao);
     }
 
@@ -20,8 +21,9 @@ export default class ResultadoController {
     }
 
     static async update(resultado, id_avaliacao){
-        var resultadoObj = new Resultado();
-        resultadoObj.parseEntidade(resultado); 
+        var resultadoObj = new Resultado(); 
+        resultadoObj.setNota(resultado.nota);
+        resultadoObj.setAluno(resultado.aluno);
         if (typeof(id_avaliacao) == "undefined")
             return await ResultadoDAO.update(resultadoObj);
         else
