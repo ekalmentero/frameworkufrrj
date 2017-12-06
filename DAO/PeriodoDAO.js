@@ -45,6 +45,7 @@ static async read(periodo){
         periodo.parseEntidade(object);
         periodos.push(periodo);
       }
+      return periodos;
   }
 
   static async update(periodo){

@@ -5,9 +5,9 @@ export default class PeriodoController{
 
   static async create(periodo){
       var periodoObj = new Periodo();
-      periodoObj.data_Inicio=periodo.data_inicio;
-      periodoObj.data_fim=periodo.data_fim;
-      periodoObj.nome=periodo.nome;
+      periodoObj.setData_inicio(periodo.data_inicio);
+      periodoObj.setData_fim(periodo.data_fim);
+      periodoObj.setNome(periodo.nome);
       console.log(periodoObj.getNome);
       return await PeriodoDAO.create(periodoObj);
     }

@@ -49,7 +49,7 @@ export default class Periodo extends Entidade{
     this.nome=nome;
   }
 
-  set Deleted(deleted){
+  setDeleted(deleted){
     this.deleted=deleted;
   }
 
