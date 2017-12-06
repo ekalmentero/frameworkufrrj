@@ -1,10 +1,13 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import TurmaController from '../controllers/turmaController';
+import alunoRouter from "./alunoRouter";
 
-const turma= express.Router();
+const turma= express.Router({mergeParams: true});
 
 turma.use(bodyParser.json());
+
+turma.use('/:id_turma/alunos', alunoRouter);
 
 turma.get('/:id', async function(req,res){
   res.send(await TurmaController.read(req.params.id));

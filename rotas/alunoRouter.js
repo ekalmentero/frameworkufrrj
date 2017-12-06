@@ -30,7 +30,7 @@ aluno.route('/')
     if (typeof(req.params.id_curso) != "undefined")
         res.send(await AlunoController.readAllByCurso(req.params.id_curso));
     else if(typeof(req.params.id_turma)!="undefined")
-        res.send(await TurmaController.listarAlunosTurma(req.params.id_turma));//Serviço: Listar alunos de uma turma
+        res.send(await AlunoController.listarAlunosTurma(req.params.id_turma));//Serviço: Listar alunos de uma turma
     else
         res.send(await AlunoController.readAll());
   })

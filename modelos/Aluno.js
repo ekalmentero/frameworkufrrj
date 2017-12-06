@@ -8,6 +8,7 @@ export default class Aluno extends Entidade{
   @Private matricula;
   @Private ativo;
   @Private ingresso;
+  
   @Private curso;
   @Private grade;
   @Private usuario;
@@ -21,53 +22,53 @@ export default class Aluno extends Entidade{
       this.grade=undefined;
       this.usuario=undefined;
     }
-     get Id() {
+     get getId() {
         return this.id;
       }
-      get Nome() {
+      get getNome() {
         return this.nome;
       }
-      get Matricula() {
+      get getMatricula() {
         return this.matricula;
       }
-      get Ativo() {
+      get getAtivo() {
         return this.ativo;
       }
-      get Ingresso() {
+      get getIngresso() {
         return this.ingresso;
       }
-      get Curso(){
+      get getCurso(){
         return this.curso;
       }
-      get Grade(){
+      get getGrade(){
         return this.grade;
       }
-      get Usuario(){
+      get getUsuario(){
         return this.usuario;
       }
 
-      set Id(id) {
+      setId(id) {
         this.id = id;
       }
-      set Nome(nome) {
+      setNome(nome) {
         this.nome = nome;
       }
-      set Matricula(matricula) {
+      setMatricula(matricula) {
         this.matricula = matricula;
       }
-      set Ativo(ativo) {
+      setAtivo(ativo) {
         this.ativo = ativo;
       }
-      set Ingresso(ingresso) {
+      setIngresso(ingresso) {
         this.ingresso = ingresso;
       }
-      set Curso(curso) {
+      setCurso(curso) {
         this.curso = curso;
       }
-      set Grade(grade) {
+      setGrade(grade) {
         this.grade = grade;
       }
-      set Usuario(usuario) {
+      setUsuario(usuario) {
         this.usuario = usuario;
       }
     }

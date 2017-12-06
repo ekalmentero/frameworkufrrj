@@ -5,13 +5,18 @@ import Turma from '../modelos/Turma';
 export default class AlunoController {
     static async create(aluno, id_curso){
         var alunoObj = new Aluno();
-        alunoObj.parseEntidade(aluno);
+        alunoObj.setNome(aluno.nome);
+        alunoObj.setMatricula(aluno.matricula);
+        alunoObj.setAtivo(aluno.ativo);
+        alunoObj.setIngresso(aluno.ingresso);
+        alunoObj.setGrade(aluno.grade);
+        alunoObj.setUsuario(aluno.usuario);
         return await AlunoDAO.create(alunoObj, id_curso);
     }
 
     static async read(id){
         var aluno = new Aluno();
-        aluno.Id=id;
+        aluno.setId(id);
         return await AlunoDAO.read(aluno);
     }
 
@@ -33,7 +38,13 @@ export default class AlunoController {
 
     static async update(aluno, id_curso){
         var alunoObj = new Aluno();
-        alunoObj.parseEntidade(aluno);
+        alunoObj.setId(aluno.id);
+        alunoObj.setNome(aluno.nome);
+        alunoObj.setMatricula(aluno.matricula);
+        alunoObj.setAtivo(aluno.ativo);
+        alunoObj.setIngresso(aluno.ingresso);
+        alunoObj.setGrade(aluno.grade);
+        alunoObj.setUsuario(aluno.usuario);
         if (typeof(id_curso) != "undefined")
             return await AlunoDAO.update(alunoObj, id_curso);
         else
@@ -43,7 +54,14 @@ export default class AlunoController {
 
     static async delete(aluno){
         var alunoObj = new Aluno();
-        alunoObj.parseEntidade(aluno);
+        //alunoObj.parseEntidade(aluno);
+        alunoObj.setId(aluno.id);
+        alunoObj.setNome(aluno.nome);
+        alunoObj.setMatricula(aluno.matricula);
+        alunoObj.setAtivo(aluno.ativo);
+        alunoObj.setIngresso(aluno.ingresso);
+        alunoObj.setGrade(aluno.grade);
+        alunoObj.setUsuario(aluno.usuario);
         return await AlunoDAO.delete(alunoObj);
     }
 
