@@ -15,7 +15,7 @@ app.set("chaveCriptografia", "nodemelhorqjava");
 app.use(bodyParser.json());
 
 function verificaLogin(req, res, next) {
-    // if(req.path === '/login') { next(); return; }
+    if(req.path === '/login') { next(); return; }
     var token = req.body.token || req.query.token || req.session.token;
 
     if (token) {
@@ -40,8 +40,8 @@ function verificaLogin(req, res, next) {
 import rotas from './rotas'
 app.use(rotas)
 
-import testes from './test'
-rotas.use('/teste',testes)
+import calendario from './rotas/calendarioRouter'
+rotas.use('/calendario',calendario)
 
 import disciplinas from './rotas/disciplinaRouter'
 rotas.use('/disciplinas',disciplinas)

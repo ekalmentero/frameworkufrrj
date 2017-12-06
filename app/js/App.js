@@ -5,6 +5,7 @@ import { StackNavigator } from 'react-navigation';
 
 import Login from './login';
 import Arquivos from './arquivos';
+import Calendario from './calendario';
 
 export default class App extends React.Component {
     constructor(props){
@@ -27,7 +28,7 @@ export default class App extends React.Component {
     render(){
         var tmp;
         if(this.state.logado == "1"){
-             tmp = <Arquivos />;
+             tmp = <Calendario />;
         } else { tmp = <Login />; }
         return(
           <Root>

@@ -3,13 +3,15 @@ import AvaliacaoDAO from '../DAO/AvaliacaoDAO';
 export default class AvaliacaoController {
     static async create(avaliacao, id_turma){
         var avaliacaoObj = new Avaliacao();
-        avaliacaoObj.parseEntidade(avaliacao);
+        avaliacaoObj.setNome(avaliacao.nome);
+        avaliacaoObj.setData(avaliacao.data);
+        avaliacaoObj.setDescricao(avaliacao.descricao);
         return await AvaliacaoDAO.create(avaliacaoObj, id_turma);
     }
 
     static async read(id){
         var avaliacao = new Avaliacao();
-        avaliacao.id = id;
+        avaliacao.setId(id);
         return await AvaliacaoDAO.read(avaliacao);
     }
 
@@ -27,7 +29,10 @@ export default class AvaliacaoController {
 
     static async update(avaliacao, id_turma){
         var avaliacaoObj = new Avaliacao();
-        avaliacaoObj.parseEntidade(avaliacao);
+        avaliacaoObj.setId(avaliacao.id);
+        avaliacaoObj.setNome(avaliacao.nome);
+        avaliacaoObj.setData(avaliacao.data);
+        avaliacaoObj.setDescricao(avaliacao.descricao);
         if (typeof(id_turma) == "undefined")
             return await AvaliacaoDAO.update(avaliacaoObj);
         else
@@ -36,7 +41,10 @@ export default class AvaliacaoController {
 
     static async delete(avaliacao){
         var avaliacaoObj = new Avaliacao();
-        avaliacaoObj.parseEntidade(avaliacao);
+        avaliacaoObj.setId(avaliacao.id);
+        avaliacaoObj.setNome(avaliacao.nome);
+        avaliacaoObj.setData(avaliacao.data);
+        avaliacaoObj.setDescricao(avaliacao.descricao);
         return await AvaliacaoDAO.delete(avaliacaoObj);
     }
 

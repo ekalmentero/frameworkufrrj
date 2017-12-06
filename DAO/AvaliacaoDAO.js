@@ -1,6 +1,8 @@
 "use strict";
 import BD from "../BD";
 import Avaliacao from "../modelos/Avaliacao";
+import Turma from "../modelos/Turma";
+import TurmaDAO from "./TurmaDAO";
 
 export default class AvaliacaoDAO {
   static async create(avaliacao, id_turma) {
@@ -8,10 +10,8 @@ export default class AvaliacaoDAO {
       var foreignKeys = [];
       foreignKeys.push(['turma', id_turma]);
       var retorno = await BD.inserir(avaliacao, foreignKeys);
-      avaliacao.Id = retorno;
-
+      avaliacao.setId(retorno);
       return avaliacao;
-
     } catch (error) {
       return error.message;
     }
@@ -19,23 +19,69 @@ export default class AvaliacaoDAO {
   static async read(avaliacao) {
     try {
       var retorno = await BD.buscar(avaliacao);
-      return retorno[0];
+      avaliacao.setId(retorno[0].id);
+      avaliacao.setNome(retorno[0].nome);
+      avaliacao.setData(retorno[0].data);
+      avaliacao.setDescricao(retorno[0].descricao);
+      avaliacao.setTurma(retorno[0].turma);
+      return avaliacao;
     } catch (error) {
-      return error.message;
+      return (error.message);
     }
   }
 
   static async readByTurma(id_avaliacao, id_turma){
-    return await BD.query("SELECT * FROM avaliacao WHERE turma = " + id_turma + " AND id = " + id_avaliacao);
-}
+    try {
+    var result = await BD.query("SELECT * FROM avaliacao WHERE turma = " + id_turma + " AND id = " + id_avaliacao);
+        var avaliacao = new Avaliacao();
+        avaliacao.setId(result[0].id);
+        avaliacao.setNome(result[0].nome);
+        avaliacao.setData(result[0].data);
+        avaliacao.setDescricao(result[0].descricao);
+        avaliacao.setTurma(result[0].turma);
+    return avaliacao;
+    } catch (error) {
+      return (error.message);
+    }
+  }
 
   static async readAll() {
-    return await BD.query("SELECT * FROM avaliacao");
+    try {
+    var result = await BD.query("SELECT * FROM avaliacao");
+    var avaliacoes = [];
+    for (let object of result){
+        var avaliacao = new Avaliacao();
+        avaliacao.setId(object.id);
+        avaliacao.setNome(object.nome);
+        avaliacao.setData(object.data);
+        avaliacao.setDescricao(object.descricao);
+        avaliacao.setTurma(object.turma);
+        avaliacoes.push(avaliacao);
+    }
+    return avaliacoes;
+    } catch (error) {
+      return (error.message);
+    }
   }
 
   static async readAllByTurma(id_turma){
-    return await BD.query("SELECT * FROM avaliacao WHERE turma = " + id_turma);
-}
+    try {
+    var result = await BD.query("SELECT * FROM avaliacao WHERE turma = " + id_turma);
+    var avaliacoes = [];
+    for (let object of result){
+        var avaliacao = new Avaliacao();
+        avaliacao.setId(object.id);
+        avaliacao.setNome(object.nome);
+        avaliacao.setData(object.data);
+        avaliacao.setDescricao(object.descricao);
+        avaliacao.setTurma(object.turma);
+        avaliacoes.push(avaliacao);
+    }
+    return avaliacoes;
+    } catch (error) {
+      return (error.message);
+    }
+  }
 
   static async update(avaliacao, id_turma) {
     try {

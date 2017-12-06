@@ -12,14 +12,24 @@ export default class SalaDao{
    }
 
 
-   static async insert(sala){
-      var sal_id = await BD.inserir(sala).catch((e)=>{
-          console.log(e);
-      });
+   static async insert(sala, id_predio){
 
-      sala.setId(sal_id);
+    try{
+      /*
+        var sal_id = await BD.inserir(sala).catch((e)=>{
+            console.log(e);
+        });
+        */
 
-      return sala;
+        var foreignKeys=[];
+        foreignKeys.push(['predio',id_predio]);
+        var retorno = await BD.inserir(sala, foreignKeys);
+        sala.setId(retorno);
+        return sala;
+        
+      } catch (error) {
+        return error.message;
+      }
    }
 
   

@@ -43,7 +43,7 @@ export default class BD {
             if(typeof(obj[propriedade]) == 'function' || obj[propriedade] == undefined) continue;
             if(propriedade == "getId") continue;
 
-            if(typeof(obj[propriedade]) == "object") obj[propriedade] = obj[propriedade].getId;
+            if(typeof(obj[propriedade]) == "object") continue;
 
             if(typeof(obj[propriedade]) == "string") tmp = "'"; else tmp = "";
             query += propriedade.replace("get","").toLowerCase() + " = " + tmp + obj[propriedade] + tmp + ",";
@@ -74,7 +74,7 @@ export default class BD {
         for(let propriedade of Object.getOwnPropertyNames(Object.getPrototypeOf(obj))){
             if(propriedade == "constructor") continue;
             if(typeof(obj[propriedade]) == 'function') continue;
-            if(typeof(obj[propriedade]) == "object") obj[propriedade] = obj[propriedade].getId;
+            if(typeof(obj[propriedade]) == "object") continue;
 
             if(obj[propriedade] != tmp[propriedade]){
                 filtros.push([propriedade,obj[propriedade]]);
@@ -116,7 +116,7 @@ export default class BD {
             if(propriedade == "constructor") continue;
             if(typeof(obj[propriedade]) == 'function' || obj[propriedade] == undefined) continue;
             if(propriedade == "getId") continue;
-            if(typeof(obj[propriedade]) == "object") obj[propriedade] = obj[propriedade].getId;
+            if(typeof(obj[propriedade]) == "object") continue;
 
             var tmp;
             if(obj[propriedade] != tmp[propriedade]){
@@ -150,7 +150,7 @@ export default class BD {
         for(let propriedade of Object.getOwnPropertyNames(Object.getPrototypeOf(obj))){
             if(typeof(obj[propriedade]) == 'function' || obj[propriedade] == undefined) continue;
             //if(propriedade == "getId") continue;
-            if(typeof(obj[propriedade]) == "object") obj[propriedade] = obj[propriedade].getId;
+            if(typeof(obj[propriedade]) == "object") continue;
 
             if(obj[propriedade] != tmp[propriedade]){
                 filtros.push([propriedade,obj[propriedade]]);

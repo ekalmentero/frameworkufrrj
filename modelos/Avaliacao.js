@@ -1,39 +1,49 @@
 "use strict";
 import Entidade from './entidade';
+import Turma from './Turma';
 
 export default class Avaliacao extends Entidade {
   @Private id;
   @Private nome;
   @Private data;
   @Private descricao;
+  @Private turma;
 
     constructor(){
       super();
     }
 
-      get Id() {
+      get getId() {
         return this.id;
       }
-      get Nome() {
+      get getNome() {
         return this.nome;
       }
-      get Data() {
+      get getData() {
         return this.data;
       }
-      get Descricao() {
+      get getDescricao() {
         return this.descricao;
       }
 
-      set Id(id) {
+      get getTurma() {
+        return this.turma;
+      }
+
+      setId(id) {
         this.id = id;
       }
-      set Nome(nome) {
+      setNome(nome) {
         this.nome = nome;
       }
-      set Data(data) {
+      setData(data) {
         this.data = data;
       }
-      set Descricao(descricao) {
+      setDescricao(descricao) {
         this.descricao = descricao;
+      }
+
+      setTurma(turma) {
+        this.turma = turma;
       }
 }
