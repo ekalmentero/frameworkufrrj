@@ -6,13 +6,15 @@ export default class ProfessorDAO{
 
   static async create(professor,id_departamento){
     try{
-      var foreignKeys= [];
-      //foreignKeys.push(['departamento',id_departamento]);
-      var id= await BD.inserir(professor);
-      professor.id=id;
+    /*var foreignKeys= [];
+      foreignKeys.push(['departamento',id_departamento]);
+      //var id= await BD.inserir(professor,foreignKeys);
+      professor.setId(id);
       console.log(professor.getId);
-      return professor;
 
+      return professor;
+*/
+    return await BD.query("INSERT INTO professor SET matricula='"+professor.getMatricula+"',nome='"+professor.getNome+"',departamento='"+id_departamento+"'");
     }
     catch(error){
       error.message;
@@ -24,10 +26,10 @@ export default class ProfessorDAO{
     try{
       var result= await BD.buscar(professor);
       var professor= new Professor();
-      professor.id=result[0].id;
-      professor.nome=result[0].nome;
-      professor.matricula=result[0].matricula;
-      professor.departamento.parseEntidade(result[0].departamento);
+      professor.setId(result[0].id);
+      professor.setNome(result[0].nome);
+      professor.setMatricula(result[0].matricula);
+      professor.setDepartamento(result[0].departamento);
       return professor;
     }
     catch(error){

@@ -18,6 +18,7 @@ let tabelas = { // Exemplo
 export default class BD {
 
     static query(query){
+        console.log(query);
         return new Promise(
             function(resolve,reject){
                 conexao.query(query, function (erro, retorno, colunas) {

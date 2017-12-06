@@ -29,15 +29,23 @@ export default class Professor extends Entidade {
     return this.id;
   }
 
-  set nome(nome){
+  get getDepartamento(){
+    return this.departamento;
+  }
+
+  setNome(nome){
     this.nome=nome;
   }
 
-  set matricula(matricula){
+  setMatricula(matricula){
     this.matricula=matricula;
   }
 
-  set id(id){
+  setId(id){
     this.id=id;
+  }
+
+  setDepartamento(departamento){
+    this.departamento=departamento;
   }
 }
