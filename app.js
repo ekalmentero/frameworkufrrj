@@ -37,6 +37,8 @@ function verificaLogin(req, res, next) {
 }
 app.use(verificaLogin);
 
+app.use('/',express.static('visoes'));
+
 import rotas from './rotas'
 app.use(rotas)
 

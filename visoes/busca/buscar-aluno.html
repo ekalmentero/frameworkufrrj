@@ -1,0 +1,44 @@
+<div class="wow bounceInDown">
+  <div class="row">
+    <br>
+    <div class="col-md-8">
+      <h2>Buscar Aluno</h2>
+    </div>
+  </div>
+  <div class="row busca-input">
+    <div class="col-md-8">
+      <div class="input-group">
+        <div class="input-group-btn search-panel">
+          <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+            <span id="search_concept">Buscar aluno por</span>&nbsp;&nbsp;<span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="#">Nome</a></li>
+            <li><a href="#">Curso</a></li>
+            <li><a href="#">Matrícula</a></li>
+            <li><a href="#">Turma</a></li>
+          </ul>
+        </div>
+        <input type="hidden" name="search_param" value="all" id="search_param">
+        <input type="text" class="form-control" name="x" placeholder="buscar">
+        <span class="input-group-btn">
+          <button class="btn btn-default src-input" type="button"><span class="glyphicon glyphicon-search"></span></button>
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+<br><br>
+
+
+<script type="text/javascript">
+  $(document).ready(function(e){
+    $('.search-panel .dropdown-menu').find('a').click(function(e) {
+      e.preventDefault();
+      var param = $(this).attr("href").replace("#","");
+      var concept = $(this).text();
+      $('.search-panel span#search_concept').text(concept);
+      $('.input-group #search_param').val(param);
+    });
+  });
+</script>

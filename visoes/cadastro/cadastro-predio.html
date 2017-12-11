@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title></title>
+
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="../css/custom.css">
+  <link rel="stylesheet" href="../css/animate.css">
+  <link rel="stylesheet" href="../css/menu.css">
+  <link rel="stylesheet" href="../css/select2/select2.css">
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+      <![endif]-->
+    </head>
+    <body>
+      <div>
+        <nav>
+          <div class="nav-side-menu" id="home">
+            <div class="brand">Framework UFRRJ</div>
+            <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
+
+            <div class="menu-list">
+
+              <ul id="menu-content" class="menu-content collapse out">
+
+                <li  data-toggle="collapse" data-target="#products" class="collapsed" id="buscar-button">
+                  <a href="#"><i class="fa fa-search fa-lg"></i> Buscar <span class="arrow"></span></a>
+                </li>
+                <ul class="sub-menu collapse" id="products">
+                 <li><a href="../busca/buscar-instituto.html">Instituto</a></li>
+                 <li><a href="../busca/buscar-dep.html">Departamento</a></li>
+                 <li id="curso"><a href="../busca/buscar-curso.html">Curso</a></li>
+                 <li><a href="../busca/buscar-disc.html">Disciplina</a></li>
+                 <li id="alunos"><a href="../busca/buscar-aluno.html">Aluno</a></li>
+                 <li id="professor"><a href="../busca/buscar-professor.html">Professor</a></li>
+                 <li id="turma"><a href="../busca/buscar-turma.html">Turma</a></li>
+                 <li><a href="../busca/buscar-periodo.html">Período</a></li>
+                 <li><a href="../busca/buscar-predio.html">Prédio</a></li>
+               </ul>
+
+
+               <li data-toggle="collapse" data-target="#service" class="collapsed" id="cadastrar-button">
+                <a href="#"><i class="fa fa-plus fa-lg"></i> Cadastrar <span class="arrow"></span></a>
+              </li>
+              <ul class="sub-menu collapse" id="service">
+                <li><a href="cadastro-instituto.html">Instituto</a></li>
+                <li><a href="cadastro-dep.html">Departamento</a></li>
+                <li><a href="cadastro-curso.html">Curso</li>
+                <li><a href="cadastro-disc.html">Disciplina</li>
+                <li><a href="cadastro-aluno.html">Aluno</li>
+                <li><a href="cadastro-professor.html">Professor</li>
+                <li><a href="cadastro-turma.html">Turma</li>
+                <li><a href="cadastro-periodo.html">Período</li>
+                <li><a href="cadastro-predio.html">Prédio</li>
+              </ul>
+
+
+              <li data-toggle="collapse" data-target="#new" class="collapsed" id="editar-button">
+                <a href="#"><i class="fa fa-pencil fa-lg"></i> Editar <span class="arrow"></span></a>
+              </li>
+              <ul class="sub-menu collapse" id="new">
+                <li><a href="#">Instituto</a></li>
+                <li><a href="#">Departamento</a></li>
+                <li><a href="#">Curso</a></li>
+                <li><a href="#">Disciplina</a></li>
+                <li><a href="#">Aluno</a></li>
+                <li><a href="#">Professor</a></li>
+                <li><a href="#">Turma</a></li>
+                <li><a href="#">Período</a></li>
+              </ul>
+
+
+              <li id="config-button">
+                <a href="#">
+                  <i class="fa fa-cog fa-lg"></i> Configurações
+                </a>
+              </li>
+
+              <li>
+                <a href="#">
+                  <i class="fa fa-sign-out fa-lg"></i> Sair
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </div>
+    
+    
+    <div class="container col-md-offset-2">
+      <div class="col-md-8">
+        <h1>Cadastrar Prédio</h1>
+      </div>
+      
+
+      <div class="col-md-10">
+        <form class="form-instituto" action="index.html" method="post">
+         <div class="row form-cadstro-home">
+           <br>
+
+
+           <div class="col-md-12"> 
+            <div class="col-md-6">
+              <h4>Prédio</h4>
+            </div>
+          </div>
+
+          <div class="col-md-12" id="predio">
+           
+           <div class="col-md-8" class="collapse">
+            <input type="text" class="form-control input-form" name="PredioNome" id="nome-predio" placeholder="Nome" required>
+          </div>
+
+          <div class="col-md-4">
+            <input type="text" class="form-control input-form" name="PredioSigla" id="sigla-predio" placeholder="Sigla" required>
+            <br>
+          </div>
+
+          <div class="col-md-4">
+            <input type="text" class="form-control input-form" name="PredioLat" id="lat-predio" placeholder="Latitude" required>
+          </div>
+
+          <div class="col-md-4">
+           <input type="text" class="form-control input-form" name="PredioLong" id="long-predio" placeholder="Longitude" required>
+         </div>
+
+
+
+         <div class="col-md-6">
+          <br><h4>Sala</h4>
+        </div>
+
+        <div class="col-md-2">
+          <br><button type="button" id="InstAddSala" class="btn add-sala add"><i class="fa fa-plus" aria-hidden="true"></i></button>
+        </div>
+
+        <div id="sala">
+          <div class="col-md-8">
+            <div class="form-group" id="salas_container">
+              <input type="text" name="nome_sala" class="form-control input-form" id="nome_sala" placeholder="Nome" required/>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+      <div class="col-md-4 col-md-offset-8">
+       <input type="submit" name="CadastrarPredio" value="Cadastrar" class="btn btn-cadastro">
+     </div>
+   </div>
+ </form>
+</div>
+
+</div>
+
+
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="../js/jquery-3.2.1.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://www.w3schools.com/lib/w3.js"></script>
+<!-- <script type="text/javascript" src="node_modules/angular/angular.min.js"></script> -->
+<script src="../js/wow.min.js"></script>
+<script src="../js/main.js"></script>
+<script type="text/javascript" src="../js/select2/select2.js"></script>
+<script type="text/javascript" src="../js/cadastros/cadastro-predio.js"></script>
+
+</body>
+</html>
+
