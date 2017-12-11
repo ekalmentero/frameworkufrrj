@@ -89,7 +89,7 @@ export default class ProfessorDAO{
     try{
       //return await BD.deletar(professor);
 
-    return await BD.query("UPDATE professor SET deleted=1");
+    return await BD.query("UPDATE professor SET deleted=1 wHERE id='"+professor.getId+"'");
     }
     catch(error){
       error.message;
