@@ -7,14 +7,14 @@ export default class Professor extends Entidade {
   @Private id;
   @Private nome;
   @Private matricula;
-  @Private departamento= new Departamento();
+  @Private departamento;
 
   constructor() {
     super();
     this.nome=undefined;
     this.matricula=undefined;
     this.id=undefined;
-    this.departamento= new Departamento();
+    this.departamento=undefined;
   }
 
   get getNome(){

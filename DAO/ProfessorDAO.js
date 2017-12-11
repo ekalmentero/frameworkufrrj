@@ -1,6 +1,7 @@
 
 import Professor from "../modelos/Professor";
-import Departamento from "./departamentoDAO";
+import Departamento from "../modelos/departamento";
+import DepartamentoDAO from "./departamentoDAO";
 import BD from "../BD";
 
 export default class ProfessorDAO{
@@ -33,12 +34,24 @@ export default class ProfessorDAO{
       //var result= await BD.buscar(professor);
       //console.log(result);
       var professorObj= new Professor();
+      var departamentoObj= new Departamento();
+      var resultDepartamento= await BD.query("SELECT * FROM departamento WHERE id='"+result[0].departamento+"'");
+      //console.log(resultDepartamento);
+
+      //instanciando obj departamento da consulta
+      departamentoObj.setNome(resultDepartamento[0].nome);
+      departamentoObj.setSigla(resultDepartamento[0].sigla);
+      departamentoObj.setInstituto_id(resultDepartamento[0].instituto);
+      departamentoObj.setId(resultDepartamento[0].id);
+      //instanciando obj departamento da consulta
+
       professorObj.setNome(result[0].nome);
       professorObj.setMatricula(result[0].matricula);
-      professorObj.setDepartamento(result[0].departamento);
+      professorObj.setDepartamento(departamentoObj);
       professorObj.setId(result[0].id);
-      //console.log(professor.getId);
-      console.log(result);
+
+      console.log(professorObj.getDepartamento);
+      //console.log(professor);
       return professorObj;
 
     }
