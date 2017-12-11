@@ -18,15 +18,9 @@ export default class ProfessorController{
 
     var professor= new Professor();
 
-<<<<<<< Updated upstream
-    professor.Id=id;
-=======
     professor.setId(id);
-<<<<<<< Updated upstream
-=======
+
     //console.log(professor.getId);
->>>>>>> Stashed changes
->>>>>>> Stashed changes
     return await ProfessorDAO.read(professor);
   }
 

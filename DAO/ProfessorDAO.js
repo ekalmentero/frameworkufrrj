@@ -25,15 +25,6 @@ export default class ProfessorDAO{
   static async read(professor){
 
     try{
-<<<<<<< Updated upstream
-      var result= await BD.buscar(professor);
-      var professor= new Professor();
-      professor.setId(result[0].id);
-      professor.setNome(result[0].nome);
-      professor.setMatricula(result[0].matricula);
-      professor.setDepartamento(result[0].departamento);
-      return professor;
-=======
       console.log(professor.getId);
       //var result= BD.query("SELECT * FROM professor WHERE id='"+professor.getId+"'");
       var result= BD.buscar(professor);
@@ -44,19 +35,14 @@ export default class ProfessorDAO{
       professorObj.setDepartamento(result[0].departamento);
       //console.log(professor.getId);
       return result;
->>>>>>> Stashed changes
+
     }
     catch(error){
       error.message;
     }
   }
   static async readAll(){
-<<<<<<< Updated upstream
-=======
-<<<<<<< Updated upstream
-      return await BD.query("SELECT * FROM professor");
-=======
->>>>>>> Stashed changes
+
       var result= await BD.query("SELECT * FROM professor WHERE deleted=0");
       var professores=[];
       for(let object of result){
@@ -64,19 +50,10 @@ export default class ProfessorDAO{
         professor.setId(object.id);
         professor.setNome(object.nome);
         professor.setMatricula(object.matricula);
-<<<<<<< Updated upstream
-        professor.setDepartamento(Departamento.read(object.departamento));
-=======
         professor.setDepartamento(object.departamento);
->>>>>>> Stashed changes
         professores.push(professor);
       }
       return professores;
-
-<<<<<<< Updated upstream
-=======
->>>>>>> Stashed changes
->>>>>>> Stashed changes
   }
 
   static async update(professor){
