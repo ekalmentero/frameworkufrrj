@@ -93,6 +93,7 @@ export default class BD {
 
         return new Promise(
             function(resolve,reject){
+              console.log(query);
                 conexao.query(query, function (erro, retorno, colunas) {
                     if (erro) { reject(erro); throw erro; }
                     resolve(retorno);

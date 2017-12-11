@@ -19,8 +19,6 @@ export default class ProfessorController{
     var professor= new Professor();
 
     professor.setId(id);
-
-    //console.log(professor.getId);
     return await ProfessorDAO.read(professor);
   }
 

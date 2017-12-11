@@ -15,7 +15,10 @@ export default class ProfessorDAO{
 
       return professor;
 */
-    return await BD.query("INSERT INTO professor SET matricula='"+professor.getMatricula+"',nome='"+professor.getNome+"',departamento='"+id_departamento+"',usuario='"+id_usuario+"'");
+    var result= await BD.query("INSERT INTO professor SET matricula='"+professor.getMatricula+"',nome='"+professor.getNome+"',departamento='"+id_departamento+"',usuario='"+id_usuario+"'");
+    professor.setId(result.insertId);
+    console.log(professor.getId);
+    return professor;
     }
     catch(error){
       error.message;
@@ -25,16 +28,18 @@ export default class ProfessorDAO{
   static async read(professor){
 
     try{
-      console.log(professor.getId);
-      //var result= BD.query("SELECT * FROM professor WHERE id='"+professor.getId+"'");
-      var result= BD.buscar(professor);
+      //console.log(professor.getId);
+      var result= await BD.query("SELECT * FROM professor WHERE id='"+professor.getId+"'");
+      //var result= await BD.buscar(professor);
+      //console.log(result);
       var professorObj= new Professor();
-      professorObj.setId(result[0].id);
       professorObj.setNome(result[0].nome);
       professorObj.setMatricula(result[0].matricula);
       professorObj.setDepartamento(result[0].departamento);
+      professorObj.setId(result[0].id);
       //console.log(professor.getId);
-      return result;
+      console.log(result);
+      return professorObj;
 
     }
     catch(error){
@@ -53,6 +58,8 @@ export default class ProfessorDAO{
         professor.setDepartamento(object.departamento);
         professores.push(professor);
       }
+      console.log(result);
+      //console.log(professores[3].getId);
       return professores;
   }
 
@@ -69,7 +76,7 @@ export default class ProfessorDAO{
     try{
       //return await BD.deletar(professor);
 
-      BD.query("UPDATE professor SET deleted=1");
+    return await BD.query("UPDATE professor SET deleted=1");
     }
     catch(error){
       error.message;
