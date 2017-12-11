@@ -1,9 +1,14 @@
 import mysql from 'mysql';
 
 const conexao = mysql.createConnection({
-  host     : 'octoplus-mysqldbserver.mysql.database.azure.com',
+  /*host     : 'octoplus-mysqldbserver.mysql.database.azure.com',
   user     : 'octo_sqlservice@octoplus-mysqldbserver',
   password : 'FrameworkUFRRJ2017',
+  database : 'db_frameworkufrrj'*/
+
+  host     : 'localhost',
+  user     : 'root',
+  password : '',
   database : 'db_frameworkufrrj'
 });
 

@@ -9,12 +9,12 @@ export default class Periodo extends Entidade{
   @Private nome;
   @Private deleted;
 
-  constructor(id,data_inicio,data_fim,nome){
+  constructor(){
     super();
-    /*this.setId(id);
-    this.setDataInicio(data_inicio);
-    this.setDataFim(data_fim);
-    this.setNome(nome);*/
+    this.id=undefined;
+    this.data_inicio=undefined;
+    this.data_fim=undefined;
+    this.nome=undefined;
   }
   get getDataInicio(){
     return this.data_inicio;
@@ -37,23 +37,23 @@ export default class Periodo extends Entidade{
     return this.id;
   }
 
-  set setDataInicio(data_inicio){
+setDataInicio(data_inicio){
     this.data_inicio=data_inicio;
 }
 
-set setDataFim(data_fim){
+setDataFim(data_fim){
   this.data_fim=data_fim;
 }
 
-set setNome(nome){
+setNome(nome){
   this.nome=nome;
 }
 
-set setDeleted(deleted){
+setDeleted(deleted){
   this.deleted=deleted;
 }
 
-set setId(id){
+setId(id){
   this.id=id;
 }
 

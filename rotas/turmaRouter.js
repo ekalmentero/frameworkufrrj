@@ -36,8 +36,8 @@ turma.route('/')
   .get(async function(req,res){
     if(typeof(req.params.id_professor)!= "undefined")
       res.send(await TurmaController.listarTurmasProfessor(req.params.id_professor));
-    else if(typeof(req.params.id_aluno)!="undefined")
-      res.send(await TurmaController.listarTurmasAluno(req.params.id_aluno));
+    /*else if(typeof(req.params.id_aluno)!="undefined")
+      res.send(await TurmaController.listarTurmasAluno(req.params.id_aluno));*/
     else
       res.send(await TurmaController.readAll());
   })

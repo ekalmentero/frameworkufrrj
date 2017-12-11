@@ -15,14 +15,19 @@ export default class TurmaDAO{
 
   static async create(turma,id_disciplina,id_periodo){
     try{
-      var foreignKeys=[];
+      //var foreignKeys=[];
       //foreignKeys.push(['disciplina',id_disciplina]);
       //foreignKeys.push(['periodo',id_periodo]);
       //var id= await BD.inserir(turma,foreignKeys);
       //turma.setId(id);
-      return await BD.query("INSERT INTO turma SET codigo='"+turma.getCodigo+"',turno='"+turma.getTurno+"',vagas='"+turma.vagas+"',periodo='"+id_periodo+"',disciplina='"+id_disciplina+"'");
+      console.log("oi");
+      var result= await BD.query("INSERT INTO turma SET codigo='"+turma.getCodigo+"',turno='"+turma.getTurno+"',vagas='"+turma.vagas+"',periodo='"+id_periodo+"',disciplina='"+id_disciplina+"'");
       //return turma;
-    }catch(error){
+      turma.setId(result.insertId);
+      return turma;
+
+    }
+    catch(error){
       error.message;
     }
 
@@ -30,15 +35,53 @@ export default class TurmaDAO{
 
   static async read(turma){
     try{
-      var result= await BD.buscar(turma);
-      var turmaTemp= new Turma();
-      //console.log(result[0]);
-      turmaTemp.setCodigo(result[0].codigo);
-      turmaTemp.setId(result[0].id);
-      turmaTemp.setVagas(result[0].vagas);
-      turmaTemp.setProfessor(ProfessorDAO.read(result[0].professor));
-      turmaTemp.setPeriodo(PeridoDAO.read(result[0].periodo));
-      turmaTemp.setDisciplina(DisciplinaDAO.read(result[0].disciplina));
+      var turmaObj= new Turma();
+      var disciplinaObj= new Disciplina();
+      var periodoObj= new Periodo();
+
+
+      var result= await BD.query("SELECT * FROM turma WHERE id='"+turma.getId+"'");
+      var resultDisciplina= await BD.query("SELECT * FROM disciplina WHERE id='"+result[0].disciplina+"'");
+      var resultPeriodo= await BD.query("SELECT * FROM periodo WHERE id='"+result[0].periodo+"'");
+
+      //populando o obj disciplinaObj
+      disciplinaObj.setNome(resultDisciplina[0].nome);
+      disciplinaObj.setCodigo(resultDisciplina[0].codigo);
+      disciplinaObj.setCreditos(resultDisciplina[0].creditos);
+      disciplinaObj.setLivre_escolha(resultDisciplina[0].livre_escolha);
+      disciplinaObj.setId(resultDisciplina[0].id);
+      //populando o obj disciplinaObj
+
+      //populando o obj periodoObj
+      periodoObj.setDataFim(resultPeriodo[0].data_fim);
+      periodoObj.setDataInicio(resultPeriodo[0].data_inicio);
+      periodoObj.setNome(resultPeriodo[0].nome);
+      periodoObj.setId(resultPeriodo[0].id);
+      //populando o obj periodoObj
+
+      //populando professor se existir professor setado para turma
+      if(result[0].professor != null ){
+        var resultProfessor= await BD.query("SELECT * FROM professor WHERE id='"+result[0].professor+"'");
+        var professorObj= new Professor();
+        professorObj.setNome(resultProfessor[0].nome);
+        professorObj.setMatricula(resultProfessor[0].matricula);
+        turmaObj.setProfessor(professorObj);
+        console.log(professorObj);
+      }
+      //populando professor se existir professor setado para turma
+
+      //populando obj de turma
+      turmaObj.setId(result[0].id);
+      turmaObj.setTurno(result[0].turno);
+      turmaObj.setCodigo(result[0].codigo);
+      turmaObj.setVagas(result[0].vagas);
+      turmaObj.setPeriodo(periodoObj);
+      turmaObj.setDisciplina(disciplinaObj);
+      //populando obj de turma
+      console.log(turmaObj.getPeriodo);
+      return turmaObj;
+
+
       //turmaTemp.parseEntidade(result[0]);
       console.log(turmaTemp.getCodigo);
 
@@ -54,14 +97,47 @@ export default class TurmaDAO{
       var result=await BD.query("SELECT * FROM turma where deleted=0");
       var turmas= [];
       for (let object of result){
-        var turma= new Turma();
-        turmaTemp.setCodigo(object.codigo);
-        turmaTemp.setId(object.id);
-        turmaTemp.setVagas(object.vagas);
-        turmaTemp.setProfessor(ProfessorDAO.read(object.professor));
-        turmaTemp.setPeriodo(PeridoDAO.read(object.periodo));
-        turmaTemp.setDisciplina(DisciplinaDAO.read(object.disciplina));
-        array.push(turma);
+        var turmaObj= new Turma();
+        var disciplinaObj= new Disciplina();
+        var periodoObj= new Periodo();
+
+        var resultDisciplina= await BD.query("SELECT * FROM disciplina WHERE id='"+object.disciplina+"'");
+        var resultPeriodo= await BD.query("SELECT * FROM periodo WHERE id='"+object.periodo+"'");
+
+        //populando o obj disciplinaObj
+        disciplinaObj.setNome(resultDisciplina[0].nome);
+        disciplinaObj.setCodigo(resultDisciplina[0].codigo);
+        disciplinaObj.setCreditos(resultDisciplina[0].creditos);
+        disciplinaObj.setLivre_escolha(resultDisciplina[0].livre_escolha);
+        disciplinaObj.setId(resultDisciplina[0].id);
+        //populando o obj disciplinaObj
+
+        //populando o obj periodoObj
+        periodoObj.setDataFim(resultPeriodo[0].data_fim);
+        periodoObj.setDataInicio(resultPeriodo[0].data_inicio);
+        periodoObj.setNome(resultPeriodo[0].nome);
+        periodoObj.setId(resultPeriodo[0].id);
+        //populando o obj periodoObj
+
+        //populando professor se existir professor setado para turma
+        if(result[0].professor != null ){
+          var resultProfessor= await BD.query("SELECT * FROM professor WHERE id='"+result[0].professor+"'");
+          var professorObj= new Professor();
+          professorObj.setNome(resultProfessor[0].nome);
+          professorObj.setMatricula(resultProfessor[0].matricula);
+          turmaObj.setProfessor(professorObj);
+        }
+        //populando professor se existir professor setado para turma
+
+        //populando obj de turma
+        turmaObj.setId(object.id);
+        turmaObj.setCodigo(object.codigo);
+        turmaObj.setTurno(object.turno);
+        turmaObj.setVagas(object.vagas);
+        turmaObj.setPeriodo(periodoObj);
+        turmaObj.setDisciplina(disciplinaObj);
+        turmas.push(turmaObj);
+
       }
       return turmas;
   }
@@ -71,39 +147,36 @@ export default class TurmaDAO{
   }
 
   static async update(turma){
+    console.log(turma);
     return await BD.update(turma);
+      //return await BD.query("UPDATE TURMA SET turno='"+turma.getTurno+"', codigo='"+turma.getCodigo+"', vagas='"+turma.getVagas+"', disciplina='"+turma.getDisciplina+"', periodo='"+turma.getPeriodo+"'");
   }
 
-  static async listarTurmasProfessor( id_professor){
+  static async listarTurmasProfessor(id_professor){
     var id=id_professor;
-    var sql='SELECT * FROM turma WHERE professor=';
-    var query=sql+id;
-    var result=await BD.query(query);
+    var result=await BD.query("SELECT * FROM turma WHERE professor='"+id+"'");
     console.log(result);
     var turmas=[];
-    /*var i=0;
-    while(i<result.lenght){
-      var turmaTemp= new Turma();
-      turmaTemp.setCodigo(result[i].codigo);
-      turmaTemp.setVagas(result[i].vagas);
-      turmaTemp.setProfessor(ProfessorDAO.read(result[i].professor));
-      turmaTemp.setPeriodo(PeridoDAO.read(result[i].periodo));
-      turmaTemp.setDisciplina(DisciplinaDAO.read(result[i].disciplina));
-      array.push(turmaTemp);
-      i++;
-
-    }*/
 
     for (let object of result){
       var turma= new Turma();
+      var disciplinaObj= new Disciplina();
+      var resultDisciplina= await BD.query("SELECT * disciplina WHERE id='"+object.disciplina+"'");
+
+      //popular disciplinaObj
+      disciplinaObj.setId(resultDisciplina[0].id);
+      disciplinaObj.setNome(resultDisciplina[0].nome);
+      disciplinaObj.setCodigo(resultDisciplina[0].codigo);
+      disciplinaObj.setCreditos(resultDisciplina[0].creditos);
+      disciplinaObj.setLivre_escolha(resultDisciplina[0].livre_escolha);
+      //popular disciplinaObj
+
       turmaTemp.setCodigo(object.codigo);
       turmaTemp.setId(object.id);
       turmaTemp.setVagas(object.vagas);
-      turmaTemp.setProfessor(ProfessorDAO.read(object.professor));
-      turmaTemp.setPeriodo(PeridoDAO.read(object.periodo));
-      turmaTemp.setDisciplina(DisciplinaDAO.read(object.disciplina));
+      turmaTemp.setDisciplina(disciplinaObj);
 
-      array.push(turmas);
+      turmas.push(turmas);
     }
     return turmas;
   }

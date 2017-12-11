@@ -30,7 +30,6 @@ export default class TurmaController{
     turmaObj.setTurno(turma.turno);
     turmaObj.setVagas(turma.vagas);
     turmaObj.setId(turma.id);
-    console.log("nao entrou no if");
     return await TurmaDAO.update(turmaObj);
 
   }

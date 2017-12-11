@@ -8,9 +8,9 @@ export default class Turma extends Entidade{
 @Private codigo;
 @Private turno;
 @Private vagas;
-@Private disciplina= new Disciplina();
-@Private professor= new Professor();
-@Private periodo= new Periodo();
+@Private disciplina;
+@Private professor;
+@Private periodo;
 @Private id;
 
   constructor(){
@@ -18,9 +18,9 @@ export default class Turma extends Entidade{
     this.codigo=undefined;
     this.turno=undefined;
     this.vagas=undefined;
-    this.disciplina= new Disciplina();
-    this.professor= new Professor();
-    this.periodo= new Periodo();
+    this.disciplina=undefined;
+    this.professor=undefined;
+    this.periodo=undefined;
   }
 
   get getCodigo(){
@@ -37,15 +37,15 @@ export default class Turma extends Entidade{
   }
 
   get getDisciplina(){
-    return this.disciplina.toString();
+    return this.disciplina;
   }
 
   get getPeriodo(){
-    return this.periodo.toString();
+    return this.periodo;
   }
 
   get getProfessor(){
-    return this.professor.toString();
+    return this.professor;
   }
 
   get getId(){
