@@ -15,10 +15,12 @@ export default class Aluno extends Entidade{
 
     constructor(){
       super();
+      this.id=undefined;
       this.nome=undefined;
       this.matricula=undefined;
       this.ativo=undefined;
       this.ingresso=undefined;
+      this.curso=undefined;
       this.grade=undefined;
       this.usuario=undefined;
     }

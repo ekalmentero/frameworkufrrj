@@ -1,6 +1,10 @@
 "use strict";
 import BD from "../BD";
 import Aluno from "../modelos/Aluno";
+import Curso from "../modelos/curso";
+import Grade from "../modelos/Grade";
+import CursoDAO from "./cursoDAO";
+import GradeDAO from "./GradeDAO";
 
 export default class AlunoDAO {
 
@@ -22,19 +26,32 @@ export default class AlunoDAO {
   static async read(aluno) {
     try {
       var retorno = await BD.buscar(aluno);
-      //return retorno[0];
       aluno.setNome(retorno[0].nome);
       aluno.setId(retorno[0].id);
       aluno.setMatricula(retorno[0].matricula);
       aluno.setAtivo(retorno[0].ativo);
       aluno.setIngresso(retorno[0].ingresso);
-      /*var tmpCurso = await CursoDAO.read(retorno[0].curso);
-      aluno.setCurso(tmpCurso);
-      var tmpGrade = await GradeDAO.read(retorno[0].grade);
-      aluno.setGrade(tmpGrade);*/
-      aluno.setCurso(retorno[0].curso);
-      aluno.setGrade(retorno[0].grade);
-      aluno.setUsuario(retorno[0].usuario);
+
+      //criando o objeto curso de Aluno
+      var tmpCurso= await BD.query("SELECT * FROM curso WHERE id='"+retorno[0].curso+"'");
+      var cursoObj = new Curso();
+      cursoObj.setCodigo(tmpCurso[0].codigo);
+      cursoObj.setId(tmpCurso[0].id);
+      cursoObj.setNome(tmpCurso[0].nome);
+      cursoObj.setLimite_periodos(tmpCurso[0].limite_periodos);
+      cursoObj.setTurno(tmpCurso[0].turno);
+      cursoObj.setDepartamento_id(tmpCurso[0].departamento_id);
+      aluno.setCurso(cursoObj);
+      
+      //criando o objeto grade de Aluno
+      var tmpGrade= await BD.query("SELECT * FROM grade WHERE id='"+retorno[0].grade+"'");
+      var gradeObj = new Grade();
+      gradeObj.setId(tmpGrade[0].id);
+      gradeObj.setInicio_vigencia(tmpGrade[0].inicio_vigencia);
+      gradeObj.setDisponivel(tmpGrade[0].disponivel);
+      gradeObj.setCurso(tmpGrade[0].curso);
+      aluno.setGrade(gradeObj);
+      
       return aluno;
     } catch (error) {
       return (error.message);
@@ -44,21 +61,34 @@ export default class AlunoDAO {
   static async readByMatricula(mat_aluno) {
     try {
       var retorno =  await BD.query("SELECT * FROM aluno WHERE matricula = " + mat_aluno);
-      var alunos = [];
         var alunoTemp = new Aluno();
         alunoTemp.setNome(retorno[0].nome);
         alunoTemp.setId(retorno[0].id);
         alunoTemp.setMatricula(retorno[0].matricula);
         alunoTemp.setAtivo(retorno[0].ativo);
         alunoTemp.setIngresso(retorno[0].ingresso);
-        /*var tmpCurso = await CursoDAO.read(retorno[0].curso);
-        alunoTemp.setCurso(tmpCurso);
-        var tmpGrade = await GradeDAO.read(retorno[0].grade);
-        alunoTemp.setGrade(tmpGrade);*/
-        alunoTemp.setCurso(retorno[0].curso);
-        alunoTemp.setGrade(retorno[0].grade);
-        alunos.push(alunoTemp);
-        return alunos;
+
+      //criando o objeto curso de Aluno
+      var tmpCurso= await BD.query("SELECT * FROM curso WHERE id='"+retorno[0].curso+"'");
+      var cursoObj = new Curso();
+      cursoObj.setCodigo(tmpCurso[0].codigo);
+      cursoObj.setId(tmpCurso[0].id);
+      cursoObj.setNome(tmpCurso[0].nome);
+      cursoObj.setLimite_periodos(tmpCurso[0].limite_periodos);
+      cursoObj.setTurno(tmpCurso[0].turno);
+      cursoObj.setDepartamento_id(tmpCurso[0].departamento_id);
+      alunoTemp.setCurso(cursoObj);
+      
+      //criando o objeto grade de Aluno
+      var tmpGrade= await BD.query("SELECT * FROM grade WHERE id='"+retorno[0].grade+"'");
+      var gradeObj = new Grade();
+      gradeObj.setId(tmpGrade[0].id);
+      gradeObj.setInicio_vigencia(tmpGrade[0].inicio_vigencia);
+      gradeObj.setDisponivel(tmpGrade[0].disponivel);
+      gradeObj.setCurso(tmpGrade[0].curso);
+      alunoTemp.setGrade(gradeObj);
+      
+      return alunoTemp;
     } catch (error) {
       return error.message;
     }
@@ -76,13 +106,27 @@ export default class AlunoDAO {
         alunoTemp.setMatricula(result[i].matricula);
         alunoTemp.setAtivo(result[i].ativo);
         alunoTemp.setIngresso(result[i].ingresso);
-        /*var tmpCurso = await CursoDAO.read(result[i].curso);
-        alunoTemp.setCurso(tmpCurso);
-        var tmpGrade = await GradeDAO.read(result[i].grade);
-        alunoTemp.setGrade(tmpGrade);*/
-        alunoTemp.setCurso(result[i].curso);
-        alunoTemp.setGrade(result[i].grade);
-        alunoTemp.setUsuario(result[i].usuario);
+
+        //criando o objeto curso de Aluno
+        var tmpCurso= await BD.query("SELECT * FROM curso WHERE id='"+result[i].curso+"'");
+        var cursoObj = new Curso();
+        cursoObj.setCodigo(tmpCurso[0].codigo);
+        cursoObj.setId(tmpCurso[0].id);
+        cursoObj.setNome(tmpCurso[0].nome);
+        cursoObj.setLimite_periodos(tmpCurso[0].limite_periodos);
+        cursoObj.setTurno(tmpCurso[0].turno);
+        cursoObj.setDepartamento_id(tmpCurso[0].departamento_id);
+        alunoTemp.setCurso(cursoObj);
+      
+        //criando o objeto grade de Aluno
+        var tmpGrade= await BD.query("SELECT * FROM grade WHERE id='"+result[i].grade+"'");
+        var gradeObj = new Grade();
+        gradeObj.setId(tmpGrade[0].id);
+        gradeObj.setInicio_vigencia(tmpGrade[0].inicio_vigencia);
+        gradeObj.setDisponivel(tmpGrade[0].disponivel);
+        gradeObj.setCurso(tmpGrade[0].curso);
+        alunoTemp.setGrade(gradeObj);
+
         alunos.push(alunoTemp);
         i++;
       }
@@ -104,13 +148,27 @@ export default class AlunoDAO {
         alunoTemp.setMatricula(result[i].matricula);
         alunoTemp.setAtivo(result[i].ativo);
         alunoTemp.setIngresso(result[i].ingresso);
-        /*var tmpCurso = await CursoDAO.read(result[i].curso);
-        alunoTemp.setCurso(tmpCurso);
-        var tmpGrade = await GradeDAO.read(result[i].grade);
-        alunoTemp.setGrade(tmpGrade);*/
-        alunoTemp.setCurso(result[i].curso);
-        alunoTemp.setGrade(result[i].grade);
-        alunoTemp.setUsuario(result[i].usuario);
+        
+        //criando o objeto curso de Aluno
+        var tmpCurso= await BD.query("SELECT * FROM curso WHERE id='"+result[i].curso+"'");
+        var cursoObj = new Curso();
+        cursoObj.setCodigo(tmpCurso[0].codigo);
+        cursoObj.setId(tmpCurso[0].id);
+        cursoObj.setNome(tmpCurso[0].nome);
+        cursoObj.setLimite_periodos(tmpCurso[0].limite_periodos);
+        cursoObj.setTurno(tmpCurso[0].turno);
+        cursoObj.setDepartamento_id(tmpCurso[0].departamento_id);
+        alunoTemp.setCurso(cursoObj);
+      
+        //criando o objeto grade de Aluno
+        var tmpGrade= await BD.query("SELECT * FROM grade WHERE id='"+result[i].grade+"'");
+        var gradeObj = new Grade();
+        gradeObj.setId(tmpGrade[0].id);
+        gradeObj.setInicio_vigencia(tmpGrade[0].inicio_vigencia);
+        gradeObj.setDisponivel(tmpGrade[0].disponivel);
+        gradeObj.setCurso(tmpGrade[0].curso);
+        alunoTemp.setGrade(gradeObj);
+
         alunos.push(alunoTemp);
         i++;
       }
@@ -147,7 +205,7 @@ export default class AlunoDAO {
     try {
       var i=0;
       var result= await BD.query("SELECT aluno FROM aluno_turma WHERE turma="+id);
-      var array= new Array();
+      var alunos= new Array();
   
         while(i<result.length){
         var alunoTemp= new Aluno();
@@ -158,19 +216,31 @@ export default class AlunoDAO {
         alunoTemp.setMatricula(resultAluno[0].matricula);
         alunoTemp.setAtivo(resultAluno[0].ativo);
         alunoTemp.setIngresso(resultAluno[0].ingresso);
-        /*var tmpCurso = await CursoDAO.read(resultAluno[0].curso);
-        alunoTemp.setCurso(tmpCurso);
-        var tmpGrade = await GradeDAO.read(resultAluno[0].grade);
-        alunoTemp.setGrade(tmpGrade);*/
-        alunoTemp.setCurso(resultAluno[0].curso);
-        alunoTemp.setGrade(resultAluno[0].grade);
-        alunoTemp.setUsuario(resultAluno[0].usuario);
-  
-  
-        array.push(resultAluno[0]);
+        
+        //criando o objeto curso de Aluno
+        var tmpCurso= await BD.query("SELECT * FROM curso WHERE id='"+resultAluno[0].curso+"'");
+        var cursoObj = new Curso();
+        cursoObj.setCodigo(tmpCurso[0].codigo);
+        cursoObj.setId(tmpCurso[0].id);
+        cursoObj.setNome(tmpCurso[0].nome);
+        cursoObj.setLimite_periodos(tmpCurso[0].limite_periodos);
+        cursoObj.setTurno(tmpCurso[0].turno);
+        cursoObj.setDepartamento_id(tmpCurso[0].departamento_id);
+        alunoTemp.setCurso(cursoObj);
+      
+        //criando o objeto grade de Aluno
+        var tmpGrade= await BD.query("SELECT * FROM grade WHERE id='"+resultAluno[0].grade+"'");
+        var gradeObj = new Grade();
+        gradeObj.setId(tmpGrade[0].id);
+        gradeObj.setInicio_vigencia(tmpGrade[0].inicio_vigencia);
+        gradeObj.setDisponivel(tmpGrade[0].disponivel);
+        gradeObj.setCurso(tmpGrade[0].curso);
+        alunoTemp.setGrade(gradeObj);
+   
+        alunos.push(alunoTemp);
         i++;
       }
-      return array;
+      return alunos;
     } catch (error) {
       return error.message;
     }

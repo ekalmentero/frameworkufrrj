@@ -56,12 +56,12 @@ export default class AlunoController {
         var alunoObj = new Aluno();
         //alunoObj.parseEntidade(aluno);
         alunoObj.setId(aluno.id);
-        alunoObj.setNome(aluno.nome);
+        /*alunoObj.setNome(aluno.nome);
         alunoObj.setMatricula(aluno.matricula);
         alunoObj.setAtivo(aluno.ativo);
         alunoObj.setIngresso(aluno.ingresso);
         alunoObj.setGrade(aluno.grade);
-        alunoObj.setUsuario(aluno.usuario);
+        alunoObj.setUsuario(aluno.usuario);*/
         return await AlunoDAO.delete(alunoObj);
     }
 
