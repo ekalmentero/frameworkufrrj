@@ -54,14 +54,8 @@ export default class DepartamentoDAO {
         });
     }
 
-    static async readAll(){
-        /*let departamentos = await BD.query("SELECT * FROM departamento").then( (retorno) => { return retorno; } );
-        let 
-        return*/ 
-    }
-
     static async search(departamento){
-        let query = "SELECT * from departamento WHERE ",
+        let query = "SELECT * from departamento WHERE deleted=0 ",
             wheres_array = [];
 
         if(departamento.getNome() !== "")
@@ -96,10 +90,23 @@ export default class DepartamentoDAO {
     }
 
     static async update(departamento){
-        return await BD.update(departamento);
+        let query = "UPDATE departamento SET ";
+        let sets_array = [];
+        let where = "WHERE id = "+departamento.getId();
+
+        if(departamento.getNome() !== "")
+            sets_array.push("nome='"+departamento.getNome()+"'");
+
+        if(departamento.getSigla() !== "")
+            sets_array.push("sigla='"+departamento.getSigla()+"'");
+
+        return await BD.query( query.concat( sets_array.join(","), where ) );
     }
 
     static async delete(departamento){
-        return await BD.deletar(departamento);
+        let query = "UPDATE departamento SET deleted=1 "+
+                    "WHERE id = "+departamento.getId();
+        
+        return await BD.query( query );
     }
 }

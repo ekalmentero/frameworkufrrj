@@ -14,7 +14,7 @@ export default class DepartamentoController {
     }
 
     static async read(id){
-        var departamento = new Departamento();
+        let departamento = new Departamento();
         departamento.setId(id);
         return await DepartamentoDAO.read(departamento);
     }
@@ -31,15 +31,15 @@ export default class DepartamentoController {
         return await DepartamentoDAO.search(departamento);
     }
 
-    static async update(departamento){
-        var departamentoObj = new Departamento();
-        departamentoObj.parseEntidade(departamento);
-        return await DepartamentoDAO.update(departamentoObj);
+    static async update(dados_departamento){
+        let departamento = new Departamento();
+        departamento.fillFromObject(dados_departamento);
+        return await DepartamentoDAO.update(departamento);
     }
 
-    static async delete(departamento){
-        var departamentoObj = new Departamento();
-        departamentoObj.parseEntidade(departamento);
-        return await DepartamentoDAO.delete(departamentoObj);
+    static async delete(dados_departamento){
+        let departamento = new Departamento();
+        departamento.fillFromObject(dados_departamento);
+        return await DepartamentoDAO.delete(departamento);
     }
 }
