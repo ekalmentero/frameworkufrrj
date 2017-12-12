@@ -44,6 +44,10 @@ export default class Departamento {
         this.instituto = instituto;
     }
 
+    getInstituto(){
+        return this.instituto;
+    }
+
     setDeleted(deleted){
        this.deleted = deleted;
     }

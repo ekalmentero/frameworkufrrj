@@ -4,8 +4,20 @@ import Departamento from "../modelos/Departamento";
 import BD from "../BD";
 
 export default class DepartamentoDAO {
+    
     static async create(departamento){
-        var id = await BD.inserir(departamento);
+        let query = "INSERT INTO departamento (nome, sigla, instituto, deleted) VALUES "+
+                    "('"+departamento.getNome()+"', "+
+                    "'"+departamento.getSigla()+"', "+
+                    ""+departamento.getInstituto().getId()+", "+
+                    "0)";
+
+        console.log(query);
+
+        var id = await BD.query(query).then( (retorno) => {
+                                return retorno.insertId;
+                            });
+
         departamento.setId(id);
         return departamento;
     }

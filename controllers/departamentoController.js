@@ -1,11 +1,16 @@
 import Departamento from '../modelos/Departamento';
 import DepartamentoDAO from '../DAO/DepartamentoDAO';
+import Instituto from '../modelos/Instituto';
 
 export default class DepartamentoController {
-    static async create(departamento){
-        var departamentoObj = new Departamento();
-        departamentoObj.parseEntidade(departamento);
-        return await DepartamentoDAO.create(departamentoObj);
+    
+    static async create(dados_departamento){
+        let departamento = new Departamento();
+        departamento.fillFromObject(dados_departamento);
+        let instituto = new Instituto();
+        instituto.setId(dados_departamento.instituto);
+        departamento.setInstituto(instituto);
+        return await DepartamentoDAO.create(departamento);
     }
 
     static async read(id){
