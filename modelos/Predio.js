@@ -1,13 +1,6 @@
 "use strict";
 
 export default class Predio{
-	@Private id;
-	@Private nome;
-	@Private sigla;
-	@Private lat;
-	@Private long;
-	@Private deleted;
-	@Private institutos;
 
 	constructor(){
 
@@ -18,7 +11,16 @@ export default class Predio{
 		this.lat = "";
 		this.long = "";
 		this.deleted = 0;
+		this.salas = [];
 
+	}
+
+	setSalas(salas){
+		this.salas = salas;
+	}
+
+	getSalas(){
+		return this.salas;
 	}
 
 	setInstitutos(institutos){

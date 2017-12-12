@@ -2,13 +2,28 @@
 
 import PredioDAO from '../DAO/PredioDAO.js';
 import Predio from '../modelos/Predio.js';
+import salaController from './salaController.js';
 
 class PredioController {
 	
-	static async create(predio, a_id_instituto){
-        var predioObj = new Predio();
+	static async create(dados_predio){
+        var predio = new Predio();
+
+        predio.setNome(dados_predio.nome);
+        predio.setSigla(dados_predio.sigla);
+        predio.setLat(dados_predio.lat);
+        predio.setLong(dados_predio.long);
+       
+        predio = await PredioDAO.insert(predio);
+
+        let salas = dados_predio.salas.map( (raw_sala) => {
+            return {nome : raw_sala.nome, predio : predio.getId() };
+        });
+
+        salaController.createMany(salas);
+
         //predioObj.parseEntidade(predio);
-        return await PredioDAO.create(predioObj, a_id_instituto);
+        return predio;
     }
 
     static async read(id){

@@ -10,18 +10,26 @@ export default class PredioDAO {
         
     }
 
-    /**
-    *   a_id_instituto - array com os ids dos institutos ao qual esse prédio pertence
-    */
-    static async insert(predio, a_id_instituto){ 
+    static async insert(predio){ 
 
-        var foreignKeys=[];
-        foreignKeys.push(['instituto',a_id_instituto]);
-        var id = await BD.inserir(predio, foreignKeys);
+        let query = "INSERT INTO predio (nome, sigla, lat, `long`, deleted) VALUES "+
+                    "('"+predio.getNome()+"', "+
+                    "'"+predio.getSigla()+"', "+
+                    "'"+predio.getLat()+"', "+
+                    "'"+predio.getLong()+"', "+
+                    "0)";
+
+        console.log(query);
+
+        let id = await BD.query(query).then( (retorno) => {
+                                return retorno.insertId;
+                            });
+
         predio.setId(id);
+
         return predio;
     }
-    
+
 
     static async read(predio){
         var pre_return = new Predio();

@@ -11,25 +11,29 @@ export default class SalaDao{
 
    }
 
+   static async insert(sala){
+      let query = "INSERT INTO sala (nome, predio, deleted) VALUES "+
+                    "('"+sala.getNome()+"', "+
+                    sala.getPredio().getId()+", "+
+                    "0)";
 
-   static async insert(sala, id_predio){
+        let id = await BD.query(query).then( (retorno) => {
+                                return retorno.insertId;
+                            });
 
-    try{
-      /*
-        var sal_id = await BD.inserir(sala).catch((e)=>{
-            console.log(e);
-        });
-        */
+        sala.setId(id);
 
-        var foreignKeys=[];
-        foreignKeys.push(['predio',id_predio]);
-        var retorno = await BD.inserir(sala, foreignKeys);
-        sala.setId(retorno);
         return sala;
-        
-      } catch (error) {
-        return error.message;
-      }
+   }
+
+   static async insertMany(salas){
+     let salas_retorno = [];
+
+     for(let i =0; i < salas.length; i++){
+        salas_retorno.push(await  this.insert(salas[i]));
+     }
+
+     return salas_retorno;
    }
 
   

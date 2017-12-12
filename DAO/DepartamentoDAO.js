@@ -12,8 +12,6 @@ export default class DepartamentoDAO {
                     ""+departamento.getInstituto().getId()+", "+
                     "0)";
 
-        console.log(query);
-
         var id = await BD.query(query).then( (retorno) => {
                                 return retorno.insertId;
                             });

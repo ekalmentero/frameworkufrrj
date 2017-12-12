@@ -1,13 +1,6 @@
 "use strict";
 
-import Entidade from './Entidade';
-
-export default class Sala extends Entidade{
-
-	@Private id;
-	@Private predio;
-	@Private nome;
-	@Private deleted;
+export default class Sala {
 
 	constructor(){
 		//
@@ -29,19 +22,19 @@ export default class Sala extends Entidade{
 		this.deleted = deleted;
 	}
 
-	get etId(){
+	getId(){
 		return this.id;
 	}
 
-	get getPredio(){
+	getPredio(){
 		return this.predio;
 	}
 
-	get getNome(){
+	getNome(){
 		return this.nome;
 	}
 
-	get getDeleted(){
+	getDeleted(){
 		return this.deleted;
 	}
 
