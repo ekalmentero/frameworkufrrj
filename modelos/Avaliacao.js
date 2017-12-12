@@ -11,6 +11,11 @@ export default class Avaliacao extends Entidade {
 
     constructor(){
       super();
+      this.id=undefined;
+      this.nome=undefined;
+      this.data=undefined;
+      this.descricao=undefined;
+      this.turma=[];
     }
 
       get getId() {
@@ -25,7 +30,6 @@ export default class Avaliacao extends Entidade {
       get getDescricao() {
         return this.descricao;
       }
-
       get getTurma() {
         return this.turma;
       }
@@ -42,7 +46,6 @@ export default class Avaliacao extends Entidade {
       setDescricao(descricao) {
         this.descricao = descricao;
       }
-
       setTurma(turma) {
         this.turma = turma;
       }
