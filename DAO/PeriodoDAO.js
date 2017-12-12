@@ -33,7 +33,9 @@ static async read(periodo){
   }
 }
   static async readAll(){
-      return await BD.query("SELECT * FROM periodo");
+    var result= await BD.query("SELECT * FROM periodo");
+      console.log(result);
+      return result;
   }
 
   static async update(periodo){

@@ -19,6 +19,7 @@ export default class BD {
     static query(query){
         return new Promise(
             function(resolve,reject){
+              console.log(query);
                 conexao.query(query, function (erro, retorno, colunas) {
                     if (erro) {reject(erro); throw erro;}
                     resolve(retorno);
@@ -49,7 +50,7 @@ export default class BD {
             query += propriedade.replace("get","").toLowerCase() + " = " + tmp + obj[propriedade] + tmp + ",";
         }
         query = query.slice(0,-1);
-        
+
         return new Promise(
             function(resolve,reject){
                 conexao.query(query, function (erro, retorno, colunas) {
