@@ -21,7 +21,12 @@ export default class TurmaDAO{
       //var id= await BD.inserir(turma,foreignKeys);
       //turma.setId(id);
       console.log("oi");
-      var result= await BD.query("INSERT INTO turma SET codigo='"+turma.getCodigo+"',turno='"+turma.getTurno+"',vagas='"+turma.vagas+"',periodo='"+id_periodo+"',disciplina='"+id_disciplina+"'");
+      if(typeof(turma.professor)!= 'undefined'){
+          var result= await BD.query("INSERT INTO turma SET codigo='"+turma.getCodigo+"',turno='"+turma.getTurno+"',vagas='"+turma.vagas+"',periodo='"+id_periodo+"',disciplina='"+id_disciplina+"', professor='"+turma.professor+"'");
+      }
+      else{
+          var result= await BD.query("INSERT INTO turma SET codigo='"+turma.getCodigo+"',turno='"+turma.getTurno+"',vagas='"+turma.vagas+"',periodo='"+id_periodo+"',disciplina='"+id_disciplina+"'");
+      }
       //return turma;
       turma.setId(result.insertId);
       return turma;

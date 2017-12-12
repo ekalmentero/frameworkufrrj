@@ -14,7 +14,7 @@ turma.get('/:id', async function(req,res){
 
 turma.route('/')
   .post(async function(req,res){
-    res.send(await TurmaController.create(req.body,req.params.id_disciplina, req.body.periodo));
+    res.send(await TurmaController.create(req.body,req.body.disciplina, req.body.periodo));
     //res.send(typeof(ProfessorController.create));
     //console.log("oi");
   })
