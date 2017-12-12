@@ -9,6 +9,8 @@ export default class Resultado extends Entidade{
     constructor(){
       super();
       this.nota=undefined;
+      this.aluno=undefined;
+      this.avaliacao=undefined;
     }
       get getNota() {
         return this.nota;
@@ -17,7 +19,7 @@ export default class Resultado extends Entidade{
         return this.aluno;
       }
       get getAvaliacao() {
-        return this.aluno;
+        return this.avaliacao;
       }
       
       setNota(nota) {
@@ -26,8 +28,8 @@ export default class Resultado extends Entidade{
       setAluno(aluno) {
         this.aluno = aluno;
       }
-      setAvaliacao(aluno) {
-        this.aluno = aluno;
+      setAvaliacao(avaliacao) {
+        this.avaliacao = avaliacao;
       }
 
 }

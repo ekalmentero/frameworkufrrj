@@ -6,26 +6,26 @@ export default class Grade extends Entidade {
   @Private id;
   @Private inicio_vigencia;
   @Private disponivel;
-  @Private curso = new Curso();
+  @Private curso;
 
     constructor(){
       super();
     }
 
-     get getId() {
+      get Id() {
         return this.id;
       }
-      
-      get getInicio_vigencia() {
+
+      get Inicio_vigencia() {
         return this.inicio_vigencia;
       }
-      get getDisponivel() {
+      get Disponivel() {
         return this.disponivel;
       }
-      get getCurso() {
+      get Curso() {
         return this.curso;
       }
-      
+
       setId(id) {
         this.id = id;
       }
@@ -38,7 +38,6 @@ export default class Grade extends Entidade {
       setCurso(curso) {
         this.curso = curso;
       }
-      
+
 
 }
-
