@@ -65,7 +65,7 @@ import alunos from './rotas/alunoRouter'
 rotas.use('/alunos',alunos)
 
 import avaliacao from './rotas/avaliacaoRouter'
-rotas.use('/avaliacao', avaliacao)
+rotas.use('/avaliacoes', avaliacao)
 
 import resultado from './rotas/resultadoRouter'
 rotas.use('/resultados', resultado)

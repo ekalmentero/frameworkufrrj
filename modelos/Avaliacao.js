@@ -1,25 +1,21 @@
 "use strict";
-import Turma from './Turma';
 import Entidade from './entidade';
+import Turma from './Turma';
 
 export default class Avaliacao extends Entidade {
   @Private id;
   @Private nome;
   @Private data;
   @Private descricao;
-  @Private turma = new Turma();
-  
+  @Private turma;
+
     constructor(){
       super();
     }
 
-     get getId() {
+      get getId() {
         return this.id;
       }
-      get getTurma() {
-        return this.turma;
-      }
-      
       get getNome() {
         return this.nome;
       }
@@ -29,7 +25,11 @@ export default class Avaliacao extends Entidade {
       get getDescricao() {
         return this.descricao;
       }
-      
+
+      get getTurma() {
+        return this.turma;
+      }
+
       setId(id) {
         this.id = id;
       }
@@ -42,9 +42,8 @@ export default class Avaliacao extends Entidade {
       setDescricao(descricao) {
         this.descricao = descricao;
       }
+
       setTurma(turma) {
         this.turma = turma;
       }
-
 }
-

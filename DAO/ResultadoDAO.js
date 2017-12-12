@@ -43,7 +43,7 @@ export default class ResultadoDAO {
         resultadoTemp.setAluno(alunoObj);
 
         //criando o obj avaliacao
-        var tmpAvaliacao= await BD.query("SELECT * FROM avaliacao WHERE id='"+result[i].avaliacao+"'"); console.log(result[i].avaliacao);
+        var tmpAvaliacao= await BD.query("SELECT * FROM avaliacao WHERE id='"+result[i].avaliacao+"'");
         var avaliacaoObj = new Avaliacao();
         avaliacaoObj.setId(tmpAvaliacao[0].id);
         avaliacaoObj.setNome(tmpAvaliacao[0].nome);
@@ -69,8 +69,28 @@ export default class ResultadoDAO {
       while(i<result.length){
         var resultadoTemp = new Resultado();
         resultadoTemp.setNota(result[i].nota);
-        resultadoTemp.setAluno(result[i].aluno);
-        resultadoTemp.setAvaliacao(result[i].avaliacao);
+        
+        //criando o obj aluno
+        var tmpAluno= await BD.query("SELECT * FROM aluno WHERE id='"+result[i].aluno+"'");
+        var alunoObj = new Aluno();
+        alunoObj.setId(tmpAluno[0].id);
+        alunoObj.setNome(tmpAluno[0].nome);
+        alunoObj.setMatricula(tmpAluno[0].matricula);
+        alunoObj.setAtivo(tmpAluno[0].ativo);
+        alunoObj.setIngresso(tmpAluno[0].ingresso);
+        alunoObj.setCurso(tmpAluno[0].curso);
+        resultadoTemp.setAluno(alunoObj);
+
+        //criando o obj avaliacao
+        var tmpAvaliacao= await BD.query("SELECT * FROM avaliacao WHERE id='"+result[i].avaliacao+"'");
+        var avaliacaoObj = new Avaliacao();
+        avaliacaoObj.setId(tmpAvaliacao[0].id);
+        avaliacaoObj.setNome(tmpAvaliacao[0].nome);
+        avaliacaoObj.setData(tmpAvaliacao[0].data);
+        avaliacaoObj.setDescricao(tmpAvaliacao[0].descricao);
+        avaliacaoObj.setTurma(tmpAvaliacao[0].turma);
+        resultadoTemp.setAvaliacao(avaliacaoObj);
+
         Resultados.push(resultadoTemp);
         i++;
       }
@@ -88,8 +108,28 @@ export default class ResultadoDAO {
       while(i<result.length){
         var resultadoTemp = new Resultado();
         resultadoTemp.setNota(result[i].nota);
-        resultadoTemp.setAluno(result[i].aluno);
-        resultadoTemp.setAvaliacao(result[i].avaliacao);
+
+        //criando o obj aluno
+        var tmpAluno= await BD.query("SELECT * FROM aluno WHERE id='"+result[i].aluno+"'");
+        var alunoObj = new Aluno();
+        alunoObj.setId(tmpAluno[0].id);
+        alunoObj.setNome(tmpAluno[0].nome);
+        alunoObj.setMatricula(tmpAluno[0].matricula);
+        alunoObj.setAtivo(tmpAluno[0].ativo);
+        alunoObj.setIngresso(tmpAluno[0].ingresso);
+        alunoObj.setCurso(tmpAluno[0].curso);
+        resultadoTemp.setAluno(alunoObj);
+
+        //criando o obj avaliacao
+        var tmpAvaliacao= await BD.query("SELECT * FROM avaliacao WHERE id='"+result[i].avaliacao+"'");
+        var avaliacaoObj = new Avaliacao();
+        avaliacaoObj.setId(tmpAvaliacao[0].id);
+        avaliacaoObj.setNome(tmpAvaliacao[0].nome);
+        avaliacaoObj.setData(tmpAvaliacao[0].data);
+        avaliacaoObj.setDescricao(tmpAvaliacao[0].descricao);
+        avaliacaoObj.setTurma(tmpAvaliacao[0].turma);
+        resultadoTemp.setAvaliacao(avaliacaoObj);
+
         Resultados.push(resultadoTemp);
         i++;
       }
@@ -104,6 +144,7 @@ export default class ResultadoDAO {
       await BD.query(
         "UPDATE avaliacao_aluno SET nota = "+resultado.nota+" WHERE avaliacao="+id_avaliacao+" AND aluno="+resultado.aluno
       );
+      return true;
     } catch (error) {
       return error.message;
     }
