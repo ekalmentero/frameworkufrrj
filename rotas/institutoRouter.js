@@ -8,11 +8,11 @@ instituto.use(bodyParser.json());
 
 instituto.get('/:id', async function(req,res){
     res.send(await institutoController.read(req.params.id));
-})
+});
 
 instituto.route('/')
   .get(async function(req,res){
-      res.send(await institutoController.readAll());
+      res.send(await institutoController.search(req.query));
   })
   .post(async function(req,res){
       res.send(await institutoController.create(req.body));

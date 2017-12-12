@@ -9,7 +9,6 @@ class InstitutoController {
         let instituto = new Instituto();
         instituto.fillFromObject(dados_instituto);
         instituto = await InstitutoDAO.create(instituto);
-        console.log("departamentos", dados_instituto.departamentos)
         InstitutoDAO.linkDepartamentosByDepsId(instituto, dados_instituto.departamentos);
         InstitutoDAO.linkPrediosByPrediosId(instituto, dados_instituto.predios);
 
@@ -36,6 +35,18 @@ class InstitutoController {
         var institutoObj = new Instituto();
         institutoObj.parseEntidade(instituto);
         return await InstitutoDAO.delete(institutoObj);
+    }
+
+    static async search(terms){
+        let instituto = new Instituto();
+
+        if(terms.nome !== undefined)
+            instituto.setNome(terms.nome);
+
+        if(terms.sigla !== undefined) 
+            instituto.setSigla(terms.sigla);
+
+        return await InstitutoDAO.search(instituto);
     }
 	
 }

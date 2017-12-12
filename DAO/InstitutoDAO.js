@@ -81,6 +81,34 @@ export default class InstitutoDAO{
         return instituto;
     }
 
+    static async search(instituto){
+         let query = "SELECT * from instituto WHERE ",
+            wheres_array = [];
+
+        if(instituto.getNome() !== "")
+            wheres_array.push("nome like '%"+instituto.getNome()+"%'");
+
+        if(instituto.getSigla() !== "")
+            wheres_array.push("sigla like '%"+instituto.getSigla()+"%'");
+
+        if(instituto.getId() !== null)
+            wheres_array.push("id = "+instituto.getId());
+
+        if(wheres_array.length == 0)
+            return [];
+
+        let institutos = await BD.query( query.concat(wheres_array.join(" OR ")) )
+                                .then( (retorno) => {
+                                    return retorno.map( (raw_inst) => {
+                                                let inst = new Instituto();
+                                                inst.fillFromObject(raw_inst);
+                                                return inst;
+                                            });
+                                });
+
+        return institutos;
+    }
+
     /*static async readByPredio(predio){
         let query = "SELECT * from instituto_predio "+
                     "LEFT JOIN predio ON instituto_predio.predio = predio.id "+

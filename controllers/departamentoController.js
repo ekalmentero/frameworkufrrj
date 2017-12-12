@@ -14,7 +14,6 @@ export default class DepartamentoController {
         return await DepartamentoDAO.read(departamento);
     }
 
-
     static async search(terms){
         let departamento = new Departamento();
 
@@ -26,7 +25,6 @@ export default class DepartamentoController {
 
         return await DepartamentoDAO.search(departamento);
     }
-
 
     static async update(departamento){
         var departamentoObj = new Departamento();
