@@ -15,13 +15,9 @@ predio.get('/:id', async function(req,res){
 })
 */
 
-predio.get('/search', async function(req,res){
-    res.send(await predioController.search(req.query));
-})
-
 predio.route('/')
   .get(async function(req,res){
-      res.send(await predioController.readAll());
+      res.send(await predioController.search(req.query));
   })
   .post(async function(req,res){
       res.send(await predioController.create(req.body));
