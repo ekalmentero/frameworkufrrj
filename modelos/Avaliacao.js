@@ -15,7 +15,7 @@ export default class Avaliacao extends Entidade {
       this.nome=undefined;
       this.data=undefined;
       this.descricao=undefined;
-      this.turma=[];
+      this.turma=undefined;
     }
 
       get getId() {
