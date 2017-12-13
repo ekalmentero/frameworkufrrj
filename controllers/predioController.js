@@ -2,6 +2,7 @@
 
 import PredioDAO from '../DAO/PredioDAO.js';
 import Predio from '../modelos/Predio.js';
+import Sala from '../modelos/Sala.js';
 import salaController from './salaController.js';
 
 class PredioController {
@@ -32,20 +33,26 @@ class PredioController {
         return await PredioDAO.read(predio);
     }
 
-    static async readAll(){
-        return await PredioDAO.readAll();
+    static async update(dados_predio){
+        var predio = new Predio();
+        predio.fillFromObject(dados_predio);
+
+        /*
+        * O objeto "sala" já vem no formato correto, mas o mapiei 
+        * novamente só para garantir a integridade.
+        */
+        let salas = dados_predio.salas.map( (raw_sala) => {
+            return {nome : raw_sala.nome, id : raw_sala.id };
+        });
+
+        salaController.syncWithPredio(predio.getId(), salas);
+        return await PredioDAO.update(predio);
     }
 
-    static async update(predio){
-        var predioObj = new Predio();
-        predioObj.parseEntidade(predio); 
-        return await PredioDAO.update(predioObj);
-    }
-
-    static async delete(predio){
-        var predioObj = new Predio();
-        predioObj.parseEntidade(predio);
-        return await PredioDAO.delete(predioObj);
+    static async delete(dados_predio){
+        var predio = new Predio();
+        predio.setId(dados_predio.id);
+        return await PredioDAO.delete(predio);
     }
 
     static async search(terms){
@@ -64,6 +71,10 @@ class PredioController {
             predio.setLong(terms.long);
 
         return await PredioDAO.search(predio);
+    }
+
+    static async readAllByInstitutoId(inst_id){
+        return await PredioDAO.readAllByInstitutoId(inst_id);
     }
 	
 }

@@ -21,20 +21,16 @@ class InstitutoController {
         return await InstitutoDAO.read(instituto);
     }
 
-    static async readAll(){
-        return await InstitutoDAO.readAll();
-    }
-
     static async update(dados_instituto){
         var instituto = new Instituto();
         instituto.fillFromObject(dados_instituto);
         return await InstitutoDAO.update(instituto);
     }
 
-    static async delete(instituto){
-        var institutoObj = new Instituto();
-        institutoObj.parseEntidade(instituto);
-        return await InstitutoDAO.delete(institutoObj);
+    static async delete(dados_instituto){
+       var instituto = new Instituto();
+        instituto.fillFromObject(dados_instituto);
+        return await InstitutoDAO.delete(instituto);
     }
 
     static async search(terms){
@@ -47,6 +43,10 @@ class InstitutoController {
             instituto.setSigla(terms.sigla);
 
         return await InstitutoDAO.search(instituto);
+    }
+
+    static async readAllByPredioId(pre_id){
+        return await InstitutoDAO.readAllByPredioId(pre_id);
     }
 	
 }

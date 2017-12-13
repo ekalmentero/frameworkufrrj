@@ -28,6 +28,7 @@ export default class InstitutoDAO{
         return inst;
     }
 
+
     static async read(inst){
         let inst_query = "SELECT * from instituto WHERE ";
         let inst_wheres_array = [];
@@ -81,8 +82,9 @@ export default class InstitutoDAO{
         return instituto;
     }
 
+
     static async search(instituto){
-         let query = "SELECT * from instituto WHERE ",
+        let query = "SELECT * from instituto WHERE deleted=0 AND ",
             wheres_array = [];
 
         if(instituto.getNome() !== "")
@@ -94,8 +96,7 @@ export default class InstitutoDAO{
         if(instituto.getId() !== null)
             wheres_array.push("id = "+instituto.getId());
 
-        if(wheres_array.length == 0)
-            return [];
+        console.log(query.concat(wheres_array.join(" OR ")));
 
         let institutos = await BD.query( query.concat(wheres_array.join(" OR ")) )
                                 .then( (retorno) => {
@@ -109,20 +110,11 @@ export default class InstitutoDAO{
         return institutos;
     }
 
-    /*static async readByPredio(predio){
-        let query = "SELECT * from instituto_predio "+
-                    "LEFT JOIN predio ON instituto_predio.predio = predio.id "+
-                    "WHERE instituto_predio.predio = "+predio.getId();
-
-        let retorno = await BD.query( query );
-
-        return retorno;
-    }*/
-
 
     static async linkDepartamentosByDepsId(instituto, dep_ids){
         return DepartamentoDAO.linkToInstitutoByDepsIds(dep_ids, instituto);
     }
+
 
     static async linkPrediosByPrediosId(instituto, pred_ids){
         let query = "INSERT INTO instituto_predio (instituto, predio)"+
@@ -137,25 +129,38 @@ export default class InstitutoDAO{
     }
 
     static async update(instituto){
-        let query = "UPDATE instituto "+
-                    "SET nome='"+instituto.getNome()+"', "+
-                         "sigla='"+instituto.getSigla()+"' "+
-                    "WHERE id="+instituto.getId();
+        let query = "UPDATE instituto SET ";
+        let sets_array = [];
+        let where = "WHERE id = "+instituto.getId()+" AND deleted=0 ";
+
+        if(instituto.getNome() !== "")
+            sets_array.push("nome='"+instituto.getNome()+"'");
+
+        if(instituto.getSigla() !== "")
+            sets_array.push("sigla='"+instituto.getSigla()+"'");
+
+        if(sets_array.length == 0)
+            return instituto;
+
+        return await BD.query( query.concat( sets_array.join(","), where ) );
+    }
+
+
+    static async delete(instituto){
+        let query = "UPDATE instituto SET deleted=1 "+
+                    "WHERE id = "+instituto.getId();
         
-        return await BD.query( query ).then( (retorno) => {
-            return retorno;
-        });
+        return await BD.query( query );
     }
 
 
-    static async readAll(){
-        return await BD.query("SELECT * FROM instituto").then( (retorno) => {
-            return retorno;
-        });
-    }
+    static async readAllByPredioId(pre_id){
+        let query = "SELECT instituto.sigla, instituto.nome, instituto.id "+
+                    "FROM instituto_predio "+
+                    "LEFT JOIN instituto ON instituto.id = instituto_predio.instituto "+
+                    "WHERE instituto_predio.predio = "+pre_id;
 
-    static async delete(inst){
-        return await BD.query("DELETE from instituto where id = "+inst.getId());
-    }
+        return await BD.query(query);
 
+    }
 }

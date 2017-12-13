@@ -42,4 +42,8 @@ export default class DepartamentoController {
         departamento.fillFromObject(dados_departamento);
         return await DepartamentoDAO.delete(departamento);
     }
+
+    static async readAllByInstitutoId(inst_id){
+        return await DepartamentoDAO.readAllByInstitutoId(inst_id);
+    }
 }

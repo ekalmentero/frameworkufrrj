@@ -102,6 +102,7 @@ export default class Predio{
 		
 		if(obj.deleted !== undefined)
 			this.setDeleted(obj.deleted)
+
 	}
 
 }

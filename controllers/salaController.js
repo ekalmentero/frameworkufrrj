@@ -32,6 +32,21 @@ class SalaController {
         return await SalaDAO.insertMany(salas);
     }
 
+     static async update_many(dados_salas){
+        let salas = dados_salas.map( (raw_sala) => {
+            let sala = new Sala();
+            sala.setNome(raw_sala.nome);
+            
+            let predio = new Predio();
+            predio.setId(raw_sala.predio);
+            sala.setPredio(predio);
+
+            return sala;
+        });
+        
+        return await SalaDAO.updateMany(salas);
+    }
+
     static async read(id){
         var sala = new Sala();
         sala.setId(id);
@@ -52,6 +67,19 @@ class SalaController {
         var salaObj = new Sala();
         salaObj.parseEntidade(sala);
         return await SalaDAO.delete(salaObj);
+    }
+
+    static async readAllByPredioId(predio_id){
+        return await SalaDAO.readAllByPredioId(predio_id);
+    }
+
+    static async syncWithPredio(predio_id, salas){
+        let salas_objs = salas.map( (raw_sala) => {
+            let sala = new Sala();
+            sala.fillFromObject(raw_sala);
+            return sala;
+        })
+        return await SalaDAO.syncWithPredio(predio_id, salas_objs);
     }
     
 }

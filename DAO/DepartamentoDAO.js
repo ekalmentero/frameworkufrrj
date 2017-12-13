@@ -109,4 +109,9 @@ export default class DepartamentoDAO {
         
         return await BD.query( query );
     }
+
+    static async readAllByInstitutoId(dep_id){
+        let query = "SELECT * from departamento WHERE instituto = "+dep_id;
+        return await BD.query( query );
+    }
 }

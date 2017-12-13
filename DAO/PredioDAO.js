@@ -3,6 +3,7 @@
 import BD from '../BD.js';
 import Predio from '../modelos/Predio.js';
 import InstitutoDAO from './InstitutoDAO.js';
+import SalaDAO from './SalaDAO.js';
 
 export default class PredioDAO {
   
@@ -19,8 +20,6 @@ export default class PredioDAO {
                     "'"+predio.getLong()+"', "+
                     "0)";
 
-        console.log(query);
-
         let id = await BD.query(query).then( (retorno) => {
                                 return retorno.insertId;
                             });
@@ -32,8 +31,10 @@ export default class PredioDAO {
 
 
     static async read(predio){
-        var pre_return = new Predio();
-            pre_raw = await BD.buscar(predio)[0];
+        let query = "SELECT * FROM predio WHERE id="+predio.getId()+" AND deleted=0";
+        let pre_return = new Predio();
+        console.log(query);
+        let pre_raw = (await BD.query(query))[0];
 
         pre_return.setInstitutos(pre_raw.institutos);
         pre_return.setNome(pre_raw.nome);
@@ -51,7 +52,7 @@ export default class PredioDAO {
         mas estou fazendo o básico para o funcionamento da integração.
     */
     static async search(predio){
-        let query = "SELECT * from predio WHERE ",
+        let query = "SELECT * from predio WHERE deleted=0 AND ",
             wheres_array = [];
 
         if(predio.getNome() !== "")
@@ -72,7 +73,7 @@ export default class PredioDAO {
         if(wheres_array.length == 0)
             return [];
 
-        let predios = await BD.query( query.concat(wheres_array.join(" OR ")) )
+        let predios = await BD.query( query.concat("(",wheres_array.join(" OR ")),")" )
                             .then( (retorno) => {
                                 return retorno.map( (raw_pred) => {
                                             let pred = new Predio();
@@ -84,27 +85,12 @@ export default class PredioDAO {
         return predios;
     }
 
-    static async readAll(){
-        let query = "SELECT * FROM predio";
-        let pred_objs = BD.query(query).then( (retorno) => {
-            
-            return retorno.map( (raw_pred) => {
-                        let predio = new Predio();
-                        predio.fillFromObject(raw_pred);
-                        return predio;
-                    })
-
-        });
-
-        return pred_objs;
-    }
-
-
     static async readByInstituto(instituto){
         
         let query = "SELECT * from instituto_predio "+
                     "LEFT JOIN predio ON instituto_predio.predio = predio.id "+
-                    "WHERE instituto_predio.instituto = "+instituto.getId();
+                    "WHERE instituto_predio.instituto = "+instituto.getId()+" "
+                    "AND deleted = 0";
 
         let retorno = await BD.query( query ).then( (retorno) => {
                                 return retorno;
@@ -114,12 +100,38 @@ export default class PredioDAO {
     }
    
     static async update(predio){
-        return await BD.update(predio);
-    }
-   
-    static async delete(predio){
-        return await BD.deletar(predio);
+        let query = "UPDATE predio SET ";
+        let sets_array = [];
+        let where = "WHERE id = "+predio.getId()+" AND deleted=0 ";
+
+        if(predio.getNome() !== "")
+            sets_array.push("nome='"+predio.getNome()+"'");
+
+        if(predio.getSigla() !== "")
+            sets_array.push("sigla='"+predio.getSigla()+"'");
+
+        if(sets_array.length == 0)
+            return predio;
+
+        return await BD.query( query.concat( sets_array.join(","), where ) );
     }
 
+
+    static async delete(predio){
+        let query = "UPDATE predio SET deleted=1 "+
+                    "WHERE id = "+predio.getId();
+        
+        return await BD.query( query );
+    }
+
+
+    static async readAllByInstitutoId(inst_id){
+        let query = "SELECT predio.sigla, predio.nome, predio.id, predio.lat, predio.long "+
+                    "FROM instituto_predio "+
+                    "LEFT JOIN predio ON predio.id = instituto_predio.predio "+
+                    "WHERE instituto_predio.instituto = "+inst_id;
+
+        return await BD.query(query);
+    }
 
 }
