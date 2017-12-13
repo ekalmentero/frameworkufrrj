@@ -87,6 +87,7 @@ export default class BD {
             if(typeof(filtros[i][1]) == "string") tmp = "'"; else tmp = "";
             query += " " + filtros[i][0].replace("get","").toLowerCase() + " = " + tmp + filtros[i][1] + tmp;
         }
+        if(filtros.length > 0) query += " AND deleted=0";
 
         return new Promise(
             function(resolve,reject){
