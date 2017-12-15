@@ -55,7 +55,6 @@ export default class AlunoTurmaDAO {
 
   static async update(alunoTurma, idAluno = undefined, idConceito = undefined, idTurma = undefined){
       try {
-          foreignKeys = [];
 
           if (typeof(idAluno) != undefined)
             foreignKeys.push(['aluno', idAluno]);
@@ -67,6 +66,25 @@ export default class AlunoTurmaDAO {
             foreignKeys.push(['turma', idTurma]);
 
           return await BD.update(alunoTurma, foreignKeys);
+      } catch (error) {
+        return error.message;
+      }
+  }
+
+  static async updateFinalGrade(alunoTurmaObj, idTurma, idAluno){
+      try {
+
+          if (alunoTurmaObj.nota_final == undefined){
+              return "No grade found";
+          }
+
+          if (idTurma == undefined && idAluno == undefined){
+              return "Class and student are necessary"
+          }
+
+          var sql = "UPDATE aluno_turma SET nota_final = " + alunoTurmaObj.nota_final + " WHERE aluno=" + idAluno + " AND turma=" + idTurma;
+
+          return await BD.query(sql);
       } catch (error) {
         return error.message;
       }

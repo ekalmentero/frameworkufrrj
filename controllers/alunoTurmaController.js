@@ -29,5 +29,11 @@ export default class AlunoTurmaController {
         return await AlunoTurmaDAO.update(alunoTurmaObj);
     }
 
+    static async updateFinalGrade(alunoTurmaJson, idTurma, idAluno){
+        var alunoTurmaObj = new AlunoTurma();
+        alunoTurmaObj.nota_final = alunoTurmaJson.nota_final;
+        return await AlunoTurmaDAO.updateFinalGrade(alunoTurmaObj, idTurma, idAluno);
+    }
+
 
 }
