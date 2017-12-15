@@ -1,10 +1,12 @@
-import avaliacao from '../modelos/avaliacao';
+import Avaliacao from '../modelos/avaliacao';
 import avaliacaoDAO from '../DAO/avaliacaoDAO';
 
 export default class avaliacaoController {
     static async create(avaliacao, idTurma = undefined){
-        var avaliacaoObj = new avaliacao();
-        avaliacaoObj.parseEntidade(avaliacao);
+        var avaliacaoObj = new Avaliacao();
+        avaliacaoObj.nome = avaliacao.nome;
+        avaliacaoObj.data = avaliacao.data;
+        avaliacaoObj.descricao = avaliacao.descricao;  
         return await avaliacaoDAO.create(avaliacaoObj, idTurma);
     }
 

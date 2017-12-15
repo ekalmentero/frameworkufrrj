@@ -1,6 +1,7 @@
 "use strict";
 
 import Departamento from "../modelos/departamento";
+import InstitutoDAO from './institutoDAO';
 import BD from "../bd";
 
 export default class DepartamentoDAO {
@@ -17,7 +18,8 @@ export default class DepartamentoDAO {
         departamento.setNome(result[0].nome);
         departamento.setSigla(result[0].sigla);
         departamento.setDeleted(result[0].deleted);
-        departamento.setInstituto_id(result[0].instituto_id);
+        var tmpInstituto = await InstitutoDAO.read(retorno[0].instituto_id);
+        departamento.setInstituto(tmpInstituto);
 
         return departamento;
     }

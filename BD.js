@@ -11,7 +11,10 @@ let tabelas = { // Exemplo
     'Professor' : "professor",
     'Disciplina' : "disciplina",
     'Turma' : "turma",
-    'Periodo' : "periodo"
+    'Periodo' : "periodo",
+    'Curso' : "curso",
+    'Departamento': "departamento",
+    'AlunoTurma' : "aluno_turma"
 };
 
 export default class BD {
@@ -31,14 +34,17 @@ export default class BD {
         var tabela = tabelas[obj.constructor.name];
         var query = "INSERT INTO " + tabela + " SET ";
 
-        if (typeof(chavesEstrangeiras) != "undefined"){
+        if (typeof(chavesEstrangeiras) != "undefined" && chavesEstrangeiras.length > 0){
             for(var i = 0;i<chavesEstrangeiras.length;i++){
-                query += chavesEstrangeiras[i][0] + " = " + chavesEstrangeiras[i][1] + ",";
+                query += chavesEstrangeiras[i][0] + " = " + chavesEstrangeiras[i][1] + ", ";
             }
         }
 
         var tmp = "";
+        var firstText = true;
+        var separator = "";
         for(let propriedade of Object.getOwnPropertyNames(Object.getPrototypeOf(obj))){
+            propriedade =  propriedade.toLowerCase();
             if(propriedade == "constructor") continue;
             if(typeof(obj[propriedade]) == 'function' || obj[propriedade] == undefined) continue;
             if(propriedade.toLowerCase() == "id") continue;
@@ -46,13 +52,15 @@ export default class BD {
             if(typeof(obj[propriedade]) == "object") continue;
 
             if(typeof(obj[propriedade]) == "string") tmp = "'"; else tmp = "";
-            query += propriedade.replace("get","").toLowerCase() + " = " + tmp + obj[propriedade] + tmp + ",";
+            if (firstText == false) separator = ", ";
+            query += separator + propriedade.replace("get","") + " = " + tmp + obj[propriedade] + tmp;
+            firstText = false;
         }
-        query = query.slice(0,-1);
 
         return new Promise(
             function(resolve,reject){
                 conexao.query(query, function (erro, retorno, colunas) {
+                console.log(query);
                     if (erro) reject(erro); else {
                         BD.query("SELECT LAST_INSERT_ID() AS lid").then((r)=>{
                             resolve(r[0].lid);
@@ -107,7 +115,7 @@ export default class BD {
 
         var tmp = new obj.constructor;
 
-        if (typeof(chavesEstrangeiras) != "undefined"){
+        if (typeof(chavesEstrangeiras) != "undefined" && chavesEstrangeiras.length > 0){
             for(var i = 0;i<chavesEstrangeiras.length;i++){
                 query += chavesEstrangeiras[i][0] + " = " + chavesEstrangeiras[i][1] + ",";
             }

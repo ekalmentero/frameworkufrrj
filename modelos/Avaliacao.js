@@ -8,7 +8,7 @@ export default class Avaliacao extends Entidade {
   @Private data;
   @Private descricao;
   @Private turma = new Turma();
-  
+
     constructor(){
       super();
     }
@@ -19,7 +19,7 @@ export default class Avaliacao extends Entidade {
       get Turma() {
         return this.turma;
       }
-      
+
       get Nome() {
         return this.nome;
       }
@@ -29,7 +29,7 @@ export default class Avaliacao extends Entidade {
       get Descricao() {
         return this.descricao;
       }
-      
+
       set Id(id) {
         this.id = id;
       }
@@ -47,4 +47,3 @@ export default class Avaliacao extends Entidade {
       }
 
 }
-
