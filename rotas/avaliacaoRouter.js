@@ -20,7 +20,7 @@ avaliacao.route('/')
             res.send(await avaliacaoController.readAll());
     })
     .post(async function(req, res){
-        res.send(await avaliacaoController.create(req.body, req.body.id_turma));
+        res.send(await avaliacaoController.create(req.body, req.params.id_turma));
     })
     .patch(async function(req,res){
         if (typeof(req.body.id_turma) != "undefined")

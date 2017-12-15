@@ -1,6 +1,7 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import alunoRouter from "./alunoRouter";
+import avaliacaoRouter from "./avaliacaoRouter";
 import TurmaController from '../controllers/turmaController';
 
 const turma = express.Router({mergeParams: true});
@@ -12,6 +13,8 @@ turma.get('/:id', async function(req,res){
 })
 
 turma.use('/:id_turma/aluno', alunoRouter);
+
+turma.use('/:id_turma/avaliacao', avaliacaoRouter);
 
 turma.route('/')
   .post(async function(req,res){
