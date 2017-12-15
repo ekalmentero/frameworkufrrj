@@ -13,35 +13,35 @@ export default class Aula extends Entidade{
 		
 	}
 
-	get getData(){
+	get Data(){
 		return this.data;
 	}
 
-	setId(id){
+	set Id(id){
 		this.id = id;
 	}
 
-	setTurmaId(id){
+	set TurmaId(id){
 		this.turma_id = id;
 	}
 
-	get getTurmaId(){
+	get TurmaId(){
 		return this.turma_id;
 	}
 
-	get getId(){
+	get Id(){
 		return this.id;
 	}
 
-	setData(data){
+	set Data(data){
 		this.data = data;
 	}
 
-	get getTurma(){
+	get Turma(){
 		return this.turma;
 	}
 
-	setTurma(turma){
+	set Turma(turma){
 		this.turma = turma;
 	}
 

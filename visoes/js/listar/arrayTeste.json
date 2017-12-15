@@ -1,0 +1,32 @@
+[
+	{
+		"id": "1",
+		"nome": "Disciplina 1",
+        "codigo":"DC1",
+        "creditos":"4"
+	},
+    {
+		"id": "2",
+		"nome": "Disciplina 2",
+        "codigo":"DC2",
+        "creditos":"2"
+	},
+    {
+		"id": "3",
+		"nome": "Disciplina 3",
+        "codigo":"DC3",
+        "creditos":"4"
+	},
+    {
+		"id": "4",
+		"nome": "Disciplina 4",
+        "codigo":"DC4",
+        "creditos":"2"
+	},
+    {
+		"id": "5",
+		"nome": "Disciplina 5",
+        "codigo":"DC5",
+        "creditos":"4"
+	}	
+]

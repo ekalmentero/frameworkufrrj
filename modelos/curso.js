@@ -23,68 +23,59 @@ export default class Curso extends Entidade {
         this.departamento = new Departamento();
     }
 
-
-    get getId(){
+    get Id(){
         return this.id;
     }
 
-    get getNome(){
+    get Nome(){
         return this.nome;
     }
 
-    get getLimite_periodos(){
+    get Limite_periodos(){
         return this.limite_periodos;
     }
 
-    get getTurno(){
+    get Turno(){
         return this.turno;
     }
 
-    get getCodigo(){
+    get Codigo(){
         return this.codigo;
     }
 
-    get getDepartamento_id(){
+    get Departamento_id(){
         return this.departamento_id;
     }
 
-    get getDepartamento(){
-        return this.departamento;
-    }
-
-    get getDeleted(){
+    get Deleted(){
         return this.deleted;
     }
 
-    setId(id){
+    set Id(id){
         this.id = id;
     }
 
-    setNome(nome){
+    set Nome(nome){
         if (typeof(nome) == "string") this.nome = nome;
     }
 
-    setCodigo(codigo){
+    set Codigo(codigo){
         if (typeof(codigo) == "string") this.codigo = codigo;
     }
 
-    setLimite_periodos(limite_periodos){
+    set Limite_periodos(limite_periodos){
         if (typeof(limite_periodos) == "number") this.limite_periodos = limite_periodos;
     }
 
-    setTurno(turno){
+    set Turno(turno){
         if (typeof(turno) == "string") this.turno = turno;
     }
 
-    setDepartamento_id(departamento_id){
+    set Departamento_id(departamento_id){
         if (typeof(departamento_id) == "number") this.departamento_id = departamento_id;
     }
 
-    setDepartamento(departamento){
-        this.departamento = departamento;
-    }
-
-    setDeleted(deleted){
+    set Deleted(deleted){
         if (typeof(deleted) == "number") this.deleted = deleted;
     }
 }

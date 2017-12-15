@@ -12,6 +12,7 @@
 		"pouchdb-react-native": "^6.3.4",
 		"react": "^16.0.0",
 		"react-native": "^0.49.4",
+		"react-native-calendars": "^1.11.0",
 		"react-native-chooser": "^1.6.1",
 		"react-native-image-picker": "^0.26.4",
 		"react-native-linear-gradient": "^2.3.0",

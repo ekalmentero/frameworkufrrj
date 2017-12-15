@@ -13,49 +13,49 @@ export default class Turma extends Entidade{
     super();
   }
 
-  get getCodigo(){
+  get Codigo(){
     return this.codigo;
   }
 
-  get getVagas(){
+  get Vagas(){
     return this.vagas;
 
   }
 
-  get getDisciplina(){
+  get Disciplina(){
     return this.disciplina;
   }
 
-  get getPeriodo(){
+  get Periodo(){
     return this.periodo;
   }
 
-  get getProfessor(){
+  get Professor(){
     return this.professor();
   }
 
-  get getId(){
+  get Id(){
     return this.id;
   }
 
-  set setCodigo(codigo){
+  set Codigo(codigo){
     this.codigo=codigo;
   }
 
-  set setVagas(vagas){
+  set Vagas(vagas){
     this.vagas=vagas;
   }
-  set setId(id){
+  set Id(id){
     this.id=id;
   }
-  set setTurmaId(id){
+  set TurmaId(id){
     this.id=id;
   }
 
-  set setPeriodoId(id){
+  set PeriodoId(id){
     this.id=id;
   }
-  set setProfessorId(id){
+  set ProfessorId(id){
     this.id=id;
   }
 

@@ -4,7 +4,7 @@ export default class Entidade {
         for (let property of Object.getOwnPropertyNames(json)){
             if (property == "deleted") continue;
             if (!properties.includes(property)) continue;
-            eval("this.set" + property.charAt(0).toUpperCase() + property.slice(1) + "(json." + property + ")");
+            this.property = json.property;
         }
     }
 

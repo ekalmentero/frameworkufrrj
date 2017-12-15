@@ -3,16 +3,16 @@
 export default class Material {
 
 	constructor(ir, arquivo, conteudo){
-		this.setId = id;
-		this.setArquivo = arquivo;
-		this.setConteudo = conteudo;
+		this.set Id = id;
+		this.set Arquivo = arquivo;
+		this.set Conteudo = conteudo;
 	}
 
 	get getId(){
 		return this.id;
 	}
 
-	setId(id){
+	set Id(id){
 		this.id = id;
 	}
 
@@ -20,7 +20,7 @@ export default class Material {
 		return this.conteudo;
 	}
 
-	setConteudo(conteudo){
+	set Conteudo(conteudo){
 		this.conteudo = conteudo;
 	}
 
@@ -28,7 +28,7 @@ export default class Material {
 		return this.arquivo;
 	}
 
-	setArquivo(arquivo){
+	set Arquivo(arquivo){
 		this.arquivo = arquivo;
 	}
 

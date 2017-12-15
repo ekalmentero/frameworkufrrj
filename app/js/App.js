@@ -5,6 +5,7 @@ import { StackNavigator } from 'react-navigation';
 
 import Login from './login';
 import Arquivos from './arquivos';
+import Calendario from './calendario';
 
 export default class App extends React.Component {
     constructor(props){

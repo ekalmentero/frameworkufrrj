@@ -9,32 +9,32 @@ export default class Horario extends Entidade{
 	@Private hora_fim;
 
 	constructor(id, hora_inicio, hora_fim){
-		this.setId(id);
-		this.setHoraInicio(hora_inicio);
-		this.setHoraFim(hora_fim);
+		this.set Id(id);
+		this.set HoraInicio(hora_inicio);
+		this.set HoraFim(hora_fim);
 	}
 
-	setId(id){
+	set Id(id){
 		this.id = id;
 	}
 
-	setHoraInicio(h_ini){
+	set HoraInicio(h_ini){
 		this.hora_inicio = h_ini;
 	}
 
-	setHoraFim(h_fim){
+	set HoraFim(h_fim){
 		this.hora_fim = h_fim;
 	}
 
-	get getId(){
+	get Id(){
 		return this.id;
 	}
 	
-	get getHoraInicio(){
+	get HoraInicio(){
 		return this.hora_inicio;
 	}
 	
-	get getHoraFim(){
+	get HoraFim(){
 		return this.hora_fim;
 	}
 

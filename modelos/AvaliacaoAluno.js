@@ -11,24 +11,24 @@ export default class AvaliacaoAluno extends Entidade{
       super();
     }
 
-     get getAvaliacao() {
+     get Avaliacao() {
         return this.avaliacao;
       }
 
-      get getAluno() {
+      get Aluno() {
         return this.aluno;
       }
-      get getNota() {
+      get Nota() {
         return this.nota;
       }
       
-      setAvaliacao(avaliacao) {
+      set Avaliacao(avaliacao) {
         this.avaliacao = avaliacao;
       }
-      setAluno(aluno) {
+      set Aluno(aluno) {
         this.aluno = aluno;
       }
-      setNota(nota) {
+      set Nota(nota) {
         this.nota = nota;
       }
 

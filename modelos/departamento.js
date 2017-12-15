@@ -32,31 +32,23 @@ export default class Departamento extends Entidade {
         return this.deleted;
     }
 
-    get getInstituto(){
-        return this.instituto;
-    }
-
-    setId(id){
+    set Id(id){
         this.id = id;
     }
 
-    setNome(nome){
+    set Nome(nome){
         if (typeof(nome) == "string") this.nome = nome;
     }
 
-    setInstituto_id(instituto_id){
+    set Instituto_id(instituto_id){
         if (typeof(instituto_id) == "number") this.instituto_id = instituto_id;
     }
 
-    setInstituto(instituto){
-        this.instituto = instituto;
-    }
-
-    setDeleted(deleted){
+    set Deleted(deleted){
         if (typeof(deleted) == "number") this.deleted = deleted;
     }
 
-    setSigla(sigla){
+    set Sigla(sigla){
         if (typeof(sigla) == "string") this.sigla = sigla;
     }
 

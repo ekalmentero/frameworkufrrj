@@ -43,27 +43,27 @@ export default class Disciplina extends Entidade {
         return this.departamento;
     }
 
-    setId(id){
+    set Id(id){
         this.id = id;
     }
 
-    setNome(nome){
+    set Nome(nome){
         if (typeof(nome) == "string") this.nome = nome;
     }
 
-    setCodigo(codigo){
+    set Codigo(codigo){
         if (typeof(codigo) == "string") this.codigo = codigo;
     }
 
-    setCreditos(creditos){
+    set Creditos(creditos){
         if (typeof(creditos) == "number") this.creditos = creditos;
     }
 
-    setLivre_escolha(livre_escolha){
+    set Livre_escolha(livre_escolha){
         this.livre_escolha = livre_escolha;
     }
 
-    setDepartamento(departamento){
+    set Departamento(departamento){
         this.departamento = departamento;
     }    
 }

@@ -13,19 +13,19 @@ export default class Sala extends Entidade{
 		//
 	}
 
-	setId(id){
+	set Id(id){
 		this.id = id;
 	}
 
-	setPredio(predio){
+	set Predio(predio){
 		this.predio = predio;
 	}
 
-	setNome(nome){
+	set Nome(nome){
 		this.nome = nome;
 	}
 
-	setDeleted(deleted){
+	set Deleted(deleted){
 		this.deleted = deleted;
 	}
 
@@ -33,15 +33,15 @@ export default class Sala extends Entidade{
 		return this.id;
 	}
 
-	get getPredio(){
+	get Predio(){
 		return this.predio;
 	}
 
-	get getNome(){
+	get Nome(){
 		return this.nome;
 	}
 
-	get getDeleted(){
+	get Deleted(){
 		return this.deleted;
 	}
 

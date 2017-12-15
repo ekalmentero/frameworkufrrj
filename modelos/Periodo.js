@@ -11,49 +11,49 @@ export default class Periodo extends Entidade{
 
   constructor(id,data_inicio,data_fim,nome){
     super();
-    /*this.setId(id);
-    this.setDataInicio(data_inicio);
-    this.setDataFim(data_fim);
-    this.setNome(nome);*/
+    /*this.set Id(id);
+    this.set DataInicio(data_inicio);
+    this.set DataFim(data_fim);
+    this.set Nome(nome);*/
   }
-  get getDataInicio(){
+  get DataInicio(){
     return this.data_inicio;
   }
 
-  get getDataFim(){
+  get DataFim(){
     return this.data_fim;
 
   }
 
-  get getNome(){
+  get Nome(){
     return this.nome;
   }
 
-  get getDeleted(){
+  get Deleted(){
     return this.deleted;
   }
 
-  get getId(){
+  get Id(){
     return this.id;
   }
 
-  set setDataInicio(data_inicio){
+  set DataInicio(data_inicio){
     this.data_inicio=data_inicio;
 }
 
-set setDataFim(data_fim){
+set DataFim(data_fim){
   this.data_fim=data_fim;
 }
 
-set setNome(nome){
+set Nome(nome){
   this.nome=nome;
 }
 
-set setDeleted(deleted){
+set Deleted(deleted){
   this.deleted=deleted;
 }
 
-set setId(id){
+set Id(id){
   this.id=id;
 }
 

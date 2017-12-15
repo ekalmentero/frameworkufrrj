@@ -5,7 +5,7 @@ let tabelas = { // Exemplo
     'Aluno' : "aluno",
     'Avaliacao' : "avaliacao",
     'Grade' : "grade",
-    'AvaliacaoAluno' : "avaliacao_aluno",
+    'Resultado' : "avaliacao_aluno",
     'Prerequisito' : "prerequisito",
     'Instituto' : "instituto",
     'Professor' : "professor",
@@ -44,7 +44,7 @@ export default class BD {
         for(let propriedade of Object.getOwnPropertyNames(Object.getPrototypeOf(obj))){
             if(propriedade == "constructor") continue;
             if(typeof(obj[propriedade]) == 'function' || obj[propriedade] == undefined) continue;
-            if(propriedade == "getId") continue;
+            if(propriedade.toLowerCase() == "id") continue;
 
             if(typeof(obj[propriedade]) == "object") continue;
 
@@ -90,6 +90,7 @@ export default class BD {
             if(typeof(filtros[i][1]) == "string") tmp = "'"; else tmp = "";
             query += " " + filtros[i][0].replace("get","").toLowerCase() + " = " + tmp + filtros[i][1] + tmp;
         }
+        if(filtros.length > 0) query += " AND deleted=0";
 
         return new Promise(
             function(resolve,reject){

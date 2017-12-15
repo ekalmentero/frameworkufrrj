@@ -10,31 +10,31 @@ export default class Professor extends Entidade {
 
   constructor() {
     super();
-    //this.setNome(nome);
-    //this.setMatricula(matricula);
+    //this.set Nome(nome);
+    //this.set Matricula(matricula);
   }
 
-  get getNome(){
+  get Nome(){
     return this.nome;
   }
 
-  get getMatricula(){
+  get Matricula(){
     return this.matricula;
   }
 
-  get getId(){
+  get Id(){
     return this.id;
   }
 
-  setNome(nome){
+  set Nome(nome){
     this.nome=nome;
   }
 
-  setMatricula(matricula){
+  set Matricula(matricula){
     this.matricula=matricula;
   }
 
-  setId(id){
+  set Id(id){
     this.id=id;
   }
 }

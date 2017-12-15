@@ -15,53 +15,53 @@ export default class Aluno extends Entidade{
     constructor(){
       super();
     }
-     get getId() {
+     get Id() {
         return this.id;
       }
-      get getCurso() {
+      get Curso() {
         return this.curso;
       }
-      get getGrade() {
+      get Grade() {
         return this.grade;
       }
-      get getNome() {
+      get Nome() {
         return this.nome;
       }
-      get getMatricula() {
+      get Matricula() {
         return this.matricula;
       }
-      get getAtivo() {
+      get Ativo() {
         return this.ativo;
       }
-      get getIngresso() {
+      get Ingresso() {
         return this.ingresso;
       }
-      get getAvaliacoes(){
+      get Avaliacoes(){
         return this.avaliacoes;
       }
 
-      setId(id) {
+      set Id(id) {
         this.id = id;
       }
-      setNome(nome) {
+      set Nome(nome) {
         this.nome = nome;
       }
-      setMatricula(matricula) {
+      set Matricula(matricula) {
         this.matricula = matricula;
       }
-      setAtivo(ativo) {
+      set Ativo(ativo) {
         this.ativo = ativo;
       }
-      setIngresso(ingresso) {
+      set Ingresso(ingresso) {
         this.ingresso = ingresso;
       }
-      setCurso(curso) {
+      set Curso(curso) {
         this.curso = curso;
       }
-      setGrade(grade) {
+      set Grade(grade) {
         this.grade = grade;
       }
-      setAvaliacoes(avaliacao){
+      set Avaliacoes(avaliacao){
         this.avaliacoes.push(avaliacao);
 
       }
