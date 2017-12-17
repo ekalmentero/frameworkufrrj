@@ -1,10 +1,13 @@
 import express from 'express';
 import bodyParser from 'body-parser';
+import turmaRouter from './turmaRouter';
 import ProfessorController from '../controllers/professorController';
 
 const professor= express.Router();
 
 professor.use(bodyParser.json());
+
+professor.use('/:id_professor/turmas', turmaRouter);
 
 professor.get('/:id', async function(req,res){
   res.send(await ProfessorController.read(req.params.id));

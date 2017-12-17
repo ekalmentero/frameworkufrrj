@@ -1,5 +1,5 @@
 import Turma from '../modelos/turma';
-import TurmaDAO from '../DAO/turmaDAO';
+import TurmaDAO from '../DAO/TurmaDAO';
 
 
 export default class ProfessorController{
@@ -8,6 +8,10 @@ export default class ProfessorController{
     var turmaObj= new Turma();
     turmaObj.parseDisciplina(turma);
     return await TurmaDAO.create(turmaObj);
+  }
+  
+  static async readAllByProfessor(id_professor){
+      return await TurmaDAO.readAllByProfessor(id_professor);
   }
 
   static async read(id){

@@ -2,7 +2,7 @@ import Turma from "../modelos/Turma";
 import BD from "../BD";
 
 
-export class TurmaDAO{
+export default class TurmaDAO{
   constructor(){
 
   }
@@ -32,6 +32,17 @@ export class TurmaDAO{
 
   static async readAll(){
       return await BD.query("SELECT * FROM turma");
+  }
+
+  static async readAllByProfessor(id_professor){
+      return await BD.query("SELECT t.id, t.turno, t.codigo, t.vagas, d.nome as disciplina, p.nome as periodo, z.nome as professor FROM turma t JOIN periodo p ON t.periodo = p.id JOIN disciplina d ON t.disciplina = d.id JOIN professor z ON t.professor = z.id WHERE t.professor = " + id_professor);
+      var turmas = [];
+      for (let object of result){
+          var turma = new Turma();
+          turma.parseEntidade(object);
+          turmas.push(turma);
+      } 
+      return turmas;
   }
 
   static async delete(turma){
