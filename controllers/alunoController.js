@@ -8,6 +8,10 @@ export default class AlunoController {
         alunoObj.parseEntidade(aluno);
         return await AlunoDAO.create(alunoObj);
     }
+    
+    static async readAllByTurma(id_turma){
+        return await AlunoDAO.readAllByTurma(id_turma);
+    }
 
     static async read(id){
         var aluno = new Aluno();

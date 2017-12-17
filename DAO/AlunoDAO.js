@@ -18,6 +18,17 @@ export default class AlunoDAO {
     }
   }
 
+  static async readAllByTurma(id_turma){
+      return await BD.query("select a.nome, a.matricula, t.codigo as turma from aluno_turma alt JOIN aluno a ON alt.aluno = a.id JOIN turma t ON alt.turma = t.id WHERE t.id = " + id_turma);
+      var alunos = [];
+      for (let object of result){
+          var aluno = new Aluno();
+          aluno.parseEntidade(object);
+          alunos.push(aluno);
+      } 
+      return alunos;
+  }
+
   static async read(aluno) {
     try {
       var retorno = await BD.buscar(aluno);
