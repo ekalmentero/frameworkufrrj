@@ -30,7 +30,7 @@ instituto.route('/')
       res.send(await institutoController.update(req.body));
   })
   .delete(async function(req,res){
-      res.send(await institutoController.delete(req.body));
+      res.send(await institutoController.delete(req.query));
   });
 
 export default instituto;

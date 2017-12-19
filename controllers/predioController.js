@@ -10,6 +10,7 @@ class PredioController {
 	static async create(dados_predio){
         var predio = new Predio();
 
+        console.log("dados_predio", dados_predio);
         predio.setNome(dados_predio.nome);
         predio.setSigla(dados_predio.sigla);
         predio.setLat(dados_predio.lat);

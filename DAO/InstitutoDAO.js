@@ -84,7 +84,7 @@ export default class InstitutoDAO{
 
 
     static async search(instituto){
-        let query = "SELECT * from instituto WHERE deleted=0 AND ",
+        let query = "SELECT * from instituto WHERE deleted=0 ",
             wheres_array = [];
 
         if(instituto.getNome() !== "")
@@ -96,9 +96,11 @@ export default class InstitutoDAO{
         if(instituto.getId() !== null)
             wheres_array.push("id = "+instituto.getId());
 
-        console.log(query.concat(wheres_array.join(" OR ")));
+        if(wheres_array.length > 0)
+            query = query.concat(" AND ", wheres_array.join(" OR "));
 
-        let institutos = await BD.query( query.concat(wheres_array.join(" OR ")) )
+
+        let institutos = await BD.query( query )
                                 .then( (retorno) => {
                                     return retorno.map( (raw_inst) => {
                                                 let inst = new Instituto();

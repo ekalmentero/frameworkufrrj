@@ -28,7 +28,8 @@ class InstitutoController {
     }
 
     static async delete(dados_instituto){
-       var instituto = new Instituto();
+        var instituto = new Instituto();
+        console.log('dados_instituto', dados_instituto);
         instituto.fillFromObject(dados_instituto);
         return await InstitutoDAO.delete(instituto);
     }
