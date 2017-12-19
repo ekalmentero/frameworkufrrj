@@ -29,7 +29,7 @@ departamento.route('/')
       res.send(await DepartamentoController.update(req.body));
   })
   .delete(async function(req,res){
-      res.send(await DepartamentoController.delete(req.body));
+      res.send(await DepartamentoController.delete(req.query));
   });
 
 export default departamento;

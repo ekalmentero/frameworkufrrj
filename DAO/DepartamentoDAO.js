@@ -21,15 +21,13 @@ export default class DepartamentoDAO {
     }
 
     static async read(departamento){
-        var result =  await BD.buscar(departamento);
+        let query = "SELECT * from departamento WHERE id="+departamento.getId()+" AND deleted=0";
 
-        departamento.setId(result[0].id);
-        departamento.setNome(result[0].nome);
-        departamento.setSigla(result[0].sigla);
-        departamento.setDeleted(result[0].deleted);
-        departamento.setInstituto_id(result[0].instituto_id);
-
-        return departamento;
+        let retorno = await BD.query( query ).then( (retorno) => {
+                                return retorno;
+                            });
+        
+        return retorno;
     }
 
     static async readByInstituto(instituto){
@@ -67,7 +65,7 @@ export default class DepartamentoDAO {
         if(wheres_array.length > 0)
             query = query.concat(" AND ",wheres_array.join(" OR "));
 
-        console.log(query);
+
         let departamentos = await BD.query( query )
                             .then( (retorno) => {
                                 return retorno.map( (raw_dep) => {
