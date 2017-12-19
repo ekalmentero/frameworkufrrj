@@ -64,10 +64,11 @@ export default class DepartamentoDAO {
         if(departamento.getSigla() !== "")
             wheres_array.push("sigla like '%"+departamento.getSigla()+"%'");
 
-        if(wheres_array.length == 0)
-            return [];
+        if(wheres_array.length > 0)
+            query = query.concat(" AND ",wheres_array.join(" OR "));
 
-        let departamentos = await BD.query( query.concat(wheres_array.join(" OR ")) )
+        console.log(query);
+        let departamentos = await BD.query( query )
                             .then( (retorno) => {
                                 return retorno.map( (raw_dep) => {
                                             let dep = new Departamento();

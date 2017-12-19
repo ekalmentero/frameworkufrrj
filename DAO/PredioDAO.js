@@ -52,7 +52,7 @@ export default class PredioDAO {
         mas estou fazendo o básico para o funcionamento da integração.
     */
     static async search(predio){
-        let query = "SELECT * from predio WHERE deleted=0 AND ",
+        let query = "SELECT * from predio WHERE deleted=0 ",
             wheres_array = [];
 
         if(predio.getNome() !== "")
@@ -69,11 +69,11 @@ export default class PredioDAO {
 
         if(predio.getLong() !== "")
             wheres_array.push("long = '"+predio.getLong()+"'");
+       
+        if(wheres_array.length > 0)
+            query = query.concat(" AND ",wheres_array.join(" OR "));
 
-        if(wheres_array.length == 0)
-            return [];
-
-        let predios = await BD.query( query.concat("(",wheres_array.join(" OR ")),")" )
+        let predios = await BD.query( query )
                             .then( (retorno) => {
                                 return retorno.map( (raw_pred) => {
                                             let pred = new Predio();
