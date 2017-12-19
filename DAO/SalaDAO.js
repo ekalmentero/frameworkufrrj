@@ -127,8 +127,9 @@ export default class SalaDao{
       });
 
       let query = "UPDATE sala SET deleted=1 "+
-                 "WHERE id in ("+ids.join(" , ")+")";
+                  "WHERE id in ("+ids.join(" , ")+")";
 
+      console.log(query);
       return await BD.query( query );
    }
 

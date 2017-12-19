@@ -32,7 +32,7 @@ predio.route('/')
       res.send(await predioController.update(req.body));
   })
   .delete(async function(req,res){
-      res.send(await predioController.delete(req.body));
+      res.send(await predioController.delete(req.query));
   });
 
 export default predio;
