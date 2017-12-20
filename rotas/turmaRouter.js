@@ -15,8 +15,11 @@ turma.get('/:id', async function(req,res){
 
 turma.route('/')
   .get(async function(req,res){
-    if (typeof(req.params.id_professor) != "undefined")
+    if (typeof(req.params.id_professor) != "undefined"){
+      res.header("Access-Control-Allow-Origin", "*");
+      res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
       res.send(await TurmaController.readAllByProfessor(req.params.id_professor));
+    }
     else
       res.send(404);
   })
