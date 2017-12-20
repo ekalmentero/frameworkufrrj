@@ -14,7 +14,7 @@ class SalaController {
         predio.setId(dados_sala.predio);
         sala.setPredio(predio);
 
-        return await SalaDAO.create(sala);
+        return await SalaDAO.insert(sala);
     }
 
     static async createMany(dados_salas){
@@ -47,25 +47,31 @@ class SalaController {
         return await SalaDAO.updateMany(salas);
     }
 
-    static async read(id){
+    static async search(dados_sala){
         var sala = new Sala();
-        sala.setId(id);
-        return await SalaDAO.read(sala);
+        sala.fillFromObject(dados_sala);
+        return await SalaDAO.search(sala);
     }
 
     static async readAll(){
         return await SalaDAO.readAll();
     }
 
+    static async read(id){
+        let sala = new Sala();
+        sala.setId(id)
+        return await SalaDAO.read(sala);
+    }
+
     static async update(sala){
         var salaObj = new Sala();
-        salaObj.parseEntidade(sala); 
+        salaObj.fillFromObject(sala); 
         return await SalaDAO.update(salaObj);
     }
 
     static async delete(sala){
         var salaObj = new Sala();
-        salaObj.parseEntidade(sala);
+        salaObj.fillFromObject(sala);
         return await SalaDAO.delete(salaObj);
     }
 

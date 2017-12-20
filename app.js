@@ -76,6 +76,9 @@ rotas.use('/instituto', instituto)
 import predio from './rotas/predioRouter'
 rotas.use('/predio', predio)
 
+import sala from './rotas/salaRouter'
+rotas.use('/sala', sala)
+
 rotas.all("/login",function(req,res){
     if(req.session.token) res.redirect("/");
 

@@ -12,7 +12,7 @@ sala.get('/:id', async function(req,res){
 
 sala.route('/')
   .get(async function(req,res){
-      res.send(await salaController.readAll());
+      res.send(await salaController.search(req.query));
   })
   .post(async function(req,res){
       res.send(await salaController.create(req.body));

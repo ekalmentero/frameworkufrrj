@@ -17,13 +17,20 @@ export default class SalaDao{
                     sala.getPredio().getId()+", "+
                     "0)";
 
-        let id = await BD.query(query).then( (retorno) => {
+      console.log(query);
+      
+      let id = await BD.query(query).then( (retorno) => {
                                 return retorno.insertId;
                             });
 
-        sala.setId(id);
+      sala.setId(id);
 
-        return sala;
+      return sala;
+   }
+
+   static async read(sala){
+      let query = "SELECT * FROM sala WHERE id = "+sala.getId();
+      return await BD.query( query );
    }
 
    static async insertMany(salas){
@@ -113,7 +120,7 @@ export default class SalaDao{
         let where = "WHERE id = "+sala.getId()+" AND deleted=0 ";
 
         if(sala.getNome() !== "")
-            sets_array.push("nome='"+sala.getNome()+"'");
+            sets_array.push("nome = '"+sala.getNome()+"'");
 
         if(sets_array.length == 0)
             return sala;
@@ -138,6 +145,19 @@ export default class SalaDao{
                  "WHERE id = "+sala.getId();
         
         return await BD.query( query );
+   } 
+
+   static async search(sala){
+      let query = "SELECT * from sala WHERE deleted = 0";
+      let wheres_array = [];
+
+      if(sala.getNome() !== "" && sala.getNome() !== undefined)
+         wheres_array.push("nome = "+sala.getNome());
+
+      if(wheres_array.length > 0)
+        query = query.concat(" AND ",wheres_array.join(","));
+
+      return await BD.query( query );
    }
 
    static async readAllByPredioId(predio_id){ 
