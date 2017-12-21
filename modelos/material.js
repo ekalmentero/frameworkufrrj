@@ -5,6 +5,7 @@ export default class Material extends Entidade {
 
 	@Private id;
 	@Private arquivo;
+	@Private conteudo;
 
 	constructor(){
 		super();
