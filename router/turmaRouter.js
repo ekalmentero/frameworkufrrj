@@ -1,7 +1,7 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import alunoRouter from './alunoRouter';
-import TurmaController from '../controllers/turmaController';
+import TurmaController from '../controller/turmaController';
 
 const turma= express.Router({mergeParams: true});
 

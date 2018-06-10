@@ -1,7 +1,7 @@
 "use strict";
 
 import BD from '../BD.js';
-import Horario from '../modelos/Horario.js';
+import Horario from '../model/Horario.js';
 
 export default class HorarioDAO {
   

@@ -1,6 +1,6 @@
 "use strict";
 import BD from '../BD.js';
-import Material from '../modelos/Material.js';
+import Material from '../model/Material.js';
 
 export default class MaterialDAO{
 

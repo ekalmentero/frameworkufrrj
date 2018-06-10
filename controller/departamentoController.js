@@ -1,4 +1,4 @@
-import Departamento from '../modelos/departamento';
+import Departamento from '../model/departamento';
 import DepartamentoDAO from '../DAO/departamentoDAO';
 
 export default class DepartamentoController {

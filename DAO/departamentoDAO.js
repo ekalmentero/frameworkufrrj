@@ -1,6 +1,6 @@
 "use strict";
 
-import Departamento from "../modelos/departamento";
+import Departamento from "../model/departamento";
 import BD from "../bd";
 
 export default class DepartamentoDAO {

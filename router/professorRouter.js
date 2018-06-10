@@ -1,7 +1,7 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import turmaRouter from './turmaRouter';
-import ProfessorController from '../controllers/professorController';
+import ProfessorController from '../controller/professorController';
 
 const professor= express.Router();
 

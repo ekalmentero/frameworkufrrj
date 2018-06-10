@@ -1,7 +1,7 @@
 "use strict";
 
 import SalaDAO from '../DAO/SalaDAO.js';
-import Sala from '../modelos/Sala.js';
+import Sala from '../model/Sala.js';
 
 class SalaController {
 	

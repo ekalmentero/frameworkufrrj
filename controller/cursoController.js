@@ -1,4 +1,4 @@
-import Curso from '../modelos/curso';
+import Curso from '../model/curso';
 import CursoDAO from '../DAO/cursoDAO';
 
 export default class CursoController {

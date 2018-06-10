@@ -1,7 +1,7 @@
 "use strict";
 
 import HorarioDAO from '../DAO/HorarioDAO.js';
-import Horario from '../modelos/Horario.js';
+import Horario from '../model/Horario.js';
 
 class HorarioController {
 	

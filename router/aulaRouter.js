@@ -1,6 +1,6 @@
 import express from 'express';
 import bodyParser from 'body-parser';
-import aulaController from '../controllers/aulaController';
+import aulaController from '../controller/aulaController';
 
 const aula = express.Router();
 

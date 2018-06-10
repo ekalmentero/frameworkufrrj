@@ -1,5 +1,5 @@
-import Aluno from '../modelos/Aluno';
-import AvaliacaoAluno from '../modelos/AvaliacaoAluno';
+import Aluno from '../model/Aluno';
+import AvaliacaoAluno from '../model/AvaliacaoAluno';
 import AlunoDAO from '../DAO/AlunoDAO';
 import AvaliacaoAlunoDAO from '../DAO/AvaliacaoAlunoDAO';
 export default class AlunoController {

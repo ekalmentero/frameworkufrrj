@@ -1,6 +1,6 @@
 import express from 'express';
 import bodyParser from 'body-parser';
-import ConteudoController from '../controllers/conteudoController';
+import ConteudoController from '../controller/conteudoController';
 
 const conteudo = express.Router();
 

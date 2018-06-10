@@ -2,7 +2,7 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import disciplinaRouter from "./disciplinaRouter";
 import cursoRouter from "./cursoRouter";
-import DepartamentoController from '../controllers/departamentoController';
+import DepartamentoController from '../controller/departamentoController';
 
 
 const departamento = express.Router();

@@ -1,4 +1,4 @@
-import Material from '../modelos/material';
+import Material from '../model/material';
 import MaterialDAO from '../DAO/materialDAO';
 
 export default class MaterialController {

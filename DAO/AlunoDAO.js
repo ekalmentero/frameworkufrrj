@@ -2,9 +2,9 @@
 import BD from "../BD";
 import CursoDAO from './cursoDAO';
 import GradeDAO from './GradeDAO';
-import Aluno from "../modelos/Aluno";
-import Avaliacao from "../modelos/Avaliacao";
-import AvaliacaoAluno from "../modelos/AvaliacaoAluno";
+import Aluno from "../model/Aluno";
+import Avaliacao from "../model/Avaliacao";
+import AvaliacaoAluno from "../model/AvaliacaoAluno";
 
 export default class AlunoDAO {
   

@@ -1,8 +1,8 @@
 "use strict";
 
 import BD from '../BD.js';
-import Sala from '../modelos/Sala.js';
-import Predio from '../modelos/Predio.js';
+import Sala from '../model/Sala.js';
+import Predio from '../model/Predio.js';
 
 export default class SalaDao{
   

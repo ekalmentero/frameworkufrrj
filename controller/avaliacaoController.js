@@ -1,4 +1,4 @@
-import avaliacao from '../modelos/avaliacao';
+import avaliacao from '../model/avaliacao';
 import avaliacaoDAO from '../DAO/avaliacaoDAO';
 
 export default class avaliacaoController {

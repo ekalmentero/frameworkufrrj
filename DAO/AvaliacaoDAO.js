@@ -1,6 +1,6 @@
 "use strict";
 import BD from "../BD";
-import Avaliacao from "../modelos/Avaliacao";
+import Avaliacao from "../model/Avaliacao";
 import TurmaDAO from "./TurmaDAO";
 
 export default class AvaliacaoDAO {

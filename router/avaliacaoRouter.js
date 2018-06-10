@@ -1,6 +1,6 @@
 import express from 'express';
 import bodyParser from 'body-parser';
-import avaliacaoController from '../controllers/avaliacaoController';
+import avaliacaoController from '../controller/avaliacaoController';
 
 const avaliacao = express.Router({mergeParams: true});
 

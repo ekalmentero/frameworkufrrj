@@ -1,6 +1,6 @@
 import express from 'express';
 import bodyParser from 'body-parser';
-import institutoController from '../controllers/institutoController';
+import institutoController from '../controller/institutoController';
 
 const instituto = express.Router();
 

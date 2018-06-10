@@ -1,5 +1,5 @@
 
-import Professor from "../modelos/Professor";
+import Professor from "../model/Professor";
 import BD from "../BD";
 
 export default class ProfessorDAO{

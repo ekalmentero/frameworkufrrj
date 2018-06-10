@@ -1,4 +1,4 @@
-import Disciplina from '../modelos/disciplina';
+import Disciplina from '../model/disciplina';
 import DisciplinaDAO from '../DAO/disciplinaDAO';
 
 export default class DisciplinaController {

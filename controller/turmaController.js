@@ -1,4 +1,4 @@
-import Turma from '../modelos/turma';
+import Turma from '../model/turma';
 import TurmaDAO from '../DAO/TurmaDAO';
 
 

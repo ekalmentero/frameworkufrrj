@@ -1,7 +1,7 @@
 "use strict";
 
 import InstitutoDAO from '../DAO/InstitutoDAO.js';
-import Instituto from '../modelos/Instituto.js';
+import Instituto from '../model/Instituto.js';
 
 class InstitutoController {
 	

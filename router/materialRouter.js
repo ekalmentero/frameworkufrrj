@@ -1,6 +1,6 @@
 import express from 'express';
 import bodyParser from 'body-parser';
-import MaterialController from '../controllers/materialController';
+import MaterialController from '../controller/materialController';
 
 const material = express.Router();
 

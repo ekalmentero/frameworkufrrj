@@ -1,4 +1,4 @@
-import Turma from "../modelos/Turma";
+import Turma from "../model/Turma";
 import BD from "../BD";
 
 

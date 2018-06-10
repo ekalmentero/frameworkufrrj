@@ -1,6 +1,6 @@
 import express from 'express';
 import bodyParser from 'body-parser';
-import DisciplinaController from '../controllers/disciplinaController';
+import DisciplinaController from '../controller/disciplinaController';
 
 const disciplina = express.Router({mergeParams: true});
 

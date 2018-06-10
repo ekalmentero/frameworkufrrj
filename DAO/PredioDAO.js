@@ -1,8 +1,8 @@
 "use strict";
 
 import BD from '../BD.js';
-import Predio from '../modelos/Predio.js';
-import Instituto from '../modelos/Instituto.js';
+import Predio from '../model/Predio.js';
+import Instituto from '../model/Instituto.js';
 
 export default class PredioDAO {
   

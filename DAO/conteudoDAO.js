@@ -1,6 +1,6 @@
 "use strict";
 import BD from '../BD.js';
-import Conteudo from '../modelos/Conteudo.js';
+import Conteudo from '../model/Conteudo.js';
 
 export default class ConteudoDAO{
 

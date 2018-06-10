@@ -1,6 +1,6 @@
 import express from 'express';
 import bodyParser from 'body-parser';
-import PeriodoController from '../controllers/periodoController';
+import PeriodoController from '../controller/periodoController';
 
 const periodo = express.Router();
 

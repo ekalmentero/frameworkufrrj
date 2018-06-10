@@ -1,6 +1,6 @@
 import express from 'express';
 import bodyParser from 'body-parser';
-import CursoController from '../controllers/cursoController';
+import CursoController from '../controller/cursoController';
 
 const curso = express.Router({mergeParams: true});
 

@@ -1,4 +1,4 @@
-import Professor from "../modelos/Periodo";
+import Professor from "../model/Periodo";
 import BD from "../BD";
 
 

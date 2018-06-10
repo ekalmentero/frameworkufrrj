@@ -1,6 +1,6 @@
 import express from 'express';
 import bodyParser from 'body-parser';
-import horarioController from '../controllers/horarioController';
+import horarioController from '../controller/horarioController';
 
 const horario = express.Router();
 

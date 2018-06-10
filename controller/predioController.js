@@ -1,7 +1,7 @@
 "use strict";
 
 import PredioDAO from '../DAO/PredioDAO.js';
-import Predio from '../modelos/Predio.js';
+import Predio from '../model/Predio.js';
 
 class PredioController {
 	

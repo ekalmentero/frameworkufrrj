@@ -1,6 +1,6 @@
 import express from 'express';
 import bodyParser from 'body-parser';
-import predioController from '../controllers/predioController';
+import predioController from '../controller/predioController';
 
 const predio = express.Router();
 

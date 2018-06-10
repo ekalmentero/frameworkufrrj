@@ -1,6 +1,6 @@
 import express from 'express';
 import bodyParser from 'body-parser';
-import AlunoController from '../controllers/alunoController';
+import AlunoController from '../controller/alunoController';
 
 const aluno = express.Router({mergeParams: true});
 

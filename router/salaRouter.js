@@ -1,6 +1,6 @@
 import express from 'express';
 import bodyParser from 'body-parser';
-import salaController from '../controllers/salaController';
+import salaController from '../controller/salaController';
 
 const sala = express.Router();
 

@@ -1,8 +1,8 @@
 "use strict";
 import BD from "../BD";
 import TurmaDAO from './cursoDAO';
-import Aula from "../modelos/Aula";
-import Turma from "../modelos/Turma";
+import Aula from "../model/Aula";
+import Turma from "../model/Turma";
 
 export default class AulaDAO {
   

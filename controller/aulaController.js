@@ -1,7 +1,7 @@
 "use strict";
 
 import AulaDAO from '../DAO/AulaDAO.js';
-import Aula from '../modelos/Aula.js';
+import Aula from '../model/Aula.js';
 
 class AulaController {
 

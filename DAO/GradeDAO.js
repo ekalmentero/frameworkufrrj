@@ -1,6 +1,6 @@
 "use strict";
 import BD from "../BD";
-import Grade from "../modelos/Grade";
+import Grade from "../model/Grade";
 import CursoDAO from "./cursoDAO";
 
 export default class GradeDAO {

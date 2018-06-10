@@ -1,4 +1,4 @@
-import Conteudo from '../modelos/conteudo';
+import Conteudo from '../model/conteudo';
 import ConteudoDAO from '../DAO/conteudoDAO';
 
 export default class ConteudoController {

@@ -1,6 +1,6 @@
 "use strict";
 
-import Curso from "../modelos/curso";
+import Curso from "../model/curso";
 import BD from "../bd";
 
 export default class CursoDAO {

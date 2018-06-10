@@ -1,6 +1,6 @@
 "use strict";
 import BD from "../BD";
-import AvaliacaoAluno from "../modelos/AvaliacaoAluno";
+import AvaliacaoAluno from "../model/AvaliacaoAluno";
 
 export default class AvaliacaoAlunoDAO {
   static async readAll() {

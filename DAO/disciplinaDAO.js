@@ -1,6 +1,6 @@
 "use strict";
 
-import Disciplina from "../modelos/disciplina";
+import Disciplina from "../model/disciplina";
 import BD from "../bd";
 
 export default class DisciplinaDAO {
