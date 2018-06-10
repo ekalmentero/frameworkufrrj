@@ -1,8 +1,7 @@
 import express from 'express'
 import bodyParser from 'body-parser';
-const app = express()
+const app = express();
 
-app.set("chaveCriptografia", "nodemelhorqjava");
 app.use(bodyParser.json());
 
 import rotas from './rotas'
