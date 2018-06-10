@@ -1,0 +1,87 @@
+{
+	"info": {
+		"_postman_id": "eb40c518-5d76-446a-85f2-0807aad72b04",
+		"name": "UFRRJ API",
+		"description": "##### Collection of requests for UFRRJ API\n\n[API Source-code](https://github.com/ekalmentero/frameworkufrrj)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Disciplinas",
+			"description": null,
+			"item": [
+				{
+					"name": "GET all disciplinas",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "38132f2f-e260-4ba1-80c3-af0faba1eaa2",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Response has a JSON body\", function () {",
+									"    pm.expect(pm.response.to.be.json);",
+									"});",
+									"",
+									"pm.test(\"Response has at least one element\", function() {",
+									"    pm.expect(pm.response.json().length).to.be.above(0);",
+									"});",
+									"",
+									"pm.test(\"Response match disciplina schema\", function() {",
+									"    var schema = {",
+									"        \"type\" : \"object\",",
+									"        \"required\" : [",
+									"            \"id\",",
+									"            \"nome\",",
+									"            \"codigo\",",
+									"            \"creditos\",",
+									"            \"livre_escolha\",",
+									"            \"departamento\",",
+									"            \"asd\"",
+									"        ],",
+									"        \"properties\" : {",
+									"            \"title\" : { \"type\" : \"string\" },",
+									"            \"id\": { \"type\" : \"integer\" },",
+									"            \"nome\": { \"type\" : \"string\" },",
+									"            \"codigo\": { \"type\" : \"string\" },",
+									"            \"creditos\": { \"type\" : \"integer\" },",
+									"            \"livre_escolha\": { \"type\" : \"integer\" },",
+									"            \"departamento\": { \"type\" : \"integer\" },",
+									"            \"asd\": { \"type\" : \"integer\" }",
+									"        }",
+									"    };",
+									"    pm.expect(tv4.validate(pm.response.json()[0], schema)).to.be.true;",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "localhost:8080/disciplinas",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"disciplinas"
+							]
+						},
+						"description": "Retorna todas as disciplinas cadastradas."
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
