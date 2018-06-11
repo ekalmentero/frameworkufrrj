@@ -31,9 +31,14 @@ export default class DisciplinaController {
         return await DisciplinaDAO.update(disciplinaObj);
     }
 
-    static async delete(disciplina){
+    static async delete(disciplina, mode){
         var disciplinaObj = new Disciplina();
         disciplinaObj.parseEntidade(disciplina);
-        return await DisciplinaDAO.delete(disciplinaObj);
+        if (mode == "soft")
+            return await DisciplinaDAO.softDelete(disciplinaObj);
+        else if (mode == "hard")
+            return await DisciplinaDAO.hardDelete(disciplinaObj);
+        else
+            return 403;
     }
 }

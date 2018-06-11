@@ -42,7 +42,11 @@ export default class DisciplinaDAO {
         return await BD.update(disciplina);
     }
     
-    static async delete(disciplina){
+    static async softDelete(disciplina){
         return await BD.deletar(disciplina);
+    }
+
+    static async hardDelete(disciplina){
+        return await BD.query("DELETE FROM disciplina WHERE id = " + disciplina.id);
     }
 }

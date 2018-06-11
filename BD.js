@@ -132,8 +132,11 @@ export default class BD {
         return new Promise(
             function(resolve,reject){
                 conexao.query(query, function (erro, retorno, colunas) {
-                    if (erro) { reject(erro); throw erro; }
-                    resolve(true);
+                    if (erro) reject(erro); else {
+                        BD.query("SELECT * from " + tabela + " WHERE id=" + obj["getId"]).then((r)=>{
+                            resolve(r[0]);
+                        }).catch((erro)=>{reject(erro); throw erro;});
+                    }
                 });
             }
         );
@@ -167,8 +170,11 @@ export default class BD {
         return new Promise(
             function(resolve,reject){
                 conexao.query(query, function (erro, retorno, colunas) {
-                    if (erro) reject(erro);
-                    resolve(true);
+                    if (erro) reject(erro); else {
+                        BD.query("SELECT * from " + tabela + " WHERE id=" + obj["getId"]).then((r)=>{
+                            resolve(r[0]);
+                        }).catch((erro)=>{reject(erro); throw erro;});
+                    }
                 });
             }
         );

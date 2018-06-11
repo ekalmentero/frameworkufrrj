@@ -30,7 +30,10 @@ disciplina.route('/')
             res.send(await DisciplinaController.update(req.body));
     })
     .delete(async function(req,res){
-        res.send(await DisciplinaController.delete(req.body));
+        if (typeof(req.body.mode) == "undefined")
+            res.send(403);
+        else
+            res.send(await DisciplinaController.delete(req.body, req.body.mode));
     });
 
 export default disciplina;
