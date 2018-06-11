@@ -11,12 +11,12 @@
 			"description": null,
 			"item": [
 				{
-					"name": "GET all disciplinas",
+					"name": "Get all disciplinas",
 					"event": [
 						{
 							"listen": "test",
 							"script": {
-								"id": "38132f2f-e260-4ba1-80c3-af0faba1eaa2",
+								"id": "3b716149-71a4-4eff-a8f7-96127a675d7b",
 								"type": "text/javascript",
 								"exec": [
 									"pm.test(\"Status code is 200\", function () {",
@@ -40,8 +40,7 @@
 									"            \"codigo\",",
 									"            \"creditos\",",
 									"            \"livre_escolha\",",
-									"            \"departamento\",",
-									"            \"asd\"",
+									"            \"departamento\"",
 									"        ],",
 									"        \"properties\" : {",
 									"            \"title\" : { \"type\" : \"string\" },",
@@ -50,8 +49,7 @@
 									"            \"codigo\": { \"type\" : \"string\" },",
 									"            \"creditos\": { \"type\" : \"integer\" },",
 									"            \"livre_escolha\": { \"type\" : \"integer\" },",
-									"            \"departamento\": { \"type\" : \"integer\" },",
-									"            \"asd\": { \"type\" : \"integer\" }",
+									"            \"departamento\": { \"type\" : \"integer\" }",
 									"        }",
 									"    };",
 									"    pm.expect(tv4.validate(pm.response.json()[0], schema)).to.be.true;",
@@ -77,7 +75,465 @@
 								"disciplinas"
 							]
 						},
-						"description": "Retorna todas as disciplinas cadastradas."
+						"description": "Return all disciplinas from database."
+					},
+					"response": []
+				},
+				{
+					"name": "Get all disciplinas from a departamento",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "8c27802b-5b78-4aca-8d21-873bca552ebb",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Response has a JSON body\", function () {",
+									"    pm.expect(pm.response.to.be.json);",
+									"});",
+									"",
+									"pm.test(\"Response has at least one element\", function() {",
+									"    pm.expect(pm.response.json().length).to.be.above(0);",
+									"});",
+									"",
+									"pm.test(\"Response match disciplina schema\", function() {",
+									"    var schema = {",
+									"        \"type\" : \"object\",",
+									"        \"required\" : [",
+									"            \"id\",",
+									"            \"nome\",",
+									"            \"codigo\",",
+									"            \"creditos\",",
+									"            \"livre_escolha\",",
+									"            \"departamento\"",
+									"        ],",
+									"        \"properties\" : {",
+									"            \"title\" : { \"type\" : \"string\" },",
+									"            \"id\": { \"type\" : \"integer\" },",
+									"            \"nome\": { \"type\" : \"string\" },",
+									"            \"codigo\": { \"type\" : \"string\" },",
+									"            \"creditos\": { \"type\" : \"integer\" },",
+									"            \"livre_escolha\": { \"type\" : \"integer\" },",
+									"            \"departamento\": { \"type\" : \"integer\" }",
+									"        }",
+									"    };",
+									"    pm.expect(tv4.validate(pm.response.json()[0], schema)).to.be.true;",
+									"});",
+									"",
+									"pm.test(\"Response match desired departamento\", function() {",
+									"    for (var disciplina of pm.response.json()){",
+									"        pm.expect(disciplina.departamento).to.equal(1);",
+									"    }",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "localhost:8080/departamentos/1/disciplinas",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"departamentos",
+								"1",
+								"disciplinas"
+							]
+						},
+						"description": "Returns all disciplinas from a specified departamento."
+					},
+					"response": []
+				},
+				{
+					"name": "Create a disciplina",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "afebee74-6ba3-4da7-abb8-bce30fc582a2",
+								"type": "text/javascript",
+								"exec": [
+									"pm.environment.set(\"disciplina_id\", pm.response.json().id);",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Response has a JSON body\", function () {",
+									"    pm.expect(pm.response.to.be.json);",
+									"});",
+									"",
+									"pm.test(\"Response match disciplina schema\", function() {",
+									"    var schema = {",
+									"        \"type\" : \"object\",",
+									"        \"required\" : [",
+									"            \"id\",",
+									"            \"nome\",",
+									"            \"codigo\",",
+									"            \"creditos\",",
+									"            \"livre_escolha\",",
+									"            \"departamento\"",
+									"        ],",
+									"        \"properties\" : {",
+									"            \"title\" : { \"type\" : \"string\" },",
+									"            \"id\": { \"type\" : \"integer\" },",
+									"            \"nome\": { \"type\" : \"string\" },",
+									"            \"codigo\": { \"type\" : \"string\" },",
+									"            \"creditos\": { \"type\" : \"integer\" },",
+									"            \"livre_escolha\": { \"type\" : \"integer\" },",
+									"            \"departamento\": { \"type\" : \"string\" }",
+									"        }",
+									"    };",
+									"    pm.expect(tv4.validate(pm.response.json(), schema)).to.be.true;",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nome\": \"disciplina smoke test\",\n    \"codigo\": \"ST999\",\n    \"creditos\": 6,\n    \"livre_escolha\": 1\n}"
+						},
+						"url": {
+							"raw": "localhost:8080/departamentos/1/disciplinas",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"departamentos",
+								"1",
+								"disciplinas"
+							]
+						},
+						"description": "Inserts a disciplina in database."
+					},
+					"response": []
+				},
+				{
+					"name": "Get a disciplina",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "1ec26c57-6d6a-43f0-b9f1-cb0106adfc53",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Response has a JSON body\", function () {",
+									"    pm.expect(pm.response.to.be.json);",
+									"});",
+									"",
+									"pm.test(\"Response has a single element\", function() {",
+									"    pm.expect(pm.response.json()).not.to.be.an(\"array\");",
+									"    pm.expect(pm.response.json()).to.be.an(\"object\");",
+									"});",
+									"",
+									"pm.test(\"Response match disciplina schema\", function() {",
+									"    var schema = {",
+									"        \"type\" : \"object\",",
+									"        \"required\" : [",
+									"            \"id\",",
+									"            \"nome\",",
+									"            \"codigo\",",
+									"            \"creditos\",",
+									"            \"livre_escolha\",",
+									"            \"departamento\"",
+									"        ],",
+									"        \"properties\" : {",
+									"            \"title\" : { \"type\" : \"string\" },",
+									"            \"id\": { \"type\" : \"integer\" },",
+									"            \"nome\": { \"type\" : \"string\" },",
+									"            \"codigo\": { \"type\" : \"string\" },",
+									"            \"creditos\": { \"type\" : \"integer\" },",
+									"            \"livre_escolha\": { \"type\" : \"integer\" },",
+									"            \"departamento\": { \"type\" : \"integer\" }",
+									"        }",
+									"    };",
+									"    pm.expect(tv4.validate(pm.response.json(), schema)).to.be.true;",
+									"});",
+									"",
+									"pm.test(\"Response match desired disciplina\", function() {",
+									"        pm.expect(pm.response.json().id).to.equal(pm.environment.get(\"disciplina_id\"));",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "localhost:8080/disciplinas/{{disciplina_id}}",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"disciplinas",
+								"{{disciplina_id}}"
+							]
+						},
+						"description": "Returns a specified disciplina from database."
+					},
+					"response": []
+				},
+				{
+					"name": "Update a disciplina",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "4f7d10fe-7f19-4384-a74c-08d33a9699ba",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Response has a JSON body\", function () {",
+									"    pm.expect(pm.response.to.be.json);",
+									"});",
+									"",
+									"pm.test(\"Response match disciplina schema\", function() {",
+									"    var schema = {",
+									"        \"type\" : \"object\",",
+									"        \"required\" : [",
+									"            \"id\",",
+									"            \"nome\",",
+									"            \"codigo\",",
+									"            \"creditos\",",
+									"            \"livre_escolha\",",
+									"            \"deleted\",",
+									"            \"departamento\"",
+									"        ],",
+									"        \"properties\" : {",
+									"            \"title\" : { \"type\" : \"string\" },",
+									"            \"id\": { \"type\" : \"integer\" },",
+									"            \"nome\": { \"type\" : \"string\" },",
+									"            \"codigo\": { \"type\" : \"string\" },",
+									"            \"creditos\": { \"type\" : \"integer\" },",
+									"            \"livre_escolha\": { \"type\" : \"integer\" },",
+									"            \"deleted\": { \"type\" : \"integer\" },",
+									"            \"departamento\": { \"type\" : \"integer\" }",
+									"        }",
+									"    };",
+									"    pm.expect(tv4.validate(pm.response.json(), schema)).to.be.true;",
+									"});",
+									"",
+									"pm.test(\"Response match updated field\", function() {",
+									"        pm.expect(pm.response.json().codigo).to.equal(\"ST000\");",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": {{disciplina_id}},\n    \"codigo\": \"ST000\"\n}"
+						},
+						"url": {
+							"raw": "localhost:8080/disciplinas",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"disciplinas"
+							]
+						},
+						"description": "Inserts a disciplina in database."
+					},
+					"response": []
+				},
+				{
+					"name": "Soft delete a disciplina",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "959d5b06-c01f-4f90-9b5d-3cbcee852aae",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Response has a JSON body\", function () {",
+									"    pm.expect(pm.response.to.be.json);",
+									"});",
+									"",
+									"pm.test(\"Response match disciplina schema\", function() {",
+									"    var schema = {",
+									"        \"type\" : \"object\",",
+									"        \"required\" : [",
+									"            \"id\",",
+									"            \"nome\",",
+									"            \"codigo\",",
+									"            \"creditos\",",
+									"            \"livre_escolha\",",
+									"            \"deleted\",",
+									"            \"departamento\"",
+									"        ],",
+									"        \"properties\" : {",
+									"            \"title\" : { \"type\" : \"string\" },",
+									"            \"id\": { \"type\" : \"integer\" },",
+									"            \"nome\": { \"type\" : \"string\" },",
+									"            \"codigo\": { \"type\" : \"string\" },",
+									"            \"creditos\": { \"type\" : \"integer\" },",
+									"            \"livre_escolha\": { \"type\" : \"integer\" },",
+									"            \"deleted\": { \"type\" : \"integer\" },",
+									"            \"departamento\": { \"type\" : \"integer\" }",
+									"        }",
+									"    };",
+									"    pm.expect(tv4.validate(pm.response.json(), schema)).to.be.true;",
+									"});",
+									"",
+									"pm.test(\"Response match a soft delete operation\", function() {",
+									"        pm.expect(pm.response.json().deleted).to.equal(1);",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id\": {{disciplina_id}},\n\t\"mode\": \"soft\"\n}"
+						},
+						"url": {
+							"raw": "localhost:8080/disciplinas",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"disciplinas"
+							]
+						},
+						"description": "Set a disciplina as deleted in database."
+					},
+					"response": []
+				},
+				{
+					"name": "Hard delete a disciplina",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "d1152552-d464-493b-989c-08201ec6eaa4",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Response has a JSON body\", function () {",
+									"    pm.expect(pm.response.to.be.json);",
+									"});",
+									"",
+									"pm.test(\"Response match disciplina schema\", function() {",
+									"    var schema = {",
+									"        \"type\" : \"object\",",
+									"        \"required\" : [",
+									"            \"fieldCount\",",
+									"            \"affectedRows\",",
+									"            \"insertId\",",
+									"            \"serverStatus\",",
+									"            \"warningCount\",",
+									"            \"message\",",
+									"            \"protocol41\",",
+									"            \"changedRows\"",
+									"        ]",
+									"    };",
+									"    pm.expect(tv4.validate(pm.response.json(), schema)).to.be.true;",
+									"});",
+									"",
+									"pm.test(\"Response match a hard delete operation\", function() {",
+									"        pm.expect(pm.response.json().affectedRows).to.equal(1);",
+									"        pm.expect(pm.response.json().changedRows).to.equal(0);",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id\": {{disciplina_id}},\n\t\"mode\": \"hard\"\n}"
+						},
+						"url": {
+							"raw": "localhost:8080/disciplinas",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"disciplinas"
+							]
+						},
+						"description": "Removes a disciplina from database."
 					},
 					"response": []
 				}
