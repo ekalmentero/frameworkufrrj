@@ -77,7 +77,33 @@
 						},
 						"description": "Return all disciplinas from database."
 					},
-					"response": []
+					"response": [
+						{
+							"id": "7a3d1b15-463f-435e-b1ae-f424bcc068c6",
+							"name": "Get all disciplinas",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {},
+								"url": {
+									"raw": "localhost:8080/disciplinas",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"disciplinas"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "",
+							"header": [],
+							"cookie": [],
+							"body": "[\n    {\n        \"id\": 1,\n        \"nome\": \"fusce congue\",\n        \"codigo\": \"IH466\",\n        \"creditos\": 6,\n        \"livre_escolha\": 0,\n        \"departamento\": 4\n    },\n    {\n        \"id\": 2,\n        \"nome\": \"primis in\",\n        \"codigo\": \"IC133\",\n        \"creditos\": 4,\n        \"livre_escolha\": 0,\n        \"departamento\": 12\n    }\n]"
+						}
+					]
 				},
 				{
 					"name": "Get all disciplinas from a departamento",
@@ -141,20 +167,48 @@
 						"header": [],
 						"body": {},
 						"url": {
-							"raw": "localhost:8080/departamentos/1/disciplinas",
+							"raw": "localhost:8080/departamentos/{{departamento_id}}/disciplinas",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
 								"departamentos",
-								"1",
+								"{{departamento_id}}",
 								"disciplinas"
 							]
 						},
 						"description": "Returns all disciplinas from a specified departamento."
 					},
-					"response": []
+					"response": [
+						{
+							"id": "339d29c4-397d-466d-b624-5e7e034891ec",
+							"name": "Get all disciplinas from a departamento",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {},
+								"url": {
+									"raw": "localhost:8080/departamentos/1/disciplinas",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"departamentos",
+										"1",
+										"disciplinas"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "",
+							"header": [],
+							"cookie": [],
+							"body": "[\n    {\n        \"id\": 14,\n        \"nome\": \"justo in\",\n        \"codigo\": \"IC393\",\n        \"creditos\": 6,\n        \"livre_escolha\": 0,\n        \"departamento\": 1\n    },\n    {\n        \"id\": 33,\n        \"nome\": \"consequat varius\",\n        \"codigo\": \"IC723\",\n        \"creditos\": 6,\n        \"livre_escolha\": 0,\n        \"departamento\": 1\n    }\n]"
+						}
+					]
 				},
 				{
 					"name": "Create a disciplina",
@@ -218,20 +272,56 @@
 							"raw": "{\n    \"nome\": \"disciplina smoke test\",\n    \"codigo\": \"ST999\",\n    \"creditos\": 6,\n    \"livre_escolha\": 1\n}"
 						},
 						"url": {
-							"raw": "localhost:8080/departamentos/1/disciplinas",
+							"raw": "localhost:8080/departamentos/{{departamento_id}}/disciplinas",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
 								"departamentos",
-								"1",
+								"{{departamento_id}}",
 								"disciplinas"
 							]
 						},
 						"description": "Inserts a disciplina in database."
 					},
-					"response": []
+					"response": [
+						{
+							"id": "f9e24d79-5d20-4771-bee2-82846d80de63",
+							"name": "Create a disciplina",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nome\": \"lorem ipsun\",\n    \"codigo\": \"IC000\",\n    \"creditos\": 4,\n    \"livre_escolha\": 0\n}"
+								},
+								"url": {
+									"raw": "localhost:8080/departamentos/1/disciplinas",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"departamentos",
+										"1",
+										"disciplinas"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "",
+							"header": [],
+							"cookie": [],
+							"body": "{\n    \"id\": 1,\n    \"nome\": \"lorem ipsun\",\n    \"codigo\": \"IC000\",\n    \"creditos\": 4,\n    \"livre_escolha\": 0,\n    \"departamento\": \"1\"\n}"
+						}
+					]
 				},
 				{
 					"name": "Get a disciplina",
@@ -306,7 +396,34 @@
 						},
 						"description": "Returns a specified disciplina from database."
 					},
-					"response": []
+					"response": [
+						{
+							"id": "2c55987e-c812-410b-b045-66b5c9b49558",
+							"name": "Get a disciplina",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {},
+								"url": {
+									"raw": "localhost:8080/disciplinas/1",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"disciplinas",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "",
+							"header": [],
+							"cookie": [],
+							"body": "{\n    \"id\": 1,\n    \"nome\": \"lorem ipsun\",\n    \"codigo\": \"IC000\",\n    \"creditos\": 6,\n    \"livre_escolha\": 1,\n    \"departamento\": 1\n}"
+						}
+					]
 				},
 				{
 					"name": "Update a disciplina",
@@ -385,7 +502,41 @@
 						},
 						"description": "Inserts a disciplina in database."
 					},
-					"response": []
+					"response": [
+						{
+							"id": "3e6797cf-dc70-44e7-aaf1-93f484870ad7",
+							"name": "Update a disciplina",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"id\": 1,\n    \"codigo\": \"IC111\",\n    \"creditos\": 2\n}"
+								},
+								"url": {
+									"raw": "localhost:8080/disciplinas",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"disciplinas"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "",
+							"header": [],
+							"cookie": [],
+							"body": "{\n    \"id\": 1,\n    \"nome\": \"lorem ipsun\",\n    \"codigo\": \"IC111\",\n    \"creditos\": 2,\n    \"livre_escolha\": 1,\n    \"deleted\": 0,\n    \"departamento\": 1\n}"
+						}
+					]
 				},
 				{
 					"name": "Soft delete a disciplina",
@@ -450,7 +601,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"id\": {{disciplina_id}},\n\t\"mode\": \"soft\"\n}"
+							"raw": "{\n  \"id\": {{disciplina_id}},\n  \"mode\": \"soft\"\n}"
 						},
 						"url": {
 							"raw": "localhost:8080/disciplinas",
@@ -464,7 +615,41 @@
 						},
 						"description": "Set a disciplina as deleted in database."
 					},
-					"response": []
+					"response": [
+						{
+							"id": "afa55ed0-b2bf-4a49-bef6-7b326d43a4f2",
+							"name": "Soft delete a disciplina",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"id\": 1,\n\t\"mode\": \"soft\"\n}"
+								},
+								"url": {
+									"raw": "localhost:8080/disciplinas",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"disciplinas"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "",
+							"header": [],
+							"cookie": [],
+							"body": "{\n    \"id\": 1,\n    \"nome\": \"lorem ipsun\",\n    \"codigo\": \"IC000\",\n    \"creditos\": 6,\n    \"livre_escolha\": 1,\n    \"deleted\": 1,\n    \"departamento\": 1\n}"
+						}
+					]
 				},
 				{
 					"name": "Hard delete a disciplina",
@@ -535,7 +720,41 @@
 						},
 						"description": "Removes a disciplina from database."
 					},
-					"response": []
+					"response": [
+						{
+							"id": "a90dab72-467d-4e52-8a54-4f4e9bece304",
+							"name": "Hard delete a disciplina",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"id\": 1,\n\t\"mode\": \"hard\"\n}"
+								},
+								"url": {
+									"raw": "localhost:8080/disciplinas",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"disciplinas"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "",
+							"header": [],
+							"cookie": [],
+							"body": "{\n    \"fieldCount\": 0,\n    \"affectedRows\": 1,\n    \"insertId\": 0,\n    \"serverStatus\": 2,\n    \"warningCount\": 0,\n    \"message\": \"\",\n    \"protocol41\": true,\n    \"changedRows\": 0\n}"
+						}
+					]
 				}
 			]
 		}
