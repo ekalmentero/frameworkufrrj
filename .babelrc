@@ -3,6 +3,10 @@
   "plugins": [
     "syntax-class-properties",
     "transform-class-properties",
-    "babel-plugin-transform-private-properties"
+    "babel-plugin-transform-private-properties",
+    ["transform-runtime", {
+      "polyfill": false,
+      "regenerator": true
+    }]
   ]
 }
