@@ -1,21 +1,17 @@
-import mysql from 'mysql';
-
-//import Aluno from 'modelos/aluno';
-
-const conexao = mysql.createConnection({
-  host     : 'localhost',
-  user     : 'root',
-  password : 'root',
-  database : 'db_frameworkufrrj' //ALTERAR NÉ
-});
-
-conexao.connect(function(erro) {
-    if(erro) console.error("Componente BD : ERRO CONEXAO BD"); else console.log("Componente BD : Conectado ao banco");
-});
+var conexao = require('./conexao.js')
+//let tabelas = require('./tabelas.js')
 
 let tabelas = { // Exemplo
     'Aluno' : "aluno",
-    'Professor' : "tbl_professor"
+    'Avaliacao' : "avaliacao",
+    'Grade' : "grade",
+    'AvaliacaoAluno' : "avaliacao_aluno",
+    'Prerequisito' : "prerequisito",
+    'Instituto' : "instituto",
+    'Professor' : "professor",
+    'Disciplina' : "disciplina",
+    'Turma' : "turma",
+    'Periodo' : "periodo"
 };
 
 export default class BD {
@@ -24,33 +20,44 @@ export default class BD {
         return new Promise(
             function(resolve,reject){
                 conexao.query(query, function (erro, retorno, colunas) {
-                    if (erro) throw erro;
+                    if (erro) {reject(erro); throw erro;}
                     resolve(retorno);
                 });
             }
         );
     }
 
-    static inserir(obj){
+    static inserir(obj, chavesEstrangeiras){
         var tabela = tabelas[obj.constructor.name];
         var query = "INSERT INTO " + tabela + " SET ";
+
+        if (typeof(chavesEstrangeiras) != "undefined"){
+            for(var i = 0;i<chavesEstrangeiras.length;i++){
+                query += chavesEstrangeiras[i][0] + " = " + chavesEstrangeiras[i][1] + ",";
+            }
+        }
 
         var tmp = "";
         for(let propriedade of Object.getOwnPropertyNames(Object.getPrototypeOf(obj))){
             if(propriedade == "constructor") continue;
-            if(typeof(obj[propriedade]) == 'function') continue;
+            if(typeof(obj[propriedade]) == 'function' || obj[propriedade] == undefined) continue;
+            if(propriedade == "getId") continue;
+
+            if(typeof(obj[propriedade]) == "object") continue;
 
             if(typeof(obj[propriedade]) == "string") tmp = "'"; else tmp = "";
             query += propriedade.replace("get","").toLowerCase() + " = " + tmp + obj[propriedade] + tmp + ",";
         }
         query = query.slice(0,-1);
-
-        console.log(query);
-
+        
         return new Promise(
             function(resolve,reject){
                 conexao.query(query, function (erro, retorno, colunas) {
-                    if (erro) reject(erro); else resolve(true);
+                    if (erro) reject(erro); else {
+                        BD.query("SELECT LAST_INSERT_ID() AS lid").then((r)=>{
+                            resolve(r[0].lid);
+                        }).catch((erro)=>{reject(erro); throw erro;});
+                    }
                 });
             }
         );
@@ -67,6 +74,7 @@ export default class BD {
         for(let propriedade of Object.getOwnPropertyNames(Object.getPrototypeOf(obj))){
             if(propriedade == "constructor") continue;
             if(typeof(obj[propriedade]) == 'function') continue;
+            if(typeof(obj[propriedade]) == "object") continue;
 
             if(obj[propriedade] != tmp[propriedade]){
                 filtros.push([propriedade,obj[propriedade]]);
@@ -83,14 +91,14 @@ export default class BD {
         return new Promise(
             function(resolve,reject){
                 conexao.query(query, function (erro, retorno, colunas) {
-                    if (erro) reject(erro);
+                    if (erro) { reject(erro); throw erro; }
                     resolve(retorno);
                 });
             }
         );
     }
 
-    static update(obj){
+    static update(obj, chavesEstrangeiras){
         var tabela = tabelas[obj.constructor.name];
         var query = "UPDATE " + tabela + " SET ";
 
@@ -98,12 +106,22 @@ export default class BD {
 
         var tmp = new obj.constructor;
 
+        if (typeof(chavesEstrangeiras) != "undefined"){
+            for(var i = 0;i<chavesEstrangeiras.length;i++){
+                query += chavesEstrangeiras[i][0] + " = " + chavesEstrangeiras[i][1] + ",";
+            }
+        }
+
         for(let propriedade of Object.getOwnPropertyNames(Object.getPrototypeOf(obj))){
             if(propriedade == "constructor") continue;
-            if(typeof(obj[propriedade]) == 'function') continue;
+            if(typeof(obj[propriedade]) == 'function' || obj[propriedade] == undefined) continue;
+            if(propriedade == "getId") continue;
+            if(typeof(obj[propriedade]) == "object") continue;
 
-            if(obj[propriedade] != tmp[propriedade] && propriedade != "getId"){
-                query += propriedade.replace("get","").toLowerCase() + "=" + obj[propriedade] + ",";
+            var tmp;
+            if(obj[propriedade] != tmp[propriedade]){
+                if(typeof(obj[propriedade]) == "string") tmp = "'"; else tmp = "";
+                query += propriedade.replace("get","").toLowerCase() + "=" + tmp + obj[propriedade] + tmp + ",";
             }
         }
 
@@ -114,7 +132,7 @@ export default class BD {
         return new Promise(
             function(resolve,reject){
                 conexao.query(query, function (erro, retorno, colunas) {
-                    if (erro) reject(erro);
+                    if (erro) { reject(erro); throw erro; }
                     resolve(true);
                 });
             }
@@ -123,15 +141,16 @@ export default class BD {
 
     static deletar(obj){
         var tabela = tabelas[obj.constructor.name];
-        var query = "DELETE FROM " + tabela + " WHERE ";
+        var query = "UPDATE " + tabela + " SET deleted=1 WHERE ";
 
         var filtros = [];
 
         var tmp = new obj.constructor;
 
         for(let propriedade of Object.getOwnPropertyNames(Object.getPrototypeOf(obj))){
-            if(propriedade == "constructor") continue;
-            if(typeof(obj[propriedade]) == 'function') continue;
+            if(typeof(obj[propriedade]) == 'function' || obj[propriedade] == undefined) continue;
+            //if(propriedade == "getId") continue;
+            if(typeof(obj[propriedade]) == "object") continue;
 
             if(obj[propriedade] != tmp[propriedade]){
                 filtros.push([propriedade,obj[propriedade]]);
@@ -141,7 +160,7 @@ export default class BD {
         var tmp;
         for(var i = 0;i<filtros.length;i++){
             if(typeof(filtros[i][1]) == "string") tmp = "'"; else tmp = "";
-            if(i > 0) query += "AND";
+            if(i > 0) query += " AND ";
             query += filtros[i][0].replace("get","").toLowerCase() + " = " + tmp + filtros[i][1] + tmp + " ";
         }
 
